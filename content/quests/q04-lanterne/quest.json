@@ -1,0 +1,70 @@
+{
+  "id": "q04-lanterne",
+  "title": "La lanterne du meunier",
+  "region": "village",
+  "giver": "meunier",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.lecture",
+    "base.expressions"
+  ],
+  "summary": "Écris seul·e le sort qui répartit les sacs de farine en caisses.",
+  "hud": "Aide Maître Odon le meunier, près de la forge.",
+  "source": "hello : lecture interactive IO.readln + Integer.parseInt ; division entière (complément)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "23",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le meunier range ses sacs de farine par **caisses de 10**. Écris un programme qui :\n- lit au clavier le nombre de sacs (un entier),\n- affiche `Caisses : X` (nombre de caisses pleines),\n- puis `Sacs restants : Y` (sacs qui ne remplissent pas une caisse).\n\nExemple pour 23 sacs :\n```\nCaisses : 2\nSacs restants : 3\n```\nLe sort sera vérifié avec d'autres quantités que tu ne connais pas : il doit calculer, pas deviner !\nPour essayer avec « Exécuter », mets un nombre dans le champ **Entrée** de la barre d'outils.",
+  "hints": [
+    "Lis une ligne avec `IO.readln(...)` puis convertis-la avec `Integer.parseInt(...)`.",
+    "Entre deux `int`, `/` donne le quotient entier et `%` le reste.",
+    "Attention : `\"Caisses : \" + sacs / 10` calcule bien la division avant la concaténation (priorité de `/`)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ah, l'apprenti·e de la Doyenne ! Tu tombes bien, ma lanterne de comptage est éteinte.",
+      "Chaque soir je range mes sacs de farine par caisses de 10, et il m'en reste toujours quelques-uns.",
+      "Écris-moi un sort qui me dit combien de caisses pleines et combien de sacs restants, quel que soit le nombre de sacs. Seul·e, cette fois !"
+    ],
+    "success": [
+      "La lanterne se rallume ! Caisses et sacs restants, exact à chaque fois.",
+      "La Doyenne m'a dit que tu étais prêt·e pour le **Bois des Embranchements**, à l'est du village. La route est ouverte !"
+    ],
+    "done": "Grâce à ton sort, je ne me trompe plus jamais dans mes caisses.",
+    "locked": "Hmm ? Reviens quand la Doyenne t'aura appris à manier les variables."
+  },
+  "effects": {
+    "onPass": [
+      "unlock:Route du Bois des Embranchements ouverte (est du village)"
+    ]
+  },
+  "reward": {
+    "xp": 30
+  }
+}

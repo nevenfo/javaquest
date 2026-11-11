@@ -93,9 +93,9 @@ Village jouable : déplacement ZQSD/flèches, collisions, PNJ, dialogue, une qu�
 ### Dépendances
 B3, assets (D1).
 ### Tâches
-- [ ] C1.1 Phaser : carte tuilée, joueur animé, collisions, caméra, interactions.
-- [ ] C1.2 Éditeur CodeMirror (coloration, lignes, indentation, erreurs cliquables, réinitialiser, brouillon conservé).
-- [ ] C1.3 Quête « La porte du sanctuaire » : Java → compilation sandbox → trace → animation → tests serveur → récompense.
+- [x] C1.1 Phaser : carte tuilée, joueur animé, collisions, caméra, interactions.
+- [x] C1.2 Éditeur CodeMirror (coloration, lignes, indentation, erreurs cliquables, réinitialiser, brouillon conservé).
+- [x] C1.3 Quête « La porte du sanctuaire » : Java → compilation sandbox → trace → animation → tests serveur → récompense.
 ### Validation
 - Test E2E navigateur headless (Edge CDP) : déplacement, dialogue, exécution Java, porte ouverte ; capture d'écran.
 
@@ -107,7 +107,7 @@ Ensemble visuel/sonore cohérent sous licences compatibles.
 ### Dépendances
 A1.
 ### Tâches
-- [ ] D1.1 Télécharger/sélectionner packs Kenney (CC0), polices OFL, Phaser/CodeMirror (MIT) ; `THIRD_PARTY.md`.
+- [x] D1.1 Télécharger/sélectionner packs Kenney (CC0), polices OFL, Phaser/CodeMirror (MIT) ; `THIRD_PARTY.md`.
 ### Validation
 - Chaque fichier redistribué a sa licence listée ; `tools/check-licenses` OK.
 
@@ -131,7 +131,7 @@ Micro-compétences issues des supports ESIEE avec prérequis, erreurs fréquente
 ### Dépendances
 A1.2, R1.
 ### Tâches
-- [ ] E1.1 `content/skills.json` + validateur (graphe acyclique, provenance obligatoire).
+- [x] E1.1 `content/skills.json` + validateur (graphe acyclique, provenance obligatoire).
 ### Validation
 - `tools/validate-content` OK ; chaque compétence reliée à ≥1 source ou marquée « complément ».
 

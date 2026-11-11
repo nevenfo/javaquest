@@ -1,0 +1,40 @@
+{
+  "id": "q02-echo",
+  "title": "L'écho du puits",
+  "region": "village",
+  "giver": "lina",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "q01-porte"
+  ],
+  "skills": [
+    "base.affichage",
+    "base.expressions"
+  ],
+  "summary": "Prédis ce que le puits va répéter avant de l'entendre.",
+  "source": "hello : affichage ; concaténation de String (complément)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "Écho... 3\n5 seaux\nTotal : 32\n",
+  "brief": "Le puits magique répète les sorts qu'on lui lance… mais ce sort-ci est piégé.\nLis le programme **sans l'exécuter** et écris exactement ce qu'il affichera, ligne par ligne.\nAttention à `print` / `println` et à l'ordre des `+` entre nombres et textes.",
+  "hints": [
+    "`IO.print` n'ajoute pas de retour à la ligne : la ligne suivante continue sur la même.",
+    "Les `+` se calculent de gauche à droite : tant qu'il n'y a que des nombres, c'est une addition ; dès qu'un texte apparaît, c'est une concaténation."
+  ],
+  "dialog": {
+    "intro": [
+      "Psst ! Tu veux voir un tour ? Le vieux puits répète tout ce qu'on lui dit.",
+      "Mais celui qui a écrit ce sort était un farceur… Devine ce que le puits va dire, ligne par ligne !"
+    ],
+    "success": [
+      "Exactement ce que le puits a répété ! Tu lis le Java comme un livre."
+    ],
+    "done": "Le puits répète encore ton sort, écoute… « Total : 32 » !"
+  },
+  "reward": {
+    "xp": 15
+  }
+}

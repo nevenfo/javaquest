@@ -79,7 +79,7 @@ public class ServerTest {
         check("santé + sandbox prête", Boolean.TRUE.equals(h.get("sandbox")), h);
 
         Map<String, Object> ok = runCode("void main() {\n  String n = IO.readln();\n  IO.println(\"Salut \" + n);\n}\n", "Ada\n");
-        check("exécution : stdin + sortie", "ok".equals(ok.get("status")) && "Salut Ada\n".equals(ok.get("stdout")), ok);
+        check("exécution : stdin (écho terminal) + sortie", "ok".equals(ok.get("status")) && "Ada\nSalut Ada\n".equals(ok.get("stdout")), ok);
 
         Map<String, Object> ce = runCode("void main() {\n  int x = \"a\";\n}\n", "");
         List<Object> comp = (List<Object>) ce.get("compile");

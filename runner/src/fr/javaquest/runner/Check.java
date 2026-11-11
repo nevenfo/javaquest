@@ -1,7 +1,5 @@
 package fr.javaquest.runner;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -59,18 +57,17 @@ public final class Check {
     /** Sortie standard capturée d'un main du joueur (stdin fourni). */
     public static String runMain(String className, String stdin, String... args) throws Throwable {
         Class<?> c = playerClass(className);
-        InputStream oldIn = System.in;
         StringBuilder sb = new StringBuilder();
         System.out.flush();
         synchronized (Capture.class) { Capture.redirect = sb; }
-        System.setIn(new ByteArrayInputStream((stdin == null ? "" : stdin).getBytes(StandardCharsets.UTF_8)));
+        Runner.INPUT.reset((stdin == null ? "" : stdin).getBytes(StandardCharsets.UTF_8), Runner.ECHO);
         try {
             Runner.invokeMain(c, args);
         } finally {
             System.out.flush();
             System.err.flush();
             synchronized (Capture.class) { Capture.redirect = null; }
-            System.setIn(oldIn);
+            Runner.INPUT.reset(new byte[0], null);
         }
         return sb.toString().replace("\r\n", "\n");
     }

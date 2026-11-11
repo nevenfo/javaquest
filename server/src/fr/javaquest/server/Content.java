@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  * vérification, solutions de référence et solutions fautives restent côté serveur.
  */
 public final class Content {
-    public record Quest(String id, Map<String, Object> meta, List<Map<String, Object>> support,
+    public record Quest(String id, Map<String, Object> meta, List<Map<String, Object>> support, List<Map<String, Object>> program,
                         List<Map<String, Object>> harness, List<List<Map<String, Object>>> solutions,
                         List<List<Map<String, Object>>> wrong) { }
 
@@ -33,7 +33,7 @@ public final class Content {
             if (!Files.exists(f)) continue;
             Map<String, Object> meta = Json.parseObject(Files.readString(f, StandardCharsets.UTF_8));
             String id = Json.str(meta, "id", q.getFileName().toString());
-            quests.put(id, new Quest(id, meta, files(q, Json.list(meta, "support")), files(q, Json.list(meta, "harness")),
+            quests.put(id, new Quest(id, meta, files(q, Json.list(meta, "support")), files(q, Json.list(meta, "program")), files(q, Json.list(meta, "harness")),
                     fileSets(q, Json.list(meta, "solutions")), fileSets(q, Json.list(meta, "wrong"))));
         }
     }
@@ -66,8 +66,9 @@ public final class Content {
         List<Object> list = new ArrayList<>();
         for (Quest q : quests.values()) {
             Map<String, Object> m = new LinkedHashMap<>(q.meta());
-            m.remove("harness"); m.remove("solutions"); m.remove("wrong");
+            m.remove("harness"); m.remove("solutions"); m.remove("wrong"); m.remove("answerKey");
             m.put("support", q.support());
+            m.put("program", q.program());
             list.add(m);
         }
         Map<String, Object> out = new LinkedHashMap<>();

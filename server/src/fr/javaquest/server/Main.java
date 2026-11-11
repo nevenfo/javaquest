@@ -173,6 +173,9 @@ public final class Main {
 
     /** Exécution (run) ou vérification (check) d'un code de joueur, avec l'API et le harnais de la quête. */
     private Map<String, Object> run(Map<String, Object> b, boolean check) {
+        Content.Quest pq = content.quest(Json.str(b, "quest", ""));
+        if (check && pq != null && "quiz".equals(Json.str(pq.meta(), "kind", ""))) return Grading.quiz(pq, Json.list(b, "answers"));
+        if (check && pq != null && "predict".equals(Json.str(pq.meta(), "kind", ""))) return Grading.predict(pq, Json.str(b, "prediction", ""), runner);
         Map<String, Object> req = new LinkedHashMap<>();
         List<Object> files = new ArrayList<>();
         int total = 0;

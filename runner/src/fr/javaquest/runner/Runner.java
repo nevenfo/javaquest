@@ -2,7 +2,6 @@ package fr.javaquest.runner;
 
 import fr.javaquest.common.Json;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.FileDescriptor;
 import java.io.PrintStream;
@@ -21,6 +20,8 @@ import java.util.*;
  */
 public final class Runner {
     private static MemoryCompiler.Loader loader;
+    static final PlayerInput INPUT = new PlayerInput();
+    static final PrintStream ECHO = new PrintStream(new Capture("in"), true, StandardCharsets.UTF_8);
     private static volatile boolean done;
     private static long start;
 
@@ -60,9 +61,10 @@ public final class Runner {
         }
         loader = new MemoryCompiler.Loader(classes, Runner.class.getClassLoader());
 
-        System.setIn(new ByteArrayInputStream(Json.str(req, "stdin", "").getBytes(StandardCharsets.UTF_8)));
         System.setOut(new PrintStream(new Capture("out"), true, StandardCharsets.UTF_8));
         System.setErr(new PrintStream(new Capture("err"), true, StandardCharsets.UTF_8));
+        INPUT.reset(Json.str(req, "stdin", "").getBytes(StandardCharsets.UTF_8), ECHO);
+        System.setIn(INPUT);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             if (!done) { System.out.flush(); System.err.flush(); finish("exit"); }
         }));

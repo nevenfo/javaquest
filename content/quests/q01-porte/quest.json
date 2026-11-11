@@ -4,18 +4,66 @@
   "region": "village",
   "npc": "ancien",
   "kind": "code",
-  "skills": ["base.programme", "base.affichage"],
+  "skills": [
+    "base.programme",
+    "base.affichage"
+  ],
   "support": [],
-  "harness": ["harness/Verif.java"],
-  "solutions": [["solutions/Main.java"], ["solutions/classique/Main.java"]],
-  "wrong": [["wrong/Main.java"]],
-  "starter": { "Main.java": "void main() {\n    // Prononce la formule magique ici.\n}\n" },
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ],
+    [
+      "solutions/classique/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    // Prononce la formule magique ici.\n}\n"
+  },
   "brief": "La porte du sanctuaire ne s'ouvre qu'à celui qui prononce exactement : Ouvre-toi !\nUn sort, en Java, c'est une instruction. Pour « prononcer » un texte, on l'affiche : IO.println(\"texte\");",
   "hints": [
     "Une formule s'affiche avec IO.println(...) ; le texte va entre guillemets.",
     "Le texte doit être exactement Ouvre-toi ! (avec l'espace avant le point d'exclamation).",
     "Chaque instruction Java se termine par un point-virgule ;"
   ],
-  "effects": { "onPass": ["door:sanctuaire:open"] },
-  "reward": { "xp": 20 }
+  "effects": {
+    "onPass": [
+      "door:sanctuaire",
+      "item:baguette:Baguette d'apprenti"
+    ]
+  },
+  "reward": {
+    "xp": 20
+  },
+  "giver": "ysolde",
+  "main": true,
+  "assessment": "guided",
+  "requires": [],
+  "summary": "Prononce exactement la formule « Ouvre-toi ! » pour ouvrir le sanctuaire.",
+  "hud": "Parle à la Doyenne Ysolde (E), puis écris ton premier sort.",
+  "source": "hello : afficher un message (System.out.println / IO.println)",
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ta première épreuve : la porte du Sanctuaire de la Compilation, là-haut, au nord.",
+      "Elle ne s'ouvre qu'à qui prononce exactement : **Ouvre-toi !**",
+      "En Java, « prononcer » un texte, c'est l'afficher. Je t'ouvre l'atelier de code : écris ton sort, exécute-le, puis fais-le vérifier."
+    ],
+    "resume": "La porte attend toujours ta formule. On reprend ?",
+    "success": [
+      "La porte s'ouvre dans un grondement de pierre ! Ton premier programme Java fonctionne.",
+      "Derrière elle se trouve la Citadelle des Épreuves : tu pourras t'y entraîner comme à un vrai contrôle. Mais d'abord, apprends les bases ici, au village."
+    ],
+    "done": "Le Sanctuaire est ouvert grâce à toi. La Citadelle des Épreuves t'attend quand tu voudras t'entraîner."
+  }
 }
