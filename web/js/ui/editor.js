@@ -73,7 +73,11 @@ export class Workshop {
     this.hooks.layout?.();
     this.showInfo('brief');
     this.result = null;
-    this.renderOut('console', `<div class="out-sys">Écris ton code puis « Exécuter » (Ctrl+Entrée) pour l'essayer, ou « Vérifier la quête » (Ctrl+Maj+Entrée) pour la valider avec des tests cachés.</div>`);
+    const intro = this.exam ? 'Épreuve : exécute ton code autant que tu veux ; la correction n'a lieu qu'en rendant la copie.'
+      : { quiz: 'Coche tes réponses puis « Vérifier la quête ».', predict: 'Écris ta prédiction puis « Vérifier la quête » : le programme sera réellement exécuté pour comparer.',
+          parsons: 'Range les runes puis « Exécuter » pour essayer, ou « Vérifier la quête ».' }[this.kind]
+      || 'Écris ton code puis « Exécuter » (Ctrl+Entrée) pour l'essayer, ou « Vérifier la quête » (Ctrl+Maj+Entrée) pour la valider avec des tests cachés.';
+    this.renderOut('console', `<div class="out-sys">${intro}</div>`);
     this.hooks.scene()?.setupStage(quest.stage);
     play('book');
     setTimeout(() => { this.cm.refresh(); if (!$('ed-code').hidden) this.cm.focus(); }, 30);

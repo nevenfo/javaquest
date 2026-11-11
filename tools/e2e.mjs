@@ -2,7 +2,7 @@
 // Démarre le serveur (sous-processus Java), crée un profil, joue la première quête et vérifie l'effet dans le monde.
 // Usage : node tools/e2e.mjs [--shots dossier]   (outil de développement uniquement)
 import { spawn } from 'node:child_process';
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -114,6 +114,23 @@ try {
   await shot('07-grimoire');
   await press('Escape');
   await shot('08-monde');
+  // Mode examen : épreuve blanche avec les solutions de référence → toutes les parties réussies.
+  await js(`window.confirm = () => true; window.JQ.scene.loadMap('citadelle', { x: 17, y: 23 }); window.JQ.exam.menu(); true`);
+  check('pupitre des épreuves', await waitFor(`!!document.querySelector('[data-start="blanc-1"]')`));
+  await js(`document.querySelector('[data-start="blanc-1"]').click(); true`);
+  check('examen : atelier ouvert avec minuteur', await waitFor(`!document.getElementById('editor').hidden && (document.getElementById('ex-timer')?.textContent || '').includes(':')`));
+  check('examen : indices et rappel masqués', await js(`[...document.querySelectorAll('#ed-infotabs button')].filter(b => !b.hidden).map(b => b.dataset.info).join(',') === 'brief,api'`));
+  await shot('09-examen');
+  const sol = (q) => { const dir = join(ROOT, 'content/quests', q, 'solutions'); const f = readdirSync(dir).filter(n => n.endsWith('.java')); return Object.fromEntries(f.map(n => [n, readFileSync(join(dir, n), 'utf8')])); };
+  const answerKey = JSON.parse(readFileSync(join(ROOT, 'content/quests/e01-questions/quest.json'), 'utf8')).answerKey;
+  await js(`(() => { const S = window.JQ.session; S.quest('e01-questions').quizAnswers = ${JSON.stringify(answerKey)};
+    S.quest('e02-chaudron').drafts = ${JSON.stringify(sol('e02-chaudron'))}; S.quest('e03-runes').drafts = ${JSON.stringify(sol('e03-runes'))};
+    S.quest('e04-creatures').drafts = ${JSON.stringify(sol('e04-creatures'))}; return true; })()`);
+  await js(`window.JQ.exam.submit(true); true`);
+  check('examen : copie corrigée, toutes les parties réussies', await waitFor(`document.getElementById('modal-box').textContent.includes('Résultats') && !document.getElementById('modal-box').textContent.includes('✘')`, 60000), await js(`document.getElementById('modal-box').textContent.slice(0, 600)`));
+  check('examen : preuves de type examen enregistrées', await js(`window.JQ.session.state.evidence.filter(e => e.assessment === 'exam' && e.ok).length >= 4`));
+  await shot('10-resultats-examen');
+  await press('Escape');
   check('aucune exception JavaScript', logs.length === 0, logs.join(' | '));
 } catch (e) {
   check('exécution du scénario', false, e.stack);
