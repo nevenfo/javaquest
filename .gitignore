@@ -1,0 +1,14 @@
+# Runtime / outils locaux (JDK portable, binaires de build)
+.tools/
+build/
+dist/
+node_modules/
+*.zip
+# Données personnelles de progression
+data/
+# Supports ESIEE protégés : consultation privée locale, jamais versionnés ni redistribués
+curriculum/originals/
+# Divers
+*.log
+bin/
+obj/

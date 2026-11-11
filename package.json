@@ -1,0 +1,9 @@
+{
+  "name":"java-quest-esiee",
+  "version":"0.3.0",
+  "private":true,
+  "type":"module",
+  "scripts":{"start":"node server.mjs","test":"node --test tests/*.test.mjs"},
+  "engines":{"node":">=20"},
+  "description":"Application pédagogique Java locale privée — exercices ESIEE, compilation réelle Java 25"
+}
