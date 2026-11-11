@@ -1,31 +1,30 @@
 # PROGRESS
 
 ## Phase actuelle
-Phase B terminée (B1–B4). Phase C — tranche verticale (C1) + D1 assets.
+Phases A, B, C1, D1, E1, R1 validées. En cours : F1 (contenu des régions) en parallèle de G1 (examen) et E2/D2.
 
 ## Tâche actuelle
-C1.1 — Moteur de jeu Phaser (carte, joueur, collisions, interactions).
+F1 — production du contenu des régions (spécification `docs/CONTENT.md`).
 
 ## Dernière tâche validée
-B4 — `JavaQuest.exe` (manifeste Win10/11, mutex, Job kill-on-close, arrêt via stdin) + `tools/assemble.sh` (runtime jlink 12 modules + CDS, 79 Mo).
+C1 tranche verticale : village Phaser jouable, atelier CodeMirror, quêtes q01–q04 (guidée, prédiction, complétion, autonome à entrées variées), sauvegarde/rechargement.
 Validation :
-- `pwsh -File tools/test-launcher.ps1` → 10 PASS / 0 FAIL (copie dans un chemin avec espaces et accents, Java exécuté en sandbox avec le runtime jlink).
-- `bash tools/test-server.sh` → 24 PASS ; `bash tools/test-sandbox.sh` → 26 PASS.
+- `node tools/e2e.mjs` → 19/19 sur 4 passages consécutifs (1 échec isolé non reproduit, non identifié : à surveiller).
+- `bash tools/test-server.sh` → 24 PASS + contenu 4/4 ; `bash tools/test-sandbox.sh` → 26 PASS ; `pwsh -File tools/test-launcher.ps1` → 10 PASS.
 
 ## Décisions actives
-- Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`.
-- Sandbox : LPAC + `registryRead`, `DETACHED_PROCESS`, env minimal avec variables de profil (sinon CreateProcess 203).
-- Protocole runner : lignes `\u0001<nonce> TYPE json` (C,O,E,W,X,T,L,D). API joueur sans import dans le paquetage anonyme (`runner/api/`, ex. `Sonde.voir`). Harnais : `Verif.verifier()` + `fr.javaquest.runner.Check`.
-- Quêtes : `content/quests/<id>/quest.json` ; `harness/`, `solutions/`, `wrong/` jamais servis. `Validate` exige solutions OK, fautives KO, départ KO.
-- Serveur : options `--app --web --content --runtime --sandbox --runner --data --port --watch-stdin`. Données par défaut `%LOCALAPPDATA%\JavaQuest`. Jeton dans le fragment `#t=`.
-- Assets dans `.tools/dl/` (non versionné) : Kenney Tiny Town/Dungeon, Interface Sounds, fonts (CC0) ; Phaser 3.90.0, CodeMirror 5.65.21 (MIT) ; JetBrains Mono, Silkscreen (OFL).
-- Supports ESIEE : `curriculum/originals/` (cours « Java EISC4 2026 », Java 25), jamais versionnés ni distribués.
+- Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md` (règles P1–P19, hypothèses H1–H5).
+- Front : Phaser 3.90 (scène `web/js/world/scene.js`, cartes `maps.js` via `builder.js`), UI DOM (`web/js/ui/*`), modèle pédagogique pur `web/js/pedagogy.js`, sauvegarde `state.js` (throttle 1 s + keepalive).
+- Runner : stdin servi ligne par ligne avec écho terminal (flux `in`) ; `System.in` installé une seule fois (IO du JDK le met en cache).
+- Quêtes : formats code/fix/parsons/predict/quiz ; clé de quiz et harnais jamais envoyés au client ; `Validate` vérifie solutions, fautives, départ, prédictions.
+- E2E : Edge headless + CDP, émulation de focus obligatoire (sinon Phaser s'endort).
+- Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
 Aucun.
 
 ## Fichiers / zones utiles
-`launcher/Sandbox/` · `runner/` · `server/src/fr/javaquest/` · `content/quests/` · `tools/{build,test-server,test-sandbox}.sh` · `tests/` · `docs/` · `.tools/jdk-25` · `.tools/dl/`
+`web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-C1.1 — Vendoriser Phaser/CodeMirror/assets dans `web/vendor` et `web/assets` (+ `THIRD_PARTY.md`), puis écrire la scène village Phaser (carte tuilée Kenney, joueur ZQSD/flèches via `event.code`, collisions, PNJ, dialogue) ; valider par capture d'écran headless Edge.
+F1 — Écrire `docs/CONTENT.md` (format de quête, harnais, vocabulaire d'événements, conventions de région), puis déléguer la production des régions et valider chaque lot par `Validate` + revue.
