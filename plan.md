@@ -58,9 +58,9 @@ Compiler en mémoire et exécuter le code étudiant ; API du monde ; harnais de 
 ### Dépendances
 B1.
 ### Tâches
-- [ ] B2.1 Compilation `javax.tools` en mémoire (multi-fichiers, Java 25, sources compactes `void main`), diagnostics réels.
-- [ ] B2.2 Exécution : stdin, `IO`, exceptions → lignes utilisateur, protocole de sortie à nonce.
-- [ ] B2.3 API du monde (`Hero`, `Magie`…) enregistrant actions + ligne source ; harnais de tests cachés.
+- [x] B2.1 Compilation `javax.tools` en mémoire (multi-fichiers, Java 25, sources compactes `void main`), diagnostics réels.
+- [x] B2.2 Exécution : stdin, `IO`, exceptions → lignes utilisateur, protocole de sortie à nonce.
+- [x] B2.3 API du monde (`Hero`, `Magie`…) enregistrant actions + ligne source ; harnais de tests cachés.
 ### Validation
 - Tests runner : code correct, erreur de compilation, exception, boucle infinie, trace d'actions correcte.
 
@@ -70,8 +70,8 @@ Servir le jeu et l'API sur loopback, notation fiable, sauvegardes robustes.
 ### Dépendances
 B2.
 ### Tâches
-- [ ] B3.1 HTTP 127.0.0.1, jeton de session, en-têtes de sécurité, limites de taille.
-- [ ] B3.2 `/api/run`, `/api/check` (tests de quête côté serveur), `/api/save` (atomique + .bak + versions de schéma) dans `%LOCALAPPDATA%\JavaQuest`.
+- [x] B3.1 HTTP 127.0.0.1, jeton de session, en-têtes de sécurité, limites de taille.
+- [x] B3.2 `/api/run`, `/api/check` (tests de quête côté serveur), `/api/save` (atomique + .bak + versions de schéma) dans `%LOCALAPPDATA%\JavaQuest`.
 ### Validation
 - Tests HTTP automatisés (refus hors loopback/jeton, save/load, run).
 

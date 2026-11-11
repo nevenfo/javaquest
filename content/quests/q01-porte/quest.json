@@ -1,0 +1,21 @@
+{
+  "id": "q01-porte",
+  "title": "La porte du sanctuaire",
+  "region": "village",
+  "npc": "ancien",
+  "kind": "code",
+  "skills": ["base.programme", "base.affichage"],
+  "support": [],
+  "harness": ["harness/Verif.java"],
+  "solutions": [["solutions/Main.java"], ["solutions/classique/Main.java"]],
+  "wrong": [["wrong/Main.java"]],
+  "starter": { "Main.java": "void main() {\n    // Prononce la formule magique ici.\n}\n" },
+  "brief": "La porte du sanctuaire ne s'ouvre qu'à celui qui prononce exactement : Ouvre-toi !\nUn sort, en Java, c'est une instruction. Pour « prononcer » un texte, on l'affiche : IO.println(\"texte\");",
+  "hints": [
+    "Une formule s'affiche avec IO.println(...) ; le texte va entre guillemets.",
+    "Le texte doit être exactement Ouvre-toi ! (avec l'espace avant le point d'exclamation).",
+    "Chaque instruction Java se termine par un point-virgule ;"
+  ],
+  "effects": { "onPass": ["door:sanctuaire:open"] },
+  "reward": { "xp": 20 }
+}
