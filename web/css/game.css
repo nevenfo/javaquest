@@ -139,3 +139,9 @@ kbd { font: 11px var(--mono); padding: 0 4px; border-radius: 3px; background: rg
 @keyframes slide { from { transform: translateX(30px); opacity: 0; } }
 #fatal { position: fixed; inset: 0; z-index: 99; background: var(--night); color: var(--parch); display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center; font-size: 18px; }
 .out-in { color: var(--gold); font-style: italic; }
+
+.ed-exam { display: flex; gap: 6px; align-items: center; padding: 6px 12px; background: #4a2f2f; color: #ffd9c9; flex-wrap: wrap; }
+.ed-exam button { background: #6b3f3f; color: #fff; border: 1px solid #8a5050; border-radius: 5px; padding: 3px 10px; }
+.ed-exam button.on { background: var(--gold); color: var(--ink); }
+.ed-exam .timer { margin-left: auto; font: 16px var(--mono); color: var(--gold); }
+.ed-exam .timer.low { color: #ff8a7a; animation: bob 1s infinite; }

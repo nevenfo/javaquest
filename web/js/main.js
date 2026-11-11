@@ -221,6 +221,7 @@ async function talk(npcId) {
 async function useObject(o) {
   if (o.action === 'board') return reviewBoard();
   if (o.action === 'grimoire') return grimoire();
+  if (o.action === 'exam') return G.exam.menu();
   if (o.quest) {
     const q = G.byId.get(o.quest), s = G.session.state;
     if (!questAvailable(s, q)) return dialog.show({ name: o.label }, [q.dialog?.locked || 'Rien ne se passe… pas encore.']);
@@ -331,6 +332,7 @@ function journal() {
   };
   const main = G.quests.filter(q => q.main), side = G.quests.filter(q => !q.main && q.assessment !== 'review' && q.assessment !== 'exam');
   const { box, close } = modal(`<h1>📜 Journal</h1><h2>Quête principale</h2>${main.map(row).join('')}<h2>Quêtes secondaires</h2>${side.map(row).join('') || '<p class="muted">Aucune pour l\'instant.</p>'}
+    <h2>🎒 Sac</h2>${s.inventory.length ? '<div class="row">' + s.inventory.map(it => `<span class="tag" title="Obtenu le ${new Date(it.at).toLocaleDateString('fr-FR')}">${esc(it.name)}</span>`).join('') + '</div>' : '<p class="muted">Ton sac est vide.</p>'}
     <h2>Chronique</h2>${s.journal.slice(-12).reverse().map(j => `<div class="muted">${new Date(j.at).toLocaleString('fr-FR')} — ${esc(j.text)}</div>`).join('') || '<p class="muted">Ton histoire commence.</p>'}
     <p><button class="btn" data-close>Fermer</button></p>`, { wide: true });
   box.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { close(); openQuest(G.byId.get(b.dataset.q)); });

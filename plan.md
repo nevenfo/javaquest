@@ -178,7 +178,7 @@ Sujets type examen (temps, aides limitées), énoncé original du joueur accessi
 ### Dépendances
 F1.
 ### Tâches
-- [ ] G1.1 Mode examen chronométré, sans indices, notation par tests, bilan par compétence.
+- [x] G1.1 Mode examen chronométré, sans indices, notation par tests, bilan par compétence.
 ### Validation
 - Tests : examen complet passé avec solutions de référence ; aides désactivées vérifiées.
 

@@ -179,7 +179,7 @@ export const MAPS = {
   citadelle: {
     name: 'Citadelle des Épreuves', build: citadelle, spawn: { x: 17, y: 23 }, mapPos: { x: 50, y: 14 },
     npcs: [{ id: 'examinateur', x: 17, y: 6 }],
-    objects: [],
+    objects: [{ id: 'pupitre', x: 17, y: 11, tile: D(54), solid: true, action: 'exam', label: 'Pupitre des épreuves (mode examen)' }],
     portals: [{ x: 17, y: 27, w: 2, to: 'village', at: { x: 22, y: 10 } }],
   },
 };

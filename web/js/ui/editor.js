@@ -39,8 +39,9 @@ export class Workshop {
   get open() { return !this.el.hidden; }
 
   // ---------- Ouverture ----------
-  openQuest(quest) {
+  openQuest(quest, opts = {}) {
     this.quest = quest;
+    this.exam = opts.exam || null;
     const qs = this.hooks.session.quest(quest.id);
     if (qs.status === 'available') qs.status = 'active';
     qs.openedAt ||= Date.now();
@@ -61,6 +62,13 @@ export class Workshop {
     if (this.kind === 'parsons') this.renderParsons();
     if (this.kind === 'predict') this.renderPredict();
     if (this.kind === 'quiz') this.renderQuiz();
+    // Mode examen : pas d'indice ni de rappel, « Rendre la copie » au lieu de « Vérifier ».
+    [...$('ed-infotabs').children].forEach(b => { b.hidden = !!this.exam && (b.dataset.info === 'hints' || b.dataset.info === 'lesson'); });
+    $('ed-check').innerHTML = this.exam ? '📝 Rendre la copie' : '✔ Vérifier la quête <kbd>Ctrl+Maj+Entrée</kbd>';
+    let bar = document.getElementById('ed-exam');
+    if (!bar) { bar = document.createElement('div'); bar.id = 'ed-exam'; bar.className = 'ed-exam'; this.el.insertBefore(bar, $('ed-infotabs')); }
+    bar.hidden = !this.exam;
+    if (this.exam) this.exam.renderBar(bar);
     this.el.hidden = false;
     this.hooks.layout?.();
     this.showInfo('brief');
@@ -199,6 +207,7 @@ export class Workshop {
   async check() {
     if (!this.quest || $('ed-check').disabled) return;
     if (this.playing) this.playing.cancel = true;
+    if (this.exam) { this.saveDraft(); return this.exam.submit(); }
     this.saveDraft();
     this.busy(true);
     const s = this.hooks.session.state; s.stats.checks++;
@@ -409,18 +418,24 @@ export class Workshop {
   renderPredict() {
     const q = this.quest, prog = (q.program || []).map(f => `<div class="out-sys">${esc(f.name)}</div><pre>${esc(f.content)}</pre>`).join('');
     $('ed-predict').innerHTML = `${prog}<p style="color:#e8e3f7">Qu'affichera exactement ce programme ? Écris chaque ligne de sortie :</p><textarea id="ed-pred" spellcheck="false" placeholder="ligne 1&#10;ligne 2"></textarea>`;
+    const qs = this.hooks.session.quest(q.id);
+    $('ed-pred').value = qs.prediction || '';
+    $('ed-pred').oninput = () => { qs.prediction = $('ed-pred').value; this.hooks.session.touch(); };
   }
 
   renderQuiz() {
-    const q = this.quest;
+    const q = this.quest, qs = this.hooks.session.quest(q.id), saved = qs.quizAnswers || [];
     $('ed-predict').innerHTML = (q.questions || []).map((qq, i) => `<div class="card" style="background:#24203a;border-color:#443b63;color:#e8e3f7;padding:8px 12px;border-radius:8px;margin:8px 0">
       <p><b>${i + 1}.</b> ${md(qq.q)} <span class="out-sys">${qq.multi ? '(une ou plusieurs réponses)' : '(une seule réponse)'}</span></p>
-      ${qq.options.map((o, j) => `<label style="display:block;margin:3px 0"><input type="${qq.multi ? 'checkbox' : 'radio'}" name="qz${i}" value="${j}"> ${md(o, true)}</label>`).join('')}</div>`).join('');
+      ${qq.options.map((o, j) => `<label style="display:block;margin:3px 0"><input type="${qq.multi ? 'checkbox' : 'radio'}" name="qz${i}" value="${j}" ${saved[i]?.includes(j) ? 'checked' : ''}> ${md(o, true)}</label>`).join('')}</div>`).join('');
+    $('ed-predict').onchange = () => { qs.quizAnswers = this.readQuiz(); this.hooks.session.touch(); };
   }
 
-  quizAnswers() {
+  readQuiz() {
     return (this.quest.questions || []).map((qq, i) => [...document.querySelectorAll(`input[name="qz${i}"]:checked`)].map(x => +x.value));
   }
+
+  quizAnswers() { return this.hooks.session.quest(this.quest.id).quizAnswers || this.readQuiz(); }
 }
 
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
