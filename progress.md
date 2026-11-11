@@ -1,28 +1,31 @@
 # PROGRESS
 
 ## Phase actuelle
-Phase B — Moteur Java isolé (B1 validé, B2 à faire).
+Phase B terminée (B1–B4). Phase C — tranche verticale (C1) + D1 assets.
 
 ## Tâche actuelle
-B2.1 — Runner Java en sandbox : compilation en mémoire.
+C1.1 — Moteur de jeu Phaser (carte, joueur, collisions, interactions).
 
 ## Dernière tâche validée
-B1 — `jq-sandbox.exe` (AppContainer LPAC + capacité `registryRead` + Job Object + politique sans enfants).
+B4 — `JavaQuest.exe` (manifeste Win10/11, mutex, Job kill-on-close, arrêt via stdin) + `tools/assemble.sh` (runtime jlink 12 modules + CDS, 79 Mo).
 Validation :
-- `bash tools/test-sandbox.sh` → 26 PASS / 0 FAIL (2026-11-11).
-- A1 : tag `legacy-v0.3`, dépôt privé `nevenfo/javaquest`, `docs/AUDIT.md`. R1 : `docs/PEDAGOGIE.md` (DOI vérifiés Crossref).
+- `pwsh -File tools/test-launcher.ps1` → 10 PASS / 0 FAIL (copie dans un chemin avec espaces et accents, Java exécuté en sandbox avec le runtime jlink).
+- `bash tools/test-server.sh` → 24 PASS ; `bash tools/test-sandbox.sh` → 26 PASS.
 
 ## Décisions actives
-- Architecture : voir `plan.md` § Architecture retenue et `docs/AUDIT.md`.
-- Sandbox : JVM lancée avec `DETACHED_PROCESS` (pas de console → pas de conhost), env minimal incluant variables de profil (sinon CreateProcess 203), flags JVM `-XX:-UsePerfData -Xms8m -XX:+UseSerialGC`.
-- Assets : Kenney Tiny Town + Tiny Dungeon (CC0, 16×16, palette commune) téléchargés dans `.tools/dl/` (non versionné) ; Phaser 3.90.0, CodeMirror 5.65.21 (MIT), JetBrains Mono + Silkscreen (OFL), Kenney Interface Sounds + fonts (CC0).
-- Supports ESIEE : `curriculum/originals/` (9 docs, cours « Java EISC4 2026 », Java 25), jamais versionnés ni distribués.
+- Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`.
+- Sandbox : LPAC + `registryRead`, `DETACHED_PROCESS`, env minimal avec variables de profil (sinon CreateProcess 203).
+- Protocole runner : lignes `\u0001<nonce> TYPE json` (C,O,E,W,X,T,L,D). API joueur sans import dans le paquetage anonyme (`runner/api/`, ex. `Sonde.voir`). Harnais : `Verif.verifier()` + `fr.javaquest.runner.Check`.
+- Quêtes : `content/quests/<id>/quest.json` ; `harness/`, `solutions/`, `wrong/` jamais servis. `Validate` exige solutions OK, fautives KO, départ KO.
+- Serveur : options `--app --web --content --runtime --sandbox --runner --data --port --watch-stdin`. Données par défaut `%LOCALAPPDATA%\JavaQuest`. Jeton dans le fragment `#t=`.
+- Assets dans `.tools/dl/` (non versionné) : Kenney Tiny Town/Dungeon, Interface Sounds, fonts (CC0) ; Phaser 3.90.0, CodeMirror 5.65.21 (MIT) ; JetBrains Mono, Silkscreen (OFL).
+- Supports ESIEE : `curriculum/originals/` (cours « Java EISC4 2026 », Java 25), jamais versionnés ni distribués.
 
 ## Blocage actif
 Aucun.
 
 ## Fichiers / zones utiles
-`launcher/Sandbox/` · `tools/test-sandbox.sh` · `tests/sandbox/Attacks.java` · `docs/{AUDIT,SECURITY,PEDAGOGIE}.md` · `.tools/jdk-25` · `.tools/dl/`
+`launcher/Sandbox/` · `runner/` · `server/src/fr/javaquest/` · `content/quests/` · `tools/{build,test-server,test-sandbox}.sh` · `tests/` · `docs/` · `.tools/jdk-25` · `.tools/dl/`
 
 ## NEXT ACTION
-B2.1 — Écrire `runner/` (Java 25) : lit un JSON de sources sur stdin, compile en mémoire via `javax.tools` (`-proc:none`, `--release 25`), renvoie diagnostics réels ; valider par un test runner (code correct / erreur de compilation) exécuté dans `jq-sandbox`.
+C1.1 — Vendoriser Phaser/CodeMirror/assets dans `web/vendor` et `web/assets` (+ `THIRD_PARTY.md`), puis écrire la scène village Phaser (carte tuilée Kenney, joueur ZQSD/flèches via `event.code`, collisions, PNJ, dialogue) ; valider par capture d'écran headless Edge.

@@ -81,7 +81,7 @@ B2.
 ### Dépendances
 B3.
 ### Tâches
-- [ ] B4.1 Instance unique (mutex, réouverture navigateur), port libre, attente de santé, ouverture navigateur, fenêtre « Arrêter », erreurs lisibles.
+- [x] B4.1 Instance unique (mutex, réouverture navigateur), port libre, attente de santé, ouverture navigateur, fenêtre « Arrêter », erreurs lisibles.
 ### Validation
 - Lancement depuis un chemin avec espaces, double lancement, arrêt : pas de processus résiduel.
 
