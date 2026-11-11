@@ -23,8 +23,11 @@ Validation :
 ## Blocage actif
 Aucun.
 
+## Incident à signaler à l'utilisateur
+`javaquest-install.zip` (49,8 Ko, non versionné, absent de la sauvegarde) a été supprimé par erreur le 2026-11-11 lors du nettoyage des fichiers hérités. Archive équivalente reconstituée depuis le tag : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip` (contenu identique au dépôt hérité, pas forcément au ZIP d'origine).
+
 ## Fichiers / zones utiles
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-F1 — Écrire `docs/CONTENT.md` (format de quête, harnais, vocabulaire d'événements, conventions de région), puis déléguer la production des régions et valider chaque lot par `Validate` + revue.
+F1 — Intégrer les lots de contenu des deux producteurs (régions village/forêt/mines puis artisans/tour/bibliothèque/citadelle) : `bash tools/test-server.sh` tout OK, `node tools/coverage.mjs` (viser parcours complet par compétence), revue d'échantillon, puis commit ; ensuite H1.2 (test Windows Sandbox du ZIP).
