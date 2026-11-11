@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 # Assemble la distribution dans build/dist/JavaQuest (runtime jlink, serveur, runner, sandbox, web, contenu).
-# Usage : bash tools/assemble.sh [--zip]
+# Usage : bash tools/assemble.sh [--zip] [--no-build]
 set -euo pipefail
 cd "$(dirname "$0")/.."
 JDK=.tools/jdk-25
 DIST=build/dist/JavaQuest
 APP=$DIST/app
-bash tools/build.sh >/dev/null
-dotnet build launcher/Sandbox -c Release -nologo -v q >/dev/null
+ZIP=0; NOBUILD=0
+for a in "$@"; do [ "$a" = "--zip" ] && ZIP=1; [ "$a" = "--no-build" ] && NOBUILD=1; done
+if [ $NOBUILD = 0 ]; then
+  bash tools/build.sh >/dev/null
+  dotnet build launcher/Sandbox -c Release -nologo -v q >/dev/null
+fi
 dotnet build launcher/Launcher -c Release -nologo -v q >/dev/null
 rm -rf "$DIST"
 mkdir -p "$APP/bin" "$APP/runner"
@@ -26,7 +30,7 @@ cp -r content "$APP/content"
 [ -d licenses ] && cp -r licenses "$DIST/licenses"
 [ -f docs/LISEZMOI.txt ] && cp docs/LISEZMOI.txt "$DIST/LISEZMOI.txt"
 du -sh "$DIST" | cut -f1 | sed 's/^/taille : /'
-if [ "${1:-}" = "--zip" ]; then
+if [ $ZIP = 1 ]; then
   rm -f build/dist/JavaQuest.zip
   (cd build/dist && powershell -NoProfile -Command "Compress-Archive -Path 'JavaQuest' -DestinationPath 'JavaQuest.zip' -CompressionLevel Optimal")
   ls -la build/dist/JavaQuest.zip
