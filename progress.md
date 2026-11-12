@@ -1,19 +1,20 @@
 # PROGRESS
 
 ## Phase actuelle
-Phases A, B, C1, D1, E1, E2, R1, G1 validées. En cours : F1 (F1.1–F1.4, F1.6, F1.7 faits) ; D2 et H1 ouverts.
+Phases A, B, C1, D1, E1, E2, R1, F1, G1 validées. Ouverts : D2 (tests unitaires état/sauvegarde manquants) puis H1 (distribution).
 
 ## Tâche actuelle
-F1.5 — région finale (projet intégrateur, compagnon programmable).
+D2 — tests unitaires état/sauvegarde (`web/js/state.js`).
 
 ## Dernière tâche validée
-F1.4 : donjon région 4 « Archives Englouties » (carte `archives`, PNJ `greffier`/`pipistrelle`, quêtes `d4-01`–`d4-04` après `b07-classement-livres`, flag `f-archives`) ; `b07-classement-livres` pose enfin `f-bibliotheque`.
+F1.5 : région finale « Observatoire du Sommet » (carte `sommet`, PNJ `astronome`, portail village nord `requires: 'f-bibliotheque'`), quêtes `s01`–`s04` pilotant le compagnon (`support/Compagnon.java`, identique sauf `GRILLE_ESSAI`), `s04` pose `f-sommet` (conclusion du jeu).
 Validation :
-- `bash tools/build.sh` OK ; `bash tools/test-server.sh` → 139 quêtes valides, 0 échec.
-- `node --test tests/web/pedagogy.test.mjs tests/web/maps.test.mjs` → 23/23 ; `node tools/e2e.mjs` → 24/24 ; `node tools/e2e-traversee.mjs` → 107 PASS, 0 FAIL ; `node tools/coverage.mjs` → 41/41.
+- `bash tools/build.sh` OK ; `bash tools/test-server.sh` → 143 quêtes valides, 0 échec.
+- `node --test tests/web/pedagogy.test.mjs tests/web/maps.test.mjs` → 24/24 ; `node tools/e2e.mjs` → 24/24 ; `node tools/e2e-traversee.mjs` → 124 PASS, 0 FAIL ; `node tools/coverage.mjs` → 143 activités, 41/41.
 
 ## Décisions actives
 - Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
+- Région finale `sommet` : API du compagnon dans `docs/CONTENT.md` § « Le compagnon de l'Observatoire ».
 - Donjons : quêtes `d<n>-NN` optionnelles (`main: false`), région = carte du donjon, accès gardé par le flag de fin de région, dernière quête pose `f-<donjon>` ; vérifiées dans `tools/e2e-traversee.mjs` après la chaîne principale.
 - Quêtes citadelle `c01`–`c04` : optionnelles (`main: false`), chaînées par `requires` ; accès via la porte du sanctuaire.
 - Runner : stdin servi ligne par ligne avec écho ; `-Dstdin.encoding=UTF-8` ; args saisis dans l'atelier (`ed-args`) si `usesArgs` ou compétence `base.args`.
@@ -33,4 +34,4 @@ Aucun.
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-F1.5 — Concevoir la région finale (projet intégrateur avec compagnon programmable : le code du joueur pilote un acteur du monde via l'API de scène de `docs/CONTENT.md` § « Rendre le code visible dans le monde »), préciser ses tâches dans `plan.md`, puis l'implémenter ; valider par `bash tools/test-server.sh`, `node --test tests/web/maps.test.mjs`, `node tools/e2e.mjs`, `node tools/e2e-traversee.mjs`.
+D2 — Écrire `tests/web/state.test.mjs` (node --test) couvrant création/sélection de profils, sauvegarde/chargement et migration d'état de `web/js/state.js` (stockage simulé) ; si vert avec l'E2E menus existant (`node tools/e2e.mjs`), cocher D2.1–D2.3 avec leur preuve.

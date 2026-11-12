@@ -1,0 +1,69 @@
+{
+  "id": "s03-ordres-de-l-automate",
+  "title": "Les ordres de l'automate",
+  "region": "sommet",
+  "giver": "astronome",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "s02-strategies"
+  ],
+  "skills": [
+    "proj.repl",
+    "col.map",
+    "exc.trycatch"
+  ],
+  "summary": "Écris un interpréteur de commandes (avance, tourne, dis, fin) qui pilote l'automate via une Map de Commande.",
+  "hud": "Le pupitre de commandes de l'automate reste à écrire.",
+  "source": "REPL : lecture de lignes, table de commandes Map<String, Commande>, arguments invalides gérés par exception (transfert)",
+  "support": [
+    "support/Compagnon.java",
+    "support/Commande.java",
+    "support/CommandeException.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "avance 2\\ntourne\\navance 3\\ndis bravo\\nfin",
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static void enregistrer(String nom, Commande cmd) {\n    }\n\n    static String traiter(Compagnon c, String ligne) {\n        return null;\n    }\n\n    public static void main(String[] args) {\n        Compagnon c = Compagnon.demarrer();\n    }\n}\n"
+  },
+  "brief": "L'astronome veut piloter l'automate **au clavier**, comme dans un petit terminal. L'interface `Commande` et la `CommandeException` sont fournies :\n```java\ninterface Commande { void executer(Compagnon c, List<String> args) throws CommandeException; }\n```\nÉcris `Main.java` :\n\n- `static void enregistrer(String nom, Commande cmd)` : ajoute une commande à une `Map<String, Commande>` ;\n- `static String traiter(Compagnon c, String ligne)` : exécute une ligne (mots séparés par des blancs, éventuellement multiples) et renvoie le texte à afficher :\n  - ligne vide ou blanche → `null` ;\n  - nom inconnu → `\"Commande inconnue : <nom>\"` ;\n  - succès → `\"ok\"` ;\n  - `CommandeException` ou `Compagnon.MurException` → `\"Erreur : \" + e.getMessage()` (le REPL ne s'arrête jamais) ;\n- `main` : crée `Compagnon.demarrer()`, lit les lignes (`IO.readln()`) jusqu'à `fin` ou la fin de l'entrée, et affiche chaque résultat non nul.\n\n**Commandes de base** (disponibles dès le chargement de `Main`, sans passer par `main`) :\n- `avance n` : `n` pas dans la direction du cap (`c.avancer()`) ; `n` est un entier ≥ 0 et il y a **exactement un** argument, sinon `CommandeException(\"nombre attendu\")` ;\n- `tourne` : `c.tourner()` (quart de tour à droite) ;\n- `dis mot1 mot2 …` : `c.dire(...)` avec les mots séparés par une espace ; sans mot : `CommandeException(\"rien à dire\")`.\n\nLe harnais ajoutera lui-même une commande avec `Main.enregistrer(...)` : ta boucle ne doit pas avoir besoin d'être modifiée pour cela.\n\nExemple : `avance 2`, `tourne`, `avance x` affichent `ok`, `ok`, `Erreur : nombre attendu`.\n\nL'automate : `c.avancer()` (dans la direction du cap), `c.tourner()`, `c.dire(\"…\")`, `c.cap()`.",
+  "hints": [
+    "Découpe avec `trim().split(\"\\\\s+\")` ; le premier mot est le nom, le reste forme les arguments (une `List<String>`).",
+    "Une `Map<String, Commande>` associe chaque nom à son objet ; les commandes de base s'enregistrent dans un bloc `static { … }` avec des lambdas `(c, args) -> { … }`. `Integer.parseInt` lève `NumberFormatException` : à convertir en `CommandeException`.",
+    "Dans `traiter`, un seul `try { cmd.executer(c, mots); return \"ok\"; } catch (CommandeException | Compagnon.MurException e) { … }` suffit à gérer toutes les erreurs d'exécution."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes stratégies, c'est bien joli, mais parfois je préfère **donner des ordres** moi-même, un par un, comme dans un terminal. Un petit interpréteur de commandes pour mon automate : `avance`, `tourne`, `dis`.",
+      "Fais en sorte qu'on puisse en ajouter d'autres sans rien casser, et qu'une faute de frappe ne plante jamais le pupitre."
+    ],
+    "resume": "Le pupitre de commandes n'est pas fini : table de commandes, erreurs gérées, boucle jusqu'à « fin ».",
+    "success": [
+      "Une table de commandes ouverte aux extensions, des erreurs rattrapées proprement : mon pupitre est prêt. Tu as réutilisé exactement le motif du shell, dans un tout autre décor."
+    ],
+    "done": "Je pilote mon automate du bout des doigts."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

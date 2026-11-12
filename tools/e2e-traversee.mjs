@@ -41,6 +41,8 @@ quests.filter(q => q.region === 'fonderie').forEach(q => visit(q));
 quests.filter(q => q.region === 'labyrinthe').forEach(q => visit(q));
 // Donjon optionnel des archives (région 4, après f-bibliotheque) : quêtes `d4-*`, prérequis d'abord.
 quests.filter(q => q.region === 'archives').forEach(q => visit(q));
+// Région finale (Observatoire du Sommet, après f-bibliotheque) : quêtes `s0*`, prérequis d'abord.
+quests.filter(q => q.region === 'sommet').forEach(q => visit(q));
 const solutionFiles = (q) => {
   const variant = (q.solutions || [])[0]; if (!variant) return null;
   return Object.fromEntries(variant.map(p => [basename(p), readFileSync(join(QDIR, q.dir, p), 'utf8')]));
@@ -101,10 +103,10 @@ try {
   await waitFor(dialogOpen); await closeDialogs();
   const clientIds = await js(`window.JQ.quests.map(q => q.id).join(',')`);
   check('contenu client = contenu disque', order.every(q => clientIds.split(',').includes(q.id)), 'quêtes manquantes côté client');
-  console.log(`Chaîne à traverser : ${order.length} quêtes (${nMain} principales + prérequis, puis ${order.length - nMain} des donjons crypte, fonderie, labyrinthe et archives)`);
+  console.log(`Chaîne à traverser : ${order.length} quêtes (${nMain} principales + prérequis, puis ${order.length - nMain} des donjons crypte, fonderie, labyrinthe et archives, puis de la région finale sommet)`);
 
   // Portails initialement verrouillés
-  for (const [from, to] of [['village', 'foret'], ['village', 'mines'], ['village', 'artisans'], ['village', 'bibliotheque'], ['artisans', 'tour'], ['mines', 'crypte'], ['artisans', 'fonderie'], ['tour', 'labyrinthe'], ['bibliotheque', 'archives']]) {
+  for (const [from, to] of [['village', 'foret'], ['village', 'mines'], ['village', 'artisans'], ['village', 'bibliotheque'], ['artisans', 'tour'], ['mines', 'crypte'], ['artisans', 'fonderie'], ['tour', 'labyrinthe'], ['bibliotheque', 'archives'], ['village', 'sommet']]) {
     await goPortal(from, to); await sleep(500);
     check(`portail verrouillé au départ : ${from} → ${to}`, (await mapOf()) === from, await mapOf());
   }
@@ -120,7 +122,7 @@ try {
 
   // ---------- Traversée ----------
   const entered = new Set(['village']);
-  const travel = { foret: ['village', 'foret'], mines: ['village', 'mines'], artisans: ['village', 'artisans'], tour: ['artisans', 'tour'], crypte: ['mines', 'crypte'], fonderie: ['artisans', 'fonderie'], labyrinthe: ['tour', 'labyrinthe'], archives: ['bibliotheque', 'archives'], bibliotheque: ['village', 'bibliotheque'] };
+  const travel = { foret: ['village', 'foret'], mines: ['village', 'mines'], artisans: ['village', 'artisans'], tour: ['artisans', 'tour'], crypte: ['mines', 'crypte'], fonderie: ['artisans', 'fonderie'], labyrinthe: ['tour', 'labyrinthe'], archives: ['bibliotheque', 'archives'], sommet: ['village', 'sommet'], bibliotheque: ['village', 'bibliotheque'] };
   let doneCount = 0, aborted = false;
   for (const q of order) {
     if (aborted) break;
@@ -146,6 +148,18 @@ try {
       if (p.sol) qs.drafts = p.sol; if (p.answers) qs.quizAnswers = p.answers; if (p.prediction != null) qs.prediction = p.prediction;
       window.JQ.workshop.openQuest(window.JQ.byId.get('${q.id}')); return true; })()`);
     if (!(await waitFor(`!document.getElementById('editor').hidden`))) { check(`${q.id} : atelier ouvert`, false); aborted = true; break; }
+    if (q.region === 'sommet') {
+      // Rejeu visuel du compagnon : exécuter la solution, rejouer la trace dans le monde, sans exception JavaScript.
+      const nLogs = logs.length;
+      await js(`window.JQ.session.state.settings.speed = 10; document.getElementById('ed-run').click(); true`);
+      const ran = await waitFor(`!document.getElementById('ed-run').disabled && !!window.JQ.workshop.result?.timeline?.length`, 60000);
+      const names = ran ? await js(`window.JQ.workshop.result.timeline.filter(e => e.t === 'event').map(e => e.name).join(',')`) : '';
+      check(`${q.id} : exécution du compagnon (événements acteur.apparaitre et acteur.deplacer)`, ran && names.includes('acteur.apparaitre') && names.includes('acteur.deplacer'), names || await js(`document.getElementById('ed-out').textContent`));
+      if (ran) {
+        await js(`window.JQ.workshop.playTimeline(window.JQ.workshop.result.timeline).then(() => true)`);
+        check(`${q.id} : rejeu des événements, l'automate est dans le monde`, await js(`window.JQ.scene.actors.has('automate')`) === true && logs.length === nLogs, logs.slice(nLogs).join(' | '));
+      }
+    }
     await js(`document.getElementById('ed-check').click(); true`);
     const ok = await waitFor(`window.JQ.session.state.quests['${q.id}']?.status === 'done'`, 90000);
     if (!ok) { check(`${q.id} (${q.region}/${q.kind}) réussie`, false, await js(`document.getElementById('ed-out').textContent`)); aborted = true; break; }
@@ -166,10 +180,13 @@ try {
   }
   const mainDone = await js(`window.JQ.quests.filter(q => q.main).every(q => window.JQ.session.state.quests[q.id]?.status === 'done')`);
   check('chaîne principale entièrement accomplie', !aborted && mainDone === true);
+  check('quêtes du sommet toutes accomplies (région finale)', await js(`window.JQ.quests.filter(q => q.region === 'sommet').every(q => window.JQ.session.state.quests[q.id]?.status === 'done')`) === true);
+  await goPortal('sommet', 'village');
+  check('portail retour : sommet → village', await waitFor(`window.JQ.scene.mapId === 'village'`, 25000), await mapOf());
 
   // Preuves, portes, citadelle
   const flags = await js(`JSON.stringify(window.JQ.session.state.world.flags)`);
-  for (const f of ['door:sanctuaire', 'f-foret', 'f-mines', 'f-forge', 'f-tour', 'f-crypte', 'f-fonderie', 'f-labyrinthe', 'f-bibliotheque', 'f-archives']) check(`flag ${f} posé`, !!JSON.parse(flags || '{}')[f], flags);
+  for (const f of ['door:sanctuaire', 'f-foret', 'f-mines', 'f-forge', 'f-tour', 'f-crypte', 'f-fonderie', 'f-labyrinthe', 'f-bibliotheque', 'f-archives', 'f-sommet']) check(`flag ${f} posé`, !!JSON.parse(flags || '{}')[f], flags);
   check('preuves pédagogiques enregistrées', await js(`window.JQ.session.state.evidence.length >= ${Math.max(1, doneCount)}`));
   check('XP accordée', (await js(`window.JQ.session.state.xp`)) > 0);
   await js(`window.JQ.scene.loadMap('village'); window.JQ.exam.enter(); true`);

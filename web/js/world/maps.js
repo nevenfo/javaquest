@@ -13,11 +13,12 @@ export const AVATARS = [
 
 function village() {
   const m = new MapBuilder(46, 32, { seed: 11 });
-  m.forestBorder(2, [{ side: 'e', from: 14, to: 16 }, { side: 's', from: 21, to: 24 }, { side: 'w', from: 14, to: 16 }, { side: 'n', from: 34, to: 36 }]);
+  m.forestBorder(2, [{ side: 'e', from: 14, to: 16 }, { side: 's', from: 21, to: 24 }, { side: 'w', from: 14, to: 16 }, { side: 'n', from: 34, to: 36 }, { side: 'n', from: 28, to: 29 }]);
   m.plaza(17, 12, 12, 8);
   m.path(5, 15, 17, 15).path(5, 14, 17, 14).path(28, 15, 45, 15).path(28, 14, 45, 14);
   m.path(22, 19, 22, 31).path(23, 19, 23, 31);
   m.path(22, 7, 22, 12).path(11, 8, 11, 14).path(35, 9, 35, 14).path(11, 15, 11, 19).path(35, 0, 35, 9);
+  m.path(28, 0, 28, 12, 2);        // sentier nord : Observatoire du Sommet
   m.house(9, 5, 'redWoodWide', { door: 'maison-ysolde' });
   m.house(20, 4, 'blueStoneWide', { door: 'sanctuaire' });
   m.house(34, 6, 'redChimney', { door: 'forge' });
@@ -160,6 +161,19 @@ function archives() {
   return m.build();
 }
 
+// Région finale : vestibule d'entrée, grande salle de l'observatoire où la grille du compagnon se déploie autour du héros.
+function sommet() {
+  const m = new MapBuilder(40, 36, { base: 'void', seed: 151 });
+  m.room(13, 26, 14, 9);           // vestibule
+  m.room(6, 4, 28, 18);            // salle de l'observatoire (astronome au nord)
+  m.carve(19, 21, 2, 6).carve(19, 34, 2, 2);
+  m.setD(14, 27, TILE.statue).setD(25, 27, TILE.statue).setD(14, 32, TILE.bookshelf).setD(15, 32, TILE.bookshelf).setD(25, 32, TILE.table).setD(24, 32, TILE.stool);
+  m.setD(8, 5, TILE.banner).setD(31, 5, TILE.banner).setD(15, 5, TILE.fountainLit).setD(24, 5, TILE.fountainLit).setD(11, 5, TILE.bookshelf).setD(12, 5, TILE.bookshelf);
+  m.setD(8, 19, TILE.pedestalLit).setD(31, 19, TILE.pedestalLit).setD(8, 12, TILE.table).setD(9, 12, TILE.stool).setD(31, 12, TILE.table).setD(30, 12, TILE.stool);
+  m.setD(28, 8, TILE.chest).setD(10, 19, TILE.barrelD).setD(29, 19, TILE.barrelD);
+  return m.build();
+}
+
 function citadelle() {
   const m = new MapBuilder(36, 28, { base: 'void', seed: 61 });
   m.room(4, 3, 28, 22);
@@ -194,6 +208,7 @@ export const NPCS = {
   gabarit: { name: 'Gabarit de Fer', sprite: SPRITES.soldier, role: 'Contremaître des moules' },
   greffier: { name: 'Greffier Mortimer', sprite: SPRITES.bald, role: "Veille à l'entrée des Archives" },
   pipistrelle: { name: 'Dame Pipistrelle', sprite: SPRITES.bat, role: 'Conservatrice des Archives' },
+  astronome: { name: 'Astronome Astrion', sprite: SPRITES.wizard, role: "Gardien de l'Observatoire du Sommet" },
   examinateur: { name: 'Examinatrice Céleste', sprite: SPRITES.knight, role: 'Juge des épreuves' },
 };
 
@@ -214,6 +229,7 @@ export const MAPS = {
       { x: 21, y: 31, w: 4, to: 'mines', at: { x: 22, y: 32 }, requires: 'f-foret', locked: 'Le garde Aubin : « Les mines sont dangereuses. Reviens après avoir traversé le Bois des Embranchements. »' },
       { x: 0, y: 14, h: 3, to: 'artisans', at: { x: 44, y: 15 }, requires: 'f-mines', locked: 'Le quartier des Artisans est fermé tant que les mines ne sont pas sûres.' },
       { x: 34, y: 0, w: 3, to: 'bibliotheque', at: { x: 19, y: 26 }, requires: 'f-tour', locked: 'La Grande Bibliothèque n\'ouvre qu\'aux maîtres des contrats (Tour).' },
+      { x: 28, y: 0, w: 2, to: 'sommet', at: { x: 19, y: 32 }, requires: 'f-bibliotheque', locked: "Un sentier de pierre grimpe vers le nord, mais une barrière de givre le ferme : l'Observatoire du Sommet n'ouvre qu'aux maîtres de la Grande Bibliothèque. Termine d'abord le classement des livres de Lyra." },
     ],
   },
   foret: {
@@ -276,6 +292,12 @@ export const MAPS = {
     npcs: [{ id: 'greffier', x: 21, y: 33 }, { id: 'pipistrelle', x: 20, y: 6 }],
     objects: [],
     portals: [{ x: 19, y: 39, w: 2, to: 'bibliotheque', at: { x: 19, y: 6 } }],
+  },
+  sommet: {
+    name: 'Observatoire du Sommet', build: sommet, spawn: { x: 19, y: 32 }, mapPos: { x: 24, y: 8 },
+    npcs: [{ id: 'astronome', x: 19, y: 7 }],
+    objects: [],
+    portals: [{ x: 19, y: 35, w: 2, to: 'village', at: { x: 28, y: 2 } }],
   },
   citadelle: {
     name: 'Citadelle des Épreuves', build: citadelle, spawn: { x: 17, y: 23 }, mapPos: { x: 50, y: 14 },
