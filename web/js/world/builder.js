@@ -34,6 +34,7 @@ export class MapBuilder {
     this.deco = new Array(w * h).fill(0);
     this.over = new Array(w * h).fill(0); // au-dessus du joueur (toits)
     this.solid = new Uint8Array(w * h);
+    if (base === 'void') this.solid.fill(1); // hors des salles : infranchissable (room/carve libèrent)
     this.doors = [];
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) this.ground[y * w + x] = this.baseTile(base, x, y);
   }

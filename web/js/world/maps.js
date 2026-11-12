@@ -57,7 +57,7 @@ function mines() {
   m.room(4, 16, 14, 9);            // galerie ouest
   m.room(26, 15, 14, 10);          // galerie est
   m.room(15, 3, 15, 10);           // grande salle
-  m.carve(22, 25, 2, 2).carve(17, 20, 2, 1).carve(25, 19, 2, 1).carve(22, 12, 2, 4).room(20, 13, 6, 3).carve(22, 12, 2, 5);
+  m.carve(22, 16, 2, 11).carve(17, 20, 5, 1).carve(24, 19, 3, 1).carve(22, 12, 2, 4).room(20, 13, 6, 3).carve(22, 12, 2, 5);
   m.carve(22, 33, 2, 1);
   m.setD(6, 18, TILE.barrelD).setD(7, 18, TILE.barrelD).setD(36, 17, TILE.anvil).setD(28, 22, TILE.table).setD(29, 22, TILE.stool);
   m.setD(16, 4, TILE.statue).setD(28, 4, TILE.statue);
@@ -115,7 +115,7 @@ function fonderie() {
 function tour() {
   const m = new MapBuilder(40, 36, { base: 'void', seed: 41 });
   m.room(14, 28, 12, 8); m.room(3, 17, 14, 10); m.room(23, 17, 14, 10); m.room(10, 3, 20, 12);
-  m.carve(19, 27, 2, 2).carve(16, 21, 8, 1).carve(19, 14, 2, 4).carve(19, 35, 2, 1);
+  m.carve(19, 27, 2, 2).carve(16, 21, 8, 1).carve(19, 14, 2, 14).carve(19, 35, 2, 1);
   m.setD(12, 4, TILE.banner).setD(27, 4, TILE.banner).setD(4, 18, TILE.bookshelf).setD(5, 18, TILE.bookshelf).setD(35, 18, TILE.statue);
   return m.build();
 }

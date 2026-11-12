@@ -22,7 +22,7 @@ Prérequis de développement : JDK Temurin 25 dans `.tools/jdk-25`, SDK .NET 8 (
 bash tools/build.sh                 # serveur + runner
 bash tools/test-sandbox.sh          # attaques contre la sandbox
 bash tools/test-server.sh           # tests HTTP + validation de tout le contenu
-node --test tests/web/pedagogy.test.mjs
+node --test tests/web/pedagogy.test.mjs tests/web/maps.test.mjs
 node tools/e2e.mjs                  # scénario complet dans Edge headless
 bash tools/assemble.sh --zip        # build/dist/JavaQuest.zip (runtime jlink)
 pwsh -File tools/test-launcher.ps1  # lanceur depuis un chemin avec espaces
