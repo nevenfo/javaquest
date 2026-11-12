@@ -14,6 +14,7 @@ Validation :
 - D2 : `npm run -s test:web` 33/33, `node tools/e2e.mjs` 33/33.
 
 ## Décisions actives
+- H1.3 (décision utilisateur 2026-11-12) : distribution gratuite, portable, hors ligne, Win10/11 avec Smart App Control actif, sans certificat payant, sans admin. Voie : remplacer `JavaQuest.exe` et `jq-sandbox.exe` par du Java FFM exécuté par le `java(w).exe` signé, **isolation AppContainer LPAC + Job Object intégralement préservée**. Prototype minimal validé avant refonte ; si l'équivalence de sécurité n'est pas démontrée (`tools/test-sandbox.sh` 26/26 + WSB 12/12), garder l'architecture actuelle et présenter signature / MSIX Store.
 - Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
 - Région finale `sommet` : API du compagnon dans `docs/CONTENT.md` § « Le compagnon de l'Observatoire ».
 - Donjons : quêtes `d<n>-NN` optionnelles (`main: false`), région = carte du donjon, accès gardé par le flag de fin de région, dernière quête pose `f-<donjon>` ; vérifiées dans `tools/e2e-traversee.mjs` après la chaîne principale.
@@ -25,7 +26,7 @@ Validation :
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
-H1.3 — Symptôme : « Une stratégie de contrôle d'application a bloqué ce fichier » (Windows Sandbox, `VerifiedAndReputablePolicyState = 1`). Cause : exécutables non signés. Faits exclus : PATH, chemin, réseau, MOTW sur `java.exe`/`.cmd`. Décision utilisateur requise : signature reconnue (coût, identité) ou refonte sans exécutable non signé (lanceur `javaw`, broker AppContainer en Java FFM).
+Aucun (décision H1.3 prise).
 
 ## Incident à signaler à l'utilisateur
 `javaquest-install.zip` (non versionné) supprimé par erreur le 2026-11-11 ; archive reconstituée : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip`.
@@ -34,4 +35,4 @@ H1.3 — Symptôme : « Une stratégie de contrôle d'application a bloqué ce f
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-H1.3 — Appliquer l'option choisie par l'utilisateur (signature ou refonte sans exécutable non signé) ; valider par `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` (WSB 12/12) puis cocher H1.2–H1.3.
+H1.3 — Prototype FFM minimal du broker (`grant` + `run --lpac` : AppContainer LPAC, politique sans enfants, Job Object) lancé par `java.exe` signé, avec la même CLI que `jq-sandbox.exe` ; valider par `tools/test-sandbox.sh` pointé sur le prototype (26/26 attendu).
