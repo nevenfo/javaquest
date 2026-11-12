@@ -1,0 +1,76 @@
+{
+  "id": "d3-03-cors-et-tambours",
+  "title": "Cors et tambours",
+  "region": "labyrinthe",
+  "giver": "heraut",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "d3-02-heritages-croises"
+  ],
+  "skills": [
+    "inh.interface",
+    "inh.default",
+    "inh.polymorphisme"
+  ],
+  "summary": "Écris une interface Signal (default + static) et deux implémentations, dont une redéfinit la méthode default ; usage polymorphe sur un tableau.",
+  "source": "interface + default + static, deux implémentations, Interface.super.methode(), tableau de l'interface (complément tour)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Signal.java",
+      "solutions/s1/Cor.java",
+      "solutions/s1/Tambour.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Signal.java",
+      "wrong/w1/Cor.java",
+      "wrong/w1/Tambour.java"
+    ],
+    [
+      "wrong/w2/Signal.java",
+      "wrong/w2/Cor.java",
+      "wrong/w2/Tambour.java"
+    ],
+    [
+      "wrong/w3/Signal.java",
+      "wrong/w3/Cor.java",
+      "wrong/w3/Tambour.java"
+    ]
+  ],
+  "starter": {
+    "Signal.java": "public interface Signal {\n    // à écrire\n}\n",
+    "Cor.java": "public class Cor {\n    // à écrire\n}\n",
+    "Tambour.java": "public class Tambour {\n    // à écrire\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Le héraut veut des **signaux** pour prévenir les familles. Écris trois fichiers.\n\n**Interface `Signal`** :\n- `String nom();` et `int portee();` (abstraites) ;\n- `default String annonce()` : `<nom> : <portee> pas` ;\n- `static Signal plusLointain(Signal[] signaux)` : le signal de plus grande portée (le **premier** en cas d'égalité), `null` si le tableau est vide.\n\n**Classes** (chacune `implements Signal`) :\n- `Cor(int souffle)` : nom `cor`, portée `souffle * 10` ; elle **profite** de la version `default` ;\n- `Tambour(int coups)` : nom `tambour`, portée `coups * 4` ; elle **redéfinit** `annonce()` en `BOUM ! ` suivi de la version par défaut.\n\nExemple :\n```java\nSignal c = new Cor(5);\nSignal t = new Tambour(10);\nc.annonce();   // \"cor : 50 pas\"\nt.annonce();   // \"BOUM ! tambour : 40 pas\"\n```\nLe harnais crée aussi ses propres signaux (classes anonymes qui ne définissent que `nom()` et `portee()`).",
+  "hints": [
+    "Une méthode `default` a un corps dans l'interface et s'appuie sur les méthodes abstraites (`nom()`, `portee()`) : celles de l'objet réel. Une méthode `static` d'interface s'appelle sur l'interface : `Signal.plusLointain(...)`.",
+    "Pour redéfinir `annonce()` dans `Tambour`, garde exactement la même signature (`@Override` t'aide). Pour réutiliser la version par défaut, on écrit `Signal.super.annonce()`.",
+    "Pour `plusLointain`, garde le meilleur trouvé jusqu'ici (`null` au départ) et ne le remplace que si le suivant est **strictement** plus loin."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bravo pour les miroirs. Maintenant, mes signaux : un cor, un tambour, et peut-être un jour une sirène.",
+      "Je veux une interface `Signal` qui annonce **toute seule** sa portée, et deux instruments dont l'un ajoute son grain de sel. Tout doit pouvoir se manipuler à travers `Signal`."
+    ],
+    "resume": "Mes signaux attendent toujours leur interface et leurs deux instruments.",
+    "success": [
+      "Le cor profite de la version par défaut, le tambour la complète : et tout se manipule à travers `Signal` ! Voilà de la belle interface.",
+      "Le Sphinx des Lignées, tout au fond, juge les modélisations. Il est exigeant, mais équitable."
+    ],
+    "done": "Mes signaux portent loin, grâce à toi."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

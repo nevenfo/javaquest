@@ -1,0 +1,72 @@
+{
+  "id": "d3-01-devises-brouillees",
+  "title": "Les devises brouillées",
+  "region": "labyrinthe",
+  "giver": "heraut",
+  "main": false,
+  "kind": "fix",
+  "assessment": "practice",
+  "requires": [
+    "t09-contrats"
+  ],
+  "skills": [
+    "inh.heritage",
+    "inh.polymorphisme",
+    "inh.comparable"
+  ],
+  "summary": "Répare une hiérarchie Ancetre/Heritier : une méthode qui surcharge au lieu de redéfinir, un compareTo inversé et incomplet.",
+  "hud": "Labyrinthe : le héraut veut une hiérarchie fiable.",
+  "source": "redéfinition vs surcharge (@Override), liaison dynamique, compareTo cohérent : erreurs typiques (complément tour)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Ancetre.java",
+      "solutions/s1/Heritier.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Ancetre.java",
+      "wrong/w1/Heritier.java"
+    ],
+    [
+      "wrong/w2/Ancetre.java",
+      "wrong/w2/Heritier.java"
+    ],
+    [
+      "wrong/w3/Ancetre.java",
+      "wrong/w3/Heritier.java"
+    ]
+  ],
+  "starter": {
+    "Ancetre.java": "public class Ancetre {\n    protected final String nom;\n    protected final int annee;\n\n    public Ancetre(String nom, int annee) {\n        this.nom = nom;\n        this.annee = annee;\n    }\n\n    public String devise() {\n        return \"Honneur\";\n    }\n\n    public String presenter() {\n        return nom + \" (\" + annee + \") : \" + devise();\n    }\n}\n",
+    "Heritier.java": "public class Heritier extends Ancetre implements Comparable<Heritier> {\n    private final String vertu;\n\n    public Heritier(String nom, int annee, String vertu) {\n        super(nom, annee);\n        this.vertu = vertu;\n    }\n\n    public String devise(int rang) {\n        return \"Honneur et \" + vertu;\n    }\n\n    @Override\n    public int compareTo(Heritier autre) {\n        return Integer.compare(autre.annee, annee);\n    }\n}\n"
+  },
+  "multiFile": true,
+  "brief": "À l'entrée du Labyrinthe des Lignées, le héraut tient un registre de familles : un `Ancetre` (nom, année, devise `\"Honneur\"`) et ses `Heritier`, qui ajoutent une **vertu**. Le code est fourni… mais il a **au moins deux bugs**.\n\nCe qu'on attend :\n- un `Heritier` proclame **sa** devise `\"Honneur et <vertu>\"`, **même vu à travers une variable `Ancetre`** : `presenter()` d'un héritier doit donc donner `Aldo (1200) : Honneur et Courage` ;\n- les héritiers se trient avec `Arrays.sort` : **le plus ancien d'abord** ; à année égale, **ordre alphabétique** des noms ; le tri doit rester juste même avec des années extrêmes (`Integer.MIN_VALUE`, `Integer.MAX_VALUE`).\n\nRépare `Heritier` sans le réécrire entièrement ; `Ancetre` est correct.\n\nExemple :\n```java\nAncetre a = new Heritier(\"Aldo\", 1200, \"Courage\");\na.presenter();   // \"Aldo (1200) : Honneur et Courage\"\n```",
+  "hints": [
+    "Pour **redéfinir** une méthode héritée, la signature (nom **et** paramètres) doit être identique à celle du parent. Une signature différente crée une méthode **supplémentaire** : l'appel à travers `Ancetre` ne la voit jamais. Ajouter `@Override` fait vérifier cela au compilateur.",
+    "Dans `compareTo`, `Integer.compare(a, b)` est négatif quand `a` passe avant `b`. Relis l'ordre des deux arguments, et ajoute le départage par nom quand les années sont égales (`String` a aussi un `compareTo`).",
+    "Évite `annee - autre.annee` : avec des années extrêmes, la soustraction **déborde** et change le signe. Corrige un bug à la fois et relance."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Halte ! Ici commence le Labyrinthe des Lignées. Je suis le Héraut : je tiens le registre des familles, ancêtres et héritiers.",
+      "Mon registre est brouillé : les héritiers récitent la devise de leurs aïeux et se rangent dans le mauvais ordre. Tu connais la Tour des Contrats : répare-moi ça."
+    ],
+    "resume": "Le registre est toujours brouillé : devise de l'héritier et ordre du tri.",
+    "success": [
+      "Chaque héritier proclame sa devise et la file se range du plus ancien au plus récent. Le registre est sauvé !",
+      "Les couloirs du labyrinthe se compliquent plus loin : je te laisse passer."
+    ],
+    "done": "Le registre des lignées est en ordre, grâce à toi."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

@@ -116,7 +116,23 @@ function tour() {
   const m = new MapBuilder(40, 36, { base: 'void', seed: 41 });
   m.room(14, 28, 12, 8); m.room(3, 17, 14, 10); m.room(23, 17, 14, 10); m.room(10, 3, 20, 12);
   m.carve(19, 27, 2, 2).carve(16, 21, 8, 1).carve(19, 14, 2, 14).carve(19, 35, 2, 1);
+  m.carve(19, 0, 2, 4);            // brèche au nord : passage vers le Labyrinthe des Lignées
   m.setD(12, 4, TILE.banner).setD(27, 4, TILE.banner).setD(4, 18, TILE.bookshelf).setD(5, 18, TILE.bookshelf).setD(35, 18, TILE.statue);
+  return m.build();
+}
+
+// Donjon optionnel de la région 3 : entrée (héraut), salle des miroirs, galerie des blasons (à l'est), cœur du labyrinthe (sphinx).
+function labyrinthe() {
+  const m = new MapBuilder(40, 40, { base: 'void', seed: 97 });
+  m.room(13, 29, 14, 9);           // entrée (héraut)
+  m.room(14, 17, 12, 9);           // salle des miroirs
+  m.room(28, 16, 9, 9);            // galerie des blasons (à l'est)
+  m.room(9, 3, 22, 10);            // cœur du labyrinthe (sphinx)
+  m.carve(19, 25, 2, 5).carve(19, 12, 2, 6).carve(25, 20, 4, 2).carve(19, 37, 2, 3);
+  m.setD(14, 30, TILE.statue).setD(25, 30, TILE.statue).setD(14, 35, TILE.bookshelf).setD(15, 35, TILE.bookshelf).setD(25, 35, TILE.table).setD(24, 35, TILE.stool);
+  m.setD(15, 18, TILE.banner).setD(24, 18, TILE.banner).setD(16, 23, TILE.pedestalLit).setD(23, 23, TILE.pedestalLit).setD(19, 18, TILE.fountain);
+  m.setD(29, 17, TILE.banner).setD(35, 17, TILE.banner).setD(30, 22, TILE.table).setD(31, 22, TILE.stool).setD(35, 22, TILE.chest).setD(35, 23, TILE.statue);
+  m.setD(10, 4, TILE.banner).setD(29, 4, TILE.banner).setD(11, 10, TILE.statue).setD(28, 10, TILE.statue).setD(15, 4, TILE.fountainLit).setD(24, 4, TILE.fountainLit).setD(12, 4, TILE.bookshelf);
   return m.build();
 }
 
@@ -157,6 +173,8 @@ export const NPCS = {
   gardien: { name: 'Gardien de la crypte', sprite: SPRITES.skeleton, role: "Veille à l'entrée de la crypte" },
   golem: { name: 'Golem des Boucles', sprite: SPRITES.cyclops, role: 'Gardien du sceau de la crypte' },
   fondeur: { name: 'Maître fondeur Orgel', sprite: SPRITES.viking, role: "Veille à l'entrée de la Fonderie" },
+  heraut: { name: 'Héraut des Lignées', sprite: SPRITES.boy, role: "Veille à l'entrée du Labyrinthe" },
+  sphinx: { name: 'Sphinx des Lignées', sprite: SPRITES.spider, role: 'Juge des hiérarchies' },
   gabarit: { name: 'Gabarit de Fer', sprite: SPRITES.soldier, role: 'Contremaître des moules' },
   examinateur: { name: 'Examinatrice Céleste', sprite: SPRITES.knight, role: 'Juge des épreuves' },
 };
@@ -219,7 +237,14 @@ export const MAPS = {
     name: 'Tour des Contrats', build: tour, spawn: { x: 19, y: 33 }, mapPos: { x: 24, y: 80 },
     npcs: [{ id: 'sentinelle', x: 19, y: 31 }, { id: 'mage', x: 19, y: 7 }],
     objects: [],
-    portals: [{ x: 19, y: 35, w: 2, to: 'artisans', at: { x: 31, y: 30 } }],
+    portals: [{ x: 19, y: 35, w: 2, to: 'artisans', at: { x: 31, y: 30 } },
+      { x: 19, y: 0, w: 2, to: 'labyrinthe', at: { x: 19, y: 36 }, requires: 'f-tour', locked: "Une grille de fer barre le passage du nord : le Labyrinthe des Lignées n'ouvre qu'aux maîtres des contrats. Termine d'abord la salle des contrats de la Tour." }],
+  },
+  labyrinthe: {
+    name: 'Labyrinthe des Lignées', build: labyrinthe, spawn: { x: 19, y: 36 }, mapPos: { x: 24, y: 66 },
+    npcs: [{ id: 'heraut', x: 21, y: 33 }, { id: 'sphinx', x: 20, y: 6 }],
+    objects: [],
+    portals: [{ x: 19, y: 39, w: 2, to: 'tour', at: { x: 19, y: 4 } }],
   },
   bibliotheque: {
     name: 'Grande Bibliothèque', build: bibliotheque, spawn: { x: 19, y: 26 }, mapPos: { x: 76, y: 16 },

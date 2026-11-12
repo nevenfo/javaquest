@@ -2,11 +2,11 @@
 
 Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. Chaque activité est validée automatiquement (`Validate` : solutions de référence acceptées, solutions fautives refusées).
 
-**131 activités**, **41 compétences**.
+**135 activités**, **41 compétences**.
 
 | guidé | entraînement | autonome | transfert | réactivation | examen |
 |---|---|---|---|---|---|
-| 22 | 26 | 29 | 21 | 29 | 4 |
+| 22 | 28 | 30 | 22 | 29 | 4 |
 
 | Compétence | Région | Provenance (cours) | Guidé | Autonome | Transfert | Réactivation | Examen | Parcours complet |
 |---|---|---|---|---|---|---|---|---|
@@ -37,12 +37,12 @@ Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. C
 | Lever des exceptions (`obj.exceptions`) | artisans | annale : GasPump.takeGas lève une exception si la cuve est insuffisante | 1 | 2 | 3 | 1 | 1 | ✔ |
 | Visibilité et paquetages (`obj.visibilite`) | artisans | annale Q6 ; GasPump : changement de prix réservé au paquetage | 1 | 2 | 1 | 1 | 1 | ✔ |
 | Aléatoire et fabrique d'objets (`obj.random`) | artisans | point : PointFactory.build() avec Random, estimation de π par fléchettes | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Interfaces (`inh.interface`) | tour | point : interface Shape (area, perimeter) ; address : interface ContactSpecifier | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Méthodes default et static d'interface (`inh.default`) | tour | point : Polygon.vertexNumber() default, perimeter() par les sommets ; address : ContactSpecifier.create(String) | 1 | 1 | 2 | 1 | 0 | ✔ |
-| Polymorphisme (`inh.polymorphisme`) | tour | point : hiérarchie Shape ; annale : animaux qui marchent / nagent / volent | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Héritage, redéfinition, surcharge (`inh.heritage`) | tour | annale Q2, Q3 ; point : débat interface / class / abstract class | 2 | 1 | 1 | 1 | 1 | ✔ |
-| Comparable et compareTo (`inh.comparable`) | tour | point : Point implements Comparable<Point> pour l'égalité de triangles ; postier : trier les envois par masse | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Concevoir une hiérarchie (`inh.modelisation`) | tour | annale : Shark, Human, Pigeon, Duck (walk/swim/fly) ; postier : Mail et Parcel | 1 | 1 | 1 | 1 | 1 | ✔ |
+| Interfaces (`inh.interface`) | tour | point : interface Shape (area, perimeter) ; address : interface ContactSpecifier | 2 | 2 | 2 | 1 | 1 | ✔ |
+| Méthodes default et static d'interface (`inh.default`) | tour | point : Polygon.vertexNumber() default, perimeter() par les sommets ; address : ContactSpecifier.create(String) | 2 | 2 | 2 | 1 | 0 | ✔ |
+| Polymorphisme (`inh.polymorphisme`) | tour | point : hiérarchie Shape ; annale : animaux qui marchent / nagent / volent | 3 | 2 | 2 | 1 | 1 | ✔ |
+| Héritage, redéfinition, surcharge (`inh.heritage`) | tour | annale Q2, Q3 ; point : débat interface / class / abstract class | 4 | 1 | 2 | 1 | 1 | ✔ |
+| Comparable et compareTo (`inh.comparable`) | tour | point : Point implements Comparable<Point> pour l'égalité de triangles ; postier : trier les envois par masse | 2 | 1 | 2 | 1 | 0 | ✔ |
+| Concevoir une hiérarchie (`inh.modelisation`) | tour | annale : Shark, Human, Pigeon, Duck (walk/swim/fly) ; postier : Mail et Parcel | 1 | 1 | 2 | 1 | 1 | ✔ |
 | ArrayList (`col.arraylist`) | bibliotheque | collections : intérêt d'ArrayList vs tableau ; annale Q4 | 1 | 1 | 2 | 1 | 0 | ✔ |
 | ArrayList ou LinkedList ? (`col.linkedlist`) | bibliotheque | collections : SpeedList ; annale Q4–Q5 | 2 | 1 | 1 | 1 | 1 | ✔ |
 | Ensembles : HashSet, TreeSet (`col.set`) | bibliotheque | collections : HashSet vs TreeSet ; annale : domaine dupliqué | 1 | 1 | 1 | 1 | 1 | ✔ |
