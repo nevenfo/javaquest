@@ -4,8 +4,9 @@
 RPG fantastique 2D (vue de dessus) jouable dans le navigateur, lancé par `JavaQuest.exe` depuis un ZIP Windows autonome hors ligne, où du **vrai Java compilé** (JDK 25, programme « Java EISC4 2026 ») agit sur le monde. Pédagogie fondée sur la recherche, maîtrise séparée des récompenses, mode examen, exécution du code utilisateur **réellement isolée**.
 
 ## Invariants
-- Machine de développement : <machine> uniquement. `<autre-machine>` / `<ip-privée>` (PC d'un tiers) : jamais accédés, directement ou indirectement.
-- Projet : `..\java`. Rollback : tag Git `legacy-v0.3` + copie `..\javaquest-backups\2026-11-11-avant-refonte`.
+- Machine de développement : le poste principal de l'auteur uniquement ; le PC d'un tiers n'est jamais accédé, directement ou indirectement.
+- Projet : `..\java`. Rollback de la version 0.3 : dépôt privé `nevenfo/javaquest-archive` (historique d'origine, tag `legacy-v0.3`), bundle `..\javaquest-backups\2026-11-12-historique-complet-avant-reecriture.bundle` et copie `..\javaquest-backups\2026-11-11-avant-refonte`.
+- Dépôt public `nevenfo/javaquest` : jamais de support/sujet ESIEE (ni copie ni extrait), ni donnée personnelle (chemins, machines, e-mail : adresse noreply GitHub). L'archive privée ne doit jamais être rendue publique.
 - Supports ESIEE (`curriculum/originals/`, copiés depuis Y:) : consultation privée, jamais versionnés, jamais dans le ZIP. Le jeu ne contient que du contenu original relié aux objectifs (provenance tracée). `data/progress.json` (progression personnelle) : préservé, jamais versionné.
 - Code utilisateur = non fiable : exécution seulement dans AppContainer sans capacité + Job Object (mémoire, CPU, 1 processus, kill-on-close) + timeout ; jamais de repli silencieux non isolé. Toute limite de sécurité est documentée, jamais simulée.
 - Serveur local : loopback uniquement, jeton de session, arrêt propre. Aucun service distant, compte, IA ou télémétrie au runtime.
@@ -32,7 +33,7 @@ Auditer Java Quest 0.3, décider conserver/améliorer/remplacer/abandonner, prot
 ### Dépendances
 Aucune.
 ### Tâches
-- [x] A1.1 Identifier machine autorisée (<machine>) et emplacement du projet.
+- [x] A1.1 Identifier machine autorisée (poste principal) et emplacement du projet.
 - [x] A1.2 Inventorier supports ESIEE disponibles (9 documents `curriculum/originals/`, Y: non monté, OneDrive sans cours Java).
 - [x] A1.3 Git init, baseline + tag `legacy-v0.3`, dépôt GitHub privé `nevenfo/javaquest`.
 - [x] A1.4 Rédiger `docs/AUDIT.md` (décisions par composant).
@@ -200,6 +201,8 @@ B4, F1, G1.
   - [x] H1.3.2 Serveur : `SandboxRunner` lance le broker Java (plus `jq-sandbox.exe`) ; `tools/test-server.sh` 143/143, E2E verts. Fait : défaut `app/bin/sandbox.jar` (un `.exe` reste accepté) ; ServerTest 24/24, 143 quêtes, `e2e.mjs` 33/33, traversée 124/124 ; `assemble.sh` livre `sandbox.jar` ; `test-dist.ps1` 15/15 deux fois de suite. Découvert : marqueur d'autorisation périmé après réextraction au même endroit (enfant `0xC0000135`) → clé liée à l'identité des fichiers.
   - [x] H1.3.3 Lanceur sans exe : point d'entrée `JavaQuest.cmd` → `javaw.exe` signé (instance unique, ouverture du navigateur, arrêt propre depuis le jeu, aucun processus résiduel) ; `JavaQuest.exe` et `jq-sandbox.exe` retirés de la distribution. Fait : `launcher/JavaQuest.cmd` + `fr.javaquest.server.Launch` (verrou `FileChannel.tryLock`, session atomique, `rundll32 url.dll`, `/api/quit` avec jeton, arrêt après 240 s sans `/api/ping`) ; bouton « Quitter le jeu » ; `e2e.mjs` 36/36 ; `test-launcher.ps1` 23/23 ; sources C# supprimées (historique Git).
   - [x] H1.3.4 Distribution : `assemble.sh`, `test-launcher.ps1`, `test-dist.ps1`, `inner.ps1`, LISEZMOI, SECURITY, RELEASE adaptés ; `test-dist.ps1 -Build -Wsb` vert. Fait : 17/17 ; `test-sandbox.sh` (défaut = broker livré) 26/26 ; `docs/RELEASE.md`, `SECURITY.md`, `README.md`, `AUDIT.md` à jour.
+- [ ] H1.6 Instabilité `tools/test-sandbox.sh` : 1 FAIL isolé sur 5 passages (2026-11-12, test non identifié). Validation : 20 passages consécutifs 26/26, ou cause identifiée et corrigée.
+- [x] H1.5 Publication publique (décision utilisateur 2026-11-12) : historique réécrit (`git filter-repo` : fichiers hérités contenant des extraits du sujet d'examen retirés, chemins/machines/tiers masqués, e-mail → noreply), tag `legacy-v0.3` retiré ; ancien dépôt renommé `nevenfo/javaquest-archive` (privé, car `refs/pull/1/head` y conserve l'ancien historique) ; nouveau dépôt public `nevenfo/javaquest`. Fait : 0 occurrence personnelle dans tout l'historique, recouvrement 9-grammes avec `curriculum/originals/` limité à des titres de TD (`content/skills.json`, `docs/COUVERTURE.md`).
 - [x] H1.4 Crédit d'auteur « Nevant » (décision utilisateur 2026-11-12 ; pas de signature Authenticode, cf. H1.3) : écran titre, Menu > Crédits, README, LISEZMOI, `package.json`, manifestes des trois `.jar` (`Implementation-Vendor`). Fait : test-web 33/33, test-server 143 quêtes, e2e 36/36, test-sandbox 26/26, `test-dist.ps1 -Build -Wsb` 17/17.
 ### Validation
 - `pwsh -NoProfile -File tools/test-dist.ps1 -Wsb` vert ; rapport dans `docs/RELEASE.md` avec limites restantes.

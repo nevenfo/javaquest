@@ -1,16 +1,16 @@
 # PROGRESS
 
 ## Phase actuelle
-Toutes les phases du plan sont validées (A–H). Livraison : PR `ai/javaquest-2` → `main`.
+Phases A–H livrées. Dépôt public `nevenfo/javaquest` (historique réécrit), release `v2.0.0` avec `JavaQuest.zip`.
 
 ## Tâche actuelle
-Aucune tâche de développement ouverte ; fusion de la PR en attente de l'utilisateur.
+H1.6 (fiabilité de `tools/test-sandbox.sh`), facultative.
 
 ## Dernière tâche validée
-H1.4 : crédit d'auteur « Nevant » (écran titre, Crédits, README, LISEZMOI, `package.json`, manifestes `.jar` via `tools/author.mf` et `sandbox/manifest.mf`).
+H1.5 : publication publique ; H1.4 : crédit d'auteur « Nevant ».
 Validation :
-- `npm run -s test:web` 33/33 ; `bash tools/test-server.sh` 143 quêtes ; `node tools/e2e.mjs` 36/36 ; `bash tools/test-sandbox.sh` 26/26 (1 échec isolé non reproduit sur 5 passages : instabilité de timing à surveiller).
-- `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` → 17/17 (Windows Sandbox 14/14) ; `build/dist/JavaQuest.zip` régénéré avec le crédit.
+- Historique public : 0 occurrence de chemin/machine/tiers/e-mail personnels ; recouvrement 9-grammes avec `curriculum/originals/` limité à des titres de TD.
+- `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` → 17/17 ; test-web 33/33 ; test-server 143 quêtes ; e2e 36/36 ; test-sandbox 26/26 (1 échec isolé non reproduit, cf. H1.6).
 
 ## Décisions actives
 - Windows Sandbox : exécuter les scénarios en session utilisateur (`wsb connect` puis `wsb exec -r ExistingLogin`) ; en contexte `System` (session 0), tout enfant AppContainer échoue en `0xC0000142`. Sous PowerShell 5, quoter les options `-XX:...` passées à un exe.
@@ -24,10 +24,11 @@ Validation :
 - Toute nouvelle carte doit passer `tests/web/maps.test.mjs` (le vide est solide ; relier les salles par `carve`).
 - E2E : Edge headless + CDP, émulation de focus obligatoire ; `waitFor` échoue si l'évaluation lève une exception.
 - Auteur affiché : « Nevant » ; pas de signature numérique (aucun certificat, H1.3).
+- Dépôts : `origin` = `nevenfo/javaquest` (PUBLIC, historique nettoyé) ; `archive` = `nevenfo/javaquest-archive` (PRIVÉ, historique d'origine avec extraits du sujet d'examen : ne jamais rendre public ni pousser vers `origin`). Sauvegarde : `..\javaquest-backups\2026-11-12-historique-complet-avant-reecriture.bundle`. E-mail Git du dépôt : noreply GitHub.
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
-Aucun (décision H1.3 prise).
+Aucun.
 
 ## Incident à signaler à l'utilisateur
 `javaquest-install.zip` (non versionné) supprimé par erreur le 2026-11-11 ; archive reconstituée : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip`.
@@ -36,4 +37,4 @@ Aucun (décision H1.3 prise).
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` (dont `Launch.java`, `SandboxRunner.java`) · `sandbox/` · `runner/` · `launcher/JavaQuest.cmd` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e,e2e-traversee,coverage}.mjs` · `tools/{test-dist,test-launcher,test-wsb}.ps1` · `docs/` (`RELEASE.md`, `SECURITY.md`)
 
 ## NEXT ACTION
-H1 — Faire relire puis fusionner par l'utilisateur la PR `ai/javaquest-2` → `main` ; après fusion, publier `build/dist/JavaQuest.zip` (régénéré par `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb`, attendu 17/17).
+H1.6 — Lancer `bash tools/test-sandbox.sh` 20 fois, identifier le test qui échoue par intermittence, corriger, puis revalider 20/20 à 26/26.

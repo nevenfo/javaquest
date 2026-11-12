@@ -29,6 +29,6 @@ node tools/e2e.mjs                  # scénario complet dans Edge headless
 bash tools/assemble.sh --zip        # build/dist/JavaQuest.zip (runtime jlink)
 pwsh -File tools/test-dist.ps1 -Wsb # ZIP extrait (espaces/accents, PATH sans Java/Node), lanceur, puis Windows Sandbox (Smart App Control, réseau coupé)
 ```
-Suivi du projet : `plan.md` (feuille de route) et `progress.md` (état courant). Version précédente : tag `legacy-v0.3`.
+Suivi du projet : `plan.md` (feuille de route) et `progress.md` (état courant). Version précédente (0.3) : conservée hors du dépôt public.
 
 Les supports ESIEE (`curriculum/originals/`) servent uniquement à l'analyse locale : ils ne sont ni versionnés ni distribués.
