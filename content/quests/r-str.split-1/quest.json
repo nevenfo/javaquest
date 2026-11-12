@@ -1,0 +1,42 @@
+{
+  "id": "r-str.split-1",
+  "title": "Rappel : couper et classer",
+  "region": "bibliotheque",
+  "main": false,
+  "requires": [
+    "b12-releves"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "str.split",
+    "col.tri"
+  ],
+  "summary": "Prédis la sortie d'un découpage de texte suivi d'un tri avec Comparator (réactivation).",
+  "source": "split, trim, regex piégeuse, Comparator.comparing / thenComparing (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "3\n[Ada=12, Zoe=7, Bob=12]\n[Ada=12, Bob=12, Zoe=7]\n0\n2\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Attention : `split` prend une expression régulière, et il écarte les champs vides **de fin**.",
+  "hints": [
+    "`\"a.b\".split(\".\")` : le point désigne « n'importe quel caractère » ; que reste-t-il comme morceaux non vides ?",
+    "`reversed()` s'applique au comparateur construit jusque-là ; `thenComparing` départage ensuite les égalités.",
+    "`\"a,b,,\".split(\",\")` supprime les chaînes vides à la fin du tableau."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un rappel sur le découpage et le tri : deux outils qui s'enchaînent souvent."
+    ],
+    "success": [
+      "Regex, champs vides, tri en deux critères : bien vu."
+    ],
+    "done": "Découper et classer, c'est acquis."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "a08-commande",
+  "title": "Le carnet de commandes",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": true,
+  "requires": [
+    "a07-compteur-forge"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "obj.record"
+  ],
+  "summary": "Écris un record Commande avec une méthode et une fabrique static.",
+  "source": "postier : records immuables (Mail/Parcel)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Commande.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Commande.java"
+    ],
+    [
+      "wrong/w2/Commande.java"
+    ]
+  ],
+  "starter": {
+    "Commande.java": "public record Commande(/* ??? */) {\n\n    // estGrosse()\n\n    // unique(client, article)\n}\n"
+  },
+  "brief": "Rosa note les commandes des clients dans son carnet : un **client**, un **article**, une **quantité**. Une commande ne change jamais une fois écrite : c'est un cas d'école pour un `record`.\n\nComplète `Commande` :\n- composantes `String client`, `String article`, `int quantite` (dans cet ordre) ;\n- méthode `boolean estGrosse()` : vraie si la quantité est **au moins 10** ;\n- fabrique `static Commande unique(String client, String article)` : une commande de quantité 1.\n\nUn record fournit déjà constructeur, accesseurs (`client()`…), `equals`, `hashCode` et `toString`.",
+  "lesson": "Exemple résolu (autre record) :\n```java\nrecord Fiole(String liquide, int contenance) {\n    boolean estPleine() { return contenance >= 100; }\n    static Fiole vide(String liquide) { return new Fiole(liquide, 0); }\n}\n```\n`new Fiole(\"eau\", 5).liquide()` renvoie `eau` ; son `toString()` donne `Fiole[liquide=eau, contenance=5]`.",
+  "hints": [
+    "Un record se déclare `record Nom(Type a, Type b) { ... }` : les composantes sont déjà des champs `private final` avec accesseurs `a()`, `b()`.",
+    "On peut ajouter des méthodes dans le corps du record, y compris `static`. Dans `estGrosse`, lis `quantite` directement.",
+    "Exemple analogue : `record Pot(String nom, int taille) { boolean estGrand() { return taille >= 5; } }`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes clients se multiplient, et mon carnet aussi ! Chaque ligne : qui, quoi, combien. Et une fois écrite, on n'y touche plus.",
+      "Voilà un travail pour un `record`, ces classes toutes faites pour porter des données. Complète-le !"
+    ],
+    "success": [
+      "Une ligne de code pour la donnée, et tout vient avec : `equals`, `toString`… Pratique, ces records !"
+    ],
+    "done": "Mon carnet de commandes est impeccable."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

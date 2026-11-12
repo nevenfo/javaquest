@@ -1,0 +1,62 @@
+{
+  "id": "v11-recette",
+  "title": "La recette de Lina",
+  "region": "village",
+  "giver": "lina",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "v10-pancarte"
+  ],
+  "skills": [
+    "base.programme",
+    "base.affichage",
+    "base.variables"
+  ],
+  "summary": "Même structure, autre contexte : lis un nombre de fioles et affiche les ingrédients nécessaires.",
+  "source": "hello : programme complet avec variables et affichage (contexte nouveau)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "usesStdin": true,
+  "sampleStdin": "4",
+  "brief": "Lina prépare des fioles de potion. **Chaque fiole** demande 3 gouttes de rosée et 2 pétales. Ton programme lit le nombre de fioles (un entier, une ligne) puis affiche ces trois lignes :\n```\nRecette pour 4 fioles\nGouttes : 12\nPétales : 8\n```\n(exemple pour `4`). Les nombres doivent être calculés à partir de la valeur lue.",
+  "hints": [
+    "`IO.readln` renvoie un `String` : convertis-le avec `Integer.parseInt` avant de calculer.",
+    "Range le nombre de fioles dans une variable, puis calcule `fioles * 3` et `fioles * 2` dans deux autres variables.",
+    "Trois `IO.println`, chacun assemblant texte et variable avec `+`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes potions demandent toujours les mêmes proportions, mais le nombre de fioles change chaque jour.",
+      "Même méthode que pour la pancarte : un programme complet, des variables, un affichage soigné."
+    ],
+    "success": [
+      "Quatre fioles ou quarante, ma recette suit."
+    ],
+    "done": "Ma recette s'adapte à chaque commande."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

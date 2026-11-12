@@ -1,0 +1,73 @@
+{
+  "id": "f04-pont",
+  "title": "Le mot de passe du pont",
+  "region": "foret",
+  "giver": "gobelin",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "f03-memoire"
+  ],
+  "skills": [
+    "cond.equals"
+  ],
+  "summary": "Fais réagir le gobelin selon le mot de passe, en comparant les lettres avec equals.",
+  "hud": "Le gobelin garde le pont, à droite.",
+  "source": "annale : equals et non == pour comparer des String ; hello : if / else",
+  "support": [
+    "support/Pont.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "pomme-de-pin",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le gobelin barre le pont. Il ne laisse passer que celui qui prononce exactement le mot de passe **`pomme-de-pin`** (les majuscules comptent !).\n\nÉcris un programme qui :\n- lit un mot avec `IO.readln`,\n- appelle `Pont.laisserPasser()` si c'est le bon mot,\n- appelle `Pont.refuser()` sinon (une seule des deux méthodes par exécution).\n\nRegarde la classe `Pont` fournie : elle fait bouger le gobelin dans le monde. Le sort sera essayé avec plusieurs mots, y compris des mots presque justes.",
+  "hints": [
+    "Une `String` est un objet : pour tester si deux textes ont les mêmes lettres, utilise `mot.equals(\"...\")`.",
+    "`mot == \"pomme-de-pin\"` demande si c'est le **même objet** : ce que tu viens de taper n'en est pas un déjà existant !",
+    "Structure : `if (mot.equals(\"pomme-de-pin\")) { Pont.laisserPasser(); } else { Pont.refuser(); }`"
+  ],
+  "stage": {
+    "speak": true,
+    "actors": {
+      "gobelin": {
+        "sprite": 110,
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "dialog": {
+    "intro": [
+      "Qui va là ? Pour passer mon pont, dis-moi le mot de passe, voyageur !",
+      "Attention : je suis pointilleux. « Pomme-de-pin » avec une majuscule, ce n'est PAS le bon mot !",
+      "Écris le sort qui me parle : utilise `Pont.laisserPasser()` ou `Pont.refuser()` et regarde-moi réagir."
+    ],
+    "success": [
+      "Pomme-de-pin ! Grmbl… tu peux passer.",
+      "Retiens bien : comparer des mots, c'est `equals`. Le chemin vers la forêt profonde t'est ouvert."
+    ],
+    "done": "Le pont est à toi tant que tu connais le mot."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

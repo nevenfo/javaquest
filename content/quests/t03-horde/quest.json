@@ -1,0 +1,70 @@
+{
+  "id": "t03-horde",
+  "title": "La horde polymorphe",
+  "region": "tour",
+  "giver": "sentinelle",
+  "main": true,
+  "requires": [
+    "t02-default"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "inh.polymorphisme"
+  ],
+  "summary": "Manipule une horde de Monstre sans te soucier de leur classe réelle.",
+  "source": "annale : polymorphisme, appel de méthode via l'interface",
+  "support": [
+    "support/Monstre.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Gobelin.java",
+      "solutions/s1/Dragon.java",
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Gobelin.java",
+      "wrong/w1/Dragon.java",
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Gobelin.java",
+      "wrong/w2/Dragon.java",
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Gobelin.java": "public class Gobelin implements Monstre {\n    // à compléter\n}\n",
+    "Dragon.java": "public class Dragon implements Monstre {\n    // à compléter\n}\n",
+    "Main.java": "import java.util.List;\n\npublic class Main {\n    static int attaqueTotale(List<Monstre> horde) {\n        return 0;\n    }\n\n    static String cris(List<Monstre> horde) {\n        return \"\";\n    }\n\n    static Monstre plusFort(List<Monstre> horde) {\n        return null;\n    }\n}\n"
+  },
+  "multiFile": true,
+  "brief": "La Tour est assiégée par une horde de monstres de toutes sortes. L'interface `Monstre` (fournie) :\n```java\npublic interface Monstre {\n    String cri();\n    int attaque();\n}\n```\nÉcris :\n- `Gobelin` (sans paramètre) : cri `Grr !`, attaque 3 ;\n- `Dragon(int envergure)` : cri `ROAAR !`, attaque `10 + envergure` ;\n- dans `Main`, trois méthodes `static` sur une `List<Monstre>` :\n  - `int attaqueTotale(List<Monstre> horde)` : somme des attaques ;\n  - `String cris(List<Monstre> horde)` : les cris séparés par un espace (`\"\"` si la horde est vide) ;\n  - `Monstre plusFort(List<Monstre> horde)` : celui qui a la plus grande attaque (le premier en cas d'égalité, `null` si la horde est vide).\n\nTes méthodes doivent marcher avec **n'importe quel** monstre, même d'une classe que tu n'as pas écrite : jamais de `instanceof` !",
+  "hints": [
+    "Une variable de type `Monstre` peut contenir un `Gobelin`, un `Dragon`… : l'appel `m.attaque()` exécute la version de la **vraie** classe de l'objet.",
+    "Parcours la liste avec `for (Monstre m : horde)` et appelle `m.attaque()` / `m.cri()` : pas besoin de savoir qui est qui.",
+    "Pour `plusFort`, garde le meilleur vu jusqu'ici ; l'inégalité **stricte** (`>`) conserve le premier en cas d'égalité."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Alerte ! Une horde approche : gobelins, dragons, et d'autres créatures que même moi je ne connais pas.",
+      "Écris le code de défense : il devra fonctionner pour **tous** les monstres qui respectent le contrat. C'est ça, le polymorphisme !"
+    ],
+    "success": [
+      "La horde est comptée, entendue et jaugée, sans que ton code sache qui est qui. Voilà du polymorphisme !"
+    ],
+    "done": "La Tour est sauve."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

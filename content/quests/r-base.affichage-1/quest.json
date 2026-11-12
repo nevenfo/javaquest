@@ -1,0 +1,36 @@
+{
+  "id": "r-base.affichage-1",
+  "title": "Les lettres du sceau",
+  "region": "village",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "q02-echo"
+  ],
+  "skills": [
+    "base.affichage"
+  ],
+  "summary": "Prédis la sortie d'un programme qui mêle print et println (réactivation).",
+  "source": "hello : IO.print / IO.println (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "ABC\n\nDEF\nG\n",
+  "brief": "Un sceau ancien grave des lettres sur le mur, selon ce programme. Lis-le **sans l'exécuter** et écris exactement ce qui sera gravé, ligne par ligne (une ligne vide compte comme une ligne !).",
+  "hints": [
+    "`IO.print` n'ajoute pas de retour à la ligne ; `IO.println` en ajoute un. `IO.println()` seul affiche juste un retour à la ligne."
+  ],
+  "dialog": {
+    "intro": [
+      "Un vieux souvenir à rafraîchir : sauras-tu encore lire un affichage ?"
+    ],
+    "success": [
+      "Le sceau grave exactement ce que tu avais prévu."
+    ],
+    "done": "Tu lis le Java comme un livre."
+  },
+  "reward": {
+    "xp": 10
+  }
+}

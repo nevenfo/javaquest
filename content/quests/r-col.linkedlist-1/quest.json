@@ -1,0 +1,113 @@
+{
+  "id": "r-col.linkedlist-1",
+  "title": "Rappel : files et comparateurs",
+  "region": "bibliotheque",
+  "main": false,
+  "requires": [
+    "b13-structures"
+  ],
+  "kind": "quiz",
+  "assessment": "review",
+  "skills": [
+    "col.linkedlist",
+    "col.tri"
+  ],
+  "summary": "Quiz de réactivation sur LinkedList et Comparator.",
+  "source": "LinkedList (Deque), Comparator.comparing / reversed / thenComparing (réactivation espacée)",
+  "questions": [
+    {
+      "q": "Sur une `LinkedList<String> l`, quel appel retire **et renvoie** le premier élément ?",
+      "options": [
+        "`l.removeFirst()`",
+        "`l.get(0)`",
+        "`l.add(0)`",
+        "`l.first()`"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Que fait `livres.sort(Comparator.comparing(Livre::titre).reversed())` ?",
+      "options": [
+        "Trie par titre croissant",
+        "Trie par titre décroissant (ordre alphabétique inversé)",
+        "Renvoie une nouvelle liste triée",
+        "Mélange la liste"
+      ],
+      "multi": false
+    },
+    {
+      "q": "`List.sort(...)` : que renvoie-t-elle et sur quoi agit-elle ?",
+      "options": [
+        "Elle renvoie une nouvelle liste et laisse l'originale intacte",
+        "Elle ne renvoie rien (`void`) et trie la liste elle-même",
+        "Elle renvoie la liste triée et l'original aussi",
+        "Elle ne marche que sur les tableaux"
+      ],
+      "multi": false
+    },
+    {
+      "q": "À quoi sert `thenComparing(...)` dans une chaîne de comparateurs ?",
+      "options": [
+        "À départager les éléments égaux selon le premier critère",
+        "À inverser l'ordre",
+        "À supprimer les doublons",
+        "À trier une `Map`"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Des milliers d'`add(0, x)` successifs : quel choix est le plus adapté ?",
+      "options": [
+        "`ArrayList` : tout est décalé gratuitement",
+        "`LinkedList` : pas de décalage en tête",
+        "Les deux sont identiques",
+        "Un `HashSet`"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      1
+    ]
+  ],
+  "explanations": [
+    "`removeFirst()` (ou `poll()`) retire et renvoie la tête ; `get(0)` ne fait que lire.",
+    "`reversed()` inverse le critère : ici, du dernier titre alphabétique au premier.",
+    "`sort` est une méthode `void` : elle modifie la liste en place.",
+    "`thenComparing` n'intervient que lorsque les éléments sont égaux au critère précédent.",
+    "Insérer en tête d'une `ArrayList` décale tous les éléments ; la `LinkedList` n'a rien à décaler."
+  ],
+  "brief": "Cinq questions de rappel sur les listes chaînées et le tri par comparateur.",
+  "hints": [
+    "Rappelle-toi : `sort` travaille en place, `reversed` inverse le comparateur, `LinkedList` est aussi une file (`Deque`).",
+    "Pense au coût d'une insertion en tête pour chaque structure."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Petit quiz de rappel : files chaînées et tris personnalisés."
+    ],
+    "success": [
+      "Les comparateurs et les listes chaînées sont toujours frais dans ta mémoire."
+    ],
+    "done": "Rappel validé."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

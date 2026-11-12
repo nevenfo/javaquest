@@ -141,8 +141,8 @@ Modèle de preuves (guidé/autonome/transfert/différé), réactivation espacée
 ### Dépendances
 E1, R1.
 ### Tâches
-- [ ] E2.1 Modèle de maîtrise par niveaux de preuve, sans inférence sur une seule erreur.
-- [ ] E2.2 Planificateur de réactivation (intervalles = hypothèse de conception paramétrable, documentée).
+- [x] E2.1 Modèle de maîtrise par niveaux de preuve, sans inférence sur une seule erreur.
+- [x] E2.2 Planificateur de réactivation (intervalles = hypothèse de conception paramétrable, documentée).
 ### Validation
 - Tests unitaires du modèle (cas : aide utilisée, réussite unique, transfert différé, échecs isolés).
 
@@ -169,6 +169,7 @@ C1, D2, E1, E2.
 - [ ] F1.3 Région 3 + donjon (interfaces/hiérarchies).
 - [ ] F1.4 Région 4 + donjon (tableaux/collections).
 - [ ] F1.5 Région finale (projet intégrateur, compagnon programmable).
+- [ ] F1.6 E2E de traversée : un profil parcourt une quête par région (village → citadelle) avec les solutions de référence ; contenu 123 quêtes validé, couverture 41/41 (`node tools/coverage.mjs`).
 ### Validation
 - Toutes les solutions de référence compilent et passent leurs tests ; des solutions fautives connues échouent (`tools/validate-content`) ; E2E de traversée.
 

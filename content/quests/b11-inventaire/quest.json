@@ -1,0 +1,62 @@
+{
+  "id": "b11-inventaire",
+  "title": "L'inventaire du marchand",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b10-chronique"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "col.arraylist",
+    "col.set",
+    "col.map"
+  ],
+  "summary": "Même notions, nouveau contexte : dédoublonner, indexer et retirer dans une liste d'objets.",
+  "source": "collections : ArrayList, HashSet, HashMap<String, List<Integer>>",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ],
+    [
+      "solutions/s2/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static List<String> sansDoublons(List<String> objets) {\n        return null;\n    }\n\n    static Map<String, List<Integer>> positions(List<String> objets) {\n        return null;\n    }\n\n    static void retirerTous(List<String> objets, String cible) {\n    }\n}\n"
+  },
+  "brief": "Un marchand ambulant tient son inventaire dans une `List<String>`. Complète `Main` :\n- `sansDoublons(objets)` : une nouvelle liste sans doublons, en gardant l'**ordre de première apparition** ;\n- `positions(objets)` : associe chaque objet à la **liste de ses indices** dans l'inventaire ;\n- `retirerTous(objets, cible)` : retire **en place** toutes les occurrences de `cible` (rien si elle est absente).\n\n```\nsansDoublons([or, fer, or, cuivre, fer])   // [or, fer, cuivre]\npositions([or, fer, or])                    // {or=[0, 2], fer=[1]}\nretirerTous([a, a, b, a], \"a\")              // la liste devient [b]\n```\nLa liste passée à `sansDoublons` ne doit pas être modifiée.",
+  "hints": [
+    "Un `Set` élimine les doublons, mais `HashSet` ne garde pas l'ordre d'insertion : `LinkedHashSet` le garde.",
+    "Une valeur de Map peut être une liste : `computeIfAbsent(objet, k -> new ArrayList<>()).add(i)` crée la liste au premier passage.",
+    "Retirer dans une liste pendant qu'on la parcourt par indice saute des éléments ; `removeIf(x -> x.equals(cible))` évite le piège."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un marchand, un sac en vrac, et des doublons partout. Tu connais les listes, les ensembles et les tables : trouve l'outil de chaque besoin."
+    ],
+    "success": [
+      "Liste, ensemble, table : chaque structure à sa place. Voilà un vrai coup d'œil de bibliothécaire."
+    ],
+    "done": "L'inventaire est en ordre."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "m15-coffre",
+  "title": "Le coffre du spectre",
+  "region": "mines",
+  "giver": "spectre",
+  "main": true,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "m14-ateliers"
+  ],
+  "skills": [
+    "loop.for",
+    "arr.algos",
+    "meth.static"
+  ],
+  "summary": "Combine mot-miroir, tableau trié et méthodes pour ouvrir le coffre du spectre.",
+  "hud": "Dernière épreuve des mines : le coffre du spectre.",
+  "source": "hello/median : palindrome, Arrays.sort, méthodes ; collections : méthodes static à retour",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "radar\\n3\\n9\\n1\\n4",
+  "starter": {
+    "Main.java": "import java.util.Arrays;\n\n// Méthodes demandées (voir l'énoncé), puis main.\n\nvoid main() {\n    \n}\n"
+  },
+  "brief": "Au fond des mines, le spectre garde un coffre de gemmes. Il ne parle qu'à ceux qui disent un **mot-miroir**. Écris, dans `Main.java`, ces trois méthodes **static** :\n- `static boolean estMiroir(String s)` : vrai si `s` se lit pareil dans les deux sens (la casse compte ; le mot vide est un miroir) ;\n- `static int total(int[] t)` : la somme des valeurs de `t` ;\n- `static int maximum(int[] t)` : la plus grande valeur de `t` (`t` n'est jamais vide ; les valeurs peuvent être négatives).\n\nPuis, dans `main` :\n1. lis un mot ; s'il n'est pas un miroir, affiche `Le spectre reste muet.` et arrête-toi ;\n2. sinon lis le nombre `n` de gemmes (`n ≥ 1`) puis leurs `n` valeurs (entiers) dans un tableau ;\n3. affiche trois lignes : `Triées : a b c` (valeurs triées par ordre croissant, séparées par une espace), `Total : T`, `Maximum : M`.\n\nExemple pour `radar`, `3`, puis `9`, `1`, `4` :\n```\nTriées : 1 4 9\nTotal : 14\nMaximum : 9\n```",
+  "hints": [
+    "Découpe : trois petites méthodes d'abord (chacune testable seule), puis `main` qui les assemble.",
+    "`estMiroir` compare `s.charAt(i)` à `s.charAt(s.length() - 1 - i)` pour `i` de 0 à la moitié ; `maximum` part de `t[0]` ; `total` accumule dans une variable initialisée à 0.",
+    "Pour l'affichage trié : `Arrays.sort(gemmes)` puis une boucle qui construit la ligne (une espace entre deux valeurs, pas après la dernière)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Te voici au fond de Boucle-Profonde. Le coffre du spectre contient les gemmes les plus rares, mais il n'obéit qu'à un mot-miroir.",
+      "Il faudra les boucles, les tableaux et les méthodes. Écris le sort complet : trois méthodes, puis `main`. Seul·e, une dernière fois."
+    ],
+    "success": [
+      "Le coffre s'ouvre ! Mot-miroir, tri, somme, maximum : tout y est, proprement découpé en méthodes.",
+      "Chhhh… Tu as dompté les boucles de la mine. Les ateliers des **artisans** ont besoin de gens comme toi."
+    ],
+    "done": "Chhhh… le coffre reste ouvert pour toi."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-mines",
+      "unlock:Route des Ateliers des artisans ouverte"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

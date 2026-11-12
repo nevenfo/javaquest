@@ -1,0 +1,61 @@
+{
+  "id": "b06-sac-de-mots",
+  "title": "Le sac de mots",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": true,
+  "requires": [
+    "b05-doublons"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "col.map"
+  ],
+  "summary": "Compte les occurrences de chaque mot avec une Map.",
+  "source": "collections : HashMap, merge/getOrDefault, comptage",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ],
+    [
+      "solutions/s2/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static Map<String, Integer> compter(List<String> mots) {\n        return null;\n    }\n\n    static String plusFrequent(List<String> mots) {\n        return null;\n    }\n}\n"
+  },
+  "brief": "Lyra veut connaître les mots les plus fréquents d'un texte. Dans `Main`, écris :\n- `Map<String, Integer> compter(List<String> mots)` : associe chaque mot à son nombre d'occurrences ;\n- `String plusFrequent(List<String> mots)` : le mot le plus fréquent ; en cas d'égalité, le **premier par ordre alphabétique** ; `null` si la liste est vide.\n\n```java\ncompter(List.of(\"or\", \"fer\", \"or\"));          // {or=2, fer=1} (l'ordre n'a pas d'importance)\nplusFrequent(List.of(\"b\", \"a\", \"b\", \"a\", \"c\"));   // \"a\" (a et b : 2 fois, « a » vient avant)\n```\nPour incrémenter un compteur : `map.merge(mot, 1, Integer::sum)` ou `map.put(mot, map.getOrDefault(mot, 0) + 1)`.",
+  "hints": [
+    "Une `Map<String, Integer>` associe une clé (le mot) à une valeur (le compteur) ; `get` renvoie `null` si la clé est absente.",
+    "`map.getOrDefault(mot, 0) + 1` donne le nouveau compteur, qu'on range avec `put`. `merge(mot, 1, Integer::sum)` le fait en une ligne.",
+    "Pour `plusFrequent`, parcours `map.entrySet()` (chaque entrée a `getKey()` et `getValue()`) en gardant le meilleur ; compare les clés en cas d'égalité."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Voici un tas de mots. Quels sont ceux qui reviennent le plus souvent ? Pour compter, rien de tel qu'une `Map` : le mot en clé, le compteur en valeur.",
+      "Écris-moi `compter`, puis `plusFrequent` en gérant les égalités."
+    ],
+    "success": [
+      "Les mots sont comptés, le champion trouvé. La `Map` est ton alliée !"
+    ],
+    "done": "Mon sac de mots est bien rempli."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

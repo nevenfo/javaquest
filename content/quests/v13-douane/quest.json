@@ -1,0 +1,60 @@
+{
+  "id": "v13-douane",
+  "title": "La douane du village",
+  "region": "village",
+  "giver": "pip",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "v05-args",
+    "v06-types"
+  ],
+  "skills": [
+    "base.args",
+    "base.types"
+  ],
+  "summary": "Lis un prix décimal et une quantité entière en arguments ; calcule le total et sa partie entière.",
+  "source": "hello : arguments de la ligne de commande ; types int/double, conversion et cast",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main(String[] args) {\n    \n}\n"
+  },
+  "brief": "Pip tient la douane : chaque marchand donne en arguments le **prix** d'une pièce (nombre décimal, ex. `2.5`) et la **quantité** (entier).\n\n- moins de deux arguments : affiche `Usage : <prix> <quantite>` ;\n- sinon affiche `Total : <prix × quantité>` puis `Arrondi bas : <partie entière du total>`.\n\nPour les arguments `2.5 3` :\n```\nTotal : 7.5\nArrondi bas : 7\n```\nLe total est un `double` (affiché tel quel, `2.0` si le calcul tombe juste) ; la partie entière s'obtient par conversion en `int`.",
+  "hints": [
+    "Les arguments sont des `String` : `Double.parseDouble` pour le prix, `Integer.parseInt` pour la quantité.",
+    "Teste `args.length < 2` avant de lire `args[0]` et `args[1]`.",
+    "Pour la partie entière, `(int) total` tronque ; `Math.round` arrondirait au plus proche, ce n'est pas demandé."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les marchands arrivent avec leurs prix et leurs quantités. Tout me parvient en arguments, sous forme de texte.",
+      "À toi de convertir chaque valeur vers le bon type, et de ne pas planter s'il en manque."
+    ],
+    "success": [
+      "Les bons types aux bons endroits : la caisse est juste."
+    ],
+    "done": "La douane tourne rond."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

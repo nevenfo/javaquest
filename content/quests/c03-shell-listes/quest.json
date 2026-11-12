@@ -1,0 +1,63 @@
+{
+  "id": "c03-shell-listes",
+  "title": "Le shell des listes",
+  "region": "citadelle",
+  "giver": "examinateur",
+  "main": false,
+  "requires": [
+    "c02-registre"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "proj.repl",
+    "proj.architecture"
+  ],
+  "summary": "Écris seul un REPL de gestion de liste, extensible par enregistrement de commandes.",
+  "source": "jalist : shell de listes de chaînes (append, len, …), architecture évolutive",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Commande.java",
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Commande.java",
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Commande.java",
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Commande.java": "public interface Commande {\n}\n",
+    "Main.java": "public class Main {\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Projet de l'examinateur : un petit **shell** qui gère **une liste de mots**. Écris seul `Commande.java` et `Main.java`.\n\n**Contrat de `Commande`** : interface fonctionnelle avec `String executer(List<String> args)` (renvoie le texte à afficher, ou `null` si rien).\n\n**Contrat de `Main`** :\n- `static void enregistrer(String nom, Commande c)` : ajoute une commande à la table ;\n- `static String traiter(String ligne)` : exécute une ligne (mots séparés par des blancs multiples possibles) et renvoie le texte à afficher, `null` s'il n'y en a pas (ligne vide, ou commande silencieuse) ; commande inconnue → `\"Commande inconnue : <nom>\"` ;\n- `static void reinitialiser()` : vide la liste ;\n- `main` lit les lignes au clavier (`IO.readln()`) jusqu'à `fin` ou fin d'entrée, et affiche chaque résultat non nul.\n\n**Commandes de base** (disponibles dès le chargement de `Main`, sans passer par `main`) :\n- `ajoute m1 m2 …` : ajoute les mots (silencieux) ; `taille` : le nombre de mots ;\n- `montre` : la liste, ex. `[a, b, c]` ; `inverse` : inverse la liste (silencieux) ;\n- `retire m` : retire la première occurrence ; renvoie `retiré` ou `absent`.\n\nLe harnais ajoutera lui-même une commande avec `Main.enregistrer(...)` : ta boucle ne doit pas avoir besoin d'être modifiée pour cela.",
+  "hints": [
+    "Découpe la ligne avec `trim().split(\"\\\\s+\")` ; le premier mot est le nom, le reste forme la liste d'arguments.",
+    "Une `Map<String, Commande>` associe chaque nom à son objet ; les commandes de base se déclarent avec `enregistrer` dans un bloc `static { … }`.",
+    "La liste de mots est un champ `static` ; chaque commande est une lambda qui la lit ou la modifie (`reinitialiser` la vide)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Cette fois, plus de squelette : je te donne le cahier des charges d'un shell de listes. Conçois-le pour qu'on puisse y ajouter des commandes sans rien casser."
+    ],
+    "success": [
+      "Un shell propre, et une table de commandes ouverte aux extensions. Ton architecture tient la route."
+    ],
+    "done": "Le shell des listes est opérationnel."
+  },
+  "reward": {
+    "xp": 55
+  }
+}

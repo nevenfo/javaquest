@@ -1,0 +1,57 @@
+{
+  "id": "m08-miroir",
+  "title": "Le mot-miroir",
+  "region": "mines",
+  "giver": "spectre",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m07-lettres"
+  ],
+  "skills": [
+    "str.parcours"
+  ],
+  "summary": "Décide si un mot se lit pareil dans les deux sens.",
+  "source": "hello : isPalindromic ; annale : domaines palindromes",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "radar",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le spectre n'aime que les **mots-miroirs** (palindromes) : des mots qui se lisent pareil de gauche à droite et de droite à gauche (`radar`, `abba`). Lis un mot et affiche `oui` si c'en est un, `non` sinon. La casse compte (`Kayak` n'est pas un mot-miroir pour le spectre, à cause du `K`). Le mot vide et les mots d'une lettre sont des miroirs.\nTu dois comparer des **lettres** : une comparaison de lettres s'écrit avec `charAt(i)`.",
+  "hints": [
+    "On compare le premier caractère avec le dernier, le deuxième avec l'avant-dernier… : `mot.charAt(i)` et `mot.charAt(mot.length() - 1 - i)`.",
+    "Il suffit de parcourir **la moitié** du mot ; dès qu'une paire de lettres diffère, la réponse est « non ».",
+    "Ne tente pas de comparer des `char` avec `equals` : pour des caractères simples, `==` / `!=` sont corrects."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Chhhh… Je ne parle qu'aux mots-miroirs : ceux qui se lisent pareil dans les deux sens.",
+      "Dis-moi si un mot en est un. À toi de choisir comment parcourir les lettres."
+    ],
+    "success": [
+      "Chhhh… Tu as le bon œil. Les mots-miroirs n'ont plus de secret pour toi."
+    ],
+    "done": "Chhhh… radar, kayak… ah non, Kayak avec un K majuscule, jamais."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

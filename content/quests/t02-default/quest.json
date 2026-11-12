@@ -1,0 +1,64 @@
+{
+  "id": "t02-default",
+  "title": "Services tout faits",
+  "region": "tour",
+  "giver": "mage",
+  "main": true,
+  "requires": [
+    "t01-sortilege"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "inh.default"
+  ],
+  "summary": "Écris une interface avec une méthode default et une fabrique static.",
+  "source": "interfaces : méthodes default et static",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Combattant.java"
+    ],
+    [
+      "solutions/s2/Combattant.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Combattant.java"
+    ],
+    [
+      "wrong/w2/Combattant.java"
+    ],
+    [
+      "wrong/w3/Combattant.java"
+    ]
+  ],
+  "starter": {
+    "Combattant.java": "public interface Combattant {\n    // Écris le contrat Combattant (voir l'énoncé)\n}\n"
+  },
+  "brief": "Le mage veut un contrat `Combattant` qui offre des services sans que chaque classe les réécrive. Écris l'**interface** `Combattant` :\n- `String nom();` et `int force();` (abstraites) ;\n- `default String presentation()` : renvoie `nom (force N)`, par exemple `Rex (force 7)` ;\n- `static Combattant creer(String nom, int force)` : fabrique un combattant tout prêt (par exemple avec une classe anonyme).\n\nLe harnais implémente `Combattant` avec seulement `nom()` et `force()` : si `presentation()` n'est pas `default`, son code ne compile plus !",
+  "hints": [
+    "Une méthode `default` a un corps dans l'interface ; les classes qui implémentent peuvent la garder telle quelle ou la redéfinir.",
+    "Une méthode `static` d'interface s'appelle sur l'interface elle-même : `Combattant.creer(...)`.",
+    "Dans `creer`, une classe anonyme `new Combattant() { public String nom() {...} public int force() {...} }` fait l'affaire."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes combattants ont tous besoin de se présenter. Réécrire `presentation()` dans chaque classe ? Quelle perte de temps !",
+      "Une interface peut proposer une méthode **par défaut**, et même une **fabrique**. Écris-moi ça !"
+    ],
+    "success": [
+      "Voilà un contrat qui rend service ! Les classes n'ont rien à réécrire, mais peuvent le faire si elles le souhaitent."
+    ],
+    "done": "Mes combattants se présentent tout seuls."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

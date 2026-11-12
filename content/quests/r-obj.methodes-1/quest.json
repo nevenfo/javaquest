@@ -1,0 +1,42 @@
+{
+  "id": "r-obj.methodes-1",
+  "title": "Le pot qui se remplit",
+  "region": "artisans",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "a04-etiquette"
+  ],
+  "skills": [
+    "obj.methodes",
+    "obj.tostring"
+  ],
+  "summary": "Prédis la sortie d'un programme mêlant méthodes, références partagées et toString (réactivation).",
+  "source": "point : méthodes d'instance, objet renvoyé, toString, références (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "eau(15)\neau(35)\n50\nPots : eau(15) et eau(35)\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Demande-toi à chaque ligne : cette méthode modifie-t-elle l'objet, ou en crée-t-elle un nouveau ?",
+  "hints": [
+    "`Pot b = a;` ne copie pas le pot : `a` et `b` désignent le **même** objet.",
+    "`plusPlein` renvoie un **nouveau** pot et ne touche pas à `a`.",
+    "`println(objet)` et la concaténation appellent `toString()`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : une méthode peut modifier l'objet, ou en fabriquer un autre."
+    ],
+    "success": [
+      "Tu distingues l'objet modifié de l'objet créé."
+    ],
+    "done": "Méthodes et `toString` : acquis."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

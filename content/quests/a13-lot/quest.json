@@ -1,0 +1,59 @@
+{
+  "id": "a13-lot",
+  "title": "Les lots de Rosa",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": false,
+  "requires": [
+    "a12-pompe-elixir"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "obj.record",
+    "obj.exceptions"
+  ],
+  "summary": "Écris un record Lot avec validation dans le constructeur compact.",
+  "source": "postier : objets immuables, validation (records)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Lot.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Lot.java"
+    ],
+    [
+      "wrong/w2/Lot.java"
+    ]
+  ],
+  "starter": {
+    "Lot.java": "public record Lot(String metal, int quantite) {\n    // Constructeur compact : validation\n\n    // ajouter(n), estVide(), vide(metal)\n}\n"
+  },
+  "brief": "Rosa classe les marchandises en **lots** : un record `Lot(String metal, int quantite)`.\n- constructeur compact : `IllegalArgumentException` si `metal` est `null` ou vide/blanc, ou si `quantite < 0` ;\n- `Lot ajouter(int n)` : renvoie un **nouveau** lot avec `n` unités de plus (`n` peut être négatif, mais le résultat doit rester valide) ;\n- `boolean estVide()` ;\n- `static Lot vide(String metal)` : lot de quantité 0.\n\nUn record peut valider ses valeurs dans un **constructeur compact** :\n```java\nrecord Pot(int taille) {\n    Pot {\n        if (taille < 0) throw new IllegalArgumentException(\"taille\");\n    }\n}\n```",
+  "hints": [
+    "Dans un constructeur compact (`public Lot { ... }` dans un record public), on n'écrit ni les paramètres ni les affectations : on contrôle simplement les valeurs reçues.",
+    "`ajouter` crée un nouveau `Lot` : la validation du constructeur refusera déjà un résultat négatif.",
+    "Pour tester un texte vide ou blanc : `metal == null || metal.isBlank()` (teste `null` en premier)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mon registre accepte des lots de -3 lingots, ou sans nom de métal ! Un record, c'est bien, mais il doit refuser les valeurs absurdes.",
+      "Écris `Lot` avec une validation dans son constructeur compact. Elle protège toutes les façons de créer un lot."
+    ],
+    "success": [
+      "Plus de lot fantôme : le record se défend tout seul. Voilà un code bien gardé !"
+    ],
+    "done": "Mes lots sont toujours valides."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

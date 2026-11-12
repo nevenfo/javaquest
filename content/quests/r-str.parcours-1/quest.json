@@ -1,0 +1,51 @@
+{
+  "id": "r-str.parcours-1",
+  "title": "La première lettre repérée",
+  "region": "mines",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "m08-miroir"
+  ],
+  "skills": [
+    "str.parcours"
+  ],
+  "summary": "Trouve l'indice de la première occurrence d'une lettre (réactivation).",
+  "source": "hello : length() et charAt(i) (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "banane\\nn",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Lis un mot (première ligne) puis une lettre (deuxième ligne, un seul caractère). Affiche l'**indice de la première apparition** de la lettre dans le mot (le premier caractère a l'indice 0), ou `-1` si elle n'y est pas :\n```\nIndice : 2\n```\n(exemple : `banane` et `n`). Parcours le mot toi-même avec `charAt`.",
+  "hints": [
+    "Une boucle de `0` à `mot.length() - 1` avec `mot.charAt(i)`.",
+    "Dès que la lettre est trouvée, tu peux sortir de la boucle avec `break` : on veut la **première** occurrence."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir des galeries : un mot, une lettre, et tu dois dire où elle se cache."
+    ],
+    "success": [
+      "Bien repérée !"
+    ],
+    "done": "Tu sais fouiller un mot lettre par lettre."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

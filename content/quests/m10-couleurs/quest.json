@@ -1,0 +1,57 @@
+{
+  "id": "m10-couleurs",
+  "title": "Les cristaux de cinq couleurs",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m09-eboulis"
+  ],
+  "skills": [
+    "arr.base"
+  ],
+  "summary": "Compte les cristaux de chaque couleur dans un tableau de compteurs.",
+  "source": "median : tableau de valeurs ; parcours de tableau sans dépasser les bornes",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "6\\n1\\n2\\n2\\n4\\n0\\n4",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Les cristaux ont 5 couleurs, numérotées de `0` à `4`. Ton programme lit le nombre `n` de cristaux, puis la couleur de chacun, et affiche **combien il y en a de chaque couleur** (cinq lignes, de la couleur 0 à la couleur 4) :\n```\n0 : 1\n1 : 1\n2 : 2\n3 : 0\n4 : 2\n```\n(exemple pour `6` cristaux de couleurs `1 2 2 4 0 4`). Un tableau de compteurs, dont l'indice est la couleur, est la solution naturelle.",
+  "hints": [
+    "Crée un tableau de 5 cases pour compter : la case `c` contient le nombre de cristaux de couleur `c`.",
+    "À chaque couleur lue, incrémente la bonne case : la couleur sert **d'indice**.",
+    "Pour l'affichage, une boucle sur les indices `0` à `compteurs.length - 1`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les cristaux de ces galeries ont cinq couleurs. Je voudrais savoir combien j'en ai de chaque.",
+      "Pas besoin de cinq variables : un tableau fera l'affaire. Je te laisse l'écrire seul·e."
+    ],
+    "success": [
+      "Cinq compteurs dans un seul tableau, avec la couleur pour indice : malin !"
+    ],
+    "done": "Mon inventaire de cristaux est parfait."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

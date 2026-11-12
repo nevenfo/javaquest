@@ -1,0 +1,60 @@
+{
+  "id": "m05-escalier",
+  "title": "L'escalier de pierres",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m04-etais"
+  ],
+  "skills": [
+    "loop.for"
+  ],
+  "summary": "Additionne les pierres d'un escalier dont chaque étage pèse le carré de son numéro.",
+  "source": "collections : accumulation dans une boucle for ; annale : produit et somme cumulés",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "5",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Un escalier de `n` étages (lu au clavier). L'étage numéro `k` (de 1 à `n`) contient `k × k` pierres. Affiche le total :\n```\nPierres : X\n```\nExemple pour `n = 3` : 1 + 4 + 9 = 14, donc `Pierres : 14`. Pour `n = 0`, il n'y a aucune pierre.\nLe sort sera vérifié avec des escaliers de toutes tailles, jusqu'à 1000 étages.",
+  "hints": [
+    "Un accumulateur (`int total = 0;`) déclaré **avant** la boucle, auquel on ajoute quelque chose à chaque tour.",
+    "L'étage `k` va de 1 à `n` **inclus** : réfléchis à la borne de départ et à la condition (`<=` ou `<` ?).",
+    "Attention : ne remets pas `total` à 0 à l'intérieur de la boucle !"
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Voici l'escalier de pierres de la vieille galerie : l'étage `k` contient `k × k` pierres. Combien en tout ?",
+      "Une boucle et un accumulateur, voilà tout ce qu'il te faut. À toi !"
+    ],
+    "success": [
+      "Le compte est bon, même pour 1000 étages ! Tu sais accumuler dans une boucle."
+    ],
+    "done": "Plus besoin de compter les pierres une à une."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

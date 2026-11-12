@@ -1,0 +1,60 @@
+{
+  "id": "a19-tombola",
+  "title": "La tombola de la guilde",
+  "region": "artisans",
+  "giver": "pompiste",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "a11-gemmes",
+    "a04-etiquette"
+  ],
+  "skills": [
+    "obj.random",
+    "obj.tostring"
+  ],
+  "summary": "Écris Tombola : un tirage au sort sans remise avec un Random reçu, et un toString lisible.",
+  "source": "java.util.Random et collections ; toString (contexte nouveau)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Tombola.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Tombola.java"
+    ],
+    [
+      "wrong2/Tombola.java"
+    ]
+  ],
+  "starter": {
+    "Tombola.java": "import java.util.*;\n\npublic class Tombola {\n}\n"
+  },
+  "brief": "La guilde organise une tombola : on tire des lots **sans remise**. Écris la classe `Tombola` (fichier `Tombola.java`) :\n\n- constructeur `Tombola(Random rng, List<String> lots)` : **copie** la liste reçue (la liste du joueur ne doit pas être modifiée) ;\n- `String tirer()` : retire et renvoie un lot choisi **au hasard avec `rng`** ; `IllegalStateException` s'il n'en reste aucun ;\n- `int restants()` : nombre de lots restants ;\n- `toString()` : `Tombola` suivi de la liste des lots restants, dans leur ordre d'origine, par exemple `Tombola[rose, bleu]`.\n\nChaque lot sort donc exactement une fois si on tire autant de fois qu'il y a de lots.",
+  "hints": [
+    "`List.remove(int index)` retire l'élément et le renvoie : combine-le avec `rng.nextInt(taille)`.",
+    "Garde ta propre liste : `new ArrayList<>(lots)` ; ainsi la liste reçue (parfois non modifiable) reste intacte.",
+    "`toString` peut s'écrire `\"Tombola\" + lots` : une `List` s'affiche déjà entre crochets."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "La guilde organise sa tombola : chaque billet gagne un lot, et un lot ne sort qu'une fois.",
+      "Il faut du hasard, mais un hasard qu'on peut rejouer pour vérifier le tirage, et un bilan lisible à tout moment."
+    ],
+    "success": [
+      "Tirage équitable, bilan lisible : la guilde est ravie."
+    ],
+    "done": "La tombola tourne sans litige."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

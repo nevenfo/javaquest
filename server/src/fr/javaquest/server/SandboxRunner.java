@@ -77,7 +77,7 @@ public final class SandboxRunner {
                     "--mem-mb", String.valueOf(limits.memMb()), "--max-out", String.valueOf(2 * 1024 * 1024), "--",
                     javaExe.toString(), "-XX:-UsePerfData", "-Xms8m", "-Xmx256m", "-Xss1m", "-XX:+UseSerialGC",
                     "-XX:TieredStopAtLevel=1", "-XX:CICompilerCount=1", "-Dline.separator=\n", "-Dfile.encoding=UTF-8",
-                    "-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Duser.language=fr", "-Duser.country=FR",
+                    "-Dstdout.encoding=UTF-8", "-Dstderr.encoding=UTF-8", "-Dstdin.encoding=UTF-8", "-Duser.language=fr", "-Duser.country=FR",
                     "-cp", runnerJar.toAbsolutePath().toString(), "fr.javaquest.runner.Runner");
             Process p = new ProcessBuilder(cmd).redirectError(ProcessBuilder.Redirect.DISCARD).start();
             try (OutputStream os = p.getOutputStream()) { os.write(Json.write(req).getBytes(StandardCharsets.UTF_8)); }

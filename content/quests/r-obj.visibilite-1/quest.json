@@ -1,0 +1,102 @@
+{
+  "id": "r-obj.visibilite-1",
+  "title": "Qui voit quoi ?",
+  "region": "artisans",
+  "main": false,
+  "kind": "quiz",
+  "assessment": "review",
+  "requires": [
+    "a10-visibilite",
+    "a07-compteur-forge"
+  ],
+  "skills": [
+    "obj.visibilite",
+    "obj.static"
+  ],
+  "summary": "Quiz de rappel sur private, public, le paquetage et les membres static (réactivation).",
+  "source": "point : visibilité des membres ; membres static (réactivation espacée)",
+  "questions": [
+    {
+      "q": "Dans `class Coffre { private int or; }`, une autre classe `Voleur` écrit `coffre.or = 0;`. Que se passe-t-il ?",
+      "options": [
+        "Ça compile et ça marche",
+        "Erreur de compilation : `or` est privé",
+        "Ça compile mais plante à l'exécution",
+        "Ça marche seulement si `Voleur` est dans le même fichier"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Un champ `static` d'une classe…",
+      "options": [
+        "existe en un seul exemplaire, partagé par tous les objets de la classe",
+        "existe en un exemplaire par objet",
+        "ne peut pas être modifié",
+        "est automatiquement `private`"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Quelles affirmations sont vraies ? (plusieurs réponses)",
+      "options": [
+        "Une méthode `static` peut lire un champ d'instance directement",
+        "Une méthode `static` s'appelle sur la classe : `Maths.carre(3)`",
+        "Une constante se déclare `static final`",
+        "Un champ `private static` est visible uniquement dans sa classe"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Pourquoi rendre un champ `private` et fournir un accesseur ?",
+      "options": [
+        "Pour que le programme soit plus rapide",
+        "Pour contrôler et valider les modifications de l'état de l'objet",
+        "Parce que Java l'impose pour tous les champs",
+        "Pour pouvoir utiliser `static`"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      1
+    ]
+  ],
+  "explanations": [
+    "`private` limite l'accès à la classe qui déclare le champ : le compilateur refuse l'accès depuis `Voleur`.",
+    "Un champ `static` appartient à la classe : tous les objets partagent la même case.",
+    "Une méthode `static` n'a pas d'objet courant : elle ne peut pas lire un champ d'instance directement.",
+    "Les accesseurs permettent de valider les changements et de modifier la représentation sans casser les autres classes ; ce n'est pas une obligation du langage."
+  ],
+  "brief": "Réponds aux questions de rappel sur la visibilité et les membres `static`.",
+  "hints": [
+    "`private` : visible dans la classe seulement.",
+    "`static` : un seul exemplaire, attaché à la classe plutôt qu'à un objet."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : qui a le droit de voir un champ, et à qui appartient-il ?"
+    ],
+    "success": [
+      "Les portes sont bien gardées."
+    ],
+    "done": "Visibilité et `static` : acquis."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

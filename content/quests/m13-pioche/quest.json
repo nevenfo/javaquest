@@ -1,0 +1,56 @@
+{
+  "id": "m13-pioche",
+  "title": "Les calculs de la pioche",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "m12-mediane"
+  ],
+  "skills": [
+    "meth.static"
+  ],
+  "summary": "Complète deux méthodes qui retournent une valeur.",
+  "source": "collections : méthodes static avec valeur de retour ; hello : méthodes age(), isPalindromic()",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "// Dégâts d'un coup de pioche : la base plus 2 points par niveau de la pioche.\nstatic int degats(int base, int niveau) {\n    return /* ??? */;\n}\n\n// Une roche est solide à partir de la dureté 7 (comprise).\nstatic /* ??? */ estSolide(int durete) {\n    return durete >= 7;\n}\n\nvoid main() {\n    IO.println(\"Dégâts : \" + degats(4, 3));\n    IO.println(\"Solide : \" + estSolide(5));\n}\n"
+  },
+  "brief": "Une **méthode** a un type de retour, un nom, des paramètres, et renvoie une valeur avec `return`. Complète les deux `/* ??? */` :\n- `degats(base, niveau)` doit **retourner** `base + 2 × niveau` (par exemple `degats(4, 3)` vaut `10`) ;\n- `estSolide(durete)` renvoie `true` ou `false` : écris son **type de retour**.\n\nUne méthode qui retourne ne doit pas afficher : c'est l'appelant (`main`) qui décide quoi en faire. Ton code sera vérifié en appelant directement tes méthodes avec plusieurs valeurs.",
+  "lesson": "**Exemple** — le coût d'un sort selon son niveau :\n```java\nstatic int cout(int niveau) {      // type de retour, nom, paramètre\n    return 3 * niveau + 1;         // return : renvoie la valeur à l'appelant\n}\nvoid main() {\n    int c = cout(4);               // c vaut 13\n}\n```",
+  "hints": [
+    "`return` suivi d'une expression renvoie sa valeur ; le type annoncé avant le nom doit correspondre à cette valeur.",
+    "Pour `degats` : la base, plus deux fois le niveau.",
+    "`estSolide` renvoie le résultat d'une comparaison (`durete >= 7`) : quel est le type d'une comparaison ?"
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Le mineur veut qu'on arrête de refaire les mêmes calculs à la main. Mes méthodes sont presque prêtes…",
+      "Mais il manque deux morceaux : une formule de retour et un type de retour. Complète-les !"
+    ],
+    "success": [
+      "Deux méthodes qui retournent chacune une valeur : on peut les réutiliser partout. C'est ça, factoriser !"
+    ],
+    "done": "Mes calculs de pioche sont enfin propres."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

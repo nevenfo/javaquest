@@ -1,0 +1,51 @@
+{
+  "id": "r-loop.for-1",
+  "title": "La table des marches",
+  "region": "mines",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "m05-escalier"
+  ],
+  "skills": [
+    "loop.for"
+  ],
+  "summary": "Affiche une table de multiplication de 7 de longueur variable (réactivation).",
+  "source": "collections : for avec compteur (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le spectre compte les marches par sept. Lis un entier `n` et affiche les `n` premières lignes de la table de 7 :\n```\n7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n```\n(exemple pour `n = 3`). Pour `n = 0`, aucune ligne de table.",
+  "hints": [
+    "Une boucle `for` dont le compteur `k` va de 1 à `n` inclus, et qui affiche une ligne par tour.",
+    "Avec `n = 0`, la boucle ne doit pas tourner du tout."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir des mines : une boucle `for` pour compter les marches par sept."
+    ],
+    "success": [
+      "Les marches sont comptées jusqu'à la bonne."
+    ],
+    "done": "La table de 7 n'a plus de secret."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

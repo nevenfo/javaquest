@@ -1,0 +1,61 @@
+{
+  "id": "a05-doublon",
+  "title": "Le rivet en double",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": true,
+  "requires": [
+    "a03-distance"
+  ],
+  "kind": "fix",
+  "assessment": "practice",
+  "skills": [
+    "obj.equals"
+  ],
+  "summary": "Répare equals et hashCode pour que Rosa ne compte plus deux fois le même rivet.",
+  "source": "point : equals(Object) et hashCode cohérents ; HashSet",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Rivet.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Rivet.java"
+    ],
+    [
+      "wrong/w2/Rivet.java"
+    ],
+    [
+      "wrong/w3/Rivet.java"
+    ]
+  ],
+  "starter": {
+    "Rivet.java": "public class Rivet {\n    private final int x;\n    private final int y;\n\n    public Rivet(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public boolean equals(Rivet autre) {\n        return autre != null && x == autre.x && y == autre.y;\n    }\n}\n"
+  },
+  "brief": "Rosa tient le registre des rivets dans un `HashSet<Rivet>`, mais elle compte deux fois le même rivet ! La classe `Rivet` fournie contient un `equals` qui a l'air correct… et pourtant `Object a = new Rivet(2, 3); a.equals(new Rivet(2, 3))` répond `false`.\n\nRépare `Rivet` pour que deux rivets de **mêmes coordonnées** soient égaux, y compris dans un `HashSet` :\n- `equals` doit **redéfinir** `equals(Object)` (et répondre `false` pour `null` ou un autre type, sans planter) ;\n- ajoute le `hashCode` qui va avec.",
+  "hints": [
+    "`equals(Rivet)` **surcharge** `equals` sans la redéfinir : Java appelle `equals(Object)` dès que le type déclaré est `Object` (ce que fait `HashSet`).",
+    "Signature attendue : `public boolean equals(Object o)`. Teste `o instanceof Rivet r` avant de comparer les champs.",
+    "Règle d'or : deux objets égaux ont le même `hashCode`. `Objects.hash(x, y)` calcule un code à partir des champs."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mon registre est truffé de doublons ! Rosa jure qu'elle n'inscrit jamais deux fois le même rivet, mais l'ensemble en contient quand même deux.",
+      "Il paraît que le coupable est un `equals` mal écrit. Va voir de près : et n'oublie pas son compagnon le `hashCode` !"
+    ],
+    "success": [
+      "Plus aucun doublon dans mon registre. Deux rivets à la même place sont enfin reconnus comme le même !"
+    ],
+    "done": "Le registre de Rosa est propre, grâce à toi."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

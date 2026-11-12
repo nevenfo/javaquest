@@ -1,0 +1,58 @@
+{
+  "id": "a04-etiquette",
+  "title": "L'étiquette du rivet",
+  "region": "artisans",
+  "giver": "brom",
+  "main": false,
+  "requires": [
+    "a03-distance"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "obj.tostring"
+  ],
+  "summary": "Redéfinis toString pour afficher un rivet lisiblement.",
+  "source": "point : toString lisible pour le débogage",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Rivet.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Rivet.java"
+    ],
+    [
+      "wrong/w2/Rivet.java"
+    ]
+  ],
+  "starter": {
+    "Rivet.java": "public class Rivet {\n    private final int x;\n    private final int y;\n\n    public Rivet(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public int getX() { return x; }\n    public int getY() { return y; }\n\n    // toString ici\n}\n"
+  },
+  "brief": "Quand on affiche un `Rivet`, Java écrit un charabia du genre `Rivet@1b6d3586`. Brom veut une étiquette lisible.\n\nAjoute `toString()` à `Rivet` : elle **renvoie** (sans afficher) le texte `Rivet(x, y)` avec les vraies valeurs.\n\n```java\nIO.println(new Rivet(3, -4));        // Rivet(3, -4)\n\"Posé : \" + new Rivet(0, 0)          // \"Posé : Rivet(0, 0)\"\n```\nAttention à la signature : `public String toString()`, avec `@Override` si tu veux.",
+  "hints": [
+    "`toString()` est une méthode de `Object` que l'on **redéfinit** ; Java l'appelle tout seul pour afficher ou concaténer.",
+    "Elle doit **renvoyer** un `String` (un `return`), pas faire un `println`.",
+    "Exemple analogue : `return \"Sac(\" + poids + \" kg)\";` — respecte les espaces du format demandé."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Regarde ce que `println` m'affiche quand je lui donne un rivet : `Rivet@1b6d3586`. Ça ne me dit rien du tout !",
+      "Apprends à ton `Rivet` à se présenter : `Rivet(3, -4)`, voilà ce que je veux lire."
+    ],
+    "success": [
+      "`Rivet(3, -4)` : je vois enfin ce que je fabrique !"
+    ],
+    "done": "Mon registre est lisible, grâce à toi."
+  },
+  "reward": {
+    "xp": 20
+  }
+}

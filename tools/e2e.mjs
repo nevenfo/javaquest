@@ -49,7 +49,8 @@ const js = async (expr) => { const r = await cdp('Runtime.evaluate', { expressio
 const shot = async (name) => { const r = await cdp('Page.captureScreenshot', { format: 'png' }); writeFileSync(join(shotsDir, name + '.png'), Buffer.from(r.result.data, 'base64')); };
 const key = async (code, down = true) => cdp('Input.dispatchKeyEvent', { type: down ? 'rawKeyDown' : 'keyUp', code, key: code.replace('Key', '').toLowerCase(), windowsVirtualKeyCode: { KeyE: 69, KeyW: 87, KeyS: 83, KeyD: 68, KeyA: 65, Enter: 13, Space: 32, Escape: 27 }[code] || 0 });
 const press = async (code, ms = 80) => { await key(code, true); await sleep(ms); await key(code, false); };
-const waitFor = async (expr, ms = 15000) => { const t = Date.now(); while (Date.now() - t < ms) { if (await js(expr)) return true; await sleep(150); } return false; };
+const truthy = async (expr) => { const r = await cdp('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true }); return !r.result?.exceptionDetails && !!r.result?.result?.value; };
+const waitFor = async (expr, ms = 15000) => { const t = Date.now(); while (Date.now() - t < ms) { if (await truthy(expr)) return true; await sleep(150); } return false; };
 
 try {
   await cdp('Runtime.enable'); await cdp('Page.enable');

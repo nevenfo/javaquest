@@ -1,0 +1,78 @@
+{
+  "id": "a14-atelier",
+  "title": "L'atelier des armures",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "a12-pompe-elixir",
+    "a13-lot"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "obj.equals",
+    "obj.encapsulation",
+    "obj.tostring"
+  ],
+  "summary": "Finale : Armure (equals/hashCode/toString) et Atelier qui refuse les doublons.",
+  "source": "postier/celebs : classes d'objets, ensembles sans doublon, immutabilité",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Armure.java",
+      "solutions/s1/Atelier.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Armure.java",
+      "wrong/w1/Atelier.java"
+    ],
+    [
+      "wrong/w2/Armure.java",
+      "wrong/w2/Atelier.java"
+    ],
+    [
+      "wrong/w3/Armure.java",
+      "wrong/w3/Atelier.java"
+    ]
+  ],
+  "starter": {
+    "Armure.java": "public class Armure {\n    // Écris Armure ici\n}\n",
+    "Atelier.java": "public class Atelier {\n    // Écris Atelier ici\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Dernière commande de Brom : un atelier qui enregistre des armures sans jamais prendre deux fois la même. Écris **deux classes** (deux fichiers) :\n\n**`Armure(String nom, int niveau)`** : champs `private final`, `getNom()`, `getNiveau()` ; `IllegalArgumentException` si le nom est `null`/blanc ou si le niveau n'est pas entre 1 et 10 ; `equals`/`hashCode` sur nom **et** niveau ; `toString()` = `Armure[Plastron, niveau 3]`.\n\n**`Atelier`** : champs `private` ;\n- `boolean commander(Armure a)` : `true` si l'armure est nouvelle, `false` si elle est déjà commandée, `IllegalArgumentException` si `a` est `null` ;\n- `int total()` : nombre d'armures distinctes ;\n- `List<Armure> commandes()` : une **copie** de la liste dans l'ordre de commande (modifier cette copie ne doit pas changer l'atelier).",
+  "hints": [
+    "Un `Set` refuse naturellement les doublons à condition que `equals` **et** `hashCode` soient cohérents ; `add` renvoie `false` si l'élément est déjà là.",
+    "Pour garder l'ordre de commande, un `LinkedHashSet` conserve l'ordre d'insertion.",
+    "Ne renvoie jamais directement ton champ interne : `new ArrayList<>(champ)` fabrique une copie."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Voilà la grande commande du royaume : cent armures, mais jamais deux fois la même ! Rosa tient le registre, moi la forge.",
+      "Il nous faut une `Armure` solide et un `Atelier` qui refuse les doublons. Tout ce que tu as appris est utile ici : classes, encapsulation, `equals`, `toString`, exceptions."
+    ],
+    "resume": "L'atelier attend encore ses armures.",
+    "success": [
+      "Pas une armure en double, pas un champ exposé : du travail d'orfèvre !",
+      "Tu as gagné ta place parmi nous : le portail de la **Tour des Contrats** s'ouvre pour toi."
+    ],
+    "done": "L'atelier tourne sans doublon grâce à toi."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-forge",
+      "unlock:Quartier des artisans maîtrisé : la route de la Tour des Contrats est ouverte"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

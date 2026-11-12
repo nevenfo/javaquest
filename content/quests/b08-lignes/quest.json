@@ -1,0 +1,58 @@
+{
+  "id": "b08-lignes",
+  "title": "Les lignes de la carte",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b07-classement-livres"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "str.split"
+  ],
+  "summary": "Découpe une ligne « x,y:objet » avec split et trim.",
+  "source": "address : s.split(\":\") ; celebs : fromString(String)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n    // \"12,7:coffre\" -> {12, 7}\n    static int[] position(String ligne) {\n        String[] parties = ligne.split(/* ??? */);\n        String[] xy = parties[0].split(/* ??? */);\n        return new int[] { Integer.parseInt(xy[0].trim()), Integer.parseInt(xy[1].trim()) };\n    }\n\n    // \"12,7:coffre\" -> \"coffre\"\n    static String objet(String ligne) {\n        /* ??? */\n    }\n}\n"
+  },
+  "brief": "Lyra range les trésors d'une carte. Chaque ligne a la forme `x,y:objet`, avec parfois des espaces autour des morceaux.\n- `int[] position(String ligne)` : renvoie `{x, y}` ;\n- `String objet(String ligne)` : renvoie le nom de l'objet, **sans espaces autour**.\n\n```\nposition(\"12,7:coffre\")        // {12, 7}\nobjet(\" 3 , 40 : épée magique \")   // \"épée magique\"\n```\nComplète les trous `/* ??? */`.",
+  "lesson": "Exemple résolu (autre format) :\n```java\nString[] p = \"geo:48.2,2.4\".split(\":\");      // [\"geo\", \"48.2,2.4\"]\nString[] c = p[1].split(\",\");                  // [\"48.2\", \"2.4\"]\ndouble lat = Double.parseDouble(c[0].trim());\n```\n`split` prend une **expression régulière** : `\":\"` et `\",\"` y sont des caractères ordinaires, mais `\".\"` désignerait « n'importe quel caractère ».",
+  "hints": [
+    "`\"a:b\".split(\":\")` renvoie un tableau `[\"a\", \"b\"]` : on retrouve les morceaux par leur indice.",
+    "Découpe d'abord sur `\":\"` (position / objet), puis la partie position sur `\",\"`.",
+    "Pour `objet`, prends le second morceau du premier découpage et retire les espaces avec `trim()`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Chaque ligne de cette carte mélange position et objet. Pour les séparer, §split§ est l'outil parfait. À toi de compléter."
+    ],
+    "success": [
+      "Les lignes sont démêlées. Garde le réflexe : découper, puis §trim()§ avant de convertir."
+    ],
+    "done": "La carte est lisible."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

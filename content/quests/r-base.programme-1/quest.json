@@ -1,0 +1,41 @@
+{
+  "id": "r-base.programme-1",
+  "title": "Variables en mémoire",
+  "region": "village",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.programme",
+    "base.variables"
+  ],
+  "summary": "Prédis la sortie d'un petit programme qui recopie et modifie des variables (réactivation).",
+  "source": "hello : structure d'un programme, variables (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "a=10, b=7\n17\na+b=107\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Attention à ce que `b` a copié, et à l'ordre d'évaluation du `+`.",
+  "hints": [
+    "`int b = a;` copie la valeur de `a` à cet instant : modifier `a` ensuite ne change pas `b`.",
+    "`+` s'évalue de gauche à droite : avec un `String` à gauche, tout ce qui suit est concaténé comme du texte."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : une variable est une case qui garde une valeur. Que contiennent-elles à la fin ?"
+    ],
+    "success": [
+      "Les cases ont gardé chacune leur valeur."
+    ],
+    "done": "Variables et ordre d'évaluation : solides."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

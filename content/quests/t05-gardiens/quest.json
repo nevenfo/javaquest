@@ -1,0 +1,66 @@
+{
+  "id": "t05-gardiens",
+  "title": "Les gardiens de la Tour",
+  "region": "tour",
+  "giver": "mage",
+  "main": true,
+  "requires": [
+    "t04-heritage-quiz"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "inh.heritage"
+  ],
+  "summary": "Écris deux sous-classes de la classe abstraite Gardien (extends, super, redéfinition).",
+  "source": "annale : héritage, super, classe abstraite",
+  "support": [
+    "support/Gardien.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Veilleur.java",
+      "solutions/s1/Golem.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Veilleur.java",
+      "wrong/w1/Golem.java"
+    ],
+    [
+      "wrong/w2/Veilleur.java",
+      "wrong/w2/Golem.java"
+    ]
+  ],
+  "starter": {
+    "Veilleur.java": "public class Veilleur /* ??? */ {\n    // à compléter\n}\n",
+    "Golem.java": "public class Golem /* ??? */ {\n    // à compléter\n}\n"
+  },
+  "multiFile": true,
+  "brief": "La Tour emploie des gardiens. La classe abstraite `Gardien` (fournie, lecture seule) :\n```java\npublic abstract class Gardien {\n    protected final String nom;\n    protected Gardien(String nom) { this.nom = nom; }\n    public abstract int force();\n    public String presentation() { return \"[\" + nom + \" | force \" + force() + \"]\"; }\n}\n```\nÉcris :\n- `Veilleur extends Gardien` : `Veilleur(String nom, int vigilance)` ; `force()` = `vigilance * 2` ; **redéfinis** `presentation()` pour renvoyer la présentation du parent suivie de ` veille` (réutilise `super.presentation()`) ;\n- `Golem extends Gardien` : `Golem(String nom)` ; `force()` = 20 ; il **hérite** de `presentation()` sans la redéfinir.\n\nExemple : `new Veilleur(\"Aldo\", 4).presentation()` donne `[Aldo | force 8] veille`.",
+  "hints": [
+    "Le constructeur d'une sous-classe commence par `super(...)` pour initialiser la partie parente. Ne redéclare pas le champ `nom`.",
+    "`force()` est abstraite : chaque sous-classe doit la définir. `presentation()` peut être réutilisée telle quelle ou complétée.",
+    "Pour compléter plutôt que remplacer : `return super.presentation() + \"…\";`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes gardiens se ressemblent tous : un nom, une force, une façon de se présenter. Seule la force diffère, et le Veilleur ajoute son petit mot.",
+      "Voilà la classe mère. Écris les deux sous-classes : l'une ajoute un comportement, l'autre hérite de tout."
+    ],
+    "success": [
+      "Le Veilleur complète sa présentation, le Golem hérite de tout : voilà l'héritage bien utilisé !"
+    ],
+    "done": "Mes gardiens veillent sur la Tour."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

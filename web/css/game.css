@@ -81,8 +81,8 @@ kbd { font: 11px var(--mono); padding: 0 4px; border-radius: 3px; background: rg
 .ed-toolbar button { border: none; border-radius: 6px; padding: 7px 12px; font-weight: 600; color: #fff; }
 .btn-run { background: var(--leaf); } .btn-check { background: var(--sky); } #ed-reset { background: #5a5170; }
 .ed-toolbar button:disabled { opacity: .55; cursor: wait; }
-.ed-stdin-label { color: var(--mist); font-size: 13px; }
-.ed-stdin-label input { width: 170px; background: var(--code-bg); color: var(--code-fg); border: 1px solid #443b63; border-radius: 4px; padding: 4px 6px; font: 13px var(--mono); }
+.ed-stdin-label, .ed-args-label { color: var(--mist); font-size: 13px; }
+.ed-args-label input, .ed-stdin-label input { width: 170px; background: var(--code-bg); color: var(--code-fg); border: 1px solid #443b63; border-radius: 4px; padding: 4px 6px; font: 13px var(--mono); }
 .grow { flex: 1; }
 .ed-bottom { height: 30vh; min-height: 150px; display: flex; flex-direction: column; background: #16131f; }
 .ed-out { flex: 1; overflow: auto; padding: 8px 12px; font: 13.5px/1.5 var(--mono); color: #e8e3f7; }

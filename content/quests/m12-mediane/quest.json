@@ -1,0 +1,60 @@
+{
+  "id": "m12-mediane",
+  "title": "La médiane des poids",
+  "region": "mines",
+  "giver": "spectre",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m11-statistiques"
+  ],
+  "skills": [
+    "arr.algos"
+  ],
+  "summary": "Lis des poids jusqu'à 0 dans un tableau extensible, trie-les et donne la médiane.",
+  "source": "median : Arrays.copyOf pour agrandir, Arrays.sort(values, 0, i), médiane pair/impair",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "4\\n1\\n3\\n2\\n0",
+  "starter": {
+    "Main.java": "import java.util.Arrays;\n\nvoid main() {\n    \n}\n"
+  },
+  "brief": "Le spectre pèse des pierres, une par une, sans savoir combien il y en aura : il tape chaque poids (entier non nul) et termine par `0`. Écris un programme qui retient **tous** les poids, puis affiche leur **médiane** :\n```\nMédiane : X\n```\n- Impossible de connaître le nombre de poids à l'avance : pars d'un tableau de **4 cases** et **agrandis-le** quand il est plein (`Arrays.copyOf(t, t.length * 2)`).\n- Le **tri** (`Arrays.sort`) ne doit porter que sur les cases réellement remplies : `Arrays.sort(t, 0, n)`.\n- Médiane : valeur du milieu si le nombre de poids est impair ; moyenne des deux valeurs du milieu s'il est pair (les poids `4 1 3 2` donnent `Médiane : 2.5`).\nIl y aura toujours au moins un poids.",
+  "hints": [
+    "Garde un compteur `n` de poids lus. Quand `n == t.length`, le tableau est plein : `t = Arrays.copyOf(t, t.length * 2);`.",
+    "`Arrays.sort(t, 0, n)` trie seulement les `n` premières cases. Trier tout `t` mêlerait des cases vides (0) aux vrais poids.",
+    "Médiane : trié, l'indice du milieu est `n / 2` ; si `n` est pair, on moyenne `t[n / 2 - 1]` et `t[n / 2]` (avec `/ 2.0`)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Chhhh… Je pèse des pierres, une à une, sans jamais savoir combien il y en aura. À la fin, je veux la pierre du milieu.",
+      "Un tableau qui s'agrandit, un tri, une médiane. Chhhh… à toi de jouer."
+    ],
+    "success": [
+      "La pierre du milieu, même pour vingt-cinq poids ! Tu sais agrandir, trier et choisir."
+    ],
+    "done": "Chhhh… la médiane ne ment jamais."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

@@ -59,6 +59,9 @@ export class Workshop {
     $('ed-reset').hidden = this.kind === 'quiz' || this.kind === 'predict';
     document.querySelector('.ed-stdin-label').hidden = !quest.usesStdin;
     $('ed-stdin').value = quest.sampleStdin || '';
+    const usesArgs = quest.usesArgs || (quest.skills || []).includes('base.args');
+    document.querySelector('.ed-args-label').hidden = !usesArgs;
+    $('ed-args').value = (quest.sampleArgs || []).join(' ');
     if (this.kind === 'parsons') this.renderParsons();
     if (this.kind === 'predict') this.renderPredict();
     if (this.kind === 'quiz') this.renderQuiz();
@@ -73,10 +76,10 @@ export class Workshop {
     this.hooks.layout?.();
     this.showInfo('brief');
     this.result = null;
-    const intro = this.exam ? 'Épreuve : exécute ton code autant que tu veux ; la correction n'a lieu qu'en rendant la copie.'
+    const intro = this.exam ? 'Épreuve : exécute ton code autant que tu veux ; la correction n’a lieu qu’en rendant la copie.'
       : { quiz: 'Coche tes réponses puis « Vérifier la quête ».', predict: 'Écris ta prédiction puis « Vérifier la quête » : le programme sera réellement exécuté pour comparer.',
           parsons: 'Range les runes puis « Exécuter » pour essayer, ou « Vérifier la quête ».' }[this.kind]
-      || 'Écris ton code puis « Exécuter » (Ctrl+Entrée) pour l'essayer, ou « Vérifier la quête » (Ctrl+Maj+Entrée) pour la valider avec des tests cachés.';
+      || 'Écris ton code puis « Exécuter » (Ctrl+Entrée) pour l’essayer, ou « Vérifier la quête » (Ctrl+Maj+Entrée) pour la valider avec des tests cachés.';
     this.renderOut('console', `<div class="out-sys">${intro}</div>`);
     this.hooks.scene()?.setupStage(quest.stage);
     play('book');
@@ -198,7 +201,7 @@ export class Workshop {
     this.renderOut('console', '<div class="out-sys">Compilation et exécution dans la sandbox…</div>');
     const s = this.hooks.session.state; s.stats.runs++;
     try {
-      const r = await api.run(this.quest.id, this.playerFiles(), $('ed-stdin').value ? $('ed-stdin').value.replace(/\\n/g, '\n') + '\n' : '', []);
+      const r = await api.run(this.quest.id, this.playerFiles(), $('ed-stdin').value ? $('ed-stdin').value.replace(/\\n/g, '\n') + '\n' : '', this.argsHidden() ? [] : $('ed-args').value.trim().split(/\s+/).filter(Boolean));
       this.result = r;
       this.showResult(r, false);
       this.busy(false);
@@ -230,6 +233,8 @@ export class Workshop {
       this.renderOut('tests', `<div class="out-err">${esc(e.message)}</div>`);
     } finally { this.busy(false); }
   }
+
+  argsHidden() { return document.querySelector('.ed-args-label').hidden; }
 
   busy(on) { $('ed-run').disabled = on; $('ed-check').disabled = on; }
 

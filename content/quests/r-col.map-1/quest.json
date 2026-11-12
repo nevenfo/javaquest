@@ -1,0 +1,43 @@
+{
+  "id": "r-col.map-1",
+  "title": "Rappel : listes, ensembles et tables",
+  "region": "bibliotheque",
+  "main": false,
+  "requires": [
+    "b11-inventaire"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "col.arraylist",
+    "col.set",
+    "col.map"
+  ],
+  "summary": "Prédis la sortie d'un programme mêlant List, Set et Map (réactivation).",
+  "source": "collections : ArrayList, TreeSet, TreeMap, remove(int) et remove(Object) (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "4 3\n[cuivre, fer, or]\n{cuivre=1, fer=1, or=2}\n2 0\n[30]\nnull\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Méfie-toi de `remove` sur une liste d'entiers et d'une clé absente dans une `Map`.",
+  "hints": [
+    "`TreeSet` et `TreeMap` gardent leurs éléments triés ; un `Set` élimine les doublons.",
+    "`n.remove(1)` retire l'élément d'**indice** 1 ; `n.remove(Integer.valueOf(10))` retire la **valeur** 10.",
+    "`get` sur une clé absente renvoie `null` ; `getOrDefault` renvoie la valeur par défaut."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un rappel éclair : liste, ensemble, table. Qui garde quoi ?"
+    ],
+    "success": [
+      "Doublons, ordre, clé absente : rien ne t'a échappé."
+    ],
+    "done": "Les collections n'ont plus de secret."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

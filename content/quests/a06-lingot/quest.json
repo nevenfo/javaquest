@@ -1,0 +1,60 @@
+{
+  "id": "a06-lingot",
+  "title": "Les lingots de Brom",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "a05-doublon"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "obj.equals",
+    "obj.tostring",
+    "obj.encapsulation"
+  ],
+  "summary": "Écris seul·e une classe Lingot complète (champs privés, equals, hashCode, toString).",
+  "source": "point : classe complète avec equals/hashCode/toString",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Lingot.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Lingot.java"
+    ],
+    [
+      "wrong/w2/Lingot.java"
+    ]
+  ],
+  "starter": {
+    "Lingot.java": "// Écris ici la classe Lingot (voir l'énoncé).\npublic class Lingot {\n\n}\n"
+  },
+  "brief": "Brom empile des lingots dans sa réserve. Écris une classe `Lingot` **sans modèle** :\n- constructeur `Lingot(String metal, int poids)` ;\n- champs `private final`, accesseurs `getMetal()` et `getPoids()` ;\n- deux lingots sont **égaux** s'ils ont le même métal (comparé par contenu) **et** le même poids ; `hashCode` cohérent ;\n- `toString()` renvoie `Lingot(or, 12)` pour un lingot d'or de poids 12.\n\nLe harnais construit les métaux avec `new String(\"or\")` : attention aux comparaisons de chaînes.",
+  "hints": [
+    "Pour comparer deux `String` par contenu, utilise `equals` (ou `Objects.equals`), jamais `==`.",
+    "Structure d'un `equals` : `o instanceof Lingot l && ...`. Pour le `hashCode`, `Objects.hash(metal, poids)`.",
+    "Exemple analogue : une classe `Pot(String contenu, int taille)` avec ces trois méthodes, les mêmes champs dans `equals` et `hashCode`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ma réserve déborde de lingots et je ne sais plus lesquels sont identiques. Je te laisse écrire la classe entière : tu sais déjà tout ce qu'il faut.",
+      "Deux lingots du même métal et du même poids ? Ce sont les mêmes pour moi."
+    ],
+    "success": [
+      "Excellent ! Ma réserve se trie toute seule : plus de doublons, et un affichage clair."
+    ],
+    "done": "Mes lingots sont bien rangés."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

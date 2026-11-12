@@ -1,0 +1,61 @@
+{
+  "id": "f01-carrefour",
+  "title": "Le carrefour des tisanes",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "q04-lanterne"
+  ],
+  "skills": [
+    "cond.if"
+  ],
+  "summary": "Complète les conditions du sort qui trie les voyageurs blessés.",
+  "hud": "Sylve t'attend à l'entrée du Bois des Embranchements.",
+  "source": "hello : structure conditionnelle if / else if / else",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "9",
+  "starter": {
+    "Main.java": "void main() {\n    int pv = Integer.parseInt(IO.readln(\"PV du voyageur ? \"));\n\n    if (pv >= 15) {\n        IO.println(\"Voyageur en forme\");\n    } else if (/* ??? */) {\n        // blessé : il lui faut une tisane\n        /* ??? */\n    } else {\n        IO.println(\"Voyageur en danger : soins urgents\");\n    }\n}\n"
+  },
+  "brief": "Sylve soigne les voyageurs égarés. Selon leurs **points de vie** (`pv`), le sort doit afficher :\n- `pv` de 15 ou plus : `Voyageur en forme`\n- `pv` de 5 à 14 : `Voyageur blessé : tisane`\n- moins de 5 : `Voyageur en danger : soins urgents`\n\nComplète les deux `/* ??? */`. Les conditions sont testées **dans l'ordre** : la première qui est vraie gagne, les suivantes sont ignorées.",
+  "lesson": "**Exemple commenté** — une alarme de mana :\n```java\nif (mana >= 10) {\n    IO.println(\"Sort lancé\");\n} else if (mana > 0) {          // on arrive ici seulement si mana < 10\n    IO.println(\"Sort faible\");\n} else {                        // ici : mana <= 0\n    IO.println(\"Plus de mana\");\n}\n```",
+  "hints": [
+    "Dans le `else if`, on sait déjà que `pv < 15` : il ne reste qu'à tester la borne basse.",
+    "Pour « de 5 à 14 », il suffit de tester `pv >= 5` (le cas ≥ 15 est déjà traité plus haut).",
+    "Le bloc du milieu doit afficher exactement `Voyageur blessé : tisane` avec `IO.println`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue dans le **Bois des Embranchements** ! Ici, chaque sentier mène quelque part selon ce qu'on décide.",
+      "Je suis Sylve. Les voyageurs arrivent blessés et je dois choisir : tisane ou soins urgents ? Un `if` bien placé fait tout le travail.",
+      "Il manque deux morceaux à mon sort. Complète-les !"
+    ],
+    "success": [
+      "Parfait : les voyageurs sont triés ! Souviens-toi : la première condition vraie l'emporte."
+    ],
+    "done": "Grâce à toi, plus personne ne boit de tisane quand il lui faut un guérisseur.",
+    "locked": "Va d'abord voir le meunier, au village : il faut une lanterne pour entrer dans le Bois."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

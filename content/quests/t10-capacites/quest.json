@@ -1,0 +1,71 @@
+{
+  "id": "t10-capacites",
+  "title": "Les capacités du paladin",
+  "region": "tour",
+  "giver": "mage",
+  "main": false,
+  "requires": [
+    "t09-contrats"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "inh.modelisation"
+  ],
+  "summary": "Combine deux capacités (interfaces) pour modéliser un guerrier, un prêtre et un paladin.",
+  "source": "annale : modéliser des entités à capacités combinées (walk/swim/fly)",
+  "support": [
+    "support/Combattant.java",
+    "support/Soigneur.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Guerrier.java",
+      "solutions/s1/Pretre.java",
+      "solutions/s1/Paladin.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Guerrier.java",
+      "wrong/w1/Pretre.java",
+      "wrong/w1/Paladin.java"
+    ],
+    [
+      "wrong/w2/Guerrier.java",
+      "wrong/w2/Pretre.java",
+      "wrong/w2/Paladin.java"
+    ]
+  ],
+  "starter": {
+    "Guerrier.java": "public class Guerrier implements /* ??? */ {\n    public int attaque() { return 8; }\n}\n",
+    "Pretre.java": "public class Pretre implements Soigneur {\n    public int soin() { return /* ??? */; }\n}\n",
+    "Paladin.java": "public class Paladin /* ??? */ {\n    // attaque : 5, soin : 4. Ne réécris pas cri() ni priere().\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Le Mage veut un registre de héros. Chaque **capacité** est une interface fournie (lecture seule) :\n```java\npublic interface Combattant { int attaque(); default String cri() { /* … */ } }\npublic interface Soigneur   { int soin();    default String priere() { /* … */ } }\n```\nComplète les trois classes :\n- `Guerrier` : un `Combattant`, attaque **8** ;\n- `Pretre` : un `Soigneur`, soin **6** (pas un combattant !) ;\n- `Paladin` : **à la fois** `Combattant` et `Soigneur`, attaque **5**, soin **4**.\nLes méthodes `default` (`cri()`, `priere()`) existent déjà : ne les recopie pas.",
+  "lesson": "Exemple résolu (autre domaine) :\n```java\ninterface Marcheur { int pas(); default String marche() { return pas() + \" pas\"; } }\ninterface Nageur   { int brasses(); }\nclass Canard implements Marcheur, Nageur {   // une classe, plusieurs interfaces\n    public int pas() { return 2; }\n    public int brasses() { return 5; }\n}\n```\nUne capacité = une interface ; une entité liste celles dont elle a besoin, séparées par une virgule.",
+  "hints": [
+    "Une classe peut implémenter **plusieurs** interfaces : `implements A, B`.",
+    "Chaque méthode abstraite de chaque interface doit être définie en `public` ; les méthodes `default` viennent gratuitement.",
+    "Paladin : `public class Paladin implements Combattant, Soigneur` puis `attaque()` et `soin()`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un paladin frappe **et** soigne. Plutôt que de dupliquer du code, on combine des capacités : une interface par capacité."
+    ],
+    "success": [
+      "Chaque héros a exactement ses capacités, sans copier-coller. C'est la bonne modélisation."
+    ],
+    "done": "Le registre des héros est à jour."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

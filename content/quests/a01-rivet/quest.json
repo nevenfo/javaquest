@@ -1,0 +1,61 @@
+{
+  "id": "a01-rivet",
+  "title": "Le rivet de Brom",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "q01-porte"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "obj.classe"
+  ],
+  "summary": "Écris la classe Rivet : une position (x, y) sur la plaque d'armure.",
+  "source": "point : définir une classe avec champs et constructeur",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Rivet.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Rivet.java"
+    ],
+    [
+      "wrong/w2/Rivet.java"
+    ]
+  ],
+  "starter": {
+    "Rivet.java": "public class Rivet {\n    int x;\n    int y;\n\n    Rivet(int x, int y) {\n        /* ??? */\n    }\n}\n"
+  },
+  "brief": "Brom le forgeron pose des rivets sur ses plaques d'armure. Chaque rivet a une position : **x** (colonne) et **y** (ligne), deux entiers.\n\nComplète la classe `Rivet` : le constructeur doit **ranger** ses deux paramètres dans les champs de l'objet.\n\n```java\nRivet r = new Rivet(3, 4);   // un rivet à la colonne 3, ligne 4\n```\nLe constructeur reçoit des paramètres qui ont le même nom que les champs : à toi de distinguer les deux avec `this`.",
+  "lesson": "Exemple résolu (autre classe) :\n```java\nclass Marteau {\n    int poids;\n    String nom;\n    Marteau(int poids, String nom) {\n        this.poids = poids;\n        this.nom = nom;\n    }\n}\n```\nOn l'utilise avec `new Marteau(5, \"Cogneur\")`.",
+  "hints": [
+    "Un constructeur porte le nom de la classe et n'a pas de type de retour ; il sert à initialiser les champs.",
+    "Quand un paramètre a le même nom qu'un champ, `x = x;` ne fait rien d'utile. `this.x` désigne le champ de l'objet.",
+    "Exemple analogue : `class Sac { int poids; Sac(int poids) { this.poids = poids; } }`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ah, l'apprenti·e ! Passe-moi ce marteau. Chaque rivet de mes armures a une place précise sur la plaque : une colonne, une ligne.",
+      "Sur le parchemin de Rosa, je les note à la main. Je veux que tu m'écrives un **modèle** de rivet : une classe `Rivet`. Complète le constructeur, je m'occupe du reste !"
+    ],
+    "resume": "Le constructeur de Rivet est encore vide, apprenti·e.",
+    "success": [
+      "Voilà un rivet qui tient en place ! Chaque `new Rivet(…)` en fabrique un nouveau, avec sa propre position.",
+      "Maintenant, on va protéger ces champs : n'importe qui peut les modifier, pour l'instant."
+    ],
+    "done": "Mes rivets sont bien posés, merci à toi."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

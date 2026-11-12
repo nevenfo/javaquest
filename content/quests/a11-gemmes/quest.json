@@ -1,0 +1,58 @@
+{
+  "id": "a11-gemmes",
+  "title": "La loterie des gemmes",
+  "region": "artisans",
+  "giver": "pompiste",
+  "main": false,
+  "requires": [
+    "a09-bourse"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "obj.random"
+  ],
+  "summary": "Écris une fabrique de gemmes aléatoires dans une plage donnée.",
+  "source": "fabrique d'objets aléatoires bornés (Random)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Gemme.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Gemme.java"
+    ],
+    [
+      "wrong/w2/Gemme.java"
+    ]
+  ],
+  "starter": {
+    "Gemme.java": "import java.util.Random;\n\npublic record Gemme(int valeur) {\n    // Fabrique : aleatoire(Random rng, int min, int max)\n}\n"
+  },
+  "brief": "Gaspard et Brom tirent au sort la valeur des gemmes de la forge. Complète le record `Gemme(int valeur)` avec une fabrique :\n\n`static Gemme aleatoire(Random rng, int min, int max)`\n\n- elle renvoie une gemme dont la valeur est **entre `min` et `max` inclus** ;\n- elle **utilise le générateur `rng` reçu** (jamais `Math.random()` ni un nouveau `Random`) : ainsi, deux `Random` de même graine donnent les mêmes gemmes ;\n- `IllegalArgumentException` si `min > max`.\n\n```java\nGemme g = Gemme.aleatoire(new Random(42), 1, 6);   // valeur de 1 à 6\n```\nLe harnais tire des milliers de gemmes : chaque valeur possible doit pouvoir sortir, bornes comprises.",
+  "hints": [
+    "`rng.nextInt(n)` renvoie un entier de 0 **inclus** à n **exclu**.",
+    "Pour viser `[min, max]` inclus : `min + rng.nextInt(taille)`, où `taille` est le nombre de valeurs possibles (attention aux bornes !).",
+    "Exemple analogue : un dé de 1 à 6 se tire avec `1 + rng.nextInt(6)`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Pour fixer le prix d'une gemme, Brom lance les dés. Mais je veux un tirage **honnête** : toutes les valeurs, bornes comprises, doivent pouvoir sortir.",
+      "Écris-moi cette fabrique. Et n'invente pas ton propre `Random` : utilise celui qu'on te passe !"
+    ],
+    "success": [
+      "Du 1 au 6, et pas un de plus ! Tes gemmes sont bien tirées."
+    ],
+    "done": "La loterie des gemmes tourne rond."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

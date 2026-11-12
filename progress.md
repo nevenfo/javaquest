@@ -1,33 +1,33 @@
 # PROGRESS
 
 ## Phase actuelle
-Phases A, B, C1, D1, E1, R1 validées. En cours : F1 (contenu des régions) en parallèle de G1 (examen) et E2/D2.
+Phases A, B, C1, D1, E1, E2, R1, G1 validées. En cours : F1 (contenu et traversée des régions) ; D2 et H1 ouverts.
 
 ## Tâche actuelle
-F1 — production du contenu des régions (spécification `docs/CONTENT.md`).
+F1.6 — E2E de traversée des régions.
 
 ## Dernière tâche validée
-C1 tranche verticale : village Phaser jouable, atelier CodeMirror, quêtes q01–q04 (guidée, prédiction, complétion, autonome à entrées variées), sauvegarde/rechargement.
+F1 contenu : 123 quêtes (lots régions + comblement des parcours), parcours complet 41/41 compétences ; champ `args` dans l'atelier ; correctif d'un SyntaxError dans `web/js/ui/editor.js` (apostrophes droites, présent depuis 540dade) et du faux positif de `waitFor` dans `tools/e2e.mjs`.
 Validation :
-- `node tools/e2e.mjs` → 19/19 sur 4 passages consécutifs (1 échec isolé non reproduit, non identifié : à surveiller).
-- `bash tools/test-server.sh` → 24 PASS + contenu 4/4 ; `bash tools/test-sandbox.sh` → 26 PASS ; `pwsh -File tools/test-launcher.ps1` → 10 PASS.
+- `bash tools/build.sh` OK ; `bash tools/test-server.sh` → 24 PASS + 123 quêtes valides, 0 échec.
+- `node tools/e2e.mjs` → 24/24 (deux passages) ; `node --test tests/web/pedagogy.test.mjs` → 11/11 ; `node tools/coverage.mjs` → 41/41.
 
 ## Décisions actives
-- Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md` (règles P1–P19, hypothèses H1–H5).
-- Front : Phaser 3.90 (scène `web/js/world/scene.js`, cartes `maps.js` via `builder.js`), UI DOM (`web/js/ui/*`), modèle pédagogique pur `web/js/pedagogy.js`, sauvegarde `state.js` (throttle 1 s + keepalive).
-- Runner : stdin servi ligne par ligne avec écho terminal (flux `in`) ; `System.in` installé une seule fois (IO du JDK le met en cache).
-- Quêtes : formats code/fix/parsons/predict/quiz ; clé de quiz et harnais jamais envoyés au client ; `Validate` vérifie solutions, fautives, départ, prédictions.
-- E2E : Edge headless + CDP, émulation de focus obligatoire (sinon Phaser s'endort).
+- Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
+- Quêtes citadelle `c01`–`c04` : optionnelles (`main: false`), chaînées par `requires` ; accès via la porte du sanctuaire.
+- Runner : stdin servi ligne par ligne avec écho ; `-Dstdin.encoding=UTF-8` ; args saisis dans l'atelier (`ed-args`) si `usesArgs` ou compétence `base.args`.
+- E2E : Edge headless + CDP, émulation de focus obligatoire ; `waitFor` échoue si l'évaluation lève une exception.
+- D2 : fonctionnalités couvertes par l'E2E, mais tests unitaires état/sauvegarde absents → D2 non coché.
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
 Aucun.
 
 ## Incident à signaler à l'utilisateur
-`javaquest-install.zip` (49,8 Ko, non versionné, absent de la sauvegarde) a été supprimé par erreur le 2026-11-11 lors du nettoyage des fichiers hérités. Archive équivalente reconstituée depuis le tag : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip` (contenu identique au dépôt hérité, pas forcément au ZIP d'origine).
+`javaquest-install.zip` (non versionné) supprimé par erreur le 2026-11-11 ; archive reconstituée : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip`.
 
 ## Fichiers / zones utiles
-`web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,test-launcher.ps1}` · `docs/`
+`web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-F1 — Intégrer les lots de contenu des deux producteurs (régions village/forêt/mines puis artisans/tour/bibliothèque/citadelle) : `bash tools/test-server.sh` tout OK, `node tools/coverage.mjs` (viser parcours complet par compétence), revue d'échantillon, puis commit ; ensuite H1.2 (test Windows Sandbox du ZIP).
+F1.6 — Écrire `tools/e2e-traversee.mjs` (profil qui résout via l'API une quête par région, du village à la citadelle, avec les solutions de référence, et vérifie déblocages/portes) puis l'exécuter au vert.

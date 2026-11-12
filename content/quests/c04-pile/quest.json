@@ -1,0 +1,61 @@
+{
+  "id": "c04-pile",
+  "title": "La calculatrice à pile",
+  "region": "citadelle",
+  "giver": "examinateur",
+  "main": false,
+  "requires": [
+    "c03-shell-listes"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "proj.repl",
+    "proj.architecture"
+  ],
+  "summary": "Même architecture, autre domaine : un REPL de calculatrice à pile avec registre de commandes.",
+  "source": "jalist : shell interactif extensible (transfert vers un autre domaine)",
+  "support": [
+    "support/Commande.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static final Deque<Integer> PILE = new ArrayDeque<>();\n\n    static void enregistrer(String nom, Commande c) {\n    }\n\n    static String traiter(String ligne) {\n        return null;\n    }\n\n    public static void main(String[] args) {\n    }\n}\n"
+  },
+  "brief": "Nouveau chantier, même architecture : une **calculatrice à pile** (notation polonaise inversée). L'interface `Commande` (`String executer(List<String> args)`) est fournie ; la pile est `static final Deque<Integer> PILE` (sommet = tête : `push` / `pop` / `peek`). Écris `Main` :\n- `enregistrer(nom, commande)` ; `traiter(ligne)` renvoie le texte à afficher, ou `null` s'il n'y en a pas (ligne blanche, commande silencieuse) ; commande inconnue → `Commande inconnue : <nom>` ; `main` lit `IO.readln()` jusqu'à `fin` ou fin d'entrée et affiche chaque résultat non nul ;\n- commandes de base (disponibles dès le chargement de `Main`) :\n  - `empile n1 n2 …` : empile les entiers dans l'ordre (silencieuse) ;\n  - `plus`, `moins`, `fois` : dépile **b** (sommet) puis **a**, empile `a+b`, `a-b` ou `a*b` (silencieuses). S'il y a moins de deux nombres : `Erreur : pile insuffisante`, et la pile reste **inchangée** ;\n  - `sommet` : le nombre au sommet, ou `vide` ; `taille` : la hauteur de la pile.\n\n```\nempile 10 3\nmoins        → pile : 7\nsommet       → 7\n```\nLe harnais ajoutera une commande `dup` via `enregistrer` : la boucle ne doit pas changer.",
+  "hints": [
+    "Même schéma qu'au registre précédent : `Map<String, Commande>`, découpage de la ligne, `get` du nom ; les commandes de base s'enregistrent dans un bloc `static`.",
+    "Factorise les trois opérations : une méthode qui vérifie `PILE.size() >= 2` **avant** de dépiler, puis applique l'opération.",
+    "`moins` calcule `a - b` où `b` est le sommet : dépile d'abord `b`, puis `a`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Tu as bâti un shell de listes. Saurais-tu refaire la même architecture pour une calculatrice à pile ? Les commandes changent, le principe reste."
+    ],
+    "success": [
+      "Autre domaine, même architecture : tu as vu que le REPL et le registre sont réutilisables. C'est le signe d'une bonne conception."
+    ],
+    "done": "La calculatrice à pile calcule."
+  },
+  "reward": {
+    "xp": 55
+  }
+}

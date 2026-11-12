@@ -1,0 +1,58 @@
+{
+  "id": "f05-aiguillage",
+  "title": "Le panneau aiguilleur",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "f04-pont"
+  ],
+  "skills": [
+    "cond.switch"
+  ],
+  "summary": "Complète un switch qui indique où mène chaque direction.",
+  "source": "address : switch sur une chaîne pour choisir un traitement",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "est",
+  "starter": {
+    "Main.java": "void main() {\n    String direction = IO.readln(\"Direction ? \");\n    String panneau = switch (direction) {\n        case \"nord\" -> \"Vers la Tour\";\n        case \"sud\" -> \"Vers Javelune\";\n        /* ??? */ -> \"Vers les Mines de Boucle-Profonde\";\n        case \"ouest\" -> \"Vers la mer\";\n        /* ??? */ -> \"Sentier inconnu\";\n    };\n    IO.println(panneau);\n}\n"
+  },
+  "brief": "Le panneau de Sylve indique où mène chaque direction :\n- `nord` : `Vers la Tour`\n- `sud` : `Vers Javelune`\n- `est` : `Vers les Mines de Boucle-Profonde`\n- `ouest` : `Vers la mer`\n- toute autre direction : `Sentier inconnu`\n\nComplète les deux `/* ??? */` du `switch`. Pense au cas **par défaut** : sans lui, une direction inconnue ferait échouer le sort.",
+  "lesson": "**Exemple** — la couleur d'une potion :\n```java\nString effet = switch (couleur) {\n    case \"rouge\" -> \"soin\";\n    case \"bleu\"  -> \"mana\";\n    default      -> \"inconnu\";     // tous les autres cas\n};\n```",
+  "hints": [
+    "Dans un `switch` à flèche, chaque cas s'écrit `case \"valeur\" -> résultat;`.",
+    "Le cas qui attrape « tout le reste » s'appelle `default` (sans `case` devant).",
+    "Le cas manquant pour l'est s'écrit comme ses voisins : `case \"est\" -> ...`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ce carrefour a quatre sentiers, et les voyageurs se perdent. J'ai commencé un panneau avec un `switch`, c'est plus lisible qu'une pile de `if`.",
+      "Il manque l'est, et le cas « sentier inconnu »."
+    ],
+    "success": [
+      "Le panneau est complet ! Un `switch` avec un `default` : plus aucun voyageur perdu."
+    ],
+    "done": "Le panneau guide tout le monde, même les distraits."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

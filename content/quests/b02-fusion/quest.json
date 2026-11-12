@@ -1,0 +1,61 @@
+{
+  "id": "b02-fusion",
+  "title": "La fusion des catalogues",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": true,
+  "requires": [
+    "b01-rayon"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "col.arraylist"
+  ],
+  "summary": "Fusionne deux listes triées en une seule liste triée, sans modifier les originales.",
+  "source": "collections : ArrayList, parcours à deux indices, nouvelle liste",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static List<Integer> fusion(List<Integer> a, List<Integer> b) {\n        // À toi !\n        return null;\n    }\n}\n"
+  },
+  "brief": "Lyra possède deux catalogues d'années de parution, déjà **triés par ordre croissant**. Écris `Main.fusion(List<Integer> a, List<Integer> b)` : elle renvoie **une nouvelle liste** triée contenant tous les éléments des deux (les doublons sont conservés). Les listes reçues ne doivent pas changer.\n\n```java\nfusion(List.of(1, 4, 9), List.of(2, 4, 10, 11));   // [1, 2, 4, 4, 9, 10, 11]\n```\nSeul·e, cette fois : on ne te donne que la signature. Si tu veux, tu peux tout concaténer puis trier… mais l'idée du parcours à deux indices est plus élégante.",
+  "hints": [
+    "Garde deux indices, un par liste, et un `ArrayList` résultat ; à chaque tour, ajoute le plus petit des deux éléments courants.",
+    "Quand une liste est épuisée, recopie simplement le reste de l'autre.",
+    "Attention : compare des `Integer` avec `equals`/`compareTo` ou `<=` (déballage), jamais avec `==` sur de gros nombres."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Deux vieux catalogues, deux listes d'années déjà triées. J'en veux un seul, trié aussi, et sans abîmer les originaux !",
+      "Je ne te donne que la signature. À toi de jouer."
+    ],
+    "success": [
+      "Un seul catalogue trié, et les anciens intacts : parfait !"
+    ],
+    "done": "Mon catalogue unique est parfait."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

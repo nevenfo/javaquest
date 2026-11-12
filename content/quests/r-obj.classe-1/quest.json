@@ -1,0 +1,50 @@
+{
+  "id": "r-obj.classe-1",
+  "title": "Rappel : la fiole",
+  "region": "artisans",
+  "main": false,
+  "requires": [
+    "a02-coffre-ferme"
+  ],
+  "kind": "code",
+  "assessment": "review",
+  "skills": [
+    "obj.classe",
+    "obj.encapsulation"
+  ],
+  "summary": "Écris de mémoire une petite classe Fiole.",
+  "source": "point : classe, champs, constructeur (réactivation)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Fiole.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Fiole.java"
+    ],
+    [
+      "wrong/w2/Fiole.java"
+    ]
+  ],
+  "starter": {
+    "Fiole.java": "public class Fiole {\n\n}\n"
+  },
+  "brief": "Rappel express, sans modèle. Écris la classe `Fiole` :\n- constructeur `Fiole(String liquide, int contenance)` ;\n- champs `private final` ;\n- `getLiquide()`, `getContenance()` ;\n- `boolean estVide()` : vrai si la contenance vaut 0.",
+  "hints": [
+    "Constructeur = nom de la classe, pas de type de retour ; `this.champ = parametre;`.",
+    "`private final String liquide;` puis `public String getLiquide() { return liquide; }`."
+  ],
+  "dialog": {
+    "success": [
+      "Tu t'en souviens très bien : la classe est toujours là dans ta mémoire."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "r-loop.while-1",
+  "title": "Le tableau qui se remplit",
+  "region": "mines",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "m10-couleurs"
+  ],
+  "skills": [
+    "loop.while",
+    "arr.base"
+  ],
+  "summary": "Prédis ce qu'un while écrit dans un tableau, puis où il s'arrête en le parcourant à l'envers (réactivation).",
+  "source": "boucle while, condition d'arrêt, tableaux (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "5\n[1, 3, 7, 15, 31, 0, 0, 0]\n4 31\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Rappel : un tableau d'`int` neuf est rempli de `0`.",
+  "hints": [
+    "Déroule la boucle : note `v` et `i` à chaque tour, jusqu'à ce que `v < 40` devienne faux.",
+    "La seconde boucle recule tant que la case vaut `0` : elle s'arrête sur la dernière case remplie."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : on ne sait pas toujours combien de tours fera un `while`. Déroule-le à la main."
+    ],
+    "success": [
+      "Tu déroules les boucles sans te tromper d'un tour."
+    ],
+    "done": "`while` et tableaux : acquis."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

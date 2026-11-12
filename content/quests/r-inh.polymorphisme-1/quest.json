@@ -1,0 +1,34 @@
+{
+  "id": "r-inh.polymorphisme-1",
+  "title": "Rappel : le bruit du bestiaire",
+  "region": "tour",
+  "main": false,
+  "requires": [
+    "t03-horde"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "inh.polymorphisme"
+  ],
+  "summary": "Prédis quels bruits sont produits (polymorphisme).",
+  "source": "polymorphisme : appel selon le type réel (réactivation)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "miaou\nouaf\nouaf!\nouaf!5\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Qui fait vraiment le bruit : le type de la variable ou le type de l'objet ?",
+  "hints": [
+    "L'appel `b.bruit()` s'exécute selon la **classe réelle** de l'objet, pas le type déclaré de la variable.",
+    "`super.bruit()` appelle la version de la classe parente (ici `Chien`)."
+  ],
+  "dialog": {
+    "success": [
+      "Exact : c'est l'objet qui décide."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

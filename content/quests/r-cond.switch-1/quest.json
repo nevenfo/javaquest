@@ -1,0 +1,40 @@
+{
+  "id": "r-cond.switch-1",
+  "title": "Le switch qui déborde",
+  "region": "foret",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "f05-aiguillage"
+  ],
+  "skills": [
+    "cond.switch"
+  ],
+  "summary": "Prédis la sortie de switch à l'ancienne (sans break) et de switch fléché (réactivation).",
+  "source": "switch : break, enchaînement des cas, default, syntaxe fléchée (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "AB\nCD\nrouge\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Les deux premiers `switch` sont identiques : seul `n` change.",
+  "hints": [
+    "Dans un `switch` à l'ancienne (`case x:`), sans `break` l'exécution continue dans le cas suivant.",
+    "Un `switch` fléché (`->`) n'exécute que le cas choisi : pas d'enchaînement."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : un `case` sans `break` ne s'arrête pas tout seul."
+    ],
+    "success": [
+      "Tu suis le fil des cas, jusqu'au bout."
+    ],
+    "done": "Le `switch` n'a plus de piège pour toi."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

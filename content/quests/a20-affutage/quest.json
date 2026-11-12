@@ -1,0 +1,59 @@
+{
+  "id": "a20-affutage",
+  "title": "L'affûtage de Brom",
+  "region": "artisans",
+  "giver": "brom",
+  "main": false,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "a01-rivet"
+  ],
+  "skills": [
+    "obj.methodes"
+  ],
+  "summary": "Complète deux méthodes de Lame : une qui modifie l'objet, une qui renvoie un booléen.",
+  "source": "point : méthodes d'instance, paramètres, type de retour (void ou valeur)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Lame.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Lame.java"
+    ],
+    [
+      "wrong2/Lame.java"
+    ]
+  ],
+  "starter": {
+    "Lame.java": "public class Lame {\n    private final String nom;\n    private int tranchant;\n\n    public Lame(String nom, int tranchant) {\n        this.nom = nom;\n        this.tranchant = tranchant;\n    }\n\n    public String getNom() { return nom; }\n\n    public int getTranchant() { return tranchant; }\n\n    // Affûte la lame : ajoute 'points' au tranchant (maximum 100). Ne renvoie rien.\n    public /* ??? */ affuter(int points) {\n        tranchant = Math.min(100, tranchant + points);\n    }\n\n    // Vrai si le tranchant est au moins égal à 'seuil'.\n    public /* ??? */ estAffutee(int seuil) {\n        return /* ??? */;\n    }\n}\n"
+  },
+  "brief": "Brom affûte ses lames. La classe `Lame` est presque finie ; complète les trois trous `/* ??? */` :\n\n- le **type de retour** de `affuter` (elle modifie la lame mais ne renvoie rien) ;\n- le **type de retour** de `estAffutee` (elle répond par oui ou non) ;\n- l'expression renvoyée par `estAffutee` : vrai si le tranchant est **au moins** égal à `seuil`.\n\n```java\nLame l = new Lame(\"Aube\", 50);\nl.affuter(30);          // tranchant : 80\nl.estAffutee(80);       // true\n```",
+  "lesson": "**Exemple** — une méthode qui modifie l'objet (rien à renvoyer) et une qui répond :\n```java\npublic void remplir(int litres) { niveau += litres; }\npublic boolean estVide() { return niveau == 0; }\n```\nLe type de retour s'écrit avant le nom : `void` si rien n'est renvoyé, sinon le type de la valeur.",
+  "hints": [
+    "Une méthode qui ne renvoie rien a pour type de retour `void`.",
+    "Une méthode qui répond « oui ou non » renvoie un `boolean`.",
+    "« Au moins égal à » se traduit par `>=`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Affûter une lame, c'est changer son tranchant ; demander si elle est assez aiguisée, c'est poser une question.",
+      "Deux méthodes, deux types de retour différents : complète-les."
+    ],
+    "success": [
+      "Une méthode qui agit, une qui répond : tu les distingues."
+    ],
+    "done": "Mes lames sont bien affûtées."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

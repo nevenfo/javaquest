@@ -1,0 +1,42 @@
+{
+  "id": "r-base.types-1",
+  "title": "Types et arguments",
+  "region": "village",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "v05-args",
+    "v06-types"
+  ],
+  "skills": [
+    "base.types",
+    "base.args"
+  ],
+  "summary": "Prédis les effets des divisions, des conversions et de args.length (réactivation).",
+  "source": "hello : arguments ; types, conversions et cast (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "3 3.0 3.5\nb\n3 2\nargs : 0\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Il est lancé **sans aucun argument**.",
+  "hints": [
+    "Une division entre deux `int` est entière, même si on range le résultat dans un `double`.",
+    "`(int)` tronque ; `%` donne le reste ; `c++` sur un `char` passe au caractère suivant."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : les nombres ont un type, et le type décide du résultat."
+    ],
+    "success": [
+      "Tu lis les types comme la JVM."
+    ],
+    "done": "Types et arguments : acquis."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

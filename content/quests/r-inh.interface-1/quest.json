@@ -1,0 +1,58 @@
+{
+  "id": "r-inh.interface-1",
+  "title": "Rappel : le contrat du lanceur",
+  "region": "tour",
+  "main": false,
+  "requires": [
+    "t01-sortilege"
+  ],
+  "kind": "code",
+  "assessment": "review",
+  "skills": [
+    "inh.interface"
+  ],
+  "summary": "Écris de mémoire une interface et ses implémentations.",
+  "source": "interfaces (réactivation)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Lanceur.java",
+      "solutions/s1/Archer.java",
+      "solutions/s1/Mage.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Lanceur.java",
+      "wrong/w1/Archer.java",
+      "wrong/w1/Mage.java"
+    ],
+    [
+      "wrong/w2/Lanceur.java",
+      "wrong/w2/Archer.java",
+      "wrong/w2/Mage.java"
+    ]
+  ],
+  "starter": {
+    "Lanceur.java": "public interface Lanceur {\n\n}\n",
+    "Archer.java": "public class Archer {\n\n}\n",
+    "Mage.java": "public class Mage {\n\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Rappel express. Écris :\n- l'interface `Lanceur` avec `String lancer(String cible)` ;\n- `Archer implements Lanceur` : `lancer(\"orc\")` renvoie `Flèche sur orc` ;\n- `Mage implements Lanceur` : `lancer(\"orc\")` renvoie `Boule de feu sur orc`.\nLe harnais ajoutera ses propres lanceurs.",
+  "hints": [
+    "`interface Lanceur { String lancer(String cible); }` : pas de corps.",
+    "Une classe qui implémente doit écrire la méthode en `public`."
+  ],
+  "dialog": {
+    "success": [
+      "Le contrat n'a plus de secret."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

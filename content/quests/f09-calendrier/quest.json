@@ -1,0 +1,61 @@
+{
+  "id": "f09-calendrier",
+  "title": "Le calendrier de la forêt",
+  "region": "foret",
+  "giver": "sylve",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "f08-grille"
+  ],
+  "skills": [
+    "cond.switch",
+    "base.types"
+  ],
+  "summary": "Convertis un nombre de jours en semaines et jours, et nomme le jour de la semaine avec un switch.",
+  "source": "hello/annale : switch sur une valeur ; division entière et reste",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "usesStdin": true,
+  "sampleStdin": "17",
+  "brief": "Sylve compte les jours depuis le dernier **lundi**. Lis le nombre de jours écoulés `d` (entier ≥ 0, une ligne) et affiche deux lignes :\n```\n<semaines> semaines et <jours> jours\nJour : <nom du jour>\n```\nLes **semaines** sont la division entière de `d` par 7, les **jours** le reste. Le jour a pour nom, selon ce reste : 0 `Lundi`, 1 `Mardi`, 2 `Mercredi`, 3 `Jeudi`, 4 `Vendredi`, 5 `Samedi`, 6 `Dimanche`.\n\nPour `17` : `2 semaines et 3 jours` puis `Jour : Jeudi` (le mot « semaines » est toujours au pluriel).",
+  "hints": [
+    "Entre deux `int`, `/` donne le quotient entier et `%` le reste : pas besoin de `double`.",
+    "Un `switch` sur le reste évite sept `if` : `case 0 -> ...`.",
+    "Prévois un `default` ou range le nom dans une variable `String` avant de l'afficher."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Dans la forêt, on compte le temps en semaines. Mais les jours ont chacun leur nom, et il faut les retrouver vite.",
+      "Cette fois, tu écris le sort seul·e : lecture, division, reste, et un aiguillage `switch`."
+    ],
+    "success": [
+      "Le calendrier de la forêt est enfin lisible."
+    ],
+    "done": "Les jours défilent dans le bon ordre."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

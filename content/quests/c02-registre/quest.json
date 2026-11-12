@@ -1,0 +1,61 @@
+{
+  "id": "c02-registre",
+  "title": "Le registre des commandes",
+  "region": "citadelle",
+  "giver": "examinateur",
+  "main": false,
+  "requires": [
+    "c01-saisie"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "proj.architecture"
+  ],
+  "summary": "Remplace le switch par un registre : une Map de commandes (interface Commande) consultée par la boucle.",
+  "source": "jalist : « architecture orientée objet évolutive » (une commande = un objet)",
+  "support": [
+    "support/Commande.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static final Map<String, Commande> COMMANDES = new HashMap<>();\n\n    static {\n        COMMANDES.put(\"somme\", args -> /* ??? */);\n        COMMANDES.put(\"compte\", args -> String.valueOf(/* ??? */));\n        COMMANDES.put(\"echo\", args -> String.join(\" \", args));\n    }\n\n    static String traiter(String ligne) {\n        List<String> mots = new ArrayList<>(Arrays.asList(ligne.trim().split(\"\\\\s+\")));\n        String nom = mots.remove(0);\n        Commande c = /* ??? */;\n        return c == null ? \"Commande inconnue : \" + nom : c.executer(mots);\n    }\n\n    public static void main(String[] args) {\n        String ligne;\n        while ((ligne = IO.readln()) != null && !ligne.equals(\"fin\")) IO.println(traiter(ligne));\n    }\n}\n"
+  },
+  "brief": "Trop de `case` dans un `switch`, et il faut le rouvrir à chaque nouvelle commande ! Ici, chaque commande est un objet de type `Commande` (interface fournie, lecture seule) rangé dans la `Map` `COMMANDES` ; la boucle se contente de la consulter.\n```java\npublic interface Commande { String executer(List<String> args); }\n```\nComplète les trois trous :\n- `somme` : la somme des arguments entiers, en texte (`somme 1 2 3` → `6` ; sans argument → `0`) ;\n- `compte` : le nombre d'arguments ;\n- la recherche de la commande dans la table (`null` si le nom est inconnu).\n\nAjouter une commande, ce sera un `COMMANDES.put(...)` de plus, **sans toucher à la boucle**.",
+  "lesson": "Exemple résolu (autres commandes) :\n```java\nMap<String, Commande> m = new HashMap<>();\nm.put(\"longueur\", args -> String.valueOf(args.get(0).length()));   // lambda = objet Commande\nCommande c = m.get(\"longueur\");                                      // null si absent\nString r = c.executer(List.of(\"hello\"));                             // \"5\"\n```",
+  "hints": [
+    "`Commande` n'a qu'une méthode : une lambda `args -> expression` suffit, et elle doit renvoyer un `String`.",
+    "`args` est une `List<String>` : `args.size()` en donne la taille ; pour la somme, boucle ou utilise `args.stream().mapToInt(Integer::parseInt).sum()`.",
+    "Une `Map` renvoie l'objet associé à une clé avec `get` (et `null` si la clé est absente)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un switch par commande, c'est une architecture qui ne grandit pas. Rangeons plutôt chaque commande dans un registre, et laissons la boucle l'interroger."
+    ],
+    "success": [
+      "Le registre fait le travail : la boucle ne change plus, seul le registre s'étoffe. C'est ça, une architecture évolutive."
+    ],
+    "done": "Le registre est en service."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

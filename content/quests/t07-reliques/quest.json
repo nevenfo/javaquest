@@ -1,0 +1,61 @@
+{
+  "id": "t07-reliques",
+  "title": "Les reliques de la Tour",
+  "region": "tour",
+  "giver": "sentinelle",
+  "main": false,
+  "requires": [
+    "t06-classement"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "inh.comparable"
+  ],
+  "summary": "Écris seul·e une classe Relique triable : la plus lourde d'abord.",
+  "source": "postier : tri par ordre naturel (Comparable)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Relique.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Relique.java"
+    ],
+    [
+      "wrong/w2/Relique.java"
+    ],
+    [
+      "wrong/w3/Relique.java"
+    ]
+  ],
+  "starter": {
+    "Relique.java": "public class Relique {\n    // Écris la classe Relique (voir l'énoncé)\n}\n"
+  },
+  "brief": "La Tour garde des reliques. Écris la classe `Relique` **sans modèle** :\n- `Relique(String nom, int poids)`, accesseurs `getNom()` et `getPoids()` ;\n- `toString()` renvoie `Sceptre (12 kg)` ;\n- elle implémente `Comparable<Relique>` : la **plus lourde d'abord** ; à poids égal, **ordre alphabétique** du nom ; deux reliques de même nom et même poids sont à égalité (0).\n\n```java\n[Sceptre (12 kg), Calice (5 kg), Anneau (5 kg)]  // avant tri\n[Sceptre (12 kg), Anneau (5 kg), Calice (5 kg)]  // après Collections.sort\n```",
+  "hints": [
+    "Pour trier du plus grand au plus petit, inverse les arguments : `Integer.compare(autre.poids, poids)`.",
+    "Le départage n'a lieu que si les poids sont égaux, donc si la première comparaison renvoie 0.",
+    "Ta classe doit déclarer `implements Comparable<Relique>` pour que `Collections.sort` et `TreeSet` l'acceptent."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les reliques de la Tour sont rangées dans un coffre sans ordre. Je veux les voir de la plus lourde à la plus légère, et par ordre alphabétique en cas d'égalité.",
+      "À toi d'écrire la classe entière !"
+    ],
+    "success": [
+      "Le coffre est enfin trié ! Sceptre en tête, comme il se doit."
+    ],
+    "done": "Les reliques sont rangées."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

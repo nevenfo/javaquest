@@ -1,0 +1,59 @@
+{
+  "id": "a17-ordonnance",
+  "title": "L'ordonnance de Rosa",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "a13-lot"
+  ],
+  "skills": [
+    "obj.record",
+    "obj.exceptions"
+  ],
+  "summary": "Écris seul·e le record Ordonnance, avec validation par exception et une méthode.",
+  "source": "annale/address : record, constructeur compact, IllegalArgumentException",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Ordonnance.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Ordonnance.java"
+    ],
+    [
+      "wrong2/Ordonnance.java"
+    ]
+  ],
+  "starter": {
+    "Ordonnance.java": "// Écris ici le record Ordonnance\n"
+  },
+  "brief": "Rosa note ses prescriptions de potions. Écris le **record** `Ordonnance` (fichier `Ordonnance.java`) :\n\n- composants `String potion` et `int doses` (dans cet ordre) ;\n- `potion` ne doit être ni `null` ni vide/blanche, et `doses` doit être **strictement positif** : sinon `IllegalArgumentException` ;\n- une méthode `Ordonnance doubler()` qui renvoie une **nouvelle** ordonnance avec le double de doses.\n\n```java\nnew Ordonnance(\"Feu\", 2).doubler();   // Ordonnance[potion=Feu, doses=4]\n```",
+  "hints": [
+    "Un record déclare ses composants dans l'en-tête : `record Nom(Type a, Type b) { ... }` ; accesseurs et `toString` sont fournis.",
+    "Un **constructeur compact** (`Ordonnance { ... }`, sans parenthèses) est l'endroit pour valider avant l'affectation.",
+    "`potion.isBlank()` couvre le texte vide ; teste `potion == null` avant pour ne pas planter."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes ordonnances sont de simples données : une potion, un nombre de doses. Mais une ordonnance sans potion ou à zéro dose, c'est un danger public.",
+      "Un record, une validation, une petite méthode : écris-le seul·e."
+    ],
+    "success": [
+      "Une ordonnance ne peut plus naître invalide."
+    ],
+    "done": "Mes prescriptions sont sûres."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

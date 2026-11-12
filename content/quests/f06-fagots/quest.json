@@ -1,0 +1,58 @@
+{
+  "id": "f06-fagots",
+  "title": "Les fagots du bûcheron",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "f05-aiguillage"
+  ],
+  "skills": [
+    "exc.trycatch"
+  ],
+  "summary": "Complète le sort qui redemande une saisie tant qu'elle n'est pas un nombre.",
+  "source": "hello : try { Integer.parseInt } catch (NumberFormatException e), redemander tant que non valide",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "abc\\n7",
+  "starter": {
+    "Main.java": "void main() {\n    int fagots = 0;\n    boolean valide = false;\n    while (!valide) {\n        try {\n            fagots = Integer.parseInt(IO.readln(\"Combien de fagots ? \"));\n            valide = true;\n        } catch (/* ??? */ e) {\n            IO.println(\"/* ??? */\");\n        }\n    }\n    IO.println(\"Fagots : \" + fagots);\n}\n"
+  },
+  "brief": "Le bûcheron demande au voyageur combien de fagots il emporte. Mais certains répondent « beaucoup », « 3,5 » ou rien du tout : `Integer.parseInt` lève alors une **`NumberFormatException`** et le sort s'arrête.\n\nComplète le sort pour qu'il :\n- **capture** cette exception,\n- affiche `Ce n'est pas un nombre !`,\n- **redemande** (la boucle `while` s'en charge) jusqu'à obtenir un entier,\n- puis affiche `Fagots : N`.\n\nPour essayer avec « Exécuter », mets plusieurs lignes dans **Entrée** (la première invalide, la dernière valide).",
+  "lesson": "**Exemple** — demander l'âge d'un dragon :\n```java\nint age = -1;\nwhile (age < 0) {\n    try {\n        age = Integer.parseInt(IO.readln(\"Âge ? \"));\n    } catch (NumberFormatException e) {   // le type d'exception à capturer\n        IO.println(\"Un nombre, s'il te plaît !\");\n    }\n}\n```\nLe `catch` ne répare rien tout seul : c'est la **boucle** qui permet de redemander.",
+  "hints": [
+    "Le type à mettre dans le `catch` est celui que lève `Integer.parseInt` quand le texte n'est pas un nombre : `NumberFormatException`.",
+    "Dans le `catch`, affiche exactement `Ce n'est pas un nombre !` : le `valide = true;` n'est pas exécuté, donc la boucle recommence.",
+    "Tu n'as aucune autre ligne à ajouter : seulement le type dans les parenthèses du `catch` et le texte du message."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les voyageurs répondent n'importe quoi quand je leur demande combien de fagots ils veulent !",
+      "Mon sort plante à la première réponse bizarre. Apprends-lui à rattraper l'erreur et à redemander poliment."
+    ],
+    "success": [
+      "Il rattrape l'erreur et redemande : voilà un sort solide ! Un `try / catch` suivi d'une boucle, c'est ça le secret."
+    ],
+    "done": "Plus aucun voyageur ne fait planter mon sort."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

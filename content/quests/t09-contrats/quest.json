@@ -1,0 +1,81 @@
+{
+  "id": "t09-contrats",
+  "title": "La salle des contrats",
+  "region": "tour",
+  "giver": "sentinelle",
+  "main": true,
+  "requires": [
+    "t08-menagerie"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "inh.interface",
+    "inh.default",
+    "inh.comparable"
+  ],
+  "summary": "Finale : une interface Contrat comparable, avec default, fabrique static et tri polymorphe.",
+  "source": "annale/postier : interface + Comparable + tri polymorphe",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Contrat.java",
+      "solutions/s1/Registre.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Contrat.java",
+      "wrong/w1/Registre.java"
+    ],
+    [
+      "wrong/w2/Contrat.java",
+      "wrong/w2/Registre.java"
+    ],
+    [
+      "wrong/w3/Contrat.java",
+      "wrong/w3/Registre.java"
+    ],
+    [
+      "wrong/w4/Contrat.java",
+      "wrong/w4/Registre.java"
+    ]
+  ],
+  "starter": {
+    "Contrat.java": "public interface Contrat {\n    // à écrire\n}\n",
+    "Registre.java": "import java.util.*;\n\npublic class Registre {\n    // à écrire\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Dernière épreuve de la Tour. Écris deux fichiers.\n\n**Interface `Contrat extends Comparable<Contrat>`** :\n- `String titre();` et `int valeur();` (abstraites) ;\n- `default int compareTo(Contrat autre)` : la plus grande valeur d'abord, puis le titre alphabétique ;\n- `default String resume()` : `titre : valeur` ;\n- `static Contrat creer(String titre, int valeur)` : fabrique d'un contrat simple.\n\n**Classe `Registre`** (méthodes `static`) :\n- `List<Contrat> classer(List<Contrat> contrats)` : une **nouvelle** liste triée ; la liste reçue ne change pas ;\n- `Contrat meilleur(List<Contrat> contrats)` : le contrat qui passe en premier, `null` si la liste est vide.\n\nLe harnais fournit ses propres contrats (classes anonymes qui ne définissent que `titre()` et `valeur()`) : le tri doit marcher avec eux.",
+  "hints": [
+    "Une interface peut redéfinir une méthode de `Comparable` en `default` : toute classe qui l'implémente devient triable, sans réécrire `compareTo`.",
+    "Dans `classer`, copie d'abord (`new ArrayList<>(contrats)`), puis `Collections.sort(copie)`.",
+    "`Integer.compare(autre.valeur(), valeur())` trie du plus grand au plus petit ; départage avec `titre().compareTo(...)`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Te voici dans la salle des contrats, dernière épreuve. Chaque contrat a un titre et une valeur ; les plus précieux passent en premier.",
+      "Je veux un contrat qui se compare **tout seul**, sans que chaque classe réécrive `compareTo`. Interface, `default`, fabrique et tri : tu as tous les outils."
+    ],
+    "resume": "Les contrats attendent toujours leur classement.",
+    "success": [
+      "Les contrats se classent d'eux-mêmes, quelle que soit leur classe ! La Tour reconnaît ta maîtrise.",
+      "Les portes de la **Grande Bibliothèque de Lyra** s'ouvrent devant toi."
+    ],
+    "done": "La Tour des Contrats t'est acquise."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-tour",
+      "unlock:Tour des Contrats maîtrisée : la route de la Grande Bibliothèque est ouverte"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

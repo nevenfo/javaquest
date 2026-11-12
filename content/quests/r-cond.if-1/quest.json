@@ -1,0 +1,51 @@
+{
+  "id": "r-cond.if-1",
+  "title": "Le dé des lutins",
+  "region": "foret",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "f02-peage"
+  ],
+  "skills": [
+    "cond.if"
+  ],
+  "summary": "Interprète un jet de dé de 1 à 20 (réactivation).",
+  "source": "hello : if / else if / else (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "18",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Les lutins jouent aux dés (un dé à 20 faces). Lis le jet (un entier) et affiche :\n- jet de `1` : `Échec critique`\n- jet de 18 ou plus : `Réussite critique`\n- jet de 10 à 17 : `Réussite`\n- sinon : `Échec`",
+  "hints": [
+    "Un cas particulier (le `1`) doit être testé **avant** les tranches plus larges, sinon il est masqué.",
+    "Les tranches « 18 ou plus » puis « 10 ou plus » s'enchaînent avec `else if`."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : les lutins du Bois aiment jouer aux dés. À toi d'arbitrer, de mémoire !"
+    ],
+    "success": [
+      "Les lutins sont contents : le règlement du dé est respecté."
+    ],
+    "done": "Le jeu des lutins n'a plus de secret pour toi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

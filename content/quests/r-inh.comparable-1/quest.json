@@ -1,0 +1,49 @@
+{
+  "id": "r-inh.comparable-1",
+  "title": "Rappel : les grimoires triés",
+  "region": "tour",
+  "main": false,
+  "requires": [
+    "t06-classement"
+  ],
+  "kind": "code",
+  "assessment": "review",
+  "skills": [
+    "inh.comparable"
+  ],
+  "summary": "Écris de mémoire une classe Comparable.",
+  "source": "Comparable / compareTo (réactivation)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Grimoire.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Grimoire.java"
+    ],
+    [
+      "wrong/w2/Grimoire.java"
+    ]
+  ],
+  "starter": {
+    "Grimoire.java": "public class Grimoire {\n\n}\n"
+  },
+  "brief": "Rappel express. Écris la classe `Grimoire` :\n- `Grimoire(String titre, int pages)`, `getTitre()`, `getPages()`, `toString()` = `titre/pages` (ex. `Ombres/120`) ;\n- `Comparable<Grimoire>` : **moins de pages d'abord**, puis titre alphabétique.",
+  "hints": [
+    "`implements Comparable<Grimoire>` puis `public int compareTo(Grimoire autre)`.",
+    "`Integer.compare(pages, autre.pages)` ; en cas de 0, `titre.compareTo(autre.titre)`."
+  ],
+  "dialog": {
+    "success": [
+      "Le tri naturel n'a plus de secret."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

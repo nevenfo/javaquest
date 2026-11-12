@@ -1,0 +1,62 @@
+{
+  "id": "b09-vocabulaire",
+  "title": "Le vocabulaire d'un texte",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b08-lignes"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "str.split",
+    "col.set",
+    "col.map"
+  ],
+  "summary": "Découpe un texte en mots, compte les mots distincts et leurs fréquences.",
+  "source": "collections : découpage en mots, HashSet, HashMap (sac de mots)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ],
+    [
+      "solutions/s2/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n}\n"
+  },
+  "brief": "Lyra étudie le vocabulaire d'un manuscrit. Dans `Main`, écris seul :\n- `static List<String> mots(String texte)` : les mots en **minuscules**, dans l'ordre ; le séparateur est toute suite de blancs (espaces, tabulations) ; les blancs en début ou en fin sont ignorés ; texte vide ou blanc → liste vide ;\n- `static int distincts(String texte)` : le nombre de mots **différents** ;\n- `static Map<String, Integer> frequences(String texte)` : le nombre d'occurrences de chaque mot.\n\n```\nmots(\"  Le chat et le CHIEN \")     // [le, chat, et, le, chien]\ndistincts(\"Le chat et le chien\")   // 4\nfrequences(\"a b a\")                // {a=2, b=1}\n```\nLa ponctuation n'est pas à traiter.",
+  "hints": [
+    "`texte.strip().toLowerCase()` prépare la chaîne ; `split(\"\\\\s+\")` découpe sur les blancs (n'oublie pas le cas de la chaîne vide : elle donne `[\"\"]`).",
+    "Un `Set` ne garde qu'un exemplaire de chaque élément : `new HashSet<>(mots)` donne directement les mots distincts.",
+    "Une `Map<String, Integer>` avec `merge(mot, 1, Integer::sum)` compte les occurrences."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un manuscrit entier, et personne pour le résumer. Je te laisse tout écrire : découpage, ensemble, table de fréquences."
+    ],
+    "success": [
+      "Découper, dédoublonner, compter : trois outils, un seul texte. Excellent."
+    ],
+    "done": "Le vocabulaire est établi."
+  },
+  "reward": {
+    "xp": 45
+  }
+}
