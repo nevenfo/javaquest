@@ -2,11 +2,11 @@
 
 Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. Chaque activité est validée automatiquement (`Validate` : solutions de référence acceptées, solutions fautives refusées).
 
-**123 activités**, **41 compétences**.
+**127 activités**, **41 compétences**.
 
 | guidé | entraînement | autonome | transfert | réactivation | examen |
 |---|---|---|---|---|---|
-| 22 | 22 | 27 | 19 | 29 | 4 |
+| 22 | 24 | 28 | 20 | 29 | 4 |
 
 | Compétence | Région | Provenance (cours) | Guidé | Autonome | Transfert | Réactivation | Examen | Parcours complet |
 |---|---|---|---|---|---|---|---|---|
@@ -16,17 +16,17 @@ Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. C
 | Expressions et opérateurs (`base.expressions`) | village | hello : calcul de l'âge (année courante − naissance) ; complément | 2 | 1 | 1 | 1 | 0 | ✔ |
 | Types primitifs et limites (`base.types`) | village | annale : Q7 (valeurs d'un byte), Q10 (plus grande factorielle sur int / long) | 3 | 1 | 2 | 1 | 1 | ✔ |
 | Arguments de la ligne de commande (`base.args`) | village | hello : java HelloWorld toto 2000, args.length, args[i] | 1 | 1 | 2 | 1 | 0 | ✔ |
-| Lire au clavier et convertir (`base.lecture`) | village | hello : IO.readln, Integer.parseInt ; median : Double.parseDouble(IO.readln(...)) | 1 | 1 | 1 | 1 | 0 | ✔ |
+| Lire au clavier et convertir (`base.lecture`) | village | hello : IO.readln, Integer.parseInt ; median : Double.parseDouble(IO.readln(...)) | 1 | 2 | 1 | 1 | 0 | ✔ |
 | Conditions if / else (`cond.if`) | foret | hello : structure conditionnelle if/else ; année bissextile | 1 | 3 | 1 | 1 | 0 | ✔ |
-| Comparer des String (equals vs ==) (`cond.equals`) | foret | annale Q8 (==, equals, hashCode) ; point : égalité par contenu | 1 | 1 | 1 | 1 | 0 | ✔ |
-| switch (`cond.switch`) | foret | address : switch (elements[0]) pour créer un ContactSpecifier | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Capturer une exception (try / catch) (`exc.trycatch`) | foret | hello : try { Integer.parseInt } catch (NumberFormatException e), redemander tant que non valide | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Boucle while (`loop.while`) | mines | median : while (true) … break sur la sentinelle −1 ; hello : redemander tant que invalide | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Boucle for et accumulation (`loop.for`) | mines | collections : for (int i = 0; i < size; i++) ; annale Q10 (factorielle) | 2 | 3 | 1 | 1 | 0 | ✔ |
-| Parcourir une chaîne (`str.parcours`) | mines | hello : isPalindromic avec length() et charAt(i) ; annale : domaines palindromes | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Tableaux (`arr.base`) | mines | median : double[] values = new double[10] ; hello : args[i] | 1 | 1 | 1 | 1 | 0 | ✔ |
+| Comparer des String (equals vs ==) (`cond.equals`) | foret | annale Q8 (==, equals, hashCode) ; point : égalité par contenu | 2 | 1 | 1 | 1 | 0 | ✔ |
+| switch (`cond.switch`) | foret | address : switch (elements[0]) pour créer un ContactSpecifier | 2 | 1 | 1 | 1 | 0 | ✔ |
+| Capturer une exception (try / catch) (`exc.trycatch`) | foret | hello : try { Integer.parseInt } catch (NumberFormatException e), redemander tant que non valide | 2 | 2 | 1 | 1 | 0 | ✔ |
+| Boucle while (`loop.while`) | mines | median : while (true) … break sur la sentinelle −1 ; hello : redemander tant que invalide | 2 | 1 | 1 | 1 | 1 | ✔ |
+| Boucle for et accumulation (`loop.for`) | mines | collections : for (int i = 0; i < size; i++) ; annale Q10 (factorielle) | 3 | 3 | 1 | 1 | 0 | ✔ |
+| Parcourir une chaîne (`str.parcours`) | mines | hello : isPalindromic avec length() et charAt(i) ; annale : domaines palindromes | 2 | 1 | 2 | 1 | 1 | ✔ |
+| Tableaux (`arr.base`) | mines | median : double[] values = new double[10] ; hello : args[i] | 1 | 1 | 2 | 1 | 0 | ✔ |
 | Algorithmes sur tableaux (`arr.algos`) | mines | median : Arrays.copyOf, Arrays.sort(values, 0, i), médiane pair/impair | 1 | 2 | 1 | 1 | 0 | ✔ |
-| Écrire des méthodes (`meth.static`) | mines | collections : public static Map<String,Integer> buildBag(List<String> l) ; hello : méthodes age(), isPalindromic() | 1 | 1 | 1 | 1 | 0 | ✔ |
+| Écrire des méthodes (`meth.static`) | mines | collections : public static Map<String,Integer> buildBag(List<String> l) ; hello : méthodes age(), isPalindromic() | 1 | 2 | 2 | 1 | 0 | ✔ |
 | Classes, champs, constructeurs (`obj.classe`) | artisans | point : classe Point avec x, y, constructeur | 1 | 1 | 1 | 1 | 1 | ✔ |
 | Encapsulation : private, getters, final (`obj.encapsulation`) | artisans | point : final, private, getters/setters, mutable vs immuable | 1 | 1 | 2 | 1 | 1 | ✔ |
 | Méthodes d'instance (`obj.methodes`) | artisans | point : distanceTo(Point p), distanceToOrigin() | 1 | 1 | 1 | 1 | 0 | ✔ |

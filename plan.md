@@ -164,7 +164,7 @@ Village + régions couvrant le programme : bases (variables, types, conditions, 
 ### Dépendances
 C1, D2, E1, E2.
 ### Tâches
-- [ ] F1.1 Région 1 + donjon (bases).
+- [x] F1.1 Région 1 + donjon (bases) : Crypte de Boucle-Profonde (carte `crypte`, accès mines après `f-mines`), quêtes optionnelles `d1-01`–`d1-04`, flag `f-crypte` ; traversée E2E 85/85.
 - [ ] F1.2 Région 2 + donjon (objets/records).
 - [ ] F1.3 Région 3 + donjon (interfaces/hiérarchies).
 - [ ] F1.4 Région 4 + donjon (tableaux/collections).

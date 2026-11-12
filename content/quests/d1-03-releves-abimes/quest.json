@@ -1,0 +1,64 @@
+{
+  "id": "d1-03-releves-abimes",
+  "title": "Les relevés abîmés",
+  "region": "crypte",
+  "giver": "gardien",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "d1-02-runes-mouvantes"
+  ],
+  "skills": [
+    "base.lecture",
+    "exc.trycatch",
+    "meth.static"
+  ],
+  "summary": "Lis des relevés dont certains sont illisibles : compte et additionne seulement les valides.",
+  "source": "lecture au clavier, conversion Integer.parseInt, NumberFormatException, méthode static (complément)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "4\\n12\\n-4\\nabc\\n7",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le gardien note les poids des cercueils, mais la moisissure a abîmé certains relevés (`abc`, `3.5`, ligne vide…). Écris dans `Main.java` :\n- une méthode `static boolean estValide(String s)` : vrai si `s` est un **entier** que `Integer.parseInt` sait lire (`-4` et `+5` sont valides ; `3.5`, `\" 7\"` ou le texte vide non) ;\n- `main` : lis un entier `n` (nombre de relevés), puis `n` lignes ; ignore les relevés non valides.\n\nAffiche deux lignes : `Valides : V` (combien de relevés lisibles) et `Somme : S` (leur somme).\n\nExemple pour `4`, puis `12`, `-4`, `abc`, `7` :\n```\nValides : 3\nSomme : 15\n```",
+  "hints": [
+    "`Integer.parseInt(texte)` lève une `NumberFormatException` si le texte n'est pas un entier : c'est cette exception que tu peux **capturer**.",
+    "`estValide` : essaie `Integer.parseInt(s)` dans un `try`, renvoie `true` ensuite ; dans le `catch`, renvoie `false`.",
+    "Dans `main`, une boucle `for` de `0` à `n` ; à chaque tour : lire la ligne, `if (estValide(ligne))` alors compter et ajouter."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes relevés de la crypte sont dans un triste état : la moisissure a mangé des chiffres. Certaines lignes ne sont plus des nombres du tout.",
+      "Écris-moi un programme qui lit les relevés, ignore les lignes illisibles et me donne le nombre de valides et leur somme. Sans modèle cette fois !"
+    ],
+    "resume": "Mes relevés sont toujours en désordre. Pense à `try` / `catch` autour de `parseInt`.",
+    "success": [
+      "Parfait : les lignes illisibles sont ignorées sans faire planter le programme, et le total est juste.",
+      "Le golem garde le sceau de la crypte. Il t'attend dans la dernière salle, tout au nord."
+    ],
+    "done": "Mes relevés sont enfin propres, merci."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

@@ -61,6 +61,22 @@ function mines() {
   m.carve(22, 33, 2, 1);
   m.setD(6, 18, TILE.barrelD).setD(7, 18, TILE.barrelD).setD(36, 17, TILE.anvil).setD(28, 22, TILE.table).setD(29, 22, TILE.stool);
   m.setD(16, 4, TILE.statue).setD(28, 4, TILE.statue);
+  m.carve(22, 0, 2, 4);            // brèche au nord : escalier vers la crypte
+  return m.build();
+}
+
+// Donjon optionnel de la région 1 : trois salles en enfilade (entrée, salle des runes, antre du golem) + un ossuaire latéral.
+function crypte() {
+  const m = new MapBuilder(40, 40, { base: 'void', seed: 71 });
+  m.room(14, 29, 12, 9);           // entrée (gardien)
+  m.room(14, 17, 12, 9);           // salle des runes
+  m.room(2, 16, 10, 9);            // ossuaire (à l'ouest)
+  m.room(10, 3, 20, 10);           // antre du golem
+  m.carve(19, 26, 2, 4).carve(19, 12, 2, 6).carve(11, 20, 4, 2).carve(19, 37, 2, 3);
+  m.setD(15, 30, TILE.statue).setD(24, 30, TILE.statue).setD(15, 35, TILE.grave).setD(24, 35, TILE.tomb);
+  m.setD(16, 18, TILE.banner).setD(23, 18, TILE.banner).setD(17, 23, TILE.pedestal).setD(22, 23, TILE.pedestal);
+  m.setD(3, 17, TILE.bookshelf).setD(4, 17, TILE.bookshelf).setD(8, 17, TILE.bookshelf).setD(3, 23, TILE.barrelD).setD(4, 23, TILE.barrelD).setD(9, 23, TILE.tomb);
+  m.setD(11, 4, TILE.banner).setD(28, 4, TILE.banner).setD(12, 10, TILE.statue).setD(27, 10, TILE.statue).setD(16, 4, TILE.fountain).setD(23, 4, TILE.fountain);
   return m.build();
 }
 
@@ -122,6 +138,8 @@ export const NPCS = {
   sentinelle: { name: 'Sentinelle des Contrats', sprite: SPRITES.knight2, role: 'Veille sur la Tour' },
   mage: { name: 'Mage Orlane', sprite: SPRITES.hooded, role: 'Maîtresse des hiérarchies' },
   lyra: { name: 'Lyra l\'archiviste', sprite: SPRITES.elder, role: 'Bibliothécaire des Collections' },
+  gardien: { name: 'Gardien de la crypte', sprite: SPRITES.skeleton, role: "Veille à l'entrée de la crypte" },
+  golem: { name: 'Golem des Boucles', sprite: SPRITES.cyclops, role: 'Gardien du sceau de la crypte' },
   examinateur: { name: 'Examinatrice Céleste', sprite: SPRITES.knight, role: 'Juge des épreuves' },
 };
 
@@ -156,7 +174,14 @@ export const MAPS = {
     name: 'Mines de Boucle-Profonde', build: mines, spawn: { x: 22, y: 31 }, mapPos: { x: 50, y: 84 },
     npcs: [{ id: 'mineur', x: 21, y: 29 }, { id: 'spectre', x: 22, y: 7 }],
     objects: [],
-    portals: [{ x: 22, y: 33, w: 2, to: 'village', at: { x: 22, y: 30 } }],
+    portals: [{ x: 22, y: 33, w: 2, to: 'village', at: { x: 22, y: 30 } },
+      { x: 22, y: 0, w: 2, to: 'crypte', at: { x: 19, y: 35 }, requires: 'f-mines', locked: "Un éboulis scellé bloque l'escalier du nord. Termine d'abord le coffre du spectre (dernière épreuve des mines) : la crypte ne s'ouvre qu'aux mineurs confirmés." }],
+  },
+  crypte: {
+    name: 'Crypte de Boucle-Profonde', build: crypte, spawn: { x: 19, y: 36 }, mapPos: { x: 76, y: 82 },
+    npcs: [{ id: 'gardien', x: 21, y: 33 }, { id: 'golem', x: 20, y: 6 }],
+    objects: [],
+    portals: [{ x: 19, y: 39, w: 2, to: 'mines', at: { x: 22, y: 5 } }],
   },
   artisans: {
     name: 'Quartier des Artisans', build: artisans, spawn: { x: 43, y: 15 }, mapPos: { x: 22, y: 50 },

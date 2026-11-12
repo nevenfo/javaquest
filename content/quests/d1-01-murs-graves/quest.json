@@ -1,0 +1,65 @@
+{
+  "id": "d1-01-murs-graves",
+  "title": "Les murs gravés",
+  "region": "crypte",
+  "giver": "gardien",
+  "main": false,
+  "kind": "fix",
+  "assessment": "practice",
+  "requires": [
+    "m15-coffre"
+  ],
+  "skills": [
+    "cond.equals",
+    "loop.while",
+    "str.parcours"
+  ],
+  "summary": "Répare le lecteur d'inscriptions du gardien : deux bugs classiques (comparaison de String, borne de boucle).",
+  "hud": "Crypte : le gardien veut un lecteur d'inscriptions fiable.",
+  "source": "while avec sentinelle, equals vs ==, parcours de chaîne : erreurs typiques (complément mines/forêt)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "ombre\\nlueur\\nfin",
+  "starter": {
+    "Main.java": "void main() {\n    int ombres = 0;\n    int lettresE = 0;\n    String mot = IO.readln(\"Inscription ? \");\n    while (mot != \"fin\") {\n        if (mot == \"ombre\") {\n            ombres++;\n        }\n        for (int i = 0; i <= mot.length(); i++) {\n            if (mot.charAt(i) == 'e') {\n                lettresE++;\n            }\n        }\n        mot = IO.readln(\"Inscription ? \");\n    }\n    IO.println(\"Ombres : \" + ombres);\n    IO.println(\"Lettres e : \" + lettresE);\n}\n"
+  },
+  "brief": "Le gardien de la crypte déchiffre les inscriptions gravées sur les murs. Il lit des mots, **un par ligne**, jusqu'au mot `fin` (qui n'est pas une inscription). Pour chaque mot, il compte :\n- les mots **exactement égaux** à `ombre` (la casse compte : `Ombre` et `ombrelle` ne comptent pas) ;\n- les lettres `e` minuscules de **tous** les mots.\n\nÀ la fin il affiche deux lignes, `Ombres : X` puis `Lettres e : Y`.\n\nSon programme est fourni… mais il a **au moins deux bugs** : il ne s'arrête jamais, puis il plante ou se trompe. Répare-le sans le réécrire entièrement.\n\nExemple pour `ombre`, `lueur`, `fin` :\n```\nOmbres : 1\nLettres e : 2\n```",
+  "hints": [
+    "`==` et `!=` comparent des **objets** ; chaque `IO.readln` en crée un nouveau. Pour comparer le **contenu** de deux `String`, il existe une méthode de `String`.",
+    "Un mot de `n` lettres a des indices de `0` à `n - 1`. Relis la condition de la boucle `for` : jusqu'où va `i` ?",
+    "Corrige un bug à la fois, en relançant avec l'entrée d'essai `ombre`, `lueur`, `fin`, puis avec `eau`, `fin` (un `e` en première lettre)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Halte… Ah, tu viens des mines ? Parfait. Mes yeux de squelette sont usés : je ne lis plus les gravures de ces murs.",
+      "J'ai un lecteur d'inscriptions, mais il est détraqué : il ne s'arrête jamais, et il plante quand il s'arrête enfin. Répare-le !"
+    ],
+    "resume": "Mon lecteur d'inscriptions est toujours cassé. Cherche du côté des comparaisons et des bornes.",
+    "success": [
+      "Il lit, il compte, il s'arrête : mes inscriptions n'ont plus de secret. Tu as la main sûre pour les `String` et les boucles.",
+      "Plus loin, dans la salle des runes, un autre mystère m'attend."
+    ],
+    "done": "Mon lecteur marche à merveille, grâce à toi."
+  },
+  "reward": {
+    "xp": 20
+  }
+}

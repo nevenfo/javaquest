@@ -7,7 +7,7 @@ Chaque quête est un dossier `content/quests/<id>/` (l'ordre alphabétique des d
 |---|---|
 | `id` | identique au nom du dossier |
 | `title`, `summary` | titre court ; résumé d'une phrase (journal, tableau des primes) |
-| `region` | `village` · `foret` · `mines` · `artisans` · `tour` · `bibliotheque` · `citadelle` |
+| `region` | `village` · `foret` · `mines` · `artisans` · `tour` · `bibliotheque` · `citadelle` · `crypte` (donjon optionnel de la région 1, `main: false`, préfixe `d1-`) |
 | `giver` | PNJ qui donne la quête (voir liste ci-dessous) — obligatoire sauf réactivations (`assessment: review`) |
 | `main` | `true` pour la quête principale (chaîne obligatoire de la région) |
 | `requires` | ids de quêtes à terminer avant (définit l'ordre) |
@@ -31,10 +31,10 @@ Chaque quête est un dossier `content/quests/<id>/` (l'ordre alphabétique des d
 | `effects.onPass` | `flag:<nom>` · `item:<id>:<nom>` · `unlock:<texte>` · `door:<id>` |
 | `reward.xp` | 10–60 |
 
-**Flags de fin de région (obligatoires sur la dernière quête principale)** : `f-foret`, `f-mines`, `f-forge` (artisans), `f-tour`, `f-bibliotheque`, `f-citadelle`.
+**Flags de fin de région (obligatoires sur la dernière quête principale)** : `f-foret`, `f-mines`, `f-forge` (artisans), `f-tour`, `f-bibliotheque`, `f-citadelle`. Donjon optionnel : `f-crypte` (posé par d1-04, jamais requis par la chaîne principale ; accès par le portail mines → crypte, `requires: 'f-mines'`).
 
 ## PNJ disponibles (`giver`)
-village : `ysolde`, `pip`, `garde`, `meunier`, `lina` · foret : `sylve`, `gobelin` · mines : `mineur`, `spectre` · artisans : `brom`, `rosa`, `pompiste` · tour : `sentinelle`, `mage` · bibliotheque : `lyra` · citadelle : `examinateur`.
+village : `ysolde`, `pip`, `garde`, `meunier`, `lina` · foret : `sylve`, `gobelin` · mines : `mineur`, `spectre` · artisans : `brom`, `rosa`, `pompiste` · tour : `sentinelle`, `mage` · bibliotheque : `lyra` · citadelle : `examinateur` · crypte : `gardien`, `golem`.
 
 ## Harnais (`harness/Verif.java`)
 ```java
