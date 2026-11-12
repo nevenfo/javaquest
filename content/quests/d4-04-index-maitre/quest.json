@@ -1,0 +1,78 @@
+{
+  "id": "d4-04-index-maitre",
+  "title": "L'index maître",
+  "region": "archives",
+  "giver": "pipistrelle",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "d4-03-stock-des-rayons"
+  ],
+  "skills": [
+    "col.map",
+    "col.set",
+    "col.tri",
+    "str.split",
+    "col.arraylist"
+  ],
+  "summary": "Épreuve de Dame Pipistrelle : construis un index étiquette → titres (Map de listes, sans doublon) et classe les étiquettes avec un Comparator à deux critères.",
+  "hud": "Cœur des Archives : Dame Pipistrelle juge ton index.",
+  "source": "Map<String, List<String>>, Set pour dédoublonner, split / strip / toLowerCase, Comparator multi-critères (transfert : toute la région)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ],
+    [
+      "wrong/w4/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static Map<String, List<String>> indexer(List<String> fiches) {\n        return null;\n    }\n\n    static List<String> classement(Map<String, List<String>> index) {\n        return null;\n    }\n}\n"
+  },
+  "brief": "Dame Pipistrelle veut un **index** des archives. Chaque fiche est une chaîne `titre;étiquette1,étiquette2,…`. Écris dans `Main.java` :\n\n**`static Map<String, List<String>> indexer(List<String> fiches)`** : renvoie, pour chaque étiquette, la liste des titres qui la portent.\n- les étiquettes sont nettoyées (`strip()`) et mises en **minuscules** ; les titres sont nettoyés (`strip()`) ;\n- les étiquettes vides (`x,,x`), les lignes vides et les fiches sans étiquette (`Seul;`) sont ignorées ;\n- chaque titre apparaît **une seule fois** par étiquette, et la liste des titres est triée par ordre alphabétique ;\n- les clés de la `Map` sont parcourues dans l'ordre alphabétique des étiquettes.\n\n**`static List<String> classement(Map<String, List<String>> index)`** : renvoie les étiquettes au format `étiquette (n)` (n = nombre de titres), triées par **n décroissant**, puis par ordre alphabétique de l'étiquette. L'index reçu ne doit pas être modifié.\n\nExemple :\n```java\nindexer(List.of(\"Dragons;magie,feu\", \"Brasier;feu\", \"Sortilèges;Magie, Eau\"))\n// {eau=[Sortilèges], feu=[Brasier, Dragons], magie=[Dragons, Sortilèges]}\nclassement(…)   // [\"feu (2)\", \"magie (2)\", \"eau (1)\"]\n```",
+  "hints": [
+    "Une `Map<String, …>` dont chaque valeur est une collection se remplit avec `computeIfAbsent(cle, k -> new …())`, qui crée la collection au premier passage. Un `Set` ignore les doublons ; un `TreeSet` garde en plus l'ordre alphabétique.",
+    "Dans `indexer` : `split(\";\")` sépare le titre des étiquettes, `split(\",\")` les étiquettes entre elles. Attention : `\"Seul;\".split(\";\")` ne renvoie qu'**un** champ. Une `TreeMap` donne des clés triées.",
+    "Dans `classement`, copie les clés dans une `ArrayList` et trie-la avec `Comparator.comparingInt(t -> index.get(t).size())`, à renverser avec `reversed()`, puis `thenComparing(...)` pour l'étiquette. Construis le texte `étiquette (n)` après le tri."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Tu as traversé mes Archives, voyageur. Je suis Dame Pipistrelle, conservatrice des lieux. Il me manque un index : retrouver tous les titres d'une étiquette en un clin d'œil.",
+      "Des cartes, des ensembles, des listes triées, un classement à deux critères : tout ce que tu as vu ici. À toi de l'assembler."
+    ],
+    "resume": "Mon index n'est pas encore bâti : indexer les fiches, puis classer les étiquettes.",
+    "success": [
+      "Pas de doublons, des titres bien rangés, des étiquettes classées sans ambiguïté. Mon index tient debout.",
+      "Collections, cartes, tris : les Archives Englouties n'ont plus de secret pour toi. Prends cette clé : elle est à toi."
+    ],
+    "done": "La clé des archives est à toi, bâtisseur."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-archives",
+      "item:cle-archives:Clé des archives",
+      "unlock:Archives Englouties conquises : la clé des archives est à toi"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

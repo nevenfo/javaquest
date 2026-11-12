@@ -58,6 +58,12 @@
     ],
     "done": "Mes livres sont bien rangés."
   },
+  "effects": {
+    "onPass": [
+      "flag:f-bibliotheque",
+      "unlock:Grande Bibliothèque maîtrisée : le passage du nord vers les Archives Englouties est ouvert"
+    ]
+  },
   "reward": {
     "xp": 40
   }

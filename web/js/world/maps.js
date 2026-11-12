@@ -141,6 +141,22 @@ function bibliotheque() {
   m.room(5, 4, 30, 24);
   for (let x = 8; x <= 31; x += 1) { if (x % 6 !== 1 && x % 6 !== 2) { m.setD(x, 8, TILE.bookshelf); m.setD(x, 14, TILE.bookshelf); m.setD(x, 20, TILE.bookshelf); } }
   m.setD(19, 24, TILE.table).setD(20, 24, TILE.table).setD(18, 24, TILE.stool).carve(19, 27, 2, 1);
+  m.carve(19, 0, 2, 5);           // passage du nord vers les Archives Englouties (donjon région 4)
+  return m.build();
+}
+
+// Donjon optionnel de la région 4 : entrée (greffier), salle des index, galerie des tiroirs (à l'ouest), cœur des archives (Dame Pipistrelle).
+function archives() {
+  const m = new MapBuilder(40, 40, { base: 'void', seed: 131 });
+  m.room(13, 29, 14, 9);           // entrée (greffier)
+  m.room(14, 17, 12, 9);           // salle des index
+  m.room(3, 16, 9, 9);             // galerie des tiroirs (à l'ouest)
+  m.room(9, 3, 22, 10);            // cœur des archives (Dame Pipistrelle)
+  m.carve(19, 25, 2, 5).carve(19, 12, 2, 6).carve(11, 20, 4, 2).carve(19, 37, 2, 3);
+  m.setD(14, 30, TILE.bookshelf).setD(25, 30, TILE.bookshelf).setD(15, 30, TILE.bookshelf).setD(24, 30, TILE.bookshelf).setD(14, 35, TILE.barrelD).setD(25, 35, TILE.table).setD(24, 35, TILE.stool);
+  m.setD(15, 18, TILE.bookshelf).setD(16, 18, TILE.bookshelf).setD(23, 18, TILE.bookshelf).setD(24, 18, TILE.bookshelf).setD(16, 23, TILE.table).setD(23, 23, TILE.table).setD(17, 23, TILE.stool).setD(22, 23, TILE.stool);
+  m.setD(4, 17, TILE.bookshelf).setD(5, 17, TILE.bookshelf).setD(8, 17, TILE.bookshelf).setD(9, 17, TILE.bookshelf).setD(4, 22, TILE.chest).setD(5, 22, TILE.barrelD).setD(9, 22, TILE.table).setD(9, 23, TILE.stool);
+  m.setD(10, 4, TILE.banner).setD(29, 4, TILE.banner).setD(11, 10, TILE.bookshelf).setD(28, 10, TILE.bookshelf).setD(15, 4, TILE.fountain).setD(24, 4, TILE.fountain).setD(12, 4, TILE.bookshelf).setD(13, 4, TILE.bookshelf);
   return m.build();
 }
 
@@ -176,6 +192,8 @@ export const NPCS = {
   heraut: { name: 'Héraut des Lignées', sprite: SPRITES.boy, role: "Veille à l'entrée du Labyrinthe" },
   sphinx: { name: 'Sphinx des Lignées', sprite: SPRITES.spider, role: 'Juge des hiérarchies' },
   gabarit: { name: 'Gabarit de Fer', sprite: SPRITES.soldier, role: 'Contremaître des moules' },
+  greffier: { name: 'Greffier Mortimer', sprite: SPRITES.bald, role: "Veille à l'entrée des Archives" },
+  pipistrelle: { name: 'Dame Pipistrelle', sprite: SPRITES.bat, role: 'Conservatrice des Archives' },
   examinateur: { name: 'Examinatrice Céleste', sprite: SPRITES.knight, role: 'Juge des épreuves' },
 };
 
@@ -250,7 +268,14 @@ export const MAPS = {
     name: 'Grande Bibliothèque', build: bibliotheque, spawn: { x: 19, y: 26 }, mapPos: { x: 76, y: 16 },
     npcs: [{ id: 'lyra', x: 19, y: 22 }],
     objects: [],
-    portals: [{ x: 19, y: 27, w: 2, to: 'village', at: { x: 35, y: 2 } }],
+    portals: [{ x: 19, y: 27, w: 2, to: 'village', at: { x: 35, y: 2 } },
+      { x: 19, y: 0, w: 2, to: 'archives', at: { x: 19, y: 36 }, requires: 'f-bibliotheque', locked: "Une grille de fer barre le passage du nord : les Archives Englouties n'ouvrent qu'aux maîtres de la Bibliothèque. Termine d'abord le classement des livres de Lyra." }],
+  },
+  archives: {
+    name: 'Archives Englouties', build: archives, spawn: { x: 19, y: 36 }, mapPos: { x: 76, y: 31 },
+    npcs: [{ id: 'greffier', x: 21, y: 33 }, { id: 'pipistrelle', x: 20, y: 6 }],
+    objects: [],
+    portals: [{ x: 19, y: 39, w: 2, to: 'bibliotheque', at: { x: 19, y: 6 } }],
   },
   citadelle: {
     name: 'Citadelle des Épreuves', build: citadelle, spawn: { x: 17, y: 23 }, mapPos: { x: 50, y: 14 },

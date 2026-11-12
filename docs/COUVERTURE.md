@@ -2,11 +2,11 @@
 
 Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. Chaque activité est validée automatiquement (`Validate` : solutions de référence acceptées, solutions fautives refusées).
 
-**135 activités**, **41 compétences**.
+**139 activités**, **41 compétences**.
 
 | guidé | entraînement | autonome | transfert | réactivation | examen |
 |---|---|---|---|---|---|
-| 22 | 28 | 30 | 22 | 29 | 4 |
+| 22 | 30 | 31 | 23 | 29 | 4 |
 
 | Compétence | Région | Provenance (cours) | Guidé | Autonome | Transfert | Réactivation | Examen | Parcours complet |
 |---|---|---|---|---|---|---|---|---|
@@ -24,8 +24,8 @@ Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. C
 | Boucle while (`loop.while`) | mines | median : while (true) … break sur la sentinelle −1 ; hello : redemander tant que invalide | 2 | 1 | 1 | 1 | 1 | ✔ |
 | Boucle for et accumulation (`loop.for`) | mines | collections : for (int i = 0; i < size; i++) ; annale Q10 (factorielle) | 3 | 3 | 1 | 1 | 0 | ✔ |
 | Parcourir une chaîne (`str.parcours`) | mines | hello : isPalindromic avec length() et charAt(i) ; annale : domaines palindromes | 2 | 1 | 2 | 1 | 1 | ✔ |
-| Tableaux (`arr.base`) | mines | median : double[] values = new double[10] ; hello : args[i] | 1 | 1 | 2 | 1 | 0 | ✔ |
-| Algorithmes sur tableaux (`arr.algos`) | mines | median : Arrays.copyOf, Arrays.sort(values, 0, i), médiane pair/impair | 1 | 2 | 1 | 1 | 0 | ✔ |
+| Tableaux (`arr.base`) | mines | median : double[] values = new double[10] ; hello : args[i] | 2 | 1 | 2 | 1 | 0 | ✔ |
+| Algorithmes sur tableaux (`arr.algos`) | mines | median : Arrays.copyOf, Arrays.sort(values, 0, i), médiane pair/impair | 2 | 2 | 1 | 1 | 0 | ✔ |
 | Écrire des méthodes (`meth.static`) | mines | collections : public static Map<String,Integer> buildBag(List<String> l) ; hello : méthodes age(), isPalindromic() | 1 | 2 | 2 | 1 | 0 | ✔ |
 | Classes, champs, constructeurs (`obj.classe`) | artisans | point : classe Point avec x, y, constructeur | 3 | 1 | 1 | 1 | 1 | ✔ |
 | Encapsulation : private, getters, final (`obj.encapsulation`) | artisans | point : final, private, getters/setters, mutable vs immuable | 1 | 2 | 2 | 1 | 1 | ✔ |
@@ -43,12 +43,12 @@ Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. C
 | Héritage, redéfinition, surcharge (`inh.heritage`) | tour | annale Q2, Q3 ; point : débat interface / class / abstract class | 4 | 1 | 2 | 1 | 1 | ✔ |
 | Comparable et compareTo (`inh.comparable`) | tour | point : Point implements Comparable<Point> pour l'égalité de triangles ; postier : trier les envois par masse | 2 | 1 | 2 | 1 | 0 | ✔ |
 | Concevoir une hiérarchie (`inh.modelisation`) | tour | annale : Shark, Human, Pigeon, Duck (walk/swim/fly) ; postier : Mail et Parcel | 1 | 1 | 2 | 1 | 1 | ✔ |
-| ArrayList (`col.arraylist`) | bibliotheque | collections : intérêt d'ArrayList vs tableau ; annale Q4 | 1 | 1 | 2 | 1 | 0 | ✔ |
-| ArrayList ou LinkedList ? (`col.linkedlist`) | bibliotheque | collections : SpeedList ; annale Q4–Q5 | 2 | 1 | 1 | 1 | 1 | ✔ |
-| Ensembles : HashSet, TreeSet (`col.set`) | bibliotheque | collections : HashSet vs TreeSet ; annale : domaine dupliqué | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Tables associatives : HashMap (`col.map`) | bibliotheque | collections : buildBag (sac de mots) ; address : HashMap<Person, ContactSpecifier> ; celebs : HashMap<String, Celebrity> | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Trier avec un Comparator (`col.tri`) | bibliotheque | celebs : trier par popularité décroissante ; collections : mots par fréquence décroissante | 1 | 1 | 1 | 2 | 0 | ✔ |
-| Découper et analyser du texte (`str.split`) | bibliotheque | address : s.split(":") ; celebs : fromString(String) ; collections : découpage en mots | 1 | 1 | 1 | 1 | 0 | ✔ |
+| ArrayList (`col.arraylist`) | bibliotheque | collections : intérêt d'ArrayList vs tableau ; annale Q4 | 2 | 1 | 3 | 1 | 0 | ✔ |
+| ArrayList ou LinkedList ? (`col.linkedlist`) | bibliotheque | collections : SpeedList ; annale Q4–Q5 | 4 | 1 | 1 | 1 | 1 | ✔ |
+| Ensembles : HashSet, TreeSet (`col.set`) | bibliotheque | collections : HashSet vs TreeSet ; annale : domaine dupliqué | 2 | 1 | 2 | 1 | 1 | ✔ |
+| Tables associatives : HashMap (`col.map`) | bibliotheque | collections : buildBag (sac de mots) ; address : HashMap<Person, ContactSpecifier> ; celebs : HashMap<String, Celebrity> | 2 | 2 | 2 | 1 | 1 | ✔ |
+| Trier avec un Comparator (`col.tri`) | bibliotheque | celebs : trier par popularité décroissante ; collections : mots par fréquence décroissante | 2 | 2 | 2 | 2 | 0 | ✔ |
+| Découper et analyser du texte (`str.split`) | bibliotheque | address : s.split(":") ; celebs : fromString(String) ; collections : découpage en mots | 1 | 2 | 2 | 1 | 0 | ✔ |
 | Boucle de commandes (REPL) (`proj.repl`) | citadelle | jalist : shell de listes de chaînes, variables $, commandes empty_list, len, append… | 1 | 1 | 1 | 1 | 0 | ✔ |
 | Architecture évolutive (`proj.architecture`) | citadelle | jalist : « mettre en œuvre une architecture orientée objet évolutive » | 1 | 1 | 1 | 1 | 0 | ✔ |
 

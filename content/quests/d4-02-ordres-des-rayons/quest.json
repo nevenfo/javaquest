@@ -1,0 +1,48 @@
+{
+  "id": "d4-02-ordres-des-rayons",
+  "title": "Les ordres des rayons",
+  "region": "archives",
+  "giver": "greffier",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "d4-01-fiches-perimees"
+  ],
+  "skills": [
+    "col.set",
+    "col.map",
+    "col.tri",
+    "col.linkedlist",
+    "arr.base"
+  ],
+  "summary": "Prédis la sortie d'un programme qui compare LinkedHashSet, TreeSet, TreeMap, LinkedHashMap, merge, getOrDefault, un Comparator, une LinkedList et un tableau trié.",
+  "source": "ordre d'itération des Set et Map (insertion, tri naturel), merge / getOrDefault, Comparator composé, LinkedList, Arrays.sort",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "[pique, as, roi, dame, fou]\n[as, dame, fou, pique, roi]\n5 true\n{as=3, dame=1, fou=1, pique=1, roi=2}\n{pique=5, as=6, roi=6, dame=4, fou=3}\n[as, roi, fou, dame, pique]\n[joker, pique, as, roi, dame] joker\n[2, 2, 5, 9] null -1\n",
+  "brief": "Dans la salle des index, chaque collection range les mêmes mots à sa façon. Lis ce programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne.\nAttention : qui garde l'ordre d'arrivée, qui trie, et que renvoie `get` pour une clé absente ? (L'ordre d'un `HashSet` n'est pas garanti : le programme n'en affiche que la taille et un test `contains`.)",
+  "hints": [
+    "`LinkedHashSet` et `LinkedHashMap` gardent l'ordre d'**insertion** ; `TreeSet` et `TreeMap` parcourent leurs éléments (ou clés) dans l'ordre **naturel** (alphabétique pour des `String`). Un `Set` ignore les doublons.",
+    "`merge(cle, 1, Integer::sum)` crée la clé avec 1 ou additionne ; `put` sur une clé **existante** remplace la valeur mais ne change pas sa position dans une `LinkedHashMap`. `get` renvoie `null` pour une clé absente, `getOrDefault` la valeur de secours.",
+    "Le `Comparator` trie d'abord par longueur croissante ; en cas d'égalité, `reverseOrder()` classe à l'**envers** de l'ordre alphabétique. `addFirst` ajoute en tête, `removeLast` retire le dernier ; `Arrays.sort` trie le tableau sur place."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Voici la salle des index : ici, un même mot peut être rangé de plusieurs manières selon la collection qui le garde.",
+      "Avant d'aller plus loin, devine ce que ce programme va afficher. Qui conserve l'ordre d'arrivée ? Qui trie ?"
+    ],
+    "success": [
+      "Exact ! Insertion, tri naturel, valeur par défaut, comparateur composé : tu lis les collections sans te laisser piéger.",
+      "Reste un dernier test : la conservatrice des Archives veut te voir bâtir un index complet."
+    ],
+    "done": "Les rayons n'ont plus de secret pour toi."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

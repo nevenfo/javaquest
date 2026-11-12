@@ -167,7 +167,7 @@ C1, D2, E1, E2.
 - [x] F1.1 Région 1 + donjon (bases) : Crypte de Boucle-Profonde (carte `crypte`, accès mines après `f-mines`), quêtes optionnelles `d1-01`–`d1-04`, flag `f-crypte` ; traversée E2E 85/85.
 - [x] F1.2 Région 2 + donjon (objets/records) : Fonderie des Gabarits (carte `fonderie`, accès nord des Artisans après `f-forge`), quêtes `d2-01`–`d2-04`, flag `f-fonderie` ; traversée E2E 92/92.
 - [x] F1.3 Région 3 + donjon (interfaces/hiérarchies) : Labyrinthe des Lignées (carte `labyrinthe`, accès nord de la Tour après `f-tour`), quêtes `d3-01`–`d3-04`, flag `f-labyrinthe` ; traversée E2E 99/99.
-- [ ] F1.4 Région 4 + donjon (tableaux/collections).
+- [x] F1.4 Région 4 + donjon (tableaux/collections) : Archives Englouties (carte `archives`, accès nord de la Bibliothèque après `f-bibliotheque`, désormais posé par `b07-classement-livres`), quêtes `d4-01`–`d4-04`, flag `f-archives` ; traversée E2E 107/107.
 - [ ] F1.5 Région finale (projet intégrateur, compagnon programmable).
 - [x] F1.7 Test déterministe de praticabilité des cartes (`tests/web/maps.test.mjs`) : depuis chaque spawn, BFS sur la grille construite ; tout PNJ (case adjacente), objet, portail et point `at` d'arrivée est atteignable à pied. Découvert en F1.2 (golem de la crypte et portail est des Artisans inaccessibles, l'E2E téléportant via `loadMap`). Fait : 10/10 ; a révélé que la base `void` était franchissable (corrigé dans `MapBuilder`) et des couloirs manquants vers le spectre (mines) et la mage (tour) ; mutation « brèche de la crypte rebouchée » → échec attendu.
 - [x] F1.6 E2E de traversée : un profil parcourt une quête par région (village → citadelle) avec les solutions de référence ; contenu 123 quêtes validé, couverture 41/41 (`node tools/coverage.mjs`).
