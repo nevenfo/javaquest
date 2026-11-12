@@ -1,6 +1,6 @@
 # Audit de Java Quest 0.3 (2026-11-11)
 
-Version auditée : tag Git `legacy-v0.3` (copie aussi dans `..\javaquest-backups\2026-11-11-avant-refonte`). Machine : <machine>.
+Version auditée : Java Quest 0.3 (tag `legacy-v0.3`, conservé dans l'archive privée ; copie aussi dans `..\javaquest-backups\2026-11-11-avant-refonte`).
 
 ## Constat
 - **Stack** : serveur Node.js (`server.mjs`, ~150 lignes minifiées), front HTML/JS natif (`public/app.js` 45 Ko, `catalog.js` 40 Ko), JDK Temurin 25 portable dans `.tools/jdk-25`. Pas de Git, pas de build.
@@ -28,4 +28,4 @@ Version auditée : tag Git `legacy-v0.3` (copie aussi dans `..\javaquest-backups
 | Copies des supports ESIEE | **Conserver localement, hors Git et hors ZIP** | Documents protégés : consultation privée uniquement. |
 
 ## Rollback
-`git checkout legacy-v0.3` restaure l'ancienne application (exige Node ≥ 20) ; la copie de sauvegarde externe contient aussi les données.
+Depuis l'archive privée, `git checkout legacy-v0.3` restaure l'ancienne application (exige Node ≥ 20) ; la copie de sauvegarde externe contient aussi les données.
