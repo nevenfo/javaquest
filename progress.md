@@ -7,13 +7,14 @@ Phases A–G validées. Reste : H1 (H1.1 fait ; H1.2 partiel ; H1.3 en attente d
 H1.3 — rendre le lancement compatible avec Smart App Control.
 
 ## Dernière tâche validée
-H1.1 (+ H1.2 partiel) : `tools/test-dist.ps1` (ZIP extrait dans un chemin avec espaces/accents, PATH sans Java/Node, lanceur + quête vérifiée) ; `tools/test-wsb.ps1` passe par `wsb exec` (LogonCommand jamais exécutée par la CLI) et rend un verdict.
+H1.3.1 : broker d'isolation porté en Java FFM (`sandbox/src/fr/javaquest/sandbox/{Main,Win}.java` → `build/sandbox/sandbox.jar`, même CLI que `jq-sandbox.exe`) ; `tools/test-sandbox.sh` accepte `SB_CMD`.
 Validation :
-- `pwsh -NoProfile -File tools/test-dist.ps1` → 15 PASS, 0 FAIL (lanceur 13/13).
-- `pwsh -NoProfile -File tools/test-wsb.ps1` → 4 PASS, 8 FAIL : Smart App Control bloque `JavaQuest.exe` et `jq-sandbox.exe` non signés (détail et expériences : `docs/RELEASE.md`).
-- D2 : `npm run -s test:web` 33/33, `node tools/e2e.mjs` 33/33.
+- `SB_CMD=".tools/jdk-25/bin/java.exe -XX:+UseSerialGC -Xmx64m -XX:TieredStopAtLevel=1 -XX:-UsePerfData --enable-native-access=ALL-UNNAMED -jar build/sandbox/sandbox.jar" bash tools/test-sandbox.sh` → 26 PASS, 0 FAIL.
+- Windows Sandbox (Smart App Control actif), session utilisateur : broker accepté, enfant LPAC OK, réseau / profil / processus bloqués.
+- Antérieur : `tools/test-dist.ps1` 15/15 ; `npm run -s test:web` 33/33 ; `node tools/e2e.mjs` 33/33.
 
 ## Décisions actives
+- Windows Sandbox : exécuter les scénarios en session utilisateur (`wsb connect` puis `wsb exec -r ExistingLogin`) ; en contexte `System` (session 0), tout enfant AppContainer échoue en `0xC0000142`. Sous PowerShell 5, quoter les options `-XX:...` passées à un exe.
 - H1.3 (décision utilisateur 2026-11-12) : distribution gratuite, portable, hors ligne, Win10/11 avec Smart App Control actif, sans certificat payant, sans admin. Voie : remplacer `JavaQuest.exe` et `jq-sandbox.exe` par du Java FFM exécuté par le `java(w).exe` signé, **isolation AppContainer LPAC + Job Object intégralement préservée**. Prototype minimal validé avant refonte ; si l'équivalence de sécurité n'est pas démontrée (`tools/test-sandbox.sh` 26/26 + WSB 12/12), garder l'architecture actuelle et présenter signature / MSIX Store.
 - Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
 - Région finale `sommet` : API du compagnon dans `docs/CONTENT.md` § « Le compagnon de l'Observatoire ».
@@ -35,4 +36,4 @@ Aucun (décision H1.3 prise).
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-H1.3 — Prototype FFM minimal du broker (`grant` + `run --lpac` : AppContainer LPAC, politique sans enfants, Job Object) lancé par `java.exe` signé, avec la même CLI que `jq-sandbox.exe` ; valider par `tools/test-sandbox.sh` pointé sur le prototype (26/26 attendu).
+H1.3.2 — Faire lancer le broker Java par `SandboxRunner`/`Main` (option `sandbox` → commande `runtime/bin/java.exe … -jar app/bin/sandbox.jar`, `grant` compris) à la place de `jq-sandbox.exe` ; valider par `bash tools/test-server.sh` (143), `node tools/e2e.mjs` et `node tools/e2e-traversee.mjs`.

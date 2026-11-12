@@ -5,12 +5,13 @@ set -u
 cd "$(dirname "$0")/.."
 ROOT="$(pwd -W 2>/dev/null || pwd)"
 RT="${1:-.tools/jdk-25}"
-SB="launcher/Sandbox/bin/Release/jq-sandbox.exe"
+# SB_CMD : commande du broker (défaut : exe C#) ; ex. SB_CMD=".tools/jdk-25/bin/java.exe --enable-native-access=ALL-UNNAMED -jar build/sandbox/sandbox.jar"
+read -ra SB <<< "${SB_CMD:-launcher/Sandbox/bin/Release/jq-sandbox.exe}"
 OUT="build/sandbox-test"
 mkdir -p "$OUT"
 "$RT/bin/javac" -d "$OUT" tests/sandbox/Attacks.java || exit 1
-"$SB" grant "$RT" >/dev/null || { echo "grant runtime failed"; exit 1; }
-"$SB" grant "$OUT" >/dev/null || { echo "grant classes failed"; exit 1; }
+"${SB[@]}" grant "$RT" >/dev/null || { echo "grant runtime failed"; exit 1; }
+"${SB[@]}" grant "$OUT" >/dev/null || { echo "grant classes failed"; exit 1; }
 
 # Écouteur loopback de l'hôte pour vérifier que la sandbox ne peut pas joindre le serveur local.
 PORT=$((20000 + RANDOM % 20000))
@@ -25,7 +26,7 @@ JFLAGS=(-XX:-UsePerfData -Xms8m -XX:+UseSerialGC -XX:TieredStopAtLevel=1 -Xss512
 check() { # name expect(json regex) mode arg [xmx]
   local name="$1" expect="$2" mode="$3" arg="${4:-}" xmx="${5:-128m}"
   local res
-  res=$(echo "" | "$SB" run --lpac --cap registryRead --timeout-ms 6000 --cpu-ms 4000 --mem-mb 512 --max-out 65536 -- \
+  res=$(echo "" | "${SB[@]}" run --lpac --cap registryRead --timeout-ms 6000 --cpu-ms 4000 --mem-mb 512 --max-out 65536 -- \
         "$RT/bin/java.exe" "${JFLAGS[@]}" -Xmx$xmx -cp "$ROOT/$OUT" Attacks "$mode" "$arg" 2>&1)
   if echo "$res" | grep -Eq "$expect"; then
     pass=$((pass+1)); printf 'PASS  %-34s %s\n' "$name" "$(echo "$res" | grep -Eo '"(timedOut|memoryLimit|cpuLimit|outputLimit)":true|(BLOCKED|ALLOWED)[^\\"]{0,70}' | head -2 | tr '\n' ' ')"
