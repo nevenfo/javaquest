@@ -105,7 +105,7 @@ async function titleScreen() {
 async function startProfile(id, fresh = false) {
   let state;
   try { state = migrate(await api.load(id)); } catch (e) { return toast('Sauvegarde illisible : ' + e.message, 'bad'); }
-  G.session?.flush();
+  await G.session?.dispose();
   G.session = new Session(id, state);
   setVolume(state.settings.volume);
   document.addEventListener('jq-save-error', (e) => toast(`⚠ Sauvegarde impossible : ${esc(e.detail.message)} — ta progression reste en mémoire, réessaie (Échap › Sauvegarder).`, 'bad'));

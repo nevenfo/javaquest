@@ -1,16 +1,17 @@
 # PROGRESS
 
 ## Phase actuelle
-Phases A, B, C1, D1, E1, E2, R1, F1, G1 validées. Ouverts : D2 (tests unitaires état/sauvegarde manquants) puis H1 (distribution).
+Phases A–G validées (A, B, C1, D1, D2, E1, E2, R1, F1, G1). Reste : H1 (distribution ZIP Windows).
 
 ## Tâche actuelle
-D2 — tests unitaires état/sauvegarde (`web/js/state.js`).
+H1.1 — distribution autonome (`tools/assemble.sh` existe déjà : jlink, serveur, runner, sandbox, web, contenu, `--zip`).
 
 ## Dernière tâche validée
-F1.5 : région finale « Observatoire du Sommet » (carte `sommet`, PNJ `astronome`, portail village nord `requires: 'f-bibliotheque'`), quêtes `s01`–`s04` pilotant le compagnon (`support/Compagnon.java`, identique sauf `GRILLE_ESSAI`), `s04` pose `f-sommet` (conclusion du jeu).
+D2 (D2.1–D2.3) : `tests/web/state.test.mjs` (état, migration, sauvegarde différée, profils) ; `Session.dispose()` arrête l'ancienne session au changement de profil (avant : chronomètre et sauvegardes continuaient) ; E2E étendu (pas-à-pas, indices gradués, journal/sac, carte, second profil).
 Validation :
-- `bash tools/build.sh` OK ; `bash tools/test-server.sh` → 143 quêtes valides, 0 échec.
-- `node --test tests/web/pedagogy.test.mjs tests/web/maps.test.mjs` → 24/24 ; `node tools/e2e.mjs` → 24/24 ; `node tools/e2e-traversee.mjs` → 124 PASS, 0 FAIL ; `node tools/coverage.mjs` → 143 activités, 41/41.
+- `npm run -s test:web` → 33/33 (mutation « dispose sans clearInterval » → échec attendu).
+- `node tools/e2e.mjs` → 33 PASS, 0 FAIL.
+- F1.5 (précédent) : `tools/test-server.sh` 143 quêtes, traversée E2E 124/124.
 
 ## Décisions actives
 - Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
@@ -21,7 +22,6 @@ Validation :
 - Sprites de PNJ : uniquement des index de personnages déjà nommés dans `SPRITES` (101–107 sont des objets) ; libres : slime 108, bat 120, rat 123.
 - Toute nouvelle carte doit passer `tests/web/maps.test.mjs` (le vide est solide ; relier les salles par `carve`).
 - E2E : Edge headless + CDP, émulation de focus obligatoire ; `waitFor` échoue si l'évaluation lève une exception.
-- D2 : fonctionnalités couvertes par l'E2E, mais tests unitaires état/sauvegarde absents → D2 non coché.
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
@@ -34,4 +34,4 @@ Aucun.
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-D2 — Écrire `tests/web/state.test.mjs` (node --test) couvrant création/sélection de profils, sauvegarde/chargement et migration d'état de `web/js/state.js` (stockage simulé) ; si vert avec l'E2E menus existant (`node tools/e2e.mjs`), cocher D2.1–D2.3 avec leur preuve.
+H1.1 — Faire produire `build/dist/JavaQuest.zip` par `bash tools/assemble.sh --zip` (le plan nomme `tools/build-dist` : aligner le plan sur `assemble.sh` plutôt que dupliquer), puis écrire `tools/test-dist` (extraction dans un chemin avec espaces, PATH sans Java/Node, lancement de `JavaQuest.exe`, `/api/health` et une quête vérifiée) en réutilisant `tools/test-launcher.ps1` ; valider en l'exécutant.

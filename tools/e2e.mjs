@@ -95,6 +95,17 @@ try {
   check('exécution réelle : sortie', await waitFor(`document.getElementById('ed-out').textContent.includes('Ouvre-toi !')`, 20000), await js(`document.getElementById('ed-out').textContent`));
   await sleep(600);
   await shot('05-execution');
+  // D2.3 : débogage visuel (pas-à-pas lié aux lignes) puis aides progressives tracées
+  await js(`document.querySelector('#ed-outtabs [data-out="trace"]').click(); true`);
+  check('pas-à-pas : étape « affiche » liée à la ligne 2', await waitFor(`[...document.querySelectorAll('#ed-out .trace-row')].some(r => r.textContent.includes('L2'))`), await js(`document.getElementById('ed-out').textContent`));
+  await js(`document.querySelector('#ed-out .trace-row').click(); true`);
+  check('pas-à-pas : clic → ligne surlignée dans le code', await waitFor(`!!document.querySelector('#editor .line-exec')`));
+  await js(`document.querySelector('#ed-infotabs [data-info="hints"]').click(); true`);
+  check('indices : aucun révélé d’office', await waitFor(`!!document.getElementById('ed-hint-more')`) && (await js(`document.querySelectorAll('.hint').length`)) === 0);
+  await js(`document.getElementById('ed-hint-more').click(); true`);
+  check('indices : révélation graduelle tracée (1/3)', await waitFor(`document.querySelectorAll('.hint').length === 1 && window.JQ.session.state.quests['q01-porte'].hintsUsed === 1 && document.getElementById('ed-hintcount').textContent.includes('1/3')`),
+    await js(`document.getElementById('ed-hintcount').textContent`));
+  await js(`document.querySelector('#ed-outtabs [data-out="console"]').click(); document.querySelector('#ed-infotabs [data-info="brief"]').click(); true`);
   await js(`document.getElementById('ed-check').click(); true`);
   check('quête validée → dialogue de réussite', await waitFor(`!document.getElementById('dialog').hidden && document.getElementById('dialog-text').textContent.includes('porte')`, 20000), await js(`document.getElementById('ed-out').textContent`));
   check('effet dans le monde : porte ouverte', await js(`!!window.JQ.session.state.world.flags['door:sanctuaire']`));
@@ -115,6 +126,30 @@ try {
   await shot('07-grimoire');
   await press('Escape');
   await shot('08-monde');
+  // D2.2 : journal (quêtes, chronique, sac) et carte du monde
+  await press('KeyJ');
+  check('journal : quête accomplie et objet dans le sac', await waitFor(`!document.getElementById('modal').hidden && ['Journal', 'Quête accomplie', 'Sac', 'apprenti'].every(t => document.getElementById('modal-box').textContent.includes(t))`),
+    await js(`document.getElementById('modal-box').textContent.slice(0, 300)`));
+  await press('Escape');
+  await press('KeyM');
+  check('carte du monde : position actuelle marquée', await waitFor(`!document.getElementById('modal').hidden && document.getElementById('modal-box').textContent.includes('Carte de Javelune') && !!document.querySelector('.mapnode.here')`));
+  await press('Escape');
+  // D2.1 : plusieurs profils locaux à sauvegardes séparées
+  await js(`document.querySelector('#hud [data-open="menu"]').click(); true`);
+  await waitFor(`!!document.getElementById('m-profiles')`);
+  await js(`document.getElementById('m-profiles').click(); true`);
+  await waitFor(`!!document.getElementById('np-name')`);
+  await js(`document.getElementById('np-name').value = 'Second Profil'; document.getElementById('np-go').click(); true`);
+  check('second profil : partie vierge, distincte', await waitFor(`window.JQ.session?.state.player.name === 'Second Profil' && !!window.JQ.scene?.hero`) && (await js(`!window.JQ.session.state.quests['q01-porte'] && !window.JQ.session.state.world.flags['door:sanctuaire']`)) === true);
+  for (let i = 0; i < 4; i++) { await press('Space'); await sleep(150); }
+  await js(`document.querySelector('#hud [data-open="menu"]').click(); true`);
+  await waitFor(`!!document.getElementById('m-profiles')`);
+  await js(`document.getElementById('m-profiles').click(); true`);
+  check('écran titre : deux profils listés', await waitFor(`document.querySelectorAll('[data-play]').length >= 2`));
+  await js(`[...document.querySelectorAll('.card.profile')].find(c => c.textContent.includes('Testeuse E2E')).querySelector('[data-play]').click(); true`);
+  check('retour au premier profil : progression intacte', await waitFor(`window.JQ.session?.state.player.name === 'Testeuse E2E' && window.JQ.session.state.quests['q01-porte']?.status === 'done' && !!window.JQ.scene?.hero`));
+  await press('Escape'); await sleep(300);
+  await js(`document.getElementById('modal').hidden || document.querySelector('#modal [data-close]')?.click(); true`);
   // Mode examen : épreuve blanche avec les solutions de référence → toutes les parties réussies.
   await js(`window.confirm = () => true; window.JQ.scene.loadMap('citadelle', { x: 17, y: 23 }); window.JQ.exam.menu(); true`);
   check('pupitre des épreuves', await waitFor(`!!document.querySelector('[data-start="blanc-1"]')`));

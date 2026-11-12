@@ -6,7 +6,7 @@
   "description": "JavaQuest 2.0 — outillage de développement uniquement (le jeu distribué n'utilise pas Node.js)",
   "scripts": {
     "build": "bash tools/build.sh",
-    "test:web": "node --test tests/web/pedagogy.test.mjs",
+    "test:web": "node --test tests/web/pedagogy.test.mjs tests/web/maps.test.mjs tests/web/state.test.mjs",
     "test:server": "bash tools/test-server.sh",
     "test:sandbox": "bash tools/test-sandbox.sh",
     "test:e2e": "node tools/e2e.mjs",

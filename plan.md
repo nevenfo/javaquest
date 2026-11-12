@@ -117,9 +117,9 @@ Menus, journal de quêtes, inventaire, carte, grimoire (compétences), sons, opt
 ### Dépendances
 C1.
 ### Tâches
-- [ ] D2.1 Menu titre, profils locaux (plusieurs étudiants), sauvegarde/chargement.
-- [ ] D2.2 Journal de quêtes, inventaire, carte du monde, grimoire de compétences.
-- [ ] D2.3 Aides progressives (indices gradués tracés) et débogage visuel (pas-à-pas des actions avec ligne, valeurs `Debug.watch`).
+- [x] D2.1 Menu titre, profils locaux (plusieurs étudiants), sauvegarde/chargement. Fait : `tests/web/state.test.mjs` 9/9 (migration, sauvegarde différée, échec réécrit, profils séparés, `Session.dispose` au changement de profil) ; E2E second profil + retour.
+- [x] D2.2 Journal de quêtes, inventaire, carte du monde, grimoire de compétences. Fait : E2E journal (sac, chronique), carte, grimoire.
+- [x] D2.3 Aides progressives (indices gradués tracés) et débogage visuel (pas-à-pas des actions avec ligne, valeurs `Debug.watch`). Fait : E2E pas-à-pas (ligne surlignée) et indice gradué tracé (`hintsUsed`) ; `node tools/e2e.mjs` 33/33.
 ### Validation
 - Tests unitaires état/sauvegarde (node --test) + E2E menus.
 

@@ -55,6 +55,14 @@ export class Session {
     if (!this.timer) this.timer = setTimeout(() => { this.timer = null; this.flush(); }, 1000);
   }
 
+  /** Fin de session (changement de profil) : arrête le chronomètre et les sauvegardes différées, puis écrit l'état. */
+  async dispose() {
+    clearInterval(this.tick); this.tick = null;
+    if (this.timer) { clearTimeout(this.timer); this.timer = null; }
+    this.listeners.clear();
+    await this.flush();
+  }
+
   /** Sauvegarde de dernière chance à la fermeture de l'onglet (requête keepalive). */
   flushOnExit() {
     if (!this.dirty) return;
