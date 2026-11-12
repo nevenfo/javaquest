@@ -7,10 +7,10 @@ Toutes les phases du plan sont validées (A–H). Livraison : PR `ai/javaquest-2
 Aucune tâche de développement ouverte ; fusion de la PR en attente de l'utilisateur.
 
 ## Dernière tâche validée
-H1.3 (H1.3.3–H1.3.4) et H1.2 : distribution sans exécutable non signé : `JavaQuest.cmd` → `javaw.exe` signé (`fr.javaquest.server.Launch`), broker `app/bin/sandbox.jar` (Java FFM) ; sources C# supprimées.
+H1.4 : crédit d'auteur « Nevant » (écran titre, Crédits, README, LISEZMOI, `package.json`, manifestes `.jar` via `tools/author.mf` et `sandbox/manifest.mf`).
 Validation :
-- `bash tools/test-sandbox.sh` → 26/26 (broker livré) ; `npm run -s test:web` 33/33 ; `bash tools/test-server.sh` 24/24 + 143 quêtes ; `node tools/e2e.mjs` 36/36 ; `node tools/e2e-traversee.mjs` 124/124 ; `node tools/coverage.mjs` 41/41.
-- `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` → 17/17 (lanceur 23/23 ; Windows Sandbox 14/14 avec Smart App Control actif, réseau coupé).
+- `npm run -s test:web` 33/33 ; `bash tools/test-server.sh` 143 quêtes ; `node tools/e2e.mjs` 36/36 ; `bash tools/test-sandbox.sh` 26/26 (1 échec isolé non reproduit sur 5 passages : instabilité de timing à surveiller).
+- `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` → 17/17 (Windows Sandbox 14/14) ; `build/dist/JavaQuest.zip` régénéré avec le crédit.
 
 ## Décisions actives
 - Windows Sandbox : exécuter les scénarios en session utilisateur (`wsb connect` puis `wsb exec -r ExistingLogin`) ; en contexte `System` (session 0), tout enfant AppContainer échoue en `0xC0000142`. Sous PowerShell 5, quoter les options `-XX:...` passées à un exe.
@@ -23,6 +23,7 @@ Validation :
 - Sprites de PNJ : uniquement des index de personnages déjà nommés dans `SPRITES` (101–107 sont des objets) ; libres : slime 108, bat 120, rat 123.
 - Toute nouvelle carte doit passer `tests/web/maps.test.mjs` (le vide est solide ; relier les salles par `carve`).
 - E2E : Edge headless + CDP, émulation de focus obligatoire ; `waitFor` échoue si l'évaluation lève une exception.
+- Auteur affiché : « Nevant » ; pas de signature numérique (aucun certificat, H1.3).
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif

@@ -2,6 +2,7 @@
   "name": "javaquest",
   "version": "2.0.0-dev",
   "private": true,
+  "author": "Nevant",
   "type": "module",
   "description": "JavaQuest 2.0 — outillage de développement uniquement (le jeu distribué n'utilise pas Node.js)",
   "scripts": {

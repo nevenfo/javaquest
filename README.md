@@ -1,5 +1,7 @@
 # JavaQuest 2.0 — Les Runes de Javelune
 
+*Un jeu de **Nevant** — conception, contenu pédagogique et développement. © 2026 Nevant.*
+
 RPG fantastique 2D (vue de dessus) pour apprendre **Java 25** à partir des objectifs du cours *Java EISC4* (ESIEE / Université Gustave Eiffel). Chaque sort est un vrai programme Java : compilé par `javac`, exécuté dans un conteneur Windows isolé, et rejoué dans le monde (paroles, actions des acteurs, valeurs observées, ligne par ligne).
 
 ## Pour jouer

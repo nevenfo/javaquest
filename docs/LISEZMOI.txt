@@ -1,5 +1,6 @@
 JavaQuest 2.0 — Les Runes de Javelune
 =====================================
+Un jeu de Nevant. © 2026 Nevant.
 
 Un RPG fantastique où l'on apprend Java (programme Java EISC4, Java 25) en écrivant de vrais
 programmes : chaque sort est compilé par un vrai javac et exécuté pour agir sur le monde.

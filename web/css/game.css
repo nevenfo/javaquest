@@ -125,7 +125,8 @@ kbd { font: 11px var(--mono); padding: 0 4px; border-radius: 3px; background: rg
 .lvl-nouveau { background: #ddd2bd; } .lvl-decouverte { background: #f1d48a; } .lvl-encours { background: #a9d79e; } .lvl-maitrise { background: #6fbf73; color: #fff; } .lvl-consolider { background: #efa58f; }
 .title-screen { text-align: center; }
 .title-screen .logo { font: 44px var(--pixel); color: var(--wood); margin: 6px 0; text-shadow: 3px 3px 0 var(--gold); }
-.title-screen .sub { font-size: 17px; color: #7a5c48; margin-bottom: 18px; }
+.title-screen .sub { font-size: 17px; color: #7a5c48; margin-bottom: 6px; }
+.title-screen .author { font: 12px var(--pixel); color: var(--wood); margin-bottom: 18px; }
 .profile { display: flex; justify-content: space-between; align-items: center; }
 .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
 .mapgrid { position: relative; width: 100%; aspect-ratio: 16/9; background: #6aa35e; border-radius: 10px; border: 3px solid var(--wood); overflow: hidden; }
