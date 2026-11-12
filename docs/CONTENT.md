@@ -75,5 +75,5 @@ Classe `support` `Compagnon` (copiée dans le dossier `support/` de chaque quêt
 Pour chaque compétence centrale : 1 activité guidée (exemple + complétion ou parsons/prédiction) → 1 autonome → 1 transfert (autre contexte) → 1–2 réactivations `review` (`r-<skill>-<n>`, sans giver). Entrelacer les notions proches dans les quêtes de transfert/donjon. Énoncés **originaux** inspirés des objectifs ESIEE (jamais copiés).
 
 ## Validation
-`bash tools/build.sh && .tools/jdk-25/bin/java -cp build/server/server.jar fr.javaquest.server.Validate --content content --runtime .tools/jdk-25 --sandbox launcher/Sandbox/bin/Release/jq-sandbox.exe --runner build/runner/runner.jar --data build/testdata [--only <id>]`
+`bash tools/build.sh && .tools/jdk-25/bin/java -cp build/server/server.jar fr.javaquest.server.Validate --content content --runtime .tools/jdk-25 --sandbox build/sandbox/sandbox.jar --runner build/runner/runner.jar --data build/testdata [--only <id>]`
 Toute quête doit être `OK` : solutions acceptées, fautives refusées, départ refusé, prédiction exacte, clé de quiz cohérente.

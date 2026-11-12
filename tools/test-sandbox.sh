@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Vérifie réellement l'isolation de jq-sandbox avec un programme Java hostile.
+# Vérifie réellement l'isolation du broker livré (sandbox.jar, Java FFM) avec un programme Java hostile.
 # Usage : bash tools/test-sandbox.sh [runtime_dir]   (défaut : .tools/jdk-25)
 set -u
 cd "$(dirname "$0")/.."
 ROOT="$(pwd -W 2>/dev/null || pwd)"
 RT="${1:-.tools/jdk-25}"
 # SB_CMD : commande du broker (défaut : exe C#) ; ex. SB_CMD=".tools/jdk-25/bin/java.exe --enable-native-access=ALL-UNNAMED -jar build/sandbox/sandbox.jar"
-read -ra SB <<< "${SB_CMD:-launcher/Sandbox/bin/Release/jq-sandbox.exe}"
+read -ra SB <<< "${SB_CMD:-.tools/jdk-25/bin/java.exe -XX:+UseSerialGC -Xmx64m -XX:TieredStopAtLevel=1 -XX:-UsePerfData --enable-native-access=ALL-UNNAMED -jar build/sandbox/sandbox.jar}"
 OUT="build/sandbox-test"
 mkdir -p "$OUT"
 "$RT/bin/javac" -d "$OUT" tests/sandbox/Attacks.java || exit 1

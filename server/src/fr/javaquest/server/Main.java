@@ -42,6 +42,8 @@ public final class Main {
     private final SandboxRunner runner;
     private final String token;
     private int port;
+    private HttpServer http;
+    private volatile long lastAuth = System.nanoTime();
 
     private Main(Path web, Content content, Storage storage, SandboxRunner runner, String token) {
         this.web = web; this.content = content; this.storage = storage; this.runner = runner; this.token = token;
@@ -50,6 +52,26 @@ public final class Main {
     public static void main(String[] args) throws Exception {
         Map<String, String> o = new HashMap<>();
         for (int i = 0; i + 1 < args.length; i += 2) o.put(args[i].replaceFirst("^--", ""), args[i + 1]);
+        Main m = start(o);
+        System.out.println("JAVAQUEST_READY " + m.url());
+        System.out.flush();
+        if ("1".equals(o.get("watch-stdin"))) {
+            // Mode historique : un parent garde stdin ouvert ; sa fermeture arrête le serveur.
+            Thread w = new Thread(() -> {
+                try { while (System.in.read() >= 0) { } } catch (IOException ignored) { }
+                m.http.stop(0);
+                System.exit(0);
+            }, "stdin-watch");
+            w.setDaemon(true);
+            w.start();
+        }
+    }
+
+    /**
+     * Démarre le serveur. Options : app, web, content, runtime, sandbox, runner, data, port,
+     * {@code idle-seconds} (arrêt si aucune requête authentifiée pendant ce délai ; 0 = jamais).
+     */
+    public static Main start(Map<String, String> o) throws Exception {
         Path app = Path.of(o.getOrDefault("app", ".")).toAbsolutePath().normalize();
         Path web = Path.of(o.getOrDefault("web", app.resolve("web").toString())).toAbsolutePath().normalize();
         Path contentDir = Path.of(o.getOrDefault("content", app.resolve("content").toString())).toAbsolutePath();
@@ -59,6 +81,7 @@ public final class Main {
         String local = System.getenv("LOCALAPPDATA");
         Path data = Path.of(o.getOrDefault("data", (local != null ? Path.of(local) : Path.of(System.getProperty("user.home"))).resolve("JavaQuest").toString())).toAbsolutePath();
         int wanted = Integer.parseInt(o.getOrDefault("port", "0"));
+        long idle = Long.parseLong(o.getOrDefault("idle-seconds", "0"));
 
         Files.createDirectories(data);
         SandboxRunner runner = new SandboxRunner(sandbox, runtime, runnerJar);
@@ -67,21 +90,37 @@ public final class Main {
         new SecureRandom().nextBytes(t);
         Main m = new Main(web, new Content(contentDir), new Storage(data), runner, HexFormat.of().formatHex(t));
         HttpServer server = m.bind(wanted);
+        m.http = server;
         server.setExecutor(Executors.newFixedThreadPool(6));
         server.createContext("/", m::handle);
         server.start();
-        System.out.println("JAVAQUEST_READY http://127.0.0.1:" + m.port + "/#t=" + m.token);
-        System.out.flush();
-        if ("1".equals(o.get("watch-stdin"))) {
-            // Le lanceur garde stdin ouvert : sa fermeture (lanceur arrêté) arrête le serveur.
+        if (idle > 0) {
             Thread w = new Thread(() -> {
-                try { while (System.in.read() >= 0) { } } catch (IOException ignored) { }
-                server.stop(0);
-                System.exit(0);
-            }, "stdin-watch");
+                while (true) {
+                    try { Thread.sleep(1000); } catch (InterruptedException e) { return; }
+                    if (System.nanoTime() - m.lastAuth > idle * 1_000_000_000L) {
+                        System.out.println("Arrêt automatique : aucune activité depuis " + idle + " s.");
+                        m.shutdown();
+                        return;
+                    }
+                }
+            }, "idle-watch");
             w.setDaemon(true);
             w.start();
         }
+        return m;
+    }
+
+    public String url() { return "http://127.0.0.1:" + port + "/#t=" + token; }
+
+    /** Arrêt du processus après avoir laissé partir la réponse en cours. */
+    private void shutdown() {
+        Thread t = new Thread(() -> {
+            try { Thread.sleep(300); } catch (InterruptedException ignored) { }
+            try { http.stop(0); } catch (RuntimeException ignored) { }
+            System.exit(0);
+        }, "shutdown");
+        t.start();
     }
 
     private HttpServer bind(int wanted) throws IOException {
@@ -135,16 +174,20 @@ public final class Main {
         String given = ex.getRequestHeaders().getFirst("X-JQ-Token");
         if (given == null || !MessageDigest.isEqual(given.getBytes(StandardCharsets.UTF_8), token.getBytes(StandardCharsets.UTF_8))) return false;
         String origin = ex.getRequestHeaders().getFirst("Origin");
-        return origin == null || origin.equals("http://127.0.0.1:" + port) || origin.equals("http://localhost:" + port);
+        boolean ok = origin == null || origin.equals("http://127.0.0.1:" + port) || origin.equals("http://localhost:" + port);
+        if (ok) lastAuth = System.nanoTime();
+        return ok;
     }
 
     private void api(HttpExchange ex, String path) throws IOException {
-        if (!authorized(ex)) { json(ex, 403, Map.of("error", "Jeton de session invalide. Relance JavaQuest.exe.")); return; }
+        if (!authorized(ex)) { json(ex, 403, Map.of("error", "Jeton de session invalide. Relance JavaQuest.cmd.")); return; }
         String method = ex.getRequestMethod();
         Map<String, String> q = query(ex.getRequestURI().getRawQuery());
         switch (method + " " + path) {
             case "GET /api/health" -> json(ex, 200, Map.of("ok", true, "version", VERSION,
                     "sandbox", runner.grantError() == null, "sandboxError", Objects.toString(runner.grantError(), "")));
+            case "GET /api/ping" -> json(ex, 200, Map.of("ok", true));
+            case "POST /api/quit" -> { json(ex, 200, Map.of("ok", true)); shutdown(); }
             case "GET /api/content" -> json(ex, 200, content.publicView());
             case "GET /api/profiles" -> json(ex, 200, Map.of("profiles", storage.list()));
             case "POST /api/profiles" -> {

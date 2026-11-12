@@ -168,6 +168,13 @@ try {
   await shot('10-resultats-examen');
   await press('Escape');
   check('aucune exception JavaScript', logs.length === 0, logs.join(' | '));
+  // Bouton « Quitter le jeu » : sauvegarde, arrêt du serveur, message final.
+  await js(`document.querySelector('#hud [data-open="menu"]').click(); true`);
+  await waitFor(`!!document.getElementById('m-quit')`);
+  check('menu : bouton Quitter le jeu', await js(`document.getElementById('m-quit').textContent.includes('Quitter')`));
+  await js(`document.getElementById('m-quit').click(); true`);
+  check('quitter : message final affiché', await waitFor(`!!document.getElementById('bye') && document.body.textContent.includes('fermer cet onglet')`));
+  check('quitter : serveur arrêté', await new Promise(r => { if (server.exitCode !== null) return r(true); const t = setTimeout(() => r(false), 8000); server.once('exit', () => { clearTimeout(t); r(true); }); }));
 } catch (e) {
   check('exécution du scénario', false, e.stack);
 } finally {

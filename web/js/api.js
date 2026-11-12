@@ -31,6 +31,8 @@ async function call(method, path, body) {
 }
 
 export const api = {
+  ping: () => call('GET', '/api/ping'),
+  quit: () => call('POST', '/api/quit', {}),
   health: () => call('GET', '/api/health'),
   content: () => call('GET', '/api/content'),
   profiles: () => call('GET', '/api/profiles'),

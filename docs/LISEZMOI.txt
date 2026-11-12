@@ -6,9 +6,11 @@ programmes : chaque sort est compilé par un vrai javac et exécuté pour agir s
 
 LANCER LE JEU
 1. Extrais TOUT le contenu du ZIP dans un dossier de ton choix (pas besoin d'administrateur).
-2. Double-clique sur JavaQuest.exe.
-3. Le jeu s'ouvre dans ton navigateur. Garde la petite fenêtre « JavaQuest est lancé » ouverte
-   pendant que tu joues ; ferme-la pour arrêter le jeu.
+2. Double-clique sur JavaQuest.cmd (une fenêtre noire apparaît une seconde, c'est normal).
+3. Le jeu s'ouvre dans ton navigateur.
+4. Pour arrêter : Menu > Quitter le jeu. Si tu fermes simplement l'onglet, le jeu s'arrête de
+   lui-même après 4 minutes sans activité. Relancer JavaQuest.cmd pendant qu'il tourne rouvre
+   simplement le jeu dans le navigateur.
 
 Aucune installation (ni Java, ni Node, ni autre), aucun compte, aucune connexion Internet.
 Windows 10 (1703+) ou Windows 11 64 bits requis.

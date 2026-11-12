@@ -10,9 +10,7 @@ ZIP=0; NOBUILD=0
 for a in "$@"; do [ "$a" = "--zip" ] && ZIP=1; [ "$a" = "--no-build" ] && NOBUILD=1; done
 if [ $NOBUILD = 0 ]; then
   bash tools/build.sh >/dev/null
-  dotnet build launcher/Sandbox -c Release -nologo -v q >/dev/null
 fi
-dotnet build launcher/Launcher -c Release -nologo -v q >/dev/null
 rm -rf "$DIST"
 mkdir -p "$APP/bin" "$APP/runner"
 # Runtime minimal : serveur (httpserver), compilateur (jdk.compiler), API usuelles du cours.
@@ -23,7 +21,7 @@ mkdir -p "$APP/bin" "$APP/runner"
 cp build/server/server.jar "$APP/server.jar"
 cp build/runner/runner.jar "$APP/runner/runner.jar"
 cp build/sandbox/sandbox.jar "$APP/bin/sandbox.jar"   # broker d'isolation (Java FFM, lancé par le java.exe signé)
-cp launcher/Launcher/bin/Release/JavaQuest.exe launcher/Launcher/bin/Release/JavaQuest.exe.config "$DIST/"
+cp launcher/JavaQuest.cmd "$DIST/JavaQuest.cmd"   # lanceur : script texte, ne démarre que le javaw.exe signé du runtime
 cp -r web "$APP/web"
 cp -r content "$APP/content"
 [ -f THIRD_PARTY.md ] && cp THIRD_PARTY.md "$DIST/"

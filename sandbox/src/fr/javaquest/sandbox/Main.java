@@ -12,7 +12,7 @@ import java.util.List;
 import static java.lang.foreign.ValueLayout.*;
 
 /**
- * Broker d'isolation en Java pur (FFM), équivalent de jq-sandbox.exe (launcher/Sandbox/Program.cs).
+ * Broker d'isolation en Java pur (FFM), port fidèle de l'ancien jq-sandbox.exe (C#, retiré ; voir l'historique Git).
  * Exécute un programme NON FIABLE directement dans un AppContainer (optionnellement LPAC), un Job Object,
  * avec politique d'enfants interdits, délai mural, plafond de sortie, environnement minimal et liste blanche de handles.
  *   grant &lt;dossier&gt; | sid | run [--timeout-ms N --cpu-ms N --mem-mb N --max-out N --cwd D --stdin-file F --lpac --cap C] -- exe args

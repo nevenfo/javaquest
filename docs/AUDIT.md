@@ -23,7 +23,7 @@ Version auditée : tag Git `legacy-v0.3` (copie aussi dans `..\javaquest-backups
 | `mastery.js` | **Améliorer** | Principe conservé (aide ≠ maîtrise, preuves distinctes, différé) ; intégré au nouveau modèle de preuves + réactivations (docs/PEDAGOGIE.md). |
 | Sauvegarde `data/progress.json` | **Améliorer** | Nouveau stockage par profil dans `%LOCALAPPDATA%\JavaQuest`, écriture atomique + `.bak` + version de schéma. Ancien fichier conservé, importable. |
 | Tests Node | **Remplacer** | Tests Java (serveur/runner), tests de sandbox, tests front (node --test, outil de dev uniquement), E2E navigateur. |
-| Lanceurs `.cmd`/`.ps1` | **Remplacer** | `JavaQuest.exe` (C# .NET Framework 4.8, présent sur Windows 10/11). |
+| Lanceurs `.cmd`/`.ps1` | **Remplacer** | `JavaQuest.cmd` → `javaw.exe` signé (`Launch`) ; l'ancien `JavaQuest.exe` C# a été retiré en H1.3 (bloqué par Smart App Control). |
 | JDK Temurin 25 | **Conserver** | Version exigée par le cours (IO.println, `void main`, records). Embarqué via `jlink`. |
 | Copies des supports ESIEE | **Conserver localement, hors Git et hors ZIP** | Documents protégés : consultation privée uniquement. |
 

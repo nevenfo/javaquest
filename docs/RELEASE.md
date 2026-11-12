@@ -1,19 +1,30 @@
 # Distribution Windows — état et limites
 
+## Principe
+Gratuite, portable, hors ligne, sans installation ni droits administrateur, compatible Windows 10 (1703+) / 11 64 bits **y compris avec Smart App Control actif**. Aucun exécutable non signé n'est livré : le seul code natif exécuté est le runtime Java Temurin 25 (`java.exe`/`javaw.exe` signés par Eclipse Foundation) et les DLL de Windows ; tout le reste est du Java (`.jar`) ou du texte.
+
 ## Construire
-`bash tools/assemble.sh --zip` → `build/dist/JavaQuest.zip` (~44 Mo compressé, 84 Mo extrait) : `JavaQuest.exe` (lanceur), `app/runtime` (JRE jlink Temurin 25 : serveur, `javac`, modules du cours), `app/server.jar`, `app/runner/runner.jar`, `app/bin/jq-sandbox.exe` (broker AppContainer), `app/web`, `app/content`, licences, `LISEZMOI.txt`. Les supports ESIEE (`curriculum/originals/`) ne sont jamais embarqués.
+`bash tools/assemble.sh --zip` → `build/dist/JavaQuest.zip` (~44 Mo compressé, 84 Mo extrait) :
+- `JavaQuest.cmd` — point d'entrée (script texte) : `start` du `javaw.exe` signé sur `fr.javaquest.server.Launch` ;
+- `app/runtime` — JRE jlink (serveur, `javac`, modules du cours) ;
+- `app/server.jar` — serveur local + lanceur (instance unique, navigateur via `rundll32 url.dll`, arrêt par « Menu > Quitter le jeu » ou après 4 min sans onglet ouvert) ;
+- `app/bin/sandbox.jar` — broker d'isolation (Java FFM : AppContainer LPAC + Job Object, voir `docs/SECURITY.md`) ;
+- `app/runner/runner.jar`, `app/web`, `app/content`, licences, `LISEZMOI.txt`.
+
+Les supports ESIEE (`curriculum/originals/`) ne sont jamais embarqués.
 
 ## Tester
-| Script | Ce qu'il prouve |
+| Commande | Ce qu'elle prouve |
 |---|---|
-| `pwsh -NoProfile -File tools/test-dist.ps1 [-Build] [-Wsb]` | ZIP extrait dans un chemin avec espaces et accents ; contenu attendu, aucun support ni fichier sensible embarqué ; PATH réduit au système (ni Java ni Node) ; puis `tools/test-launcher.ps1` sur la copie extraite : démarrage, santé, Java exécuté en sandbox, contenu, quête vérifiée par son harnais (solution acceptée, code fautif refusé), double lancement, arrêt propre, arrêt brutal (Job kill-on-close), aucun processus résiduel. |
-| `pwsh -NoProfile -File tools/test-wsb.ps1` | Même installation dans Windows Sandbox (Windows vierge, **réseau désactivé**, sans Java/Node), scénario exécuté par `wsb exec` (la CLI `wsb` n'ouvre pas de session : une `LogonCommand` ne s'exécute jamais) ; verdict par attentes explicites. |
+| `bash tools/test-sandbox.sh` | 26 attaques réelles contre le broker livré (fichiers, réseau, DNS, écoute, processus, registre, CPU, mémoire, threads, sortie, processus résiduels). |
+| `pwsh -NoProfile -File tools/test-dist.ps1 [-Build] [-Wsb]` | ZIP extrait dans un chemin avec espaces et accents ; contenu attendu, aucun `.exe` hors du runtime, aucun support ni fichier sensible ; PATH réduit au système (ni Java ni Node) ; puis `tools/test-launcher.ps1` sur la copie : démarrage, santé + sandbox, Java exécuté, quête acceptée / code fautif refusé, double lancement (une seule instance), `/api/quit` refusé sans jeton puis accepté, kill brutal puis relance (verrou libéré), arrêt sur inactivité. `-Wsb` : `tools/test-wsb.ps1`. |
+| `pwsh -NoProfile -File tools/test-wsb.ps1` | Installation dans Windows Sandbox (Windows vierge, **réseau désactivé**, sans Java/Node, **Smart App Control actif**), en session utilisateur réelle (`wsb connect` + `wsb exec -r ExistingLogin`) : 14 attentes explicites. |
 
-Dernier résultat (2026-11-12) : `test-dist.ps1` → 15 PASS, 0 FAIL (lanceur 13/13). `test-wsb.ps1` → 4 PASS, 8 FAIL : ZIP extrait, PATH sans Java/Node, réseau coupé, mais **lancement bloqué par Smart App Control** (voir ci-dessous).
+Dernier résultat (2026-11-12) : `test-sandbox.sh` 26/26 ; `test-dist.ps1 -Wsb` 17/17 (lanceur 23/23, Windows Sandbox 14/14 : serveur démarré, sandbox prête, Java exécuté, fichier personnel refusé au code, 143 quêtes, arrêt propre sans processus résiduel, `Politique CI : 1`, 0 exe non signé livré).
 
 ## Limites restantes
-- **Exécutables non signés et Smart App Control (bloquant sur certains PC).** `JavaQuest.exe` et `app/bin/jq-sandbox.exe` ne sont pas signés (`javaw.exe` l'est, par Eclipse Foundation). Sur un Windows 11 où Smart App Control est actif (installations neuves ; c'est le cas de Windows Sandbox : `VerifiedAndReputablePolicyState = 1`), Windows refuse de les lancer : « Une stratégie de contrôle d'application a bloqué ce fichier ». Désactiver Smart App Control n'est pas une consigne acceptable pour des étudiants (irréversible sans réinstallation). Il faut soit signer avec un certificat reconnu (par exemple Azure Trusted Signing ou un certificat de signature de code d'une autorité reconnue), soit supprimer tout exécutable non signé de la chaîne de lancement. Décision à prendre (H1.3).
-  - Constat en Windows Sandbox (Smart App Control actif, réseau coupé) : un `.cmd` non signé s'exécute, y compris marqué « téléchargé » (Zone.Identifier) ; `app/runtime/bin/java.exe` (signé) lance `server.jar` normalement ; seuls `JavaQuest.exe` et `jq-sandbox.exe` sont refusés (`CreateProcess error=4551`), et le serveur désactive alors l'exécution de code (`/api/health` : `sandbox:false`).
-  - Conséquence : une architecture sans exécutable non signé est possible : lanceur porté par `javaw.exe` (signé), broker AppContainer/Job réécrit en Java (FFM, `java.base`) au lieu de `jq-sandbox.exe`.
-- **SmartScreen.** Même sans Smart App Control, un exécutable non signé téléchargé (marque « Mark of the Web ») déclenche « Windows a protégé votre ordinateur » → « Informations complémentaires » → « Exécuter quand même ». La signature réduit ce problème, sans le supprimer tant que la réputation n'est pas établie.
-- Windows 10 1703+ / 11 64 bits uniquement (AppContainer LPAC, voir `docs/SECURITY.md`).
+- **SmartScreen / avertissement de fichier téléchargé.** Un `.cmd` issu d'un ZIP téléchargé peut afficher un avertissement (« Éditeur inconnu ») au premier double-clic : « Exécuter ». Smart App Control, lui, ne le bloque pas (vérifié, y compris marqué Zone.Identifier). Signer n'est pas nécessaire.
+- Pas de fenêtre native (le runtime n'embarque pas `java.desktop`) : le jeu se quitte depuis son menu, ou s'arrête seul 4 min après la fermeture de l'onglet (option `--idle-seconds`). Après une longue mise en veille, il peut falloir relancer `JavaQuest.cmd` (aucune perte : sauvegarde continue).
+- Surcoût du broker Java : ~90 ms par exécution de code (démarrage d'une JVM légère).
+- Windows 10 1703+ / 11 x64 uniquement (AppContainer LPAC ; offsets de structures x64).
+- Windows Sandbox : en contexte `System` (session 0), tout processus AppContainer échoue (`0xC0000142`) ; les tests utilisent donc une session utilisateur.

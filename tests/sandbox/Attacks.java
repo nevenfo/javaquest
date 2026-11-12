@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Programme hostile de test : chaque mode tente une action interdite.
  * Sortie : "ALLOWED <détail>" si l'action a réussi, "BLOCKED <exception>" sinon.
- * Exécuté uniquement par tools/test-sandbox.sh à l'intérieur de jq-sandbox.
+ * Exécuté uniquement par tools/test-sandbox.sh à l'intérieur du broker d'isolation (sandbox.jar).
  */
 public class Attacks {
     public static void main(String[] args) throws Exception {

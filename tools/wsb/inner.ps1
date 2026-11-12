@@ -14,7 +14,7 @@ try {
   $dest = Join-Path $env:USERPROFILE "Desktop\Mes jeux é"
   New-Item -ItemType Directory -Force $dest | Out-Null
   Expand-Archive -Path "C:\jq-in\JavaQuest.zip" -DestinationPath $dest -Force
-  $exe = Join-Path $dest "JavaQuest\JavaQuest.exe"
+  $exe = Join-Path $dest "JavaQuest\JavaQuest.cmd"
   Log ("ZIP extrait : " + (Test-Path $exe))
 
   $p = Start-Process -FilePath $exe -ArgumentList "--no-browser" -PassThru
@@ -41,9 +41,13 @@ try {
     $idx = (Invoke-WebRequest "$base/" -UseBasicParsing).StatusCode
     Log ("Page du jeu : " + $idx)
   }
-  $p.CloseMainWindow() | Out-Null
-  $stopped = $p.WaitForExit(15000)
-  Start-Sleep -Seconds 2
+  $stopped = $false
+  if ($sess) {
+    try { Invoke-RestMethod "$base/api/quit" -Method Post -Headers @{ "X-JQ-Token" = $tok } | Out-Null } catch { Log ("quit : " + $_.Exception.Message) }
+    for ($i = 0; $i -lt 30 -and @(Get-Process javaw, java -ErrorAction SilentlyContinue).Count -gt 0; $i++) { Start-Sleep -Milliseconds 500 }
+    $stopped = -not (Get-ChildItem "$env:LOCALAPPDATA\JavaQuest\session-*.txt" -ErrorAction SilentlyContinue)
+  }
+  Start-Sleep -Seconds 1
   $left = @(Get-Process javaw, java -ErrorAction SilentlyContinue).Count
   Log ("Arrêt propre : " + $stopped + " ; processus Java restants : " + $left)
 } catch {
@@ -52,7 +56,10 @@ try {
 # Diagnostic : signatures des exécutables livrés et derniers blocages Code Integrity (Smart App Control / WDAC).
 if ($exe) {
   $d = Split-Path $exe
-  foreach ($f in @("JavaQuest.exe", "app\bin\jq-sandbox.exe", "app\runtime\bin\javaw.exe")) { $sg = Get-AuthenticodeSignature (Join-Path $d $f); Log ("Signature $f : " + $sg.Status + " " + $sg.SignerCertificate.Subject) }
+  $outside = @(Get-ChildItem -Recurse -File -Include *.exe, *.dll $d | Where-Object { $_.FullName -notlike (Join-Path $d "app\runtime\*") })
+  Log ("Exécutables hors runtime signé : " + $outside.Count + " " + ($outside.Name -join ", "))
+  $unsigned = @(Get-ChildItem -Recurse -File -Include *.exe $d | Where-Object { (Get-AuthenticodeSignature $_.FullName).Status -ne "Valid" })
+  Log ("Exe non signés livrés : " + $unsigned.Count + " " + ($unsigned.Name -join ", "))
 }
 Get-WinEvent -LogName 'Microsoft-Windows-CodeIntegrity/Operational' -MaxEvents 5 -ErrorAction SilentlyContinue | ForEach-Object { $m = $_.Message -replace '\s+', ' '; Log ("CI " + $_.Id + " " + $m.Substring(0, [Math]::Min(260, $m.Length))) }
 Log ("Politique CI : " + ((Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy' -ErrorAction SilentlyContinue).VerifiedAndReputablePolicyState))

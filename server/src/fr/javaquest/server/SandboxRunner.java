@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Exécute le runner Java DANS le broker d'isolation (AppContainer LPAC + Job Object) et décode le protocole.
  * Broker : {@code sandbox.jar} (Java FFM, lancé par le java.exe signé du runtime, compatible Smart App Control) ;
- * un chemin {@code .exe} (ancien jq-sandbox.exe, même CLI) reste accepté.
+ * un chemin {@code .exe} exposant la même CLI reste accepté (outillage).
  * Aucun repli non isolé : si la sandbox échoue, le résultat est une erreur explicite.
  */
 public final class SandboxRunner {

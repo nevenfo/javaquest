@@ -52,13 +52,13 @@ const dialogOpen = () => dialog.open || G.workshop?.open || !$('modal').hidden;
 
 // ---------- Démarrage ----------
 async function boot() {
-  if (!initToken()) return fatal('Session introuvable. Lance le jeu avec <b>JavaQuest.exe</b> (le lien contient un jeton de sécurité).');
+  if (!initToken()) return fatal('Session introuvable. Lance le jeu avec <b>JavaQuest.cmd</b> (le lien contient un jeton de sécurité).');
   try {
     const h = await api.health();
     if (!h.sandbox) toast(`⚠ ${h.sandboxError}`, 'bad');
     G.content = await api.content();
   } catch (e) {
-    return fatal(`Impossible de joindre le serveur local (${esc(e.message)}). Relance <b>JavaQuest.exe</b>.`);
+    return fatal(`Impossible de joindre le serveur local (${esc(e.message)}). Relance <b>JavaQuest.cmd</b>.`);
   }
   G.quests = G.content.quests;
   G.quests.forEach((q, i) => { q.order = i; G.byId.set(q.id, q); });
@@ -66,6 +66,7 @@ async function boot() {
   G.params = { ...DEFAULT_PARAMS, ...(G.content.skills?.params || {}) };
   sheet = new Image(); sheet.src = 'assets/tiles/dungeon.png';
   await new Promise(r => { sheet.onload = r; sheet.onerror = r; });
+  setInterval(() => { api.ping().catch(() => { }); }, 30000); // battement : sans lui, le serveur s'arrête après quelques minutes
   titleScreen();
 }
 
@@ -391,7 +392,7 @@ function menu() {
   const s = G.session.state;
   const { box, close } = modal(`<h1>☰ Menu</h1>
     <div class="row"><button class="btn primary" data-close>Reprendre</button><button class="btn" id="m-save">💾 Sauvegarder</button><button class="btn" id="m-export">⬇ Exporter ma sauvegarde</button>
-    <label class="btn">⬆ Importer<input type="file" id="m-import" accept=".json" hidden></label><button class="btn" id="m-profiles">👥 Changer de profil</button></div>
+    <label class="btn">⬆ Importer<input type="file" id="m-import" accept=".json" hidden></label><button class="btn" id="m-profiles">👥 Changer de profil</button><button class="btn" id="m-quit">⏻ Quitter le jeu</button></div>
     <h2>Options</h2><div class="row">Volume <input type="range" id="m-vol" min="0" max="1" step="0.1" value="${s.settings.volume}"> Vitesse des animations du code <input type="range" id="m-speed" min="0.5" max="3" step="0.5" value="${s.settings.speed}"></div>
     <h2>Commandes</h2><p>Déplacement : <kbd>Z Q S D</kbd> (AZERTY) / <kbd>W A S D</kbd> (QWERTY) / flèches · Interagir : <kbd>E</kbd> · Journal <kbd>J</kbd> · Grimoire <kbd>G</kbd> · Carte <kbd>M</kbd> · Éditeur : <kbd>Ctrl+Entrée</kbd> exécuter, <kbd>Ctrl+Maj+Entrée</kbd> vérifier, <kbd>Ctrl+S</kbd> sauvegarder.</p>
     <h2>Comment est mesurée la maîtrise ?</h2><p>Une compétence est « maîtrisée » quand tu l'as démontrée <b>seul·e</b> (sans indice) sur au moins ${G.params.masteryMinQuests} activités différentes, dont un <b>transfert</b> (problème nouveau), et à nouveau après au moins ${G.params.masteryMinDelayDays} jour(s). Un échec isolé ne retire rien. Ces règles sont des hypothèses de conception prudentes inspirées de la recherche (pratique de récupération, espacement, apprentissage par maîtrise), pas des seuils démontrés.</p>
@@ -402,6 +403,13 @@ function menu() {
   $('m-import').onchange = async (e) => {
     try { const data = migrate(JSON.parse(await e.target.files[0].text())); if (!confirm('Remplacer la progression de ce profil par le fichier importé ?')) return; G.session.state = data; G.session.touch(); await G.session.flush(); location.reload(); }
     catch (err) { toast('Import impossible : ' + err.message, 'bad'); }
+  };
+  $('m-quit').onclick = async () => {
+    G.session.dirty = true; await G.session.flush();
+    if (G.session.lastError) { toast('Échec de la sauvegarde : le jeu reste ouvert.', 'bad'); return; }
+    G.session.dirty = false;
+    try { await api.quit(); } catch (e) { toast('Arrêt impossible : ' + e.message, 'bad'); return; }
+    document.body.innerHTML = '<div id="bye" style="padding:3em;text-align:center;font:20px sans-serif;color:#eee">Partie sauvegardée. JavaQuest est arrêté : tu peux fermer cet onglet.</div>';
   };
   $('m-profiles').onclick = async () => { await G.session.flush(); close(); titleScreen(); };
   $('m-vol').oninput = (e) => { s.settings.volume = +e.target.value; setVolume(s.settings.volume); G.session.touch(); play('tick'); };

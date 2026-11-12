@@ -23,12 +23,18 @@ $id = $started.Id
 Write-Output "Sandbox $id démarrée"
 $result = Join-Path $out "result.txt"
 # La CLI `wsb` démarre la sandbox sans session utilisateur : une LogonCommand ne s'exécuterait jamais.
-# On exécute donc le scénario dans le contexte système (attente du démarrage complet, puis wsb exec).
+# Attente du démarrage complet (contexte système), puis ouverture d'une session utilisateur.
 for ($i = 0; $i -lt 24; $i++) {
   wsb exec --id $id -r System -c "cmd.exe /c exit 0" 2>&1 | Out-Null
   if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 5
 }
-wsb exec --id $id -r System -c "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\jq-in\inner.ps1" | Out-Null
+# Session utilisateur réelle (comme un étudiant) : en contexte System (session 0), tout enfant AppContainer échoue (0xC0000142).
+Start-Process wsb -ArgumentList "connect", "--id", $id -WindowStyle Minimized
+for ($i = 0; $i -lt 36; $i++) {
+  wsb exec --id $id -r ExistingLogin -c "cmd.exe /c exit 0" 2>&1 | Out-Null
+  if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 5
+}
+wsb exec --id $id -r ExistingLogin -c "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\jq-in\inner.ps1" | Out-Null
 Get-Content $result -Encoding UTF8
 wsb stop --id $id | Out-Null
 # Verdict : chaque attente doit apparaître dans le journal produit dans la sandbox.
@@ -38,7 +44,7 @@ $expect = [ordered]@{
   "réseau coupé" = "Internet joignable : False"; "ZIP extrait" = "ZIP extrait : True"; "serveur démarré" = "Serveur démarré : True"
   "santé + sandbox" = "Santé : ok=True sandbox=True"; "Java exécuté" = "Java exécuté : status=ok stdout=Somme 55"
   "fichier personnel inaccessible au code" = "Lecture fichier perso depuis le code : status=(?!ok)\w+"; "quêtes chargées" = "Quêtes chargées : \d{3}"
-  "page du jeu" = "Page du jeu : 200"; "arrêt propre sans processus résiduel" = "Arrêt propre : True ; processus Java restants : 0"; "aucune erreur" = "^(?![\s\S]*ERREUR)[\s\S]*DONE"
+  "page du jeu" = "Page du jeu : 200"; "Smart App Control actif (test probant)" = "Politique CI : 1"; "aucun exe non signé livré" = "Exe non signés livrés : 0"; "arrêt propre sans processus résiduel" = "Arrêt propre : True ; processus Java restants : 0"; "aucune erreur" = "^(?![\s\S]*ERREUR)[\s\S]*DONE"
 }
 $bad = 0
 foreach ($k in $expect.Keys) { if ($log -match $expect[$k]) { Write-Output "PASS  wsb : $k" } else { Write-Output "FAIL  wsb : $k"; $bad++ } }
