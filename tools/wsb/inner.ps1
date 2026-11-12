@@ -49,4 +49,11 @@ try {
 } catch {
   Log ("ERREUR " + $_.Exception.Message)
 }
+# Diagnostic : signatures des exécutables livrés et derniers blocages Code Integrity (Smart App Control / WDAC).
+if ($exe) {
+  $d = Split-Path $exe
+  foreach ($f in @("JavaQuest.exe", "app\bin\jq-sandbox.exe", "app\runtime\bin\javaw.exe")) { $sg = Get-AuthenticodeSignature (Join-Path $d $f); Log ("Signature $f : " + $sg.Status + " " + $sg.SignerCertificate.Subject) }
+}
+Get-WinEvent -LogName 'Microsoft-Windows-CodeIntegrity/Operational' -MaxEvents 5 -ErrorAction SilentlyContinue | ForEach-Object { $m = $_.Message -replace '\s+', ' '; Log ("CI " + $_.Id + " " + $m.Substring(0, [Math]::Min(260, $m.Length))) }
+Log ("Politique CI : " + ((Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy' -ErrorAction SilentlyContinue).VerifiedAndReputablePolicyState))
 Log "DONE"

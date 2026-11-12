@@ -36,6 +36,14 @@ if ($url) {
   Check "Java réel exécuté en sandbox (runtime jlink)" ($r.stdout -eq "Bonjour 42`n") ($r | ConvertTo-Json -Compress -Depth 5)
   $idx = (Invoke-WebRequest "$base/" -UseBasicParsing).StatusCode
   Check "page du jeu servie" ($idx -eq 200)
+  $c = Invoke-RestMethod "$base/api/content" -Headers @{ "X-JQ-Token" = $token }
+  Check "contenu chargé (quêtes)" ($c.quests.Count -ge 100) "quêtes=$($c.quests.Count)"
+  $ok = '{"quest":"q01-porte","files":[{"name":"Main.java","content":"void main() { IO.println(\"Ouvre-toi !\"); }"}]}'
+  $r = Invoke-RestMethod "$base/api/check" -Method Post -Body ([Text.Encoding]::UTF8.GetBytes($ok)) -Headers @{ "X-JQ-Token" = $token }
+  Check "quête vérifiée par son harnais : solution acceptée" ($r.passed -eq $true) ($r | ConvertTo-Json -Compress -Depth 5)
+  $ko = '{"quest":"q01-porte","files":[{"name":"Main.java","content":"void main() { IO.println(\"Ouvre-toi\"); }"}]}'
+  $r = Invoke-RestMethod "$base/api/check" -Method Post -Body ([Text.Encoding]::UTF8.GetBytes($ko)) -Headers @{ "X-JQ-Token" = $token }
+  Check "quête vérifiée par son harnais : code fautif refusé" ($r.passed -eq $false) ($r | ConvertTo-Json -Compress -Depth 5)
 
   # 2. Double lancement : la 2e instance doit se terminer d'elle-même sans 2e serveur
   $p2 = Start-Process -FilePath $exe -ArgumentList "--no-browser" -PassThru

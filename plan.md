@@ -193,7 +193,8 @@ ZIP : extraire → double-clic `JavaQuest.exe` → jouer, hors ligne, sans prér
 ### Dépendances
 B4, F1, G1.
 ### Tâches
-- [ ] H1.1 `tools/build-dist` : jlink runtime, compilation, copie web/contenu, ZIP.
-- [ ] H1.2 Test depuis un autre dossier (chemin avec espaces), réseau coupé pour le processus, sans Java/Node dans le PATH ; Windows Sandbox si disponible.
+- [x] H1.1 Construction de la distribution (`tools/assemble.sh --zip`, nom retenu à la place de `tools/build-dist`) : jlink runtime, compilation, copie web/contenu, ZIP. Fait : `build/dist/JavaQuest.zip` 44 Mo ; contenu vérifié par `tools/test-dist.ps1`.
+- [ ] H1.2 Test depuis un autre dossier (chemin avec espaces), réseau coupé pour le processus, sans Java/Node dans le PATH ; Windows Sandbox si disponible. Partiel : `tools/test-dist.ps1` 15/15 (chemin avec espaces/accents, PATH sans Java/Node, quête vérifiée) ; `tools/test-wsb.ps1` 4/12, lancement bloqué par Smart App Control → dépend de H1.3.
+- [ ] H1.3 Lancement accepté par Smart App Control / SmartScreen : aucun exécutable non signé dans la chaîne de lancement (signature reconnue de `JavaQuest.exe` et `jq-sandbox.exe`, ou architecture sans exécutable non signé). Décision utilisateur requise (coût/identité d'un certificat vs refonte). Validation : `tools/test-wsb.ps1` 12/12.
 ### Validation
-- Script `tools/test-dist` vert ; rapport dans `docs/RELEASE.md` avec limites restantes.
+- `pwsh -NoProfile -File tools/test-dist.ps1 -Wsb` vert ; rapport dans `docs/RELEASE.md` avec limites restantes.

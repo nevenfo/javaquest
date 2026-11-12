@@ -1,17 +1,17 @@
 # PROGRESS
 
 ## Phase actuelle
-Phases A–G validées (A, B, C1, D1, D2, E1, E2, R1, F1, G1). Reste : H1 (distribution ZIP Windows).
+Phases A–G validées. Reste : H1 (H1.1 fait ; H1.2 partiel ; H1.3 en attente de décision).
 
 ## Tâche actuelle
-H1.1 — distribution autonome (`tools/assemble.sh` existe déjà : jlink, serveur, runner, sandbox, web, contenu, `--zip`).
+H1.3 — rendre le lancement compatible avec Smart App Control.
 
 ## Dernière tâche validée
-D2 (D2.1–D2.3) : `tests/web/state.test.mjs` (état, migration, sauvegarde différée, profils) ; `Session.dispose()` arrête l'ancienne session au changement de profil (avant : chronomètre et sauvegardes continuaient) ; E2E étendu (pas-à-pas, indices gradués, journal/sac, carte, second profil).
+H1.1 (+ H1.2 partiel) : `tools/test-dist.ps1` (ZIP extrait dans un chemin avec espaces/accents, PATH sans Java/Node, lanceur + quête vérifiée) ; `tools/test-wsb.ps1` passe par `wsb exec` (LogonCommand jamais exécutée par la CLI) et rend un verdict.
 Validation :
-- `npm run -s test:web` → 33/33 (mutation « dispose sans clearInterval » → échec attendu).
-- `node tools/e2e.mjs` → 33 PASS, 0 FAIL.
-- F1.5 (précédent) : `tools/test-server.sh` 143 quêtes, traversée E2E 124/124.
+- `pwsh -NoProfile -File tools/test-dist.ps1` → 15 PASS, 0 FAIL (lanceur 13/13).
+- `pwsh -NoProfile -File tools/test-wsb.ps1` → 4 PASS, 8 FAIL : Smart App Control bloque `JavaQuest.exe` et `jq-sandbox.exe` non signés (détail et expériences : `docs/RELEASE.md`).
+- D2 : `npm run -s test:web` 33/33, `node tools/e2e.mjs` 33/33.
 
 ## Décisions actives
 - Architecture : `plan.md` § Architecture retenue, `docs/AUDIT.md`. Sécurité : `docs/SECURITY.md`. Pédagogie : `docs/PEDAGOGIE.md`. Contenu : `docs/CONTENT.md`, couverture générée `docs/COUVERTURE.md`.
@@ -25,7 +25,7 @@ Validation :
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
-Aucun.
+H1.3 — Symptôme : « Une stratégie de contrôle d'application a bloqué ce fichier » (Windows Sandbox, `VerifiedAndReputablePolicyState = 1`). Cause : exécutables non signés. Faits exclus : PATH, chemin, réseau, MOTW sur `java.exe`/`.cmd`. Décision utilisateur requise : signature reconnue (coût, identité) ou refonte sans exécutable non signé (lanceur `javaw`, broker AppContainer en Java FFM).
 
 ## Incident à signaler à l'utilisateur
 `javaquest-install.zip` (non versionné) supprimé par erreur le 2026-11-11 ; archive reconstituée : `..\javaquest-backups\javaquest-install-RECONSTRUIT-depuis-legacy-v0.3.zip`.
@@ -34,4 +34,4 @@ Aucun.
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-H1.1 — Faire produire `build/dist/JavaQuest.zip` par `bash tools/assemble.sh --zip` (le plan nomme `tools/build-dist` : aligner le plan sur `assemble.sh` plutôt que dupliquer), puis écrire `tools/test-dist` (extraction dans un chemin avec espaces, PATH sans Java/Node, lancement de `JavaQuest.exe`, `/api/health` et une quête vérifiée) en réutilisant `tools/test-launcher.ps1` ; valider en l'exécutant.
+H1.3 — Appliquer l'option choisie par l'utilisateur (signature ou refonte sans exécutable non signé) ; valider par `pwsh -NoProfile -File tools/test-dist.ps1 -Build -Wsb` (WSB 12/12) puis cocher H1.2–H1.3.
