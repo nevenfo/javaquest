@@ -24,7 +24,7 @@ Validation :
 - Toute nouvelle carte doit passer `tests/web/maps.test.mjs` (le vide est solide ; relier les salles par `carve`).
 - E2E : Edge headless + CDP, émulation de focus obligatoire ; `waitFor` échoue si l'évaluation lève une exception.
 - Auteur affiché : « Nevant » ; pas de signature numérique (aucun certificat, H1.3).
-- Dépôts : `origin` = `nevenfo/javaquest` (PUBLIC, historique nettoyé) ; `archive` = `nevenfo/javaquest-archive` (PRIVÉ, historique d'origine avec extraits du sujet d'examen : ne jamais rendre public ni pousser vers `origin`). Sauvegarde : `..\javaquest-backups6-11-12-historique-complet-avant-reecriture.bundle`. E-mail Git du dépôt : noreply GitHub.
+- Dépôts : `origin` = `nevenfo/javaquest` (PUBLIC, historique nettoyé) ; `archive` = `nevenfo/javaquest-archive` (PRIVÉ, historique d'origine avec extraits du sujet d'examen : ne jamais rendre public ni pousser vers `origin`). Sauvegarde : `..\javaquest-backups\2026-11-12-historique-complet-avant-reecriture.bundle`. E-mail Git du dépôt : noreply GitHub.
 - Supports ESIEE : `curriculum/originals/` (jamais versionnés ni distribués).
 
 ## Blocage actif
