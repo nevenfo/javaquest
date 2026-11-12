@@ -169,7 +169,7 @@ C1, D2, E1, E2.
 - [ ] F1.3 Région 3 + donjon (interfaces/hiérarchies).
 - [ ] F1.4 Région 4 + donjon (tableaux/collections).
 - [ ] F1.5 Région finale (projet intégrateur, compagnon programmable).
-- [ ] F1.6 E2E de traversée : un profil parcourt une quête par région (village → citadelle) avec les solutions de référence ; contenu 123 quêtes validé, couverture 41/41 (`node tools/coverage.mjs`).
+- [x] F1.6 E2E de traversée : un profil parcourt une quête par région (village → citadelle) avec les solutions de référence ; contenu 123 quêtes validé, couverture 41/41 (`node tools/coverage.mjs`).
 ### Validation
 - Toutes les solutions de référence compilent et passent leurs tests ; des solutions fautives connues échouent (`tools/validate-content`) ; E2E de traversée.
 
