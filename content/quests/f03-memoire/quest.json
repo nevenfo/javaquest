@@ -1,0 +1,43 @@
+{
+  "id": "f03-memoire",
+  "title": "La mémoire du gobelin",
+  "region": "foret",
+  "giver": "gobelin",
+  "main": true,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "f02-peage"
+  ],
+  "skills": [
+    "cond.equals"
+  ],
+  "summary": "Prédis ce que le gobelin répond quand on compare des mots avec == et equals.",
+  "source": "annale : == compare les références, equals compare le contenu",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "false\ntrue\nfalse\ntrue\ntrue\n",
+  "brief": "Le gobelin du pont se vante d'avoir une mémoire parfaite : « Deux mots pareils ? Je les reconnais à tous les coups ! » Hélas, il confond souvent **le même objet** et **le même contenu**.\nLis le programme **sans l'exécuter** et écris exactement ce qu'il affichera, une ligne par comparaison.",
+  "hints": [
+    "`==` demande : « est-ce exactement le **même objet** en mémoire ? ». `equals` demande : « les **lettres** sont-elles les mêmes ? ».",
+    "`new String(...)` et une concaténation calculée à l'exécution fabriquent chacune un **nouvel** objet.",
+    "`String copie = secret;` ne recopie pas le texte : les deux variables désignent le même objet."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Hé hé ! Moi, le gobelin du pont, je ne me trompe jamais sur les mots de passe.",
+      "Tiens, devine ce que mon programme répond. Un mot qui a les mêmes lettres, est-ce toujours le même mot ?"
+    ],
+    "success": [
+      "Exactement ! `==` regarde l'objet, `equals` regarde les lettres. Je m'en souviendrai (peut-être)."
+    ],
+    "done": "Pour comparer des lettres, c'est `equals`. Noté."
+  },
+  "reward": {
+    "xp": 20
+  }
+}

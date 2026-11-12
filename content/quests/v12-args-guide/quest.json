@@ -1,0 +1,59 @@
+{
+  "id": "v12-args-guide",
+  "title": "Le voyageur et ses arguments",
+  "region": "village",
+  "giver": "garde",
+  "main": false,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.args"
+  ],
+  "summary": "Complète un programme qui salue le premier argument, ou « inconnu » s'il n'y en a pas.",
+  "source": "hello : args.length et args[0] (java HelloWorld toto)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main(String[] args) {\n    if (args.length > /* ??? */) {\n        IO.println(\"Salut, \" + args[/* ??? */] + \" !\");\n    } else {\n        IO.println(\"Salut, inconnu !\");\n    }\n    IO.println(\"Arguments reçus : \" + args.length);\n}\n"
+  },
+  "brief": "Aubin le garde salue chaque voyageur par son nom, passé en **argument** (`args[0]`). Complète les deux trous `/* ??? */` : le programme doit saluer le premier argument s'il existe, et `inconnu` sinon, **sans jamais planter**.\n```\nArguments Mira  ->  Salut, Mira !\n                    Arguments reçus : 1\n```\nLe bouton « Exécuter » ne transmet aucun argument ; la vérification essaie plusieurs cas.",
+  "lesson": "**Exemple** — afficher le dernier argument s'il y en a au moins un :\n```java\nif (args.length > 0) {\n    IO.println(args[args.length - 1]);\n}\n```\n`args.length` est le nombre d'arguments ; le premier est à l'indice `0`.",
+  "hints": [
+    "`args` est un tableau : `args.length` donne le nombre d'arguments reçus, `args[0]` le premier.",
+    "Lire `args[0]` quand il n'y a aucun argument fait planter le programme : c'est la condition qui protège.",
+    "Il y a au moins un argument quand `args.length` est strictement supérieur à `0`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Halte ! Mon registre salue chacun par son nom, mais deux trous se sont glissés dans mon sort.",
+      "Complète-les : il faut regarder combien d'arguments on reçoit avant d'en lire un."
+    ],
+    "success": [
+      "Parfait : on teste d'abord, on lit ensuite."
+    ],
+    "done": "Mon sort ne plante plus devant un voyageur muet."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

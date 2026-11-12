@@ -1,0 +1,49 @@
+{
+  "id": "r-obj.record-1",
+  "title": "Rappel : la potion immuable",
+  "region": "artisans",
+  "main": false,
+  "requires": [
+    "a08-commande"
+  ],
+  "kind": "code",
+  "assessment": "review",
+  "skills": [
+    "obj.record"
+  ],
+  "summary": "Écris de mémoire un record Potion avec validation.",
+  "source": "postier : records (réactivation)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Potion.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Potion.java"
+    ],
+    [
+      "wrong/w2/Potion.java"
+    ]
+  ],
+  "starter": {
+    "Potion.java": "public record Potion(String nom, int dose) {\n\n}\n"
+  },
+  "brief": "Rappel express. Écris le record `Potion(String nom, int dose)` :\n- constructeur compact : `IllegalArgumentException` si `dose < 0` ;\n- `Potion diluer()` : renvoie une **nouvelle** potion de même nom et de dose divisée par 2 (division entière).",
+  "hints": [
+    "`public record Potion(String nom, int dose) { public Potion { ... } }` pour valider.",
+    "`diluer` ne modifie rien : elle renvoie `new Potion(nom, dose / 2)`."
+  ],
+  "dialog": {
+    "success": [
+      "Un record, une validation, une méthode : tu les maîtrises."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

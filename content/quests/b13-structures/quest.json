@@ -1,0 +1,115 @@
+{
+  "id": "b13-structures",
+  "title": "Quelle structure pour quel besoin ?",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b12-releves"
+  ],
+  "kind": "quiz",
+  "assessment": "transfer",
+  "skills": [
+    "col.linkedlist",
+    "col.arraylist"
+  ],
+  "summary": "Choisis ArrayList ou LinkedList dans cinq situations nouvelles.",
+  "source": "collections : justifier le choix de la structure",
+  "questions": [
+    {
+      "q": "Une messagerie garde les 50 derniers messages : à chaque arrivée on insère **en tête** et on supprime le **dernier**, des millions de fois. Quelle structure convient le mieux ?",
+      "options": [
+        "`ArrayList` : chaque insertion en tête décale tous les messages",
+        "`LinkedList` : insertion en tête et retrait en queue sans décalage",
+        "Un `HashSet`",
+        "Un tableau recopié à chaque message"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Un classement de milliers de scores est lu **au hasard** (`get(i)` pour des `i` quelconques) et ne change presque jamais. Quelle structure ?",
+      "options": [
+        "`LinkedList`",
+        "`ArrayList`",
+        "Peu importe : les deux coûtent pareil",
+        "Aucune des deux ne permet `get(i)`"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Avec `LinkedList<Integer> l` de 100 000 éléments, que penser de `for (int i = 0; i < l.size(); i++) total += l.get(i);` ?",
+      "options": [
+        "C'est optimal",
+        "Très lent : chaque `get(i)` parcourt la chaîne ; préférer `for (int x : l)`",
+        "Ça ne compile pas",
+        "Ça vide la liste"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Quelles opérations sont en temps constant sur une `LinkedList` ? (plusieurs réponses)",
+      "options": [
+        "`addFirst(x)`",
+        "`removeLast()`",
+        "`get(5000)`",
+        "`contains(x)`"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Quel est le principal inconvénient mémoire d'une `LinkedList` par rapport à une `ArrayList` ?",
+      "options": [
+        "Aucun",
+        "Chaque maillon stocke en plus des références vers ses voisins",
+        "Elle réserve toujours le double de la place nécessaire",
+        "Elle ne libère jamais la mémoire"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1
+    ]
+  ],
+  "explanations": [
+    "Insérer en tête d'un `ArrayList` décale tout ; la `LinkedList` n'a qu'un maillon à ajouter et un à retirer.",
+    "L'accès par indice est immédiat dans un tableau (`ArrayList`) ; il faudrait parcourir les maillons dans une `LinkedList`.",
+    "`get(i)` dans une boucle indexée repart du début de la chaîne à chaque tour : coût total quadratique.",
+    "Les extrémités sont directement accessibles ; `get(i)` et `contains` parcourent la chaîne.",
+    "Chaque maillon contient la valeur et deux références (précédent, suivant) : plus de mémoire par élément."
+  ],
+  "brief": "Nouveaux décors, même question : quelle structure choisir ? Réponds aux cinq situations proposées par Lyra.",
+  "hints": [
+    "Demande-toi quelle opération domine : accès par indice, ou ajouts/retraits aux extrémités.",
+    "`ArrayList` = tableau interne (accès direct, décalages) ; `LinkedList` = maillons chaînés (extrémités faciles, parcours pour atteindre l'indice i)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un bon bibliothécaire choisit le bon rayonnage. Voyons si tu sais choisir la bonne liste."
+    ],
+    "success": [
+      "Tu justifies ton choix par les coûts, pas par l'habitude. C'est exactement ça."
+    ],
+    "done": "Tu choisis bien tes structures."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

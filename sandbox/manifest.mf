@@ -1,0 +1,3 @@
+Enable-Native-Access: ALL-UNNAMED
+Implementation-Title: JavaQuest
+Implementation-Vendor: Nevant

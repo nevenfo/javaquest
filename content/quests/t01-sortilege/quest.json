@@ -1,0 +1,64 @@
+{
+  "id": "t01-sortilege",
+  "title": "Le premier sortilège",
+  "region": "tour",
+  "giver": "sentinelle",
+  "main": true,
+  "requires": [
+    "a14-atelier"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "inh.interface"
+  ],
+  "summary": "Implémente l'interface Sortilege avec une classe Eclair.",
+  "source": "annale : interfaces (contrat de capacités)",
+  "support": [
+    "support/Sortilege.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Eclair.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Eclair.java"
+    ],
+    [
+      "wrong/w2/Eclair.java"
+    ]
+  ],
+  "starter": {
+    "Eclair.java": "public class Eclair implements Sortilege {\n    private final int niveau;\n\n    public Eclair(int niveau) {\n        /* ??? */\n    }\n\n    // nom()\n\n    // degats()\n}\n"
+  },
+  "brief": "À la Tour des Contrats, tout sort respecte un **contrat** : l'interface `Sortilege` (fournie, lecture seule) exige deux méthodes.\n\n```java\npublic interface Sortilege {\n    String nom();\n    int degats();\n}\n```\nComplète la classe `Eclair` :\n- `Eclair(int niveau)` mémorise le niveau ;\n- `nom()` renvoie `Éclair` ;\n- `degats()` renvoie `4 * niveau`.\n\nUne classe qui `implements` une interface doit **définir toutes** ses méthodes, en `public`.",
+  "lesson": "Exemple résolu (autre interface) :\n```java\ninterface Objet { String nom(); int prix(); }\nclass Potion implements Objet {\n    public String nom() { return \"Potion\"; }\n    public int prix() { return 5; }\n}\n```\nOn peut alors écrire `Objet o = new Potion();`.",
+  "hints": [
+    "`class Eclair implements Sortilege` promet de définir `nom()` et `degats()`. Les méthodes d'interface sont `public` : ta version aussi.",
+    "Le niveau reçu au constructeur doit être gardé dans un champ pour que `degats()` puisse l'utiliser.",
+    "Exemple analogue : `class Bouclier implements Objet { public String nom() { return \"Bouclier\"; } ... }`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Halte ! Ici, à la Tour des Contrats, on ne lance pas n'importe quel sort : chacun doit respecter un **contrat**. L'interface `Sortilege` en est un.",
+      "Pour t'entraîner, écris l'**Éclair** : une classe qui respecte le contrat. Le cœur du travail, c'est `implements` !"
+    ],
+    "resume": "L'Éclair n'est pas encore conforme au contrat.",
+    "success": [
+      "Contrat respecté ! Peu importe l'implémentation : pour la Tour, un `Sortilege` est un `Sortilege`.",
+      "Nous allons maintenant voir comment un contrat peut aussi offrir des services tout faits."
+    ],
+    "done": "Ton Éclair est inscrit au registre de la Tour."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

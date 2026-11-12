@@ -1,0 +1,55 @@
+{
+  "id": "v07-debordement",
+  "title": "Le trésor qui double",
+  "region": "village",
+  "giver": "pip",
+  "main": false,
+  "kind": "code",
+  "assessment": "practice",
+  "requires": [
+    "v06-types"
+  ],
+  "skills": [
+    "base.types"
+  ],
+  "summary": "Calcule un trésor qui double chaque jour, sans dépassement.",
+  "hud": "Pip a un défi de code sur le dépassement.",
+  "source": "annale : plus grande factorielle calculable en int / en long ; dépassement silencieux",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "40",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le coffre de Pip contient **1 pièce** le jour 1, puis son contenu **double** chaque jour : 2 pièces le jour 2, 4 le jour 3…\n\nÉcris un programme qui lit un numéro de jour `n` (entre 1 et 62) et affiche :\n```\nJour n : X pièces\n```\nExemple pour `n = 4` : `Jour 4 : 8 pièces`.\nTeste aussi avec des grands jours : pour `n = 32`, la valeur doit rester juste. Java ne te préviendra pas si ton type est trop petit !",
+  "hints": [
+    "Une boucle `for` qui double le contenu `n - 1` fois suffit.",
+    "Un `int` ne va que jusqu'à 2 147 483 647 : au jour 32, le nombre est trop grand.",
+    "Choisis un type plus large pour la variable qui contient les pièces (et pense au `L` si tu écris une constante géante)."
+  ],
+  "dialog": {
+    "intro": [
+      "Mon coffre double ses pièces chaque jour ! Au début, tout allait bien…",
+      "…et puis un jour, le compteur s'est mis à afficher un nombre négatif. Écris un programme qui reste juste, même après un mois !"
+    ],
+    "success": [
+      "Même au jour 62, le compte est bon. Tu as compris le piège du dépassement silencieux !"
+    ],
+    "done": "Mon trésor est enfin bien compté."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

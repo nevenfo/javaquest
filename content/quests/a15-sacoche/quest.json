@@ -1,0 +1,59 @@
+{
+  "id": "a15-sacoche",
+  "title": "La sacoche d'outils",
+  "region": "artisans",
+  "giver": "brom",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "a09-bourse"
+  ],
+  "skills": [
+    "obj.classe",
+    "obj.visibilite"
+  ],
+  "summary": "Écris seul·e la classe Outil : champs privés, constructeur, accesseurs et une méthode.",
+  "source": "point : classe, champs private, constructeur, accesseurs",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Outil.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Outil.java"
+    ],
+    [
+      "wrong2/Outil.java"
+    ]
+  ],
+  "starter": {
+    "Outil.java": "public class Outil {\n}\n"
+  },
+  "brief": "Brom range ses outils dans une sacoche. Écris la classe `Outil` (fichier `Outil.java`, point de départ vide) :\n\n- **deux champs `private`** : un `String nom` et un `int durabilite` ;\n- un constructeur `Outil(String nom, int durabilite)` ;\n- les accesseurs `getNom()` et `getDurabilite()` ;\n- une méthode `void utiliser()` qui retire 1 à la durabilité, sans jamais passer sous `0`.\n\n```java\nOutil o = new Outil(\"Marteau\", 3);\no.utiliser();      // getDurabilite() vaut 2\n```",
+  "hints": [
+    "Un champ `private` n'est visible que dans sa classe : les autres passent par des méthodes publiques.",
+    "Le constructeur recopie ses paramètres dans les champs avec `this.nom = nom;`.",
+    "Dans `utiliser`, ne décrémente que si la durabilité est strictement positive."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ma sacoche est un vrai fouillis ! Je veux une classe `Outil` propre : chacun garde ses données pour lui et ne les montre qu'à travers ses méthodes.",
+      "Je te laisse la page blanche."
+    ],
+    "success": [
+      "Voilà des outils bien rangés, qui gardent leurs secrets."
+    ],
+    "done": "Ma sacoche est en ordre."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

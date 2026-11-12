@@ -1,0 +1,42 @@
+{
+  "id": "r-proj.repl-1",
+  "title": "Rappel : la boucle et le registre",
+  "region": "citadelle",
+  "main": false,
+  "requires": [
+    "c04-pile"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "proj.repl",
+    "proj.architecture"
+  ],
+  "summary": "Prédis la sortie d'un REPL dont les commandes sont rangées dans une Map (réactivation).",
+  "source": "jalist : boucle de commandes et registre extensible (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "0\n2\nb\n? saut\nc\n[dernier, nb, note]\n",
+  "brief": "Ce mini-REPL traite un script de commandes rangées dans une `Map`. Lis-le **sans l'exécuter** et écris sa sortie exacte, ligne par ligne. Qu'est-ce qui s'affiche, qu'est-ce qui reste silencieux, et où la boucle s'arrête-t-elle ?",
+  "hints": [
+    "Une commande qui renvoie `null` n'affiche rien ; `split(\"\\\\s+\")` absorbe les blancs multiples.",
+    "La boucle sort dès que la ligne vaut `\"fin\"` : les lignes suivantes ne sont jamais traitées.",
+    "`TreeMap` garde ses clés triées par ordre alphabétique : c'est ce que `keySet()` affiche à la fin."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un rappel sur nos REPL : que fait cette boucle, et que contient son registre ?"
+    ],
+    "success": [
+      "Table de commandes, lignes silencieuses, arrêt sur fin : tu lis cette architecture couramment."
+    ],
+    "done": "Le REPL n'a plus de secret."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

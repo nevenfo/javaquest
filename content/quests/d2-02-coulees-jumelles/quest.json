@@ -1,0 +1,42 @@
+{
+  "id": "d2-02-coulees-jumelles",
+  "title": "Les coulées jumelles",
+  "region": "fonderie",
+  "giver": "fondeur",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "d2-01-moule-fissure"
+  ],
+  "skills": [
+    "obj.classe",
+    "obj.static"
+  ],
+  "summary": "Prédis la sortie d'un programme qui mêle références partagées (aliasing), égalité == et compteur static.",
+  "source": "alias de références, == sur objets, champ static partagé vs champ d'instance (complément artisans)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "5 4\ntrue\nfalse\n9 2\n1 14 3\n",
+  "brief": "Dans la salle des coulées, le fondeur manipule des fioles. Lis le programme **sans l'exécuter** et écris exactement ce qu'il affichera, ligne par ligne.\nAttention : que désigne vraiment `b` après `Fiole b = a;` ? Que compte `total` : une fiole, ou toutes ? Et que devient `d` quand `c` pointe ailleurs ?",
+  "hints": [
+    "Une variable d'objet contient une **référence**. `Fiole b = a;` ne copie pas la fiole : `a` et `b` désignent le **même** objet. Idem pour un tableau.",
+    "`==` compare les références : deux fioles construites séparément ne sont jamais `==`, même avec le même niveau. `total` est `static` : une seule valeur, partagée par toutes les fioles.",
+    "Fais un schéma : une case par objet `Fiole` (avec son niveau) et des flèches pour `a`, `b`, `c`, `d`. Affecter `c = new Fiole(1)` déplace la flèche de `c`, mais pas celle de `d`."
+  ],
+  "dialog": {
+    "intro": [
+      "Dans cette salle, chaque coulée remplit des fioles. Mais attention : certaines variables désignent la **même** fiole, d'autres seulement une jumelle.",
+      "Avant de lancer la coulée, devine ce que mon registre va annoncer, ligne par ligne."
+    ],
+    "success": [
+      "Exactement ! Tu as suivi les flèches : `a` et `b` ne font qu'un, `d` reste sur l'ancienne fiole, et `total` compte tout le monde.",
+      "Le contremaître, tout au fond, déteste les valeurs incohérentes. Prépare ton alliage."
+    ],
+    "done": "Les références n'ont plus de secret pour toi."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

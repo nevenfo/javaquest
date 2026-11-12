@@ -1,0 +1,101 @@
+{
+  "id": "a10-visibilite",
+  "title": "Qui a le droit de voir ?",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": false,
+  "requires": [
+    "a09-bourse"
+  ],
+  "kind": "quiz",
+  "assessment": "practice",
+  "skills": [
+    "obj.visibilite"
+  ],
+  "summary": "Quiz sur private, protected, public et la visibilité par défaut.",
+  "source": "point : visibilité des membres, paquetages",
+  "questions": [
+    {
+      "q": "Un champ déclaré `private int x;` dans la classe `Rivet` est accessible…",
+      "options": [
+        "depuis n'importe quelle classe",
+        "uniquement dans la classe Rivet",
+        "dans Rivet et ses sous-classes seulement",
+        "dans tout le paquetage"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Un champ déclaré `int x;` (sans mot-clé de visibilité) est accessible…",
+      "options": [
+        "partout",
+        "seulement dans sa classe",
+        "dans les classes du même paquetage",
+        "dans toutes les sous-classes, même d'un autre paquetage"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Quels sont les avantages de champs `private` avec accesseurs ? (plusieurs réponses)",
+      "options": [
+        "Empêcher de mettre l'objet dans un état invalide",
+        "Pouvoir changer la représentation interne sans casser les autres classes",
+        "Rendre le programme beaucoup plus rapide",
+        "Contrôler qui peut lire ou modifier la donnée"
+      ],
+      "multi": true
+    },
+    {
+      "q": "`protected` autorise l'accès depuis…",
+      "options": [
+        "la classe seule",
+        "la classe, son paquetage et ses sous-classes",
+        "tout le monde",
+        "uniquement les autres paquetages"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      0,
+      1,
+      3
+    ],
+    [
+      1
+    ]
+  ],
+  "explanations": [
+    "`private` : visible seulement dans la classe qui le déclare.",
+    "Sans mot-clé, la visibilité est « paquetage » : les classes du même paquetage voient le membre.",
+    "L'encapsulation protège la cohérence (validation) et permet de changer l'intérieur ; elle n'accélère rien.",
+    "`protected` : même paquetage + sous-classes (même dans d'autres paquetages)."
+  ],
+  "brief": "Rosa vérifie que tu maîtrises les portes de la forge : qui peut voir quoi ? Réponds à chaque question.",
+  "hints": [
+    "Pense à la « porte » : `private` = seulement la classe ; sans mot-clé = le paquetage ; `protected` = paquetage + sous-classes ; `public` = tout le monde.",
+    "Une bonne visibilité cache les détails internes pour pouvoir les changer sans casser les autres classes."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Avant de te confier les clés de la forge, un petit questionnaire sur les droits d'accès : qui peut ouvrir quelle porte ?"
+    ],
+    "success": [
+      "Tu connais tes portes ! Ni trop ouvertes, ni trop fermées."
+    ],
+    "done": "Les clés de la forge sont bien gardées."
+  },
+  "reward": {
+    "xp": 20
+  }
+}

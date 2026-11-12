@@ -1,0 +1,62 @@
+{
+  "id": "m17-sirene",
+  "title": "La sirène de la mine",
+  "region": "mines",
+  "giver": "spectre",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "m15-coffre"
+  ],
+  "skills": [
+    "loop.while",
+    "str.parcours",
+    "arr.base"
+  ],
+  "summary": "Lis des mots jusqu'à FIN, compte leurs voyelles, garde les comptes dans un tableau.",
+  "source": "boucle while avec sentinelle ; parcours de chaîne ; tableau d'entiers",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "usesStdin": true,
+  "sampleStdin": "chat\\nhibou\\nFIN",
+  "brief": "Le spectre lit des mots un par un, **jusqu'à ce qu'il lise `FIN`** (au plus 10 mots avant `FIN`, en minuscules, sans accent). Pour chaque mot, affiche `<mot> : <n>` où `n` est son nombre de voyelles (`a e i o u`). Garde ces nombres dans un **tableau** `int[]`, puis termine par deux lignes `Total : <somme>` et `Maximum : <plus grand compte>` (0 s'il n'y a aucun mot).\n\nPour `chat`, `hibou`, `FIN` :\n```\nchat : 1\nhibou : 3\nTotal : 4\nMaximum : 3\n```\nLe mot `FIN` n'est pas un mot à compter.\n\nSi tu utilises un message d'invite dans `IO.readln(...)`, termine-le par `? ` (les lignes contenant `?` sont ignorées à la vérification).",
+  "hints": [
+    "Tu ne sais pas combien de mots viendront : c'est un `while` qui s'arrête quand la ligne lue vaut `\"FIN\"` (compare avec `equals`).",
+    "Pour compter les voyelles, parcours le mot avec `charAt(i)` de `0` à `length() - 1`.",
+    "Range chaque compte dans `comptes[n]` puis `n++` ; parcours ensuite le tableau pour la somme et le maximum."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Chaque fois que le filon cède, ma sirène hurle un nombre : celui des voyelles du mot de passe prononcé. Absurde ? Peut-être, mais c'est la règle.",
+      "Je ne sais jamais combien de mots viendront : lis jusqu'à `FIN`, et garde tes comptes en mémoire dans un tableau."
+    ],
+    "success": [
+      "Les comptes sont justes, la sirène peut se taire."
+    ],
+    "done": "La sirène compte enfin sans erreur."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "t13-amphibie",
+  "title": "Le char amphibie",
+  "region": "tour",
+  "giver": "sentinelle",
+  "main": false,
+  "requires": [
+    "t12-orchestre"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "inh.modelisation",
+    "inh.default"
+  ],
+  "summary": "Modélise des véhicules à capacités combinées et résous un conflit de méthodes default.",
+  "source": "annale : capacités combinées ; point : méthodes default d'interface",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Roulant.java",
+      "solutions/s1/Flottant.java",
+      "solutions/s1/Charrette.java",
+      "solutions/s1/Barque.java",
+      "solutions/s1/Amphibie.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Roulant.java",
+      "wrong/w1/Flottant.java",
+      "wrong/w1/Charrette.java",
+      "wrong/w1/Barque.java",
+      "wrong/w1/Amphibie.java"
+    ],
+    [
+      "wrong/w2/Roulant.java",
+      "wrong/w2/Flottant.java",
+      "wrong/w2/Charrette.java",
+      "wrong/w2/Barque.java",
+      "wrong/w2/Amphibie.java"
+    ]
+  ],
+  "starter": {
+    "Roulant.java": "public interface Roulant {\n}\n",
+    "Flottant.java": "public interface Flottant {\n}\n",
+    "Charrette.java": "public class Charrette {\n}\n",
+    "Barque.java": "public class Barque {\n}\n",
+    "Amphibie.java": "public class Amphibie {\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Le dépôt de la Tour recense des véhicules. Conçois le modèle toi-même :\n- interface `Roulant` : `int vitesseRoute()` + méthode **default** `String deplacement()` → `\"roule à \" + vitesseRoute() + \" km/h\"` ;\n- interface `Flottant` : `int vitesseEau()` + **default** `String deplacement()` → `\"flotte à \" + vitesseEau() + \" km/h\"` ;\n- `Charrette` : roulante, route **10** ; `Barque` : flottante, eau **4** ;\n- `Amphibie` : roulante **et** flottante, route **30**, eau **8**.\n\nLes deux interfaces ont une default **de même nom** : Java refuse l'ambiguïté. `Amphibie` doit donc redéfinir `deplacement()` pour renvoyer `\"roule à 30 km/h et flotte à 8 km/h\"`, en réutilisant les deux versions par défaut. `Charrette` et `Barque` ne redéfinissent rien.",
+  "hints": [
+    "Une interface peut contenir `default String deplacement() { … }` qui utilise ses propres méthodes abstraites.",
+    "Si deux interfaces fournissent la même default, la classe doit la redéfinir.",
+    "Dans la redéfinition, `Roulant.super.deplacement()` appelle la version de `Roulant` ; fais de même avec `Flottant`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un char qui roule et qui flotte ? Il faut combiner deux capacités sans recopier leur code. Et gare au conflit entre deux méthodes default !"
+    ],
+    "success": [
+      "Modèle propre : chaque véhicule a ses capacités, et l'amphibie a su arbitrer entre ses deux héritages."
+    ],
+    "done": "Le dépôt est à jour."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "f08-grille",
+  "title": "La grille du Roi-Chêne",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "f07-offrande"
+  ],
+  "skills": [
+    "cond.if",
+    "cond.equals",
+    "exc.trycatch"
+  ],
+  "summary": "Combine mot de passe, saisie validée et conditions pour ouvrir la grille du Roi-Chêne.",
+  "hud": "Dernière épreuve du Bois : la grille du Roi-Chêne.",
+  "source": "hello : if/else, equals, try/catch NumberFormatException ; annale : == contre equals",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ],
+    [
+      "wrong3/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "sapin-d'or\\nx\\n5",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Au cœur du Bois se dresse la grille du Roi-Chêne. Ton programme doit :\n\n1. Lire le **mot de passe** (`IO.readln`). Si ce n'est pas exactement `sapin-d'or`, afficher `Grille fermée.` et **s'arrêter** (sans rien demander d'autre).\n2. Sinon, demander le **nombre de torches** allumées : tant que ce n'est pas un entier, afficher `Saisie invalide.` et redemander.\n3. Afficher enfin `Grille ouverte.` puis une ligne selon les torches :\n   - moins de 3 : `Trop sombre`\n   - de 3 à 6 : `Bien éclairé`\n   - 7 ou plus : `Aveuglant`\n\nExemple (lignes saisies : `sapin-d'or`, `x`, `5`) :\n```\nSaisie invalide.\nGrille ouverte.\nBien éclairé\n```\n(l'invite et l'écho de tes saisies peuvent aussi apparaître). Tu as tout ce qu'il faut : `equals`, `try / catch` dans une boucle, et `if / else if`.",
+  "hints": [
+    "Trois morceaux indépendants : (1) `equals` sur le mot de passe, avec `return;` pour s'arrêter si faux ; (2) une boucle avec `try / catch` ; (3) un `if / else if / else` sur le nombre.",
+    "Pour s'arrêter tôt dans `main`, `return;` suffit. N'oublie pas : un mot de passe se compare avec `equals`, pas avec `==`.",
+    "Écris et teste chaque morceau l'un après l'autre : d'abord le mot de passe seul, puis la boucle de saisie, enfin les tranches de torches."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Te voici devant la grille du Roi-Chêne, la dernière épreuve du Bois des Embranchements.",
+      "Elle exige un mot de passe, puis le nombre de torches que tu portes. Ce sort réunit tout ce que tu as appris ici : conditions, comparaison de mots et saisie rattrapée.",
+      "Écris-le seul·e, d'un bout à l'autre."
+    ],
+    "success": [
+      "La grille s'ouvre en grinçant… Tu as réuni `if`, `equals` et `try / catch` dans un seul sort : bravo !",
+      "Les **Mines de Boucle-Profonde** t'attendent, au pied de la montagne. Là-bas, ce sont les boucles qui comptent !"
+    ],
+    "done": "Le Roi-Chêne salue celui qui a rouvert sa grille."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-foret",
+      "unlock:Route des Mines de Boucle-Profonde ouverte (sentier de la montagne)"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

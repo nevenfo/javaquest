@@ -1,0 +1,60 @@
+{
+  "id": "v10-pancarte",
+  "title": "La pancarte du village",
+  "region": "village",
+  "giver": "ysolde",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.programme",
+    "base.affichage",
+    "base.variables"
+  ],
+  "summary": "Écris seul·e un programme complet qui affiche la pancarte de Javelune à partir de variables.",
+  "source": "hello : structure d'un programme, affichage, variables",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": ""
+  },
+  "brief": "Ysolde veut une nouvelle pancarte à l'entrée du village. Écris un **programme complet** (rien n'est fourni : à toi la méthode `main`).\n\n- déclare `String village = \"Javelune\"`, `int habitants = 1200` et `int fondation = 1726` ;\n- affiche, avec ces variables, exactement trois lignes ; l'ancienneté se **calcule** avec l'année 2026.\n```\nBienvenue à Javelune\nHabitants : 1200\nFondée il y a 300 ans\n```",
+  "hints": [
+    "Un programme Java 25 minimal : `void main() { ... }`. Chaque ligne s'affiche avec `IO.println(...)`.",
+    "On assemble texte et variables avec `+` : `\"Habitants : \" + habitants`.",
+    "L'ancienneté est `2026 - fondation`, à mettre entre parenthèses quand on la concatène."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Notre vieille pancarte est illisible. J'aimerais que le village l'affiche lui-même, avec ses chiffres exacts.",
+      "Écris le sort depuis la première ligne : une méthode, des variables, trois lignes."
+    ],
+    "success": [
+      "Voilà une pancarte qui se met à jour toute seule dès qu'on change une variable."
+    ],
+    "done": "La pancarte accueille tous les voyageurs."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

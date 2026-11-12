@@ -1,0 +1,38 @@
+{
+  "id": "e02-chaudron",
+  "title": "Épreuve — le chaudron",
+  "region": "citadelle",
+  "kind": "code",
+  "assessment": "exam",
+  "multiFile": true,
+  "skills": [
+    "obj.classe",
+    "obj.encapsulation",
+    "obj.exceptions",
+    "col.map"
+  ],
+  "summary": "Une classe avec état, invariants et exceptions.",
+  "source": "Objectif « classe avec état et exceptions » (type GasPump de l'examen 2025) — sujet original",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Chaudron.java",
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Chaudron.java",
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    // Teste ta classe Chaudron ici.\n}\n"
+  },
+  "brief": "Crée (bouton **+ Fichier**) une classe publique `Chaudron` :\n- `Chaudron(int capacite)` : capacité totale en doses ; `IllegalArgumentException` si `capacite <= 0`. Le chaudron est vide au départ.\n- `void verser(String ingredient, int doses)` : ajoute des doses ; `IllegalArgumentException` si `doses <= 0` ; `IllegalStateException` si le total dépasserait la capacité (et rien n'est alors ajouté).\n- `int contenu()` : nombre total de doses actuellement dans le chaudron.\n- `int doses(String ingredient)` : doses de cet ingrédient (0 s'il est absent).\n- `String preparer()` : `IllegalStateException` si le chaudron est vide ; sinon renvoie `\"Potion de \"` suivi de l'ingrédient le plus abondant (en cas d'égalité, celui **versé en premier**), puis vide le chaudron.\nAucun champ ne doit être public.",
+  "reward": {
+    "xp": 0
+  }
+}

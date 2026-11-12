@@ -1,0 +1,61 @@
+{
+  "id": "b10-chronique",
+  "title": "La chronique de la bibliothèque",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b09-vocabulaire"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "col.tri",
+    "col.linkedlist"
+  ],
+  "summary": "Une chronique bornée dans une LinkedList, avec un classement par Comparator.",
+  "source": "collections : choisir LinkedList (ajout en tête) ; celebs : tri avec Comparator",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Chronique.java"
+    ],
+    [
+      "solutions/s2/Chronique.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Chronique.java"
+    ],
+    [
+      "wrong/w2/Chronique.java"
+    ]
+  ],
+  "starter": {
+    "Chronique.java": "public class Chronique {\n}\n"
+  },
+  "brief": "Lyra tient la chronique des derniers événements : les plus récents d'abord, et seulement les `capacite` derniers sont gardés. Écris la classe `Chronique` :\n- `Chronique(int capacite)` (capacité ≥ 1) ;\n- `void noter(String evenement)` : ajoute l'événement **en tête** ; si la chronique dépasse sa capacité, l'événement le plus ancien (en queue) disparaît ;\n- `List<String> recents()` : une **copie** de la chronique, du plus récent au plus ancien ;\n- `List<String> parLongueur()` : une copie triée par longueur **décroissante**, puis par ordre alphabétique ; elle ne change pas l'ordre de la chronique.\n\nLes événements doivent être stockés dans une `LinkedList` : on n'ajoute et ne retire qu'aux extrémités, sans décaler de cases.\n\n```\nc = new Chronique(3); noter(\"a\"); noter(\"b\"); noter(\"c\"); noter(\"d\");\nc.recents()      // [d, c, b]\n```",
+  "hints": [
+    "`LinkedList` propose `addFirst` et `removeLast` : ajout en tête et retrait en queue sans décalage.",
+    "Renvoie `new ArrayList<>(evenements)` pour donner une copie : modifier la copie ne doit pas toucher la chronique.",
+    "`Comparator.comparingInt(String::length).reversed().thenComparing(Comparator.naturalOrder())` ; trie la **copie**, pas la liste interne."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "La chronique ne doit retenir que l'essentiel : les derniers événements, les plus récents en tête. Une structure faite pour ça ?"
+    ],
+    "success": [
+      "La chronique se tient toute seule, et tu sais la classer à la demande."
+    ],
+    "done": "La chronique est à jour."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

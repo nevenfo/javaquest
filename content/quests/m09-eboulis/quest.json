@@ -1,0 +1,58 @@
+{
+  "id": "m09-eboulis",
+  "title": "L'éboulis inversé",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "m08-miroir"
+  ],
+  "skills": [
+    "arr.base"
+  ],
+  "summary": "Remplis un tableau puis affiche ses valeurs à l'envers.",
+  "source": "median : double[] values = new double[10] ; hello : args[i] ; indices 0..length-1",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3\\n4\\n8\\n15",
+  "starter": {
+    "Main.java": "void main() {\n    int n = Integer.parseInt(IO.readln(\"Nombre de filons ? \"));\n    int[] valeurs = new int[/* ??? */];\n    for (int i = 0; i < n; i++) {\n        valeurs[i] = Integer.parseInt(IO.readln(\"Valeur ? \"));\n    }\n    // Affiche les valeurs en ordre inverse, une par ligne\n    for (int i = /* ??? */; i >= 0; i--) {\n        IO.println(valeurs[i]);\n    }\n}\n"
+  },
+  "brief": "Le programme lit le nombre `n` de filons, puis la valeur de chacun, qu'il range dans un **tableau**. Il doit ensuite afficher les valeurs **dans l'ordre inverse**, une par ligne (la dernière lue en premier).\n\nComplète les deux `/* ??? */` : la taille du tableau, et l'indice de départ de la boucle qui descend. Rappel : un tableau de `n` cases a ses indices de `0` à `n - 1`.\nExemple pour `3` filons valant `4`, `8`, `15` : on affiche `15`, `8`, `4`.",
+  "lesson": "**Exemple** — un tableau de 4 températures :\n```java\nint[] temp = new int[4];     // 4 cases (indices 0 à 3), toutes à 0\ntemp[0] = 12;                // écrire dans la case 0\nIO.println(temp[3]);         // lire la case 3 (dernière)\nIO.println(temp.length);     // 4 : la taille, SANS parenthèses\n```\n`temp[4]` n'existe pas : ce serait un `ArrayIndexOutOfBoundsException`.",
+  "hints": [
+    "Un tableau se crée avec sa taille : `new int[taille]`. Ici, la taille est le nombre de filons lu.",
+    "La dernière case d'un tableau de `n` cases porte l'indice `n - 1`.",
+    "La boucle descendante démarre sur la dernière case : `int i = n - 1`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un éboulis a mélangé mes filons ! Je veux les relire dans l'ordre inverse de leur découverte.",
+      "Je les range dans un tableau, puis je le parcours à rebours. Complète-moi ça."
+    ],
+    "success": [
+      "Les filons sont remis dans l'ordre inverse ! Indices de `0` à `length - 1` : tu ne t'es pas fait piéger."
+    ],
+    "done": "Mes filons sont bien rangés."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

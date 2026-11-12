@@ -1,0 +1,60 @@
+{
+  "id": "a16-des-forge",
+  "title": "Les dés de la forge",
+  "region": "artisans",
+  "giver": "pompiste",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "a11-gemmes",
+    "a07-compteur-forge"
+  ],
+  "skills": [
+    "obj.static",
+    "obj.random"
+  ],
+  "summary": "Écris seul·e Tirage : une méthode static de lancer de dé avec un Random reçu et un compteur partagé.",
+  "source": "point : membres static ; java.util.Random, nextInt et bornes",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Tirage.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Tirage.java"
+    ],
+    [
+      "wrong2/Tirage.java"
+    ]
+  ],
+  "starter": {
+    "Tirage.java": "public class Tirage {\n}\n"
+  },
+  "brief": "Le pompiste lance des dés pour décider de la pression de ses pompes. Écris la classe `Tirage` (fichier `Tirage.java`, point de départ vide) :\n\n- `public static int lancer(Random rng, int faces)` renvoie un entier **entre 1 et `faces` inclus**, tiré avec le générateur `rng` **reçu** (jamais un nouveau `Random`) ;\n- `faces < 1` : `IllegalArgumentException` (et ce lancer n'est pas compté) ;\n- un compteur **partagé**, `private static`, compte les lancers réussis ; `public static int getLances()` le renvoie.\n\n```java\nTirage.lancer(new Random(42), 6);   // de 1 à 6\n```\nN'oublie pas `import java.util.Random;`.",
+  "hints": [
+    "`rng.nextInt(n)` renvoie un entier de `0` à `n - 1` : il faut décaler pour obtenir `1..faces`.",
+    "Un compteur partagé par tous les appels est un champ `static`, incrémenté dans `lancer`.",
+    "Valide `faces` avant de tirer, et lève l'exception avant d'incrémenter."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes pompes obéissent au hasard, mais je veux un hasard **reproductible** : le même générateur donne les mêmes lancers.",
+      "Et je veux savoir combien de dés ont été lancés en tout dans l'atelier."
+    ],
+    "success": [
+      "Un hasard sous contrôle, et un compte exact."
+    ],
+    "done": "Mes dés sont équitables et comptés."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

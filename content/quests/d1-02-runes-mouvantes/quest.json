@@ -1,0 +1,43 @@
+{
+  "id": "d1-02-runes-mouvantes",
+  "title": "Les runes mouvantes",
+  "region": "crypte",
+  "giver": "gardien",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "d1-01-murs-graves"
+  ],
+  "skills": [
+    "cond.switch",
+    "loop.for",
+    "exc.trycatch"
+  ],
+  "summary": "Prédis la sortie d'un programme qui mêle for, switch (sans break !) et try/catch.",
+  "source": "switch classique et passage au cas suivant ; exception capturée dans une boucle (complément forêt/mines)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "feu 4\nrune brouillée n°1\nfeu 7\nrune brouillée n°3\neau 2\npierre 9\nfeu 9\nBilan : 22\n",
+  "brief": "Dans la salle des runes, six symboles s'illuminent tour à tour. Le gardien les traite avec ce programme.\nLis-le **sans l'exécuter** et écris exactement ce qu'il affichera, ligne par ligne.\nAttention : que devient la boucle quand une rune est brouillée ? Et que se passe-t-il quand un `case` n'a pas de `break` ?",
+  "hints": [
+    "`Integer.parseInt` lève une exception sur un texte qui n'est pas un entier. Le `catch` s'exécute alors, et les lignes restantes du `try` sont **sautées** ; la boucle, elle, continue.",
+    "Sans `break`, un `switch` « tombe » dans le `case` suivant et continue d'exécuter jusqu'au prochain `break` (ou la fin).",
+    "Déroule rune par rune dans un tableau à deux colonnes : `i`, valeur lue, reste de `v % 3`, lignes affichées, `total`."
+  ],
+  "dialog": {
+    "intro": [
+      "Les runes de cette salle changent de couleur à chaque pas. Certaines sont brouillées, d'autres s'enchaînent d'un seul élan.",
+      "Avant de les toucher : devine ce que mon grimoire va réciter, ligne par ligne."
+    ],
+    "success": [
+      "Exactement ! Tu as vu le `catch` sauter une rune et le `case 0` tomber dans le suivant.",
+      "Le golem, tout au fond, ne sera pas aussi bavard. Mais je te donne un conseil : il adore les lettres."
+    ],
+    "done": "Les runes se sont calmées. Merci de les avoir lues."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

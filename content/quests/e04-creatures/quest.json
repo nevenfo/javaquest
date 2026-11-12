@@ -1,0 +1,51 @@
+{
+  "id": "e04-creatures",
+  "title": "Épreuve — le bestiaire",
+  "region": "citadelle",
+  "kind": "code",
+  "assessment": "exam",
+  "multiFile": true,
+  "skills": [
+    "inh.modelisation",
+    "inh.interface",
+    "inh.polymorphisme"
+  ],
+  "summary": "Modéliser des créatures aux capacités combinées.",
+  "source": "Objectif « animaux qui marchent, nagent et volent » (examen 2025) — sujet original",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Creature.java",
+      "solutions/Marcheur.java",
+      "solutions/Nageur.java",
+      "solutions/Volant.java",
+      "solutions/Chat.java",
+      "solutions/Saumon.java",
+      "solutions/Corbeau.java",
+      "solutions/Cygne.java",
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Creature.java",
+      "wrong/Marcheur.java",
+      "wrong/Nageur.java",
+      "wrong/Volant.java",
+      "wrong/Chat.java",
+      "wrong/Saumon.java",
+      "wrong/Corbeau.java",
+      "wrong/Cygne.java",
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    // Teste ton bestiaire ici.\n}\n"
+  },
+  "brief": "Chaque créature a un nom (donné au constructeur). Certaines marchent, d'autres nagent, d'autres volent, parfois plusieurs.\nCrée les interfaces publiques `Marcheur` (`void marcher(int pas)`), `Nageur` (`void nager(int brasses)`) et `Volant` (`void voler(int battements)`), puis les classes `Chat` (marche), `Saumon` (nage), `Corbeau` (marche et vole), `Cygne` (marche, nage et vole), chacune avec un constructeur `(String nom)`.\nAffichages exacts : `<nom> marche <pas> pas`, `<nom> nage <n> brasses`, `<nom> vole <n> battements`.\nÉvite de dupliquer le code : tu peux ajouter d'autres classes ou interfaces ancêtres.",
+  "reward": {
+    "xp": 0
+  }
+}

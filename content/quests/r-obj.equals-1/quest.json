@@ -1,0 +1,34 @@
+{
+  "id": "r-obj.equals-1",
+  "title": "Rappel : la clé qui ne s'égale pas",
+  "region": "artisans",
+  "main": false,
+  "requires": [
+    "a05-doublon"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "obj.equals"
+  ],
+  "summary": "Prédis l'effet d'un equals(Cle) mal écrit.",
+  "source": "point : equals(Object) vs surcharge (réactivation)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "true\nfalse\n2\nfalse\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne.\nIndice de méthode : quel `equals` Java appelle-t-il quand la variable est typée `Object` ou quand la collection compare ses éléments ?",
+  "hints": [
+    "Une méthode `equals(Cle)` n'est pas la même que `equals(Object)` : Java choisit selon le type **déclaré** des arguments.",
+    "Les collections (`HashSet`, `List.contains`) appellent `equals(Object)`."
+  ],
+  "dialog": {
+    "success": [
+      "Exact : la surcharge n'est pas la redéfinition !"
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

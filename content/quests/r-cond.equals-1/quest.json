@@ -1,0 +1,51 @@
+{
+  "id": "r-cond.equals-1",
+  "title": "Les deux sentinelles",
+  "region": "foret",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "f04-pont"
+  ],
+  "skills": [
+    "cond.equals"
+  ],
+  "summary": "Compare deux mots lus au clavier (réactivation).",
+  "source": "annale : equals et non == (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "lune\\nlune",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Deux sentinelles se parlent chacune à leur tour. Lis deux mots (deux lignes) et affiche `Identiques` s'ils ont exactement les mêmes lettres (majuscules comprises), sinon `Différents`.",
+  "hints": [
+    "Chaque `IO.readln` crée un nouvel objet `String`.",
+    "Compare le contenu avec `a.equals(b)`."
+  ],
+  "dialog": {
+    "intro": [
+      "Tu te souviens du gobelin et de ses mots ? Deux sentinelles échangent un mot de passe : sont-ils identiques ?"
+    ],
+    "success": [
+      "Bien vu : le contenu, pas l'objet !"
+    ],
+    "done": "Les sentinelles te font confiance."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

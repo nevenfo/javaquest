@@ -1,0 +1,60 @@
+{
+  "id": "f10-boussole",
+  "title": "La boussole du gobelin",
+  "region": "foret",
+  "giver": "gobelin",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "f09-calendrier"
+  ],
+  "skills": [
+    "cond.switch",
+    "base.args",
+    "base.types"
+  ],
+  "summary": "Déplace un point selon une direction (switch sur un texte) et une distance reçues en arguments.",
+  "source": "switch sur String ; arguments ; conversion String -> double",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main(String[] args) {\n    \n}\n"
+  },
+  "brief": "Le gobelin se repère avec une boussole. Il part de la position `(0.0, 0.0)` ; ton programme reçoit en arguments une **direction** (`nord`, `sud`, `est` ou `ouest`) et une **distance** (nombre décimal).\n\n- `nord` : `y` augmente ; `sud` : `y` diminue ; `est` : `x` augmente ; `ouest` : `x` diminue ;\n- affiche `Position : (x, y)` avec `x` et `y` de type `double` ;\n- direction inconnue : affiche `Direction inconnue : <mot>` ;\n- moins de deux arguments : affiche `Usage : <direction> <distance>`.\n\nArguments `nord 2.5` :\n```\nPosition : (0.0, 2.5)\n```",
+  "hints": [
+    "Le `switch` fonctionne aussi sur un `String` : `case \"nord\" -> ...`.",
+    "Déclare `double x = 0, y = 0;` puis modifie-les dans chaque `case` ; `default` traite l'inconnu.",
+    "Vérifie `args.length < 2` d'abord, puis convertis `args[1]` avec `Double.parseDouble`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ma boussole, elle obéit à un mot et à une distance, rien d'autre. Mais les mots qui arrivent ne sont pas toujours les bons !",
+      "Un `switch` sur du texte, des arguments à convertir, un cas « inconnu » : tu connais tout cela."
+    ],
+    "success": [
+      "Je ne me perds plus en forêt."
+    ],
+    "done": "Ma boussole est fiable."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

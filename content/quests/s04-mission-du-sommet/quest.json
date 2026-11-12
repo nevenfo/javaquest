@@ -1,0 +1,103 @@
+{
+  "id": "s04-mission-du-sommet",
+  "title": "La mission du Sommet",
+  "region": "sommet",
+  "giver": "astronome",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "s03-ordres-de-l-automate"
+  ],
+  "skills": [
+    "proj.architecture",
+    "obj.record",
+    "obj.exceptions"
+  ],
+  "summary": "Projet final : record Etape, interface Trajet, collection d'étapes et exception MissionException pour une mission de l'automate.",
+  "hud": "Dernier projet : la mission complète de l'automate.",
+  "source": "architecture multi-fichiers : record, interface (stratégie injectée), collections (List, Map ordonnée), exception personnalisée, validation (transfert de toute la formation)",
+  "support": [
+    "support/Compagnon.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Etape.java",
+      "solutions/s1/Trajet.java",
+      "solutions/s1/ParAxes.java",
+      "solutions/s1/MissionException.java",
+      "solutions/s1/Mission.java",
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Etape.java",
+      "wrong/w1/Trajet.java",
+      "wrong/w1/ParAxes.java",
+      "wrong/w1/MissionException.java",
+      "wrong/w1/Mission.java",
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Etape.java",
+      "wrong/w2/Trajet.java",
+      "wrong/w2/ParAxes.java",
+      "wrong/w2/MissionException.java",
+      "wrong/w2/Mission.java",
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Etape.java",
+      "wrong/w3/Trajet.java",
+      "wrong/w3/ParAxes.java",
+      "wrong/w3/MissionException.java",
+      "wrong/w3/Mission.java",
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "multiFile": true,
+  "starter": {
+    "Etape.java": "public record Etape() {\n}\n",
+    "Trajet.java": "public interface Trajet {\n}\n",
+    "ParAxes.java": "public class ParAxes {\n}\n",
+    "MissionException.java": "public class MissionException extends Exception {\n}\n",
+    "Mission.java": "public class Mission {\n}\n",
+    "Main.java": "public class Main {\n    public static void main(String[] args) {\n    }\n}\n"
+  },
+  "brief": "**Projet final.** L'automate doit accomplir une **mission** : visiter des **étapes** (points de la grille) dans l'ordre, et rendre un bilan. Conçois seul les six fichiers (`Compagnon` est fourni) :\n\n- **`Etape`** : un `record Etape(String nom, int x, int y)`. Constructeur compact : nom `null` ou blanc, ou `x` / `y` négatif → `IllegalArgumentException` ;\n- **`Trajet`** : interface `void rejoindre(Compagnon c, Etape e) throws MissionException` (comment aller d'un point à un autre) ;\n- **`ParAxes`** : implémente `Trajet` : d'abord l'axe **x** (`\"droite\"` / `\"gauche\"`), puis l'axe **y** (`\"bas\"` / `\"haut\"`) ;\n- **`MissionException`** : exception **vérifiée** (`extends Exception`) avec un constructeur `(String message, Throwable cause)` ;\n- **`Mission`** : constructeur `Mission(Trajet trajet)` ;\n  - `void ajouter(Etape e)` : ajoute à la liste (même nom qu'une étape existante → `IllegalArgumentException`, sans rien ajouter) ;\n  - `List<Etape> etapes()` : les étapes dans l'ordre d'ajout, sans que l'appelant puisse modifier la mission ;\n  - `Map<String, Integer> executer(Compagnon c) throws MissionException` : pour chaque étape dans l'ordre, rejoint l'étape avec le `Trajet`, puis fait `c.dire(\"Étape \" + nom)` ; renvoie le **nombre de pas** de chaque étape (`c.pas()` après moins avant), **dans l'ordre de la mission**. Si l'automate heurte un mur (`Compagnon.MurException`), `executer` lève `MissionException` : message qui **cite le nom de l'étape**, cause conservée ;\n- **`Main`** : `main` crée la mission `ParAxes` avec les étapes `Aube (3, 0)`, `Zénith (3, 2)`, `Crépuscule (7, 2)`, l'exécute sur `Compagnon.demarrer()` et affiche une ligne `nom : n pas` par étape (ou `Mission interrompue : <message>` en cas de `MissionException`).\n\nExemple, grille ouverte, départ en (0, 0) : étapes `Aube (3, 0)` puis `Zénith (3, 2)` → bilan `{Aube=3, Zénith=2}`.\n\nL'automate (classe `Compagnon`, fournie : lis-la dans l'onglet) :\n- `c.avancer(\"droite\")` : un pas vers `\"haut\"`, `\"bas\"`, `\"gauche\"` ou `\"droite\"` ; contre un mur, une `MurException` explique le problème ;\n- `c.devantMur(\"droite\")` : vrai si un mur (ou le bord de la grille) bloque cette direction ;\n- `c.surCible()` : vrai s'il est sur la cible ; `c.x()`, `c.y()` : sa position ; `c.dire(\"…\")` : une phrase. `c.pas()` : nombre de pas déjà faits.",
+  "hints": [
+    "Un `record` génère constructeur, accesseurs, `equals` et `toString` ; sa validation se fait dans un **constructeur compact** (`public Etape { … }`) qui lève `IllegalArgumentException`.",
+    "`Mission` garde un `List<Etape>` privé : `etapes()` renvoie `List.copyOf(...)`. Pour le bilan, une `LinkedHashMap<String, Integer>` conserve l'ordre d'insertion. Le `Trajet` est reçu par le constructeur et rangé dans un champ.",
+    "Dans `executer`, enveloppe l'appel `trajet.rejoindre(c, e)` dans un `try / catch (Compagnon.MurException ex)` et relance `new MissionException(message, ex)` ; le nombre de pas de l'étape est `c.pas()` après moins `c.pas()` avant."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Te voilà au dernier projet, voyageur. Plus de squelette, plus de trous à remplir : un cahier des charges, et toute ta formation à mobiliser.",
+      "Un record pour les étapes, une interface pour le trajet, des collections pour la mission, une exception pour les murs. Fais tenir tout cela ensemble, proprement."
+    ],
+    "resume": "La mission finale attend : Etape, Trajet, ParAxes, MissionException, Mission et Main.",
+    "success": [
+      "Un record validé, une interface qui rend le déplacement interchangeable, des collections bien tenues, une exception qui dit où ça a coincé : c'est de l'architecture, voyageur, pas seulement du code.",
+      "Regarde mon automate parcourir la mission sans la moindre hésitation. Des variables du village à ce projet complet, tu as parcouru toute la route de Javelune.",
+      "Le voyage s'achève ici, mais pas ton apprentissage : Javelune garde ses donjons, ses épreuves et ses réactivations pour garder tes sorts bien aiguisés. Merci d'avoir veillé avec moi, maître programmeur : l'Observatoire du Sommet est à toi. FIN."
+    ],
+    "done": "Mon automate te salue, maître programmeur : l'Observatoire du Sommet est à toi."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-sommet",
+      "item:automate-etoile:Automate de l'Observatoire",
+      "unlock:Observatoire du Sommet conquis : l'automate de l'Observatoire est à toi, et le voyage de Javelune est accompli"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

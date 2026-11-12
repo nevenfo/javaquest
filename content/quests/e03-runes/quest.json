@@ -1,0 +1,36 @@
+{
+  "id": "e03-runes",
+  "title": "Épreuve — les runes en double",
+  "region": "citadelle",
+  "kind": "code",
+  "assessment": "exam",
+  "skills": [
+    "col.set",
+    "str.parcours",
+    "loop.while"
+  ],
+  "summary": "Trouver un doublon et le plus long palindrome dans une liste de runes.",
+  "source": "Objectif « doublon et palindrome dans un grand fichier » (examen 2025) — sujet original, lecture sur l'entrée standard",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "kayak\\nrune\\nlame\\nrotor\\nrune\\naaaaaaa\\nFIN",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le programme lit des runes (une par ligne, avec `IO.readln()`) jusqu'à la ligne `FIN`. Exactement une rune apparaît deux fois.\nAffiche ensuite :\n```\nDoublon : <la rune présente deux fois>\nPlus long palindrome : <rune>\n```\nLe plus long palindrome ignore les runes formées d'un seul caractère répété (ex. `aaaa`, `x`) ; en cas d'égalité de longueur, garde la première lue ; s'il n'y en a aucun, affiche `aucun`.\nExemple : `kayak, rune, lame, rotor, rune, aaaaaaa, FIN` → `Doublon : rune` puis `Plus long palindrome : kayak`.\n(Dans le champ Entrée, sépare les lignes par `\\n`.)",
+  "reward": {
+    "xp": 0
+  }
+}

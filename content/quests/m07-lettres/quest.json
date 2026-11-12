@@ -1,0 +1,59 @@
+{
+  "id": "m07-lettres",
+  "title": "Les e du grimoire",
+  "region": "mines",
+  "giver": "spectre",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "m06-factorielle"
+  ],
+  "skills": [
+    "str.parcours"
+  ],
+  "summary": "Complète la boucle qui compte les lettres e d'un mot.",
+  "hud": "Un spectre murmure dans la galerie des runes.",
+  "source": "hello : isPalindromic avec length() et charAt(i) ; parcours d'une chaîne",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "elfe",
+  "starter": {
+    "Main.java": "void main() {\n    String mot = IO.readln(\"Mot ? \");\n    int compte = 0;\n    for (int i = 0; i < /* ??? */; i++) {\n        if (mot./* ??? */(i) == 'e') {\n            compte++;\n        }\n    }\n    IO.println(\"Lettres e : \" + compte);\n}\n"
+  },
+  "brief": "Le spectre ne parle qu'avec la lettre **e**. Il veut savoir combien de fois `e` (minuscule) apparaît dans un mot. Complète les deux `/* ??? */` :\n- la condition d'arrêt de la boucle (jusqu'à la longueur du mot),\n- la méthode qui donne le caractère à la position `i`.\n\nAffichage : `Lettres e : N`. Exemple pour `elfe` : `Lettres e : 2`.",
+  "lesson": "**Exemple** — compter les espaces d'une phrase :\n```java\nint espaces = 0;\nfor (int i = 0; i < phrase.length(); i++) {   // length() AVEC parenthèses\n    if (phrase.charAt(i) == ' ') {             // charAt(i) : le caractère n° i (le premier est n° 0)\n        espaces++;\n    }\n}\n```",
+  "hints": [
+    "Pour un `String`, la taille s'obtient avec `length()` (avec parenthèses, contrairement aux tableaux).",
+    "Le caractère à la position `i` s'obtient avec une méthode dont le nom contient « char » et « At ».",
+    "Les indices vont de `0` à `mot.length() - 1` : la condition `i < mot.length()` les couvre exactement."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Chhhh… Je suis le spectre des galeries. Je n'aime que la lettre e, et je veux savoir combien il y en a dans chaque mot…",
+      "Parcours le mot lettre par lettre. Il manque deux morceaux à ma boucle."
+    ],
+    "success": [
+      "Deux e dans « elfe » ! Tu sais parcourir un mot case par case : `length()` et `charAt(i)`."
+    ],
+    "done": "Chhhh… j'aime les mots pleins de e."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "m06-factorielle",
+  "title": "La factorielle des runes",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "practice",
+  "requires": [
+    "m05-escalier"
+  ],
+  "skills": [
+    "loop.for",
+    "base.types"
+  ],
+  "summary": "Calcule n! sans dépasser la capacité de ton type.",
+  "source": "annale Q10 : plus grande factorielle calculable avec int puis avec long",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "15",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Les runes des mines se combinent de `n!` façons (la **factorielle** : `n! = 1 × 2 × … × n`, et `0! = 1`). Écris un programme qui lit `n` (de 0 à 20) et affiche :\n```\nn! = X\n```\nExemple pour `n = 5` : `5! = 120`.\nTeste avec `n = 12`, puis `n = 13` et `n = 20` : le résultat doit rester exact. Java ne te préviendra pas si ton type est trop petit !",
+  "hints": [
+    "Un produit se calcule comme une somme : un accumulateur, mais initialisé à **1** (pas à 0), multiplié à chaque tour.",
+    "Un `int` déborde dès `13!` (≈ 6,2 milliards). Quel type a plus de place ?",
+    "Un `long` va jusqu'à ≈ 9,2·10¹⁸ : assez pour `20!`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les runes de ces murs se combinent de toutes les façons possibles : une factorielle ! `5! = 120`, mais regarde ce que ça donne pour 20…",
+      "Écris le sort qui calcule `n!`, et garde un œil sur les dépassements."
+    ],
+    "success": [
+      "Même `20!` est exact : tu as choisi le bon type. Un dépassement d'`int` ne prévient jamais, retiens-le !"
+    ],
+    "done": "Les runes n'ont plus de secret."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

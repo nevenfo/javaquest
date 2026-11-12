@@ -1,0 +1,97 @@
+{
+  "id": "d3-04-arbre-des-lignees",
+  "title": "L'arbre des lignées",
+  "region": "labyrinthe",
+  "giver": "sphinx",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "d3-03-cors-et-tambours"
+  ],
+  "skills": [
+    "inh.modelisation",
+    "inh.heritage",
+    "inh.comparable",
+    "inh.polymorphisme",
+    "inh.interface"
+  ],
+  "summary": "Épreuve du Sphinx : modélise une hiérarchie Noble (classe abstraite, Baron, Comte), Comparable cohérent, tri d'un tableau avec Arrays.sort.",
+  "hud": "Cœur du labyrinthe : le Sphinx juge ta hiérarchie.",
+  "source": "modélisation : classe abstraite + sous-classes, Comparable, tri polymorphe de tableau (transfert : toute la région)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Noble.java",
+      "solutions/s1/Baron.java",
+      "solutions/s1/Comte.java",
+      "solutions/s1/Cour.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Noble.java",
+      "wrong/w1/Baron.java",
+      "wrong/w1/Comte.java",
+      "wrong/w1/Cour.java"
+    ],
+    [
+      "wrong/w2/Noble.java",
+      "wrong/w2/Baron.java",
+      "wrong/w2/Comte.java",
+      "wrong/w2/Cour.java"
+    ],
+    [
+      "wrong/w3/Noble.java",
+      "wrong/w3/Baron.java",
+      "wrong/w3/Comte.java",
+      "wrong/w3/Cour.java"
+    ],
+    [
+      "wrong/w4/Noble.java",
+      "wrong/w4/Baron.java",
+      "wrong/w4/Comte.java",
+      "wrong/w4/Cour.java"
+    ]
+  ],
+  "starter": {
+    "Noble.java": "public abstract class Noble {\n    // à écrire\n}\n",
+    "Baron.java": "public class Baron {\n    // à écrire\n}\n",
+    "Comte.java": "public class Comte {\n    // à écrire\n}\n",
+    "Cour.java": "public class Cour {\n    // à écrire\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Le Sphinx veut voir si tu sais **concevoir** une hiérarchie. Écris quatre fichiers.\n\n**`abstract class Noble implements Comparable<Noble>`** :\n- constructeur `Noble(String nom, int fortune)` : `IllegalArgumentException` si le nom est `null` ou blanc, ou si la fortune est négative ; le nom est rangé nettoyé (`strip()`) ;\n- accesseurs `nom()` et `fortune()` ;\n- `abstract String titre();` et `abstract int tribut();` ;\n- `compareTo` (écrit **une seule fois**, ici) : le plus gros **tribut** d'abord, puis ordre alphabétique du nom ;\n- `toString()` : `<titre> <nom> (<tribut>)`.\n\n**`Baron extends Noble`** : titre `Baron`, tribut `fortune / 10`.\n**`Comte extends Noble`** : titre `Comte`, tribut `fortune / 5 + 50` (divisions entières).\n\n**`Cour`** : `static Noble[] classer(Noble[] nobles)` renvoie un **nouveau** tableau trié (avec `Arrays.sort`) ; le tableau reçu ne change pas.\n\nExemple :\n```java\nnew Baron(\"Aldric\", 1000).toString();   // \"Baron Aldric (100)\"\nnew Comte(\"Berte\", 1000).tribut();      // 250\n```",
+  "hints": [
+    "Les deux titres se ressemblent beaucoup : ce qui est **commun** (nom, fortune, comparaison, `toString`) va dans `Noble` ; ce qui **diffère** (titre, calcul du tribut) devient abstrait dans `Noble` et concret dans chaque sous-classe.",
+    "`Noble` implémente `Comparable<Noble>` : `compareTo(Noble autre)` peut appeler `tribut()` sur `this` et sur `autre` ; la bonne version s'exécute selon la classe réelle. Le plus gros d'abord, c'est un ordre **décroissant**.",
+    "Dans `classer`, `Arrays.copyOf(nobles, nobles.length)` donne une copie sur laquelle tu peux appeler `Arrays.sort`. Les champs de `Noble` étant `private`, les sous-classes passent par `fortune()`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Tu es allé loin, voyageur. Je suis le Sphinx des Lignées. Chaque salle t'a montré un morceau de l'énigme ; je veux voir la **hiérarchie entière**.",
+      "Des nobles, des titres, un tribut qui dépend du titre, et un classement qui marche pour tous. À toi de décider ce qui est commun et ce qui diffère."
+    ],
+    "resume": "L'arbre des lignées n'est pas encore planté : une classe abstraite, deux titres, un classement.",
+    "success": [
+      "Un tribut calculé par chaque titre, un seul `compareTo`, un tri qui respecte l'original… L'arbre se tient droit.",
+      "Héritage, interfaces, polymorphisme, `Comparable` : le Labyrinthe n'a plus de secret pour toi. Prends ce sceau : il est à toi."
+    ],
+    "done": "Le sceau des lignées est à toi, bâtisseur."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-labyrinthe",
+      "item:sceau-lignees:Sceau des lignées",
+      "unlock:Labyrinthe des Lignées conquis : le sceau des lignées est à toi"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

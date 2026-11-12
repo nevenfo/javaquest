@@ -1,0 +1,129 @@
+{
+  "id": "b03-listes-quiz",
+  "title": "ArrayList ou LinkedList ?",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b02-fusion"
+  ],
+  "kind": "quiz",
+  "assessment": "practice",
+  "skills": [
+    "col.linkedlist"
+  ],
+  "summary": "Quiz sur les coûts comparés d'ArrayList et de LinkedList.",
+  "source": "collections : choisir entre ArrayList et LinkedList",
+  "questions": [
+    {
+      "q": "Coût de `get(i)` sur une `ArrayList` de n éléments ?",
+      "options": [
+        "Constant (très rapide)",
+        "Proportionnel à n",
+        "Proportionnel à n²",
+        "Impossible"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Coût de `get(i)` sur une `LinkedList` de n éléments ?",
+      "options": [
+        "Constant",
+        "Proportionnel à n (on parcourt les maillons)",
+        "Toujours instantané en tête et en queue seulement, jamais ailleurs",
+        "Impossible"
+      ],
+      "multi": false
+    },
+    {
+      "q": "On ajoute des milliers d'éléments **toujours en tête** de la liste (`add(0, x)` ou `addFirst`). Quelle structure convient le mieux ?",
+      "options": [
+        "`ArrayList` (tout décaler à chaque fois est gratuit)",
+        "`LinkedList` (insertion en tête sans décalage)",
+        "Elles se valent toujours",
+        "Aucune ne le permet"
+      ],
+      "multi": false
+    },
+    {
+      "q": "On parcourt une `LinkedList` avec `for (int i = 0; i < l.size(); i++) l.get(i)`. Que dire ?",
+      "options": [
+        "C'est efficace",
+        "C'est lent : chaque `get(i)` reparcourt la chaîne ; mieux vaut un `for (x : l)`",
+        "Ça ne compile pas",
+        "Ça modifie la liste"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Une `LinkedList` implémente… (plusieurs réponses)",
+      "options": [
+        "`List`",
+        "`Deque` (file à double entrée)",
+        "`Queue`",
+        "`Set`"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Sans besoin particulier, quel est le bon choix par défaut ?",
+      "options": [
+        "`ArrayList`",
+        "`LinkedList`",
+        "Un tableau de `Object`",
+        "Aucun des deux"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      0
+    ]
+  ],
+  "explanations": [
+    "Un `ArrayList` repose sur un tableau : l'accès par indice est direct.",
+    "Dans une `LinkedList`, il faut suivre les maillons un à un jusqu'à l'indice demandé.",
+    "Insérer en tête d'un `ArrayList` décale tous les éléments ; la `LinkedList` ajoute un maillon sans décaler.",
+    "`get(i)` dans une boucle indexée sur une `LinkedList` donne un coût proportionnel à n² au total.",
+    "`LinkedList` implémente `List`, `Deque` et donc `Queue`, mais pas `Set`.",
+    "`ArrayList` est le choix par défaut : accès rapide, bonne localité mémoire ; on ne change que pour un besoin précis."
+  ],
+  "brief": "Deux façons de stocker une liste, deux coûts différents. Lyra veut savoir si tu sais choisir.",
+  "hints": [
+    "`ArrayList` = tableau redimensionnable : accès direct par indice, insertion au début coûteuse (décalage).",
+    "`LinkedList` = chaîne de maillons : insertion en tête rapide, mais atteindre le n-ième maillon oblige à parcourir."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Deux listes, deux caractères ! L'une est un tableau, l'autre une chaîne de maillons. Sauras-tu choisir la bonne pour chaque tâche ?"
+    ],
+    "success": [
+      "Tu choisis la structure selon l'usage, pas par habitude. Bravo !"
+    ],
+    "done": "Tu sais choisir ta liste."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "r-arr.algos-1",
+  "title": "L'écart des cristaux",
+  "region": "mines",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "m12-mediane"
+  ],
+  "skills": [
+    "arr.algos"
+  ],
+  "summary": "Calcule l'écart entre la plus grande et la plus petite valeur (réactivation).",
+  "source": "median : parcours d'un tableau, min et max (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3\\n4\\n10\\n2",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Lis `n` (≥ 1) puis `n` entiers (positifs ou négatifs) et affiche l'**écart** entre le plus grand et le plus petit :\n```\nÉcart : 8\n```\n(exemple pour `4`, `10`, `2` : 10 − 2). Avec une seule valeur, l'écart vaut 0.",
+  "hints": [
+    "Garde le plus petit et le plus grand vus jusqu'ici, en les initialisant avec la **première** valeur.",
+    "Ne pars pas de 0 : une série entièrement négative aurait un faux maximum."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir des mines : un tableau, un maximum, un minimum. Tu devrais t'en sortir sans guide !"
+    ],
+    "success": [
+      "Écart exact, même sur des valeurs négatives."
+    ],
+    "done": "Les tableaux sont tes amis."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

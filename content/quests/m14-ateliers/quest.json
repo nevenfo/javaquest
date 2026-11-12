@@ -1,0 +1,59 @@
+{
+  "id": "m14-ateliers",
+  "title": "Les ateliers de Boucle-Profonde",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m13-pioche"
+  ],
+  "skills": [
+    "meth.static",
+    "loop.for"
+  ],
+  "summary": "Écris trois méthodes statiques avec valeur de retour.",
+  "source": "collections : buildBag(List) ; hello : isPalindromic() ; méthodes à entrées variées",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "// Écris ici tes trois méthodes (en dehors de main).\n\nvoid main() {\n}\n"
+  },
+  "brief": "Écris dans `Main.java` trois méthodes **static** (en dehors de `main`, qui reste vide) :\n\n1. `static long puissance(int base, int exp)` : `base` puissance `exp` (`exp ≥ 0`) ; `puissance(2, 10)` vaut `1024` et `puissance(5, 0)` vaut `1`. Le résultat est un `long` : `puissance(2, 40)` doit être exact.\n2. `static boolean estPremier(int n)` : vrai si `n` est un nombre premier (`0`, `1` et les négatifs ne le sont pas ; `2` l'est).\n3. `static int occurrences(String mot, char lettre)` : nombre de fois où `lettre` apparaît dans `mot` (la casse compte).\n\nElles **retournent** leur résultat (aucun affichage). Le harnais les appelle directement avec des valeurs variées.",
+  "hints": [
+    "Pour `puissance` : un accumulateur initialisé à 1 multiplié `exp` fois dans une boucle, et de type `long`.",
+    "Pour `estPremier` : d'abord écarter `n < 2`, puis chercher un diviseur entre 2 et `n - 1` (ou jusqu'à la racine) ; si on en trouve un, `return false;`.",
+    "Pour `occurrences` : un `for` sur `mot.length()` avec `charAt(i)` et un compteur ; `return` le compteur **après** la boucle."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Voici mes trois ateliers : puissances, nombres premiers et comptage de lettres. Chacun a besoin d'une méthode.",
+      "Écris-les seul·e. N'affiche rien : retourne, c'est tout. Le contremaître les appellera lui-même."
+    ],
+    "success": [
+      "Trois méthodes, toutes justes sur tous les cas. Tu sais maintenant découper un problème en petites fonctions réutilisables."
+    ],
+    "done": "Mes ateliers tournent sans accroc."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

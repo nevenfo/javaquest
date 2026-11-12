@@ -1,0 +1,59 @@
+{
+  "id": "c01-saisie",
+  "title": "Le guichet de la citadelle",
+  "region": "citadelle",
+  "giver": "examinateur",
+  "main": false,
+  "requires": [
+    "b13-structures",
+    "t13-amphibie"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "proj.repl"
+  ],
+  "summary": "Complète une boucle de commandes lues au clavier : ajoute, montre, fin.",
+  "source": "jalist : shell de commandes (lecture, analyse, exécution)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n    public static void main(String[] args) {\n        int total = 0;\n        while (true) {\n            String ligne = IO.readln();\n            if (ligne == null || /* ??? */) break;\n            String[] mots = ligne.trim().split(\"\\\\s+\");\n            switch (mots[0]) {\n                case \"ajoute\" -> total += Integer.parseInt(/* ??? */);\n                case \"montre\" -> IO.println(/* ??? */);\n                default -> IO.println(\"Commande inconnue : \" + mots[0]);\n            }\n        }\n    }\n}\n"
+  },
+  "brief": "À la citadelle, le guichet lit des **commandes**, une par ligne, jusqu'à `fin` (ou la fin de l'entrée) :\n- `ajoute N` : ajoute l'entier N au total ;\n- `montre` : affiche `Total : X` ;\n- toute autre commande : `Commande inconnue : <mot>` ; `fin` arrête le programme.\n\n```\najoute 5\najoute 7\nmontre        → Total : 12\nfin\n```\nComplète les trois trous `/* ??? */`. La boucle, la lecture et l'analyse sont déjà là.",
+  "lesson": "Exemple résolu (autre programme) :\n```java\nint vies = 3;\nwhile (true) {\n    String ligne = IO.readln();\n    if (ligne == null || ligne.equals(\"stop\")) break;\n    String[] mots = ligne.trim().split(\"\\\\s+\");     // mots[0] = commande, mots[1] = argument\n    switch (mots[0]) {\n        case \"perd\" -> vies -= Integer.parseInt(mots[1]);\n        case \"vies\" -> IO.println(\"Vies : \" + vies);\n        default -> IO.println(\"?\");\n    }\n}\n```",
+  "hints": [
+    "`IO.readln()` renvoie `null` quand l'entrée est finie ; la condition d'arrêt compare aussi la ligne à `\"fin\"` avec `equals`.",
+    "`mots[0]` est la commande ; son argument est le mot suivant.",
+    "`Integer.parseInt` convertit le texte en entier ; `montre` affiche `\"Total : \" + total`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Au guichet de la citadelle, les ordres arrivent ligne par ligne. Voici le squelette d'une boucle de commandes : à toi de la terminer."
+    ],
+    "success": [
+      "La boucle lit, découpe, exécute : c'est le cœur de tout programme interactif."
+    ],
+    "done": "Le guichet fonctionne."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

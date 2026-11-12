@@ -1,0 +1,58 @@
+{
+  "id": "q03-mana",
+  "title": "La réserve de mana",
+  "region": "village",
+  "giver": "ysolde",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "q01-porte"
+  ],
+  "skills": [
+    "base.variables",
+    "base.expressions"
+  ],
+  "summary": "Complète le sort qui tient le compte du mana.",
+  "hud": "Complète les /* ??? */ du sort de la Doyenne.",
+  "source": "hello : variables et calculs (âge = année courante − naissance)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main() {\n    int mana = 20;          // réserve de départ\n    int coutEclair = 7;     // coût d'un éclair\n\n    // 1. Tu lances DEUX éclairs : retire deux fois le coût à la réserve.\n    mana = /* ??? */;\n\n    // 2. Tu bois une potion : elle rend 5 points de mana.\n    /* ??? */\n\n    IO.println(\"Mana restant : \" + mana);\n}\n"
+  },
+  "brief": "Un mage tient le compte de son **mana** dans une variable. Complète les deux `/* ??? */` :\n- après deux éclairs (coût `coutEclair` chacun),\n- puis une potion qui rend 5 points.\nUtilise les variables plutôt que des nombres tout faits : si le coût change, ton sort doit rester juste.",
+  "lesson": "**Exemple commenté** — une autre réserve, de pièces cette fois :\n```java\nint pieces = 50;\nint prixPain = 4;\npieces = pieces - 3 * prixPain;   // on calcule à droite (50 - 12 = 38), on range à gauche\npieces = pieces + 10;             // 48\nIO.println(\"Pièces : \" + pieces);\n```",
+  "hints": [
+    "Pour retirer deux fois le coût : `mana - 2 * coutEclair`.",
+    "La potion : `mana = mana + 5;` (ou `mana += 5;`).",
+    "Résultat attendu : 20 − 14 + 5 = 11."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un mage qui ne compte pas son mana finit à plat au milieu d'un duel !",
+      "Voici le sort de comptage de mon ancien apprenti. Il manque deux morceaux : complète-les."
+    ],
+    "success": [
+      "Onze points de mana, c'est juste ! Tu as compris : `=` range une valeur calculée dans une variable."
+    ],
+    "done": "Garde toujours un œil sur ta réserve de mana."
+  },
+  "reward": {
+    "xp": 20
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "t06-classement",
+  "title": "Le classement des apprentis",
+  "region": "tour",
+  "giver": "mage",
+  "main": true,
+  "requires": [
+    "t05-gardiens"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "inh.comparable"
+  ],
+  "summary": "Complète compareTo pour trier les apprentis par niveau puis par nom.",
+  "source": "postier : Comparable et compareTo pour trier",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Apprenti.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Apprenti.java"
+    ],
+    [
+      "wrong/w2/Apprenti.java"
+    ],
+    [
+      "wrong/w3/Apprenti.java"
+    ]
+  ],
+  "starter": {
+    "Apprenti.java": "public class Apprenti implements Comparable<Apprenti> {\n    private final String nom;\n    private final int niveau;\n\n    public Apprenti(String nom, int niveau) {\n        this.nom = nom;\n        this.niveau = niveau;\n    }\n\n    public String getNom() { return nom; }\n    public int getNiveau() { return niveau; }\n\n    @Override\n    public String toString() { return nom + \"(\" + niveau + \")\"; }\n\n    @Override\n    public int compareTo(Apprenti autre) {\n        /* ??? */\n    }\n}\n"
+  },
+  "brief": "Le mage veut classer ses apprentis du **niveau le plus faible au plus élevé** ; à niveau égal, par **ordre alphabétique du nom**.\n\nLa classe `Apprenti` implémente déjà `Comparable<Apprenti>` : complète `compareTo`. Elle doit renvoyer un entier **négatif** si `this` passe avant `autre`, **positif** s'il passe après, **0** s'ils sont à égalité.\n\n```java\nList<Apprenti> l = new ArrayList<>(List.of(new Apprenti(\"Zoé\", 3), new Apprenti(\"Ali\", 3), new Apprenti(\"Bob\", 1)));\nCollections.sort(l);   // [Bob(1), Ali(3), Zoé(3)]\n```\nAttention aux grands nombres : soustraire deux entiers peut déborder.",
+  "lesson": "Exemple résolu (autre classe) :\n```java\nclass Fiole implements Comparable<Fiole> {\n    int volume;\n    public int compareTo(Fiole autre) {\n        return Integer.compare(volume, autre.volume);   // volume croissant\n    }\n}\n```",
+  "hints": [
+    "`compareTo` renvoie < 0, 0 ou > 0. `Collections.sort(liste)` s'appuie dessus.",
+    "`Integer.compare(a, b)` compare deux `int` sans risque de débordement ; `String.compareTo` compare deux chaînes alphabétiquement.",
+    "Schéma : compare d'abord le niveau ; si le résultat n'est pas 0, renvoie-le ; sinon compare les noms."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes apprentis se disputent leur rang ! Pour les classer, la liste doit savoir **comparer** deux apprentis : c'est le rôle de `Comparable`.",
+      "Complète `compareTo` : niveau croissant d'abord, nom alphabétique en cas d'égalité."
+    ],
+    "success": [
+      "La liste se trie toute seule ! Voilà le pouvoir de `Comparable`."
+    ],
+    "done": "Mes apprentis sont classés."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

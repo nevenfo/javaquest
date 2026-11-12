@@ -1,0 +1,129 @@
+{
+  "id": "t04-heritage-quiz",
+  "title": "Les lignées de la Tour",
+  "region": "tour",
+  "giver": "mage",
+  "main": false,
+  "requires": [
+    "t03-horde"
+  ],
+  "kind": "quiz",
+  "assessment": "practice",
+  "skills": [
+    "inh.heritage"
+  ],
+  "summary": "Quiz : redéfinition, surcharge, héritage multiple, abstract, super.",
+  "source": "annale : héritage, redéfinition (override), surcharge (overload), héritage multiple",
+  "questions": [
+    {
+      "q": "Quelle phrase décrit une **redéfinition** (override) ?",
+      "options": [
+        "Même nom, mêmes paramètres, dans une sous-classe",
+        "Même nom, paramètres différents, dans la même classe",
+        "Un nouveau nom dans la sous-classe",
+        "Une méthode `static` dans l'interface"
+      ],
+      "multi": false
+    },
+    {
+      "q": "`class A { void f(Object o) {} }` puis `class B extends A { void f(String s) {} }`. Que fait `B.f(String)` ?",
+      "options": [
+        "Elle redéfinit `A.f`",
+        "Elle surcharge `A.f` : c'est une méthode différente",
+        "Elle ne compile pas",
+        "Elle remplace `A.f` pour tous les appels"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Une classe Java peut…",
+      "options": [
+        "étendre deux classes",
+        "étendre une seule classe et implémenter plusieurs interfaces",
+        "implémenter une seule interface",
+        "n'avoir aucun parent (même pas Object)"
+      ],
+      "multi": false
+    },
+    {
+      "q": "À quoi sert `super.presentation()` dans une sous-classe ?",
+      "options": [
+        "À appeler la version de la classe parente",
+        "À créer un nouvel objet parent",
+        "À appeler la méthode de l'interface seulement",
+        "À supprimer la méthode parente"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Une classe `abstract` peut… (plusieurs réponses)",
+      "options": [
+        "contenir des méthodes concrètes",
+        "être instanciée avec `new`",
+        "contenir des champs et un constructeur",
+        "contenir des méthodes abstraites"
+      ],
+      "multi": true
+    },
+    {
+      "q": "À quoi sert l'annotation `@Override` ?",
+      "options": [
+        "Le compilateur vérifie que la méthode redéfinit bien une méthode parente",
+        "Elle rend la méthode plus rapide",
+        "Elle autorise la surcharge",
+        "Elle rend la méthode `static`"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      0,
+      2,
+      3
+    ],
+    [
+      0
+    ]
+  ],
+  "explanations": [
+    "Redéfinir = même signature dans une sous-classe ; l'appel est alors résolu selon le type réel de l'objet.",
+    "Un paramètre `String` ≠ `Object` : c'est une surcharge. `@Override` aurait signalé l'erreur.",
+    "Pas d'héritage multiple de classes en Java ; plusieurs interfaces, oui.",
+    "`super` désigne la classe parente : on réutilise son comportement avant ou après avoir ajouté le sien.",
+    "Une classe abstraite ne s'instancie pas directement, mais elle peut avoir champs, constructeur, méthodes concrètes et abstraites.",
+    "`@Override` n'a aucun effet à l'exécution : il fait échouer la compilation si la méthode ne redéfinit rien (faute de frappe, mauvaise signature)."
+  ],
+  "brief": "Le mage éprouve ta compréhension de l'héritage. Lis chaque question attentivement : certains pièges sont classiques !",
+  "hints": [
+    "Redéfinir = même signature dans la sous-classe ; surcharger = même nom, paramètres différents.",
+    "Java : une seule classe parente (`extends`), mais plusieurs interfaces (`implements`)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Hé hé, voyons si tu distingues **redéfinir** de **surcharger**… et si tu sais combien de parents une classe peut avoir !"
+    ],
+    "success": [
+      "Bravo : tu ne te laisses plus piéger par les lignées de la Tour."
+    ],
+    "done": "Tu connais tes lignées."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

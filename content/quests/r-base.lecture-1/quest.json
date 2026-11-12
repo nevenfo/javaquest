@@ -1,0 +1,54 @@
+{
+  "id": "r-base.lecture-1",
+  "title": "Le registre d'âges",
+  "region": "village",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "q04-lanterne"
+  ],
+  "skills": [
+    "base.lecture"
+  ],
+  "summary": "Lis un prénom et une année de naissance, puis calcule l'âge (réactivation).",
+  "source": "hello : IO.readln, Integer.parseInt, calcul de l'âge (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "Mira\\n2005",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Lis un **prénom** (une ligne) puis une **année de naissance** (une ligne, un entier) et affiche, avec l'année courante fixée à 2026 :\n```\nSalut <prénom> ! Tu as <âge> ans.\n```\nExemple pour `Mira` et `2005` : `Salut Mira ! Tu as 21 ans.`",
+  "hints": [
+    "`IO.readln` renvoie un `String` ; l'année doit être convertie avec `Integer.parseInt`.",
+    "L'âge se calcule : `2026 - naissance`."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : lire au clavier et convertir. Le registre du village a perdu son sort."
+    ],
+    "success": [
+      "Le registre est de nouveau à jour."
+    ],
+    "done": "Lecture, conversion, calcul : les bases solides."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

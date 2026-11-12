@@ -1,0 +1,37 @@
+{
+  "id": "r-base.expressions-1",
+  "title": "Le partage du butin",
+  "region": "village",
+  "main": false,
+  "kind": "predict",
+  "assessment": "review",
+  "requires": [
+    "q04-lanterne"
+  ],
+  "skills": [
+    "base.expressions"
+  ],
+  "summary": "Prédis les résultats de divisions entières et de concaténations (réactivation).",
+  "source": "hello : calculs entiers, division, priorité et concaténation (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "Part : 3.0\nReste : 2\nMoyenne : 3.4\n22!\nTotal : 175\n",
+  "brief": "Cinq amis se partagent 17 pièces d'or, et ce programme fait les comptes. Lis-le **sans l'exécuter** et écris sa sortie exacte, ligne par ligne. Attention aux types : un `double` s'affiche avec sa partie décimale (`3.0`).",
+  "hints": [
+    "Entre deux `int`, `/` est une division entière : le résultat est calculé **avant** d'être rangé dans un `double`.",
+    "Dans `or + amis + \"!\"`, les `+` se calculent de gauche à droite : addition tant qu'il n'y a que des nombres."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir à rafraîchir : comment Java calcule-t-il un partage d'or ?"
+    ],
+    "success": [
+      "Division entière, reste, concaténation : tout y est !"
+    ],
+    "done": "Les maths de Java n'ont plus de secret."
+  },
+  "reward": {
+    "xp": 10
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m01-wagons",
+  "title": "Les wagons de minerai",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "f08-grille"
+  ],
+  "skills": [
+    "loop.while"
+  ],
+  "summary": "Complète la boucle qui additionne les wagons jusqu'à la charge 0.",
+  "hud": "Le mineur t'attend à l'entrée des Mines de Boucle-Profonde.",
+  "source": "median : while (true) … break sur la sentinelle ; lecture répétée jusqu'à une valeur d'arrêt",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3\\n4\\n10\\n0",
+  "starter": {
+    "Main.java": "void main() {\n    int total = 0;\n    int wagons = 0;\n    int charge = Integer.parseInt(IO.readln(\"Charge du wagon (0 pour finir) ? \"));\n    while (charge /* ??? */ 0) {\n        total = total + charge;\n        /* ??? */\n        charge = Integer.parseInt(IO.readln(\"Charge du wagon (0 pour finir) ? \"));\n    }\n    IO.println(\"Wagons : \" + wagons);\n    IO.println(\"Total : \" + total);\n}\n"
+  },
+  "brief": "Le mineur pèse les wagons qui sortent de la mine, un par un. Il tape la **charge** de chaque wagon, et tape `0` quand c'est fini (le `0` est la **sentinelle** : il ne compte pas comme un wagon). Une charge négative signifie qu'on a déchargé du minerai : elle compte aussi.\n\nComplète les deux `/* ??? */` pour afficher :\n```\nWagons : <nombre de wagons>\nTotal : <somme des charges>\n```\nExemple pour `3`, `4`, `10`, `0` : `Wagons : 3` puis `Total : 17`.",
+  "lesson": "**Exemple** — compter les visiteurs jusqu'au mot « fin » :\n```java\nint visiteurs = 0;\nString nom = IO.readln(\"Nom ? \");\nwhile (!nom.equals(\"fin\")) {      // tant que ce n'est pas la sentinelle\n    visiteurs++;\n    nom = IO.readln(\"Nom ? \");    // on relit : sinon, boucle infinie !\n}\n```",
+  "hints": [
+    "Une boucle `while` répète tant que sa condition est vraie : ici, tant que la charge lue n'est **pas** la sentinelle.",
+    "Chaque tour de boucle traite un wagon : il faut donc aussi compter ce wagon.",
+    "Le compteur `wagons` s'incrémente de 1 à chaque tour (`wagons++`), et la condition utilise l'opérateur « différent de » (`!=`)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue aux **Mines de Boucle-Profonde** ! Ici, on répète les gestes mille fois : c'est le royaume des boucles.",
+      "Chaque wagon qui sort de la mine est pesé, jusqu'à ce que je tape 0. J'ai commencé ma boucle, mais il manque deux morceaux. Complète-les !"
+    ],
+    "success": [
+      "Wagons comptés, total exact : ta boucle s'arrête bien sur la sentinelle. Au prochain !"
+    ],
+    "done": "Mes wagons sont comptés comme jamais.",
+    "locked": "Ces mines ne s'ouvrent qu'à ceux qui ont franchi la grille du Roi-Chêne."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

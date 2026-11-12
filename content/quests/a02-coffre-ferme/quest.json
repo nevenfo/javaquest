@@ -1,0 +1,58 @@
+{
+  "id": "a02-coffre-ferme",
+  "title": "Des rivets bien protégés",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "a01-rivet"
+  ],
+  "kind": "fix",
+  "assessment": "practice",
+  "skills": [
+    "obj.encapsulation"
+  ],
+  "summary": "Rends les champs de Rivet private final et ajoute des accesseurs.",
+  "source": "point : encapsulation (private, final, getters)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Rivet.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Rivet.java"
+    ],
+    [
+      "wrong/w2/Rivet.java"
+    ]
+  ],
+  "starter": {
+    "Rivet.java": "public class Rivet {\n    public int x;\n    public int y;\n\n    public Rivet(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n}\n"
+  },
+  "brief": "Un apprenti a trafiqué les rivets de Brom : leurs champs sont `public` et n'importe qui peut déplacer un rivet déjà posé !\n\nRépare `Rivet` :\n- les champs `x` et `y` deviennent **`private final`** ;\n- ajoute les accesseurs `getX()` et `getY()` (type `int`) ;\n- **pas** de méthode `setX`/`setY` : un rivet posé ne bouge plus.\n\nLe constructeur `Rivet(int x, int y)` reste inchangé.",
+  "hints": [
+    "`private` cache un champ aux autres classes ; `final` interdit de le réaffecter après le constructeur.",
+    "Un accesseur est une méthode publique sans paramètre qui renvoie le champ : `public int getX()`.",
+    "Exemple analogue : `private final String nom;` puis `public String getNom() { return nom; }`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Regarde ça ! Quelqu'un a laissé les champs de mes rivets en `public`. Un coup de marteau mal placé et la plaque est ruinée.",
+      "Répare-moi cette classe : champs `private final`, et des accesseurs pour lire. Mais surtout aucun moyen de les changer !"
+    ],
+    "success": [
+      "Voilà qui est solide : on lit les rivets, on ne les modifie plus."
+    ],
+    "done": "Mes rivets sont à l'abri, grâce à toi."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

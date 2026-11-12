@@ -1,0 +1,167 @@
+{
+  "id": "e01-questions",
+  "title": "Épreuve — questions de cours",
+  "region": "citadelle",
+  "kind": "quiz",
+  "assessment": "exam",
+  "skills": [
+    "base.programme",
+    "base.types",
+    "inh.heritage",
+    "col.linkedlist",
+    "obj.equals",
+    "obj.visibilite"
+  ],
+  "summary": "Dix questions à une ou plusieurs réponses.",
+  "source": "Format des questions préliminaires de l'examen d'octobre 2025 (questions originales)",
+  "brief": "Réponds aux dix questions. Certaines ont **plusieurs** bonnes réponses (cases à cocher), d'autres une seule. Une question n'est comptée juste que si toutes les bonnes réponses, et elles seules, sont cochées.",
+  "questions": [
+    {
+      "q": "Que produit la commande `javac Grimoire.java` ?",
+      "options": [
+        "Un exécutable natif `Grimoire.exe`",
+        "Un fichier `Grimoire.class` contenant du bytecode",
+        "Une archive `Grimoire.jar`",
+        "Rien : elle exécute directement le programme"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Une classe Java (autre qu'Object)…",
+      "options": [
+        "peut hériter (`extends`) de deux classes",
+        "peut implémenter plusieurs interfaces",
+        "peut n'implémenter aucune interface",
+        "hérite toujours, au moins implicitement, d'une classe"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Déclarer dans une sous-classe une méthode de même nom, mêmes types de paramètres et même type de retour qu'une méthode héritée, c'est…",
+      "options": [
+        "une surcharge (overload)",
+        "une redéfinition (override)",
+        "une erreur de compilation"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Quelles valeurs peut contenir une variable de type `byte` ?",
+      "options": [
+        "-128",
+        "127",
+        "128",
+        "200",
+        "0"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Pour insérer 10 000 éléments **en tête** de liste (`add(0, x)`), quelle implémentation est la plus rapide ?",
+      "options": [
+        "ArrayList",
+        "LinkedList",
+        "Les deux sont équivalentes"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Et pour lire l'élément d'indice 5000 (`get(5000)`) ?",
+      "options": [
+        "ArrayList",
+        "LinkedList"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Si `a.equals(b)` est vrai (equals et hashCode correctement redéfinis), alors…",
+      "options": [
+        "`a.hashCode() == b.hashCode()`",
+        "`a == b`",
+        "`b.equals(a)`"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Un membre déclaré **sans** modificateur de visibilité est accessible…",
+      "options": [
+        "partout",
+        "uniquement dans sa classe",
+        "dans les classes du même paquetage",
+        "uniquement dans les sous-classes"
+      ],
+      "multi": false
+    },
+    {
+      "q": "Lesquels peuvent posséder des champs d'instance modifiables après construction ?",
+      "options": [
+        "une classe (champ non final)",
+        "un record",
+        "une interface"
+      ],
+      "multi": true
+    },
+    {
+      "q": "Que vaut `Integer.MAX_VALUE + 1` en Java ?",
+      "options": [
+        "Une ArithmeticException est levée",
+        "`Integer.MIN_VALUE`",
+        "2147483648",
+        "0"
+      ],
+      "multi": false
+    }
+  ],
+  "answerKey": [
+    [
+      1
+    ],
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      1
+    ],
+    [
+      0,
+      1,
+      4
+    ],
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      2
+    ],
+    [
+      0
+    ],
+    [
+      1
+    ]
+  ],
+  "explanations": [
+    "javac compile le source en bytecode (.class), exécuté ensuite par la JVM avec la commande java.",
+    "Héritage simple de classe (Object par défaut), mais implémentation multiple d'interfaces.",
+    "Même signature = redéfinition (override) ; même nom avec d'autres paramètres = surcharge (overload).",
+    "Un byte est codé sur 8 bits signés : de -128 à 127.",
+    "ArrayList décale tous les éléments à chaque insertion en tête ; LinkedList relie seulement un nouveau maillon.",
+    "ArrayList accède directement à la case ; LinkedList doit parcourir les maillons un à un.",
+    "Le contrat impose : égaux ⇒ même hashCode, et equals est symétrique. == compare les références.",
+    "Sans mot-clé : visibilité « paquetage ».",
+    "Les composants d'un record sont final ; une interface n'a pas de champ d'instance.",
+    "Le dépassement d'un int est silencieux : la valeur « reboucle » au minimum."
+  ],
+  "reward": {
+    "xp": 0
+  }
+}

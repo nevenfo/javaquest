@@ -1,0 +1,61 @@
+{
+  "id": "b05-doublons",
+  "title": "Les titres en double",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": true,
+  "requires": [
+    "b02-fusion"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "col.set"
+  ],
+  "summary": "Détecte un doublon, supprime les doublons en gardant l'ordre, trie sans doublon (Set).",
+  "source": "collections : HashSet, LinkedHashSet, TreeSet",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static String premierDoublon(List<String> mots) {\n        return null;\n    }\n\n    static List<String> sansDoublons(List<String> mots) {\n        return List.of();\n    }\n\n    static List<String> alphabetique(List<String> mots) {\n        return List.of();\n    }\n}\n"
+  },
+  "brief": "Lyra soupçonne des titres en double dans ses registres. Écris dans `Main` :\n- `String premierDoublon(List<String> mots)` : le **premier mot qui apparaît pour la deuxième fois** en lisant la liste de gauche à droite, ou `null` s'il n'y en a pas ;\n- `List<String> sansDoublons(List<String> mots)` : les mots sans répétition, **dans l'ordre de première apparition** ;\n- `List<String> alphabetique(List<String> mots)` : les mots distincts, **par ordre alphabétique**.\n\n```java\npremierDoublon(List.of(\"a\", \"b\", \"c\", \"b\", \"a\"));   // \"b\" (le 2e « b » arrive avant le 2e « a »)\nsansDoublons(List.of(\"zèbre\", \"ancre\", \"zèbre\"));    // [zèbre, ancre]\n```\nChoisis le bon type d'ensemble pour chacune : `HashSet`, `LinkedHashSet` ou `TreeSet` n'ont pas le même ordre d'itération.",
+  "hints": [
+    "`Set.add(x)` renvoie `false` si `x` était déjà présent : pratique pour détecter un doublon.",
+    "`HashSet` n'a pas d'ordre garanti ; `LinkedHashSet` garde l'ordre d'insertion ; `TreeSet` trie.",
+    "On convertit facilement : `new ArrayList<>(unSet)` donne une liste, `new TreeSet<>(uneListe)` un ensemble trié."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes registres sont un fouillis : certains titres y sont inscrits deux fois. Détecter le premier, nettoyer en gardant l'ordre, ou trier sans doublon : trois usages, trois ensembles différents.",
+      "À toi de choisir le bon ensemble pour chaque cas."
+    ],
+    "success": [
+      "Plus un doublon ! Et tu as choisi le bon ensemble à chaque fois."
+    ],
+    "done": "Mes registres sont propres."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

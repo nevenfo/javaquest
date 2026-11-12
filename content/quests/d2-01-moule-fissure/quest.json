@@ -1,0 +1,62 @@
+{
+  "id": "d2-01-moule-fissure",
+  "title": "Le moule fissuré",
+  "region": "fonderie",
+  "giver": "fondeur",
+  "main": false,
+  "kind": "fix",
+  "assessment": "practice",
+  "requires": [
+    "a14-atelier"
+  ],
+  "skills": [
+    "obj.classe",
+    "obj.equals"
+  ],
+  "summary": "Répare la classe Moule du fondeur : un paramètre qui masque le champ (this oublié) et un equals qui compare des String avec ==.",
+  "hud": "Fonderie : le fondeur veut des moules qui se souviennent de leur nom.",
+  "source": "constructeur, this et paramètre qui masque un champ ; equals sur String : erreurs typiques (complément artisans)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Moule.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Moule.java"
+    ],
+    [
+      "wrong/w2/Moule.java"
+    ]
+  ],
+  "starter": {
+    "Moule.java": "import java.util.Objects;\n\npublic class Moule {\n    private String nom;\n    private int capacite;\n\n    public Moule(String nom, int capacite) {\n        nom = nom;\n        capacite = capacite;\n    }\n\n    public String getNom() {\n        return nom;\n    }\n\n    public int getCapacite() {\n        return capacite;\n    }\n\n    @Override\n    public boolean equals(Object o) {\n        if (!(o instanceof Moule)) {\n            return false;\n        }\n        Moule autre = (Moule) o;\n        return nom == autre.nom && capacite == autre.capacite;\n    }\n\n    @Override\n    public int hashCode() {\n        return Objects.hash(nom, capacite);\n    }\n\n    @Override\n    public String toString() {\n        return \"Moule[\" + nom + \", \" + capacite + \"]\";\n    }\n}\n"
+  },
+  "brief": "Le maître fondeur range ses moules dans un registre. Un `Moule` a un **nom** et une **capacité** (en litres). Deux moules sont égaux quand leur nom (comparé par **contenu**) et leur capacité sont égaux ; `toString()` donne `Moule[cloche, 12]`.\n\nSa classe `Moule` est fournie… mais elle a **au moins deux bugs** classiques : un moule fraîchement construit n'a ni nom ni capacité, et deux moules identiques ne sont jamais égaux. Répare-la sans la réécrire entièrement.\n\nExemple attendu :\n```java\nMoule a = new Moule(new String(\"cloche\"), 12);\nMoule b = new Moule(new String(\"cloche\"), 12);\na.getNom();     // \"cloche\"\na.equals(b);    // true\n```",
+  "hints": [
+    "Dans un constructeur, un paramètre qui porte le même nom qu'un champ **masque** ce champ : `nom = nom;` ne fait que recopier le paramètre sur lui-même. Quel mot-clé désigne « le champ de cet objet » ?",
+    "`==` sur deux `String` compare les **références**, pas les caractères. Pour comparer le contenu, utilise la méthode de `String` prévue pour (ou `Objects.equals`, qui gère aussi `null`).",
+    "Corrige un bug à la fois. Après le premier, `getNom()` doit enfin répondre ; après le second, deux moules construits avec `new String(\"cloche\")` doivent être égaux."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue à la Fonderie des Gabarits, forgeron ! Brom m'a parlé de toi. Ici, on coule des objets en série, et tout part d'un bon moule.",
+      "Mon registre de moules est détraqué : les moules neufs naissent sans nom, et deux moules identiques ne se reconnaissent jamais. Répare la classe `Moule` !"
+    ],
+    "resume": "Mes moules sont toujours muets. Pense à `this`, et à la façon de comparer deux `String`.",
+    "success": [
+      "Un nom qui reste, des moules qui se reconnaissent : le registre est sauvé !",
+      "Va voir la salle des coulées : on y mélange les références, et j'ai besoin de quelqu'un qui sache les suivre."
+    ],
+    "done": "Mon registre de moules tient enfin ses promesses."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

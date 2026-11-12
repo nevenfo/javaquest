@@ -1,0 +1,69 @@
+{
+  "id": "m03-golem",
+  "title": "Le golem du couloir",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "m02-filon"
+  ],
+  "skills": [
+    "loop.for"
+  ],
+  "summary": "Fais avancer et creuser le golem avec une boucle for.",
+  "hud": "Le golem attend tes ordres dans le couloir.",
+  "source": "collections : for (int i = 0; i < size; i++) ; répéter un geste n fois",
+  "support": [
+    "support/Golem.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "5",
+  "starter": {
+    "Main.java": "void main() {\n    int n = Integer.parseInt(IO.readln(\"Longueur du couloir ? \"));\n    for (int i = 0; i < /* ??? */; i++) {\n        Golem.avancer();\n        /* ??? */\n    }\n}\n"
+  },
+  "brief": "Un golem de pierre obéit à ton code ! La classe `Golem` (fournie, à lire dans l'onglet) offre `Golem.avancer()` (une case vers la droite), `Golem.creuser()` (creuse la case où il se trouve) et `Golem.poserPierre()`.\n\nLe programme lit la **longueur du couloir** `n`. Le golem doit **avancer `n` fois, et creuser à chaque case**. Complète les deux `/* ??? */`. Lance avec « Exécuter » et regarde le golem travailler ; chaque ligne de ton code qui agit sera surlignée.\nLe sort sera vérifié avec d'autres longueurs (y compris 0 !) : il doit répéter `n` fois, pas un nombre fixe.",
+  "lesson": "**Exemple** — un lutin qui salue `n` fois :\n```java\nfor (int i = 0; i < n; i++) {   // i vaut 0, 1, ..., n-1 : n tours\n    IO.println(\"Salut !\");\n}\n```\nTrois parties : départ (`int i = 0`), condition de continuation (`i < n`), pas (`i++`).",
+  "hints": [
+    "Une boucle `for (int i = 0; i < n; i++)` s'exécute **exactement `n` fois** (pour `n = 0`, jamais).",
+    "La condition doit comparer `i` à la longueur lue, pas à un nombre écrit en dur.",
+    "À chaque tour : avancer **puis** creuser — il manque l'appel à la méthode de `Golem` qui creuse."
+  ],
+  "stage": {
+    "speak": true,
+    "actors": {
+      "golem": {
+        "sprite": 109,
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "dialog": {
+    "intro": [
+      "Voici mon golem de pierre. Il est costaud, mais il ne sait faire que ce qu'on lui dit, un geste à la fois.",
+      "Je ne vais pas écrire cent fois « avance, creuse »… Une boucle `for` répète pour moi ! Complète mon sort."
+    ],
+    "success": [
+      "Il avance, il creuse, il recommence : le golem a fait tout le couloir ! Une boucle `for`, c'est un ordre répété autant de fois qu'on veut."
+    ],
+    "done": "Mon golem creuse sans jamais se plaindre."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

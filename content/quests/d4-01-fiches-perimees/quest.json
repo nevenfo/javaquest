@@ -1,0 +1,65 @@
+{
+  "id": "d4-01-fiches-perimees",
+  "title": "Les fiches périmées",
+  "region": "archives",
+  "giver": "greffier",
+  "main": false,
+  "kind": "fix",
+  "assessment": "practice",
+  "requires": [
+    "b07-classement-livres"
+  ],
+  "skills": [
+    "col.arraylist",
+    "arr.algos",
+    "col.linkedlist"
+  ],
+  "summary": "Répare deux méthodes de nettoyage d'une liste de fiches : suppression pendant le parcours et remove(int) contre remove(Object).",
+  "source": "ArrayList : retrait pendant un for-each (ConcurrentModificationException), remove(int index) contre remove(Object), removeIf",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    // Supprime de la liste toutes les fiches de cote négative.\n    static void retirerPerimees(List<Integer> fiches) {\n        for (Integer f : fiches) {\n            if (f < 0) {\n                fiches.remove(f);\n            }\n        }\n    }\n\n    // Supprime UNE fiche portant la cote donnée (la première trouvée) ; ne fait rien si elle est absente.\n    static void retirerCote(List<Integer> fiches, int cote) {\n        fiches.remove(cote);\n    }\n}\n"
+  },
+  "brief": "Le greffier des Archives Englouties garde ses fiches dans une `List<Integer>` (une cote par fiche). Ses deux méthodes de nettoyage sont fournies, mais elles **plantent ou se trompent** :\n- `retirerPerimees(fiches)` : retire **toutes** les fiches de cote négative ;\n- `retirerCote(fiches, cote)` : retire **une seule** fiche, la première qui porte cette cote ; si aucune ne la porte, la liste ne change pas.\n\nLes deux méthodes modifient la liste reçue (elles ne renvoient rien). Répare-les sans changer leur signature.\n\nExemple :\n```\n[3, -1, 4, -2, -5, 6]  --retirerPerimees-->  [3, 4, 6]\n[10, 3, 7, 3]  --retirerCote(…, 3)-->  [10, 7, 3]\n[5, 6]  --retirerCote(…, 1)-->  [5, 6]\n```",
+  "hints": [
+    "Modifier une liste **pendant** qu'un `for` « pour chaque » la parcourt est interdit : l'itérateur s'en aperçoit et lève une `ConcurrentModificationException`. Il existe des façons de supprimer sans écrire cette boucle soi-même.",
+    "`List` a **deux** méthodes `remove` : `remove(int index)` supprime à une **position**, `remove(Object o)` supprime une **valeur**. Avec un `int` en argument, Java choisit la première.",
+    "Pour retirer selon un critère, regarde `removeIf(f -> condition)`. Pour retirer une valeur entière, il faut passer un objet `Integer`, par exemple `Integer.valueOf(x)`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue aux Archives Englouties ! Je suis le greffier : je tiens le registre des fiches, avec les pieds dans l'eau.",
+      "Mes deux méthodes de nettoyage ont une mauvaise réputation : l'une fait planter le registre, l'autre supprime la mauvaise fiche. Peux-tu les réparer ?"
+    ],
+    "resume": "Mes fiches périmées s'accumulent. Regarde de près ce que fait `remove` avec un `int`, et ce qui arrive quand on supprime pendant un parcours.",
+    "success": [
+      "Le registre ne plante plus et la bonne fiche part à chaque fois. Voilà qui est propre !",
+      "Dans la salle des index, un autre mystère t'attend : celui de l'ordre dans lequel les collections rangent leurs éléments."
+    ],
+    "done": "Mon registre est propre, merci !"
+  },
+  "reward": {
+    "xp": 30
+  }
+}

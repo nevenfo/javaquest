@@ -1,0 +1,55 @@
+{
+  "id": "r-obj.random-1",
+  "title": "La pioche de cartes",
+  "region": "artisans",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "a11-gemmes"
+  ],
+  "skills": [
+    "obj.random"
+  ],
+  "summary": "Pioche n cartes distinctes avec un Random reçu, sans modifier la liste d'origine (réactivation).",
+  "source": "java.util.Random : générateur reçu, tirage sans doublon (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Pioche.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Pioche.java"
+    ],
+    [
+      "wrong2/Pioche.java"
+    ]
+  ],
+  "starter": {
+    "Pioche.java": "import java.util.*;\n\npublic class Pioche {\n    public static List<String> tirer(Random rng, List<String> cartes, int n) {\n        \n    }\n}\n"
+  },
+  "brief": "Écris `Pioche.tirer(Random rng, List<String> cartes, int n)` qui renvoie une liste de **`n` cartes distinctes** (positions différentes) choisies au hasard avec `rng`.\n\n- la liste `cartes` reçue **n'est pas modifiée** ;\n- `n > cartes.size()` ou `n < 0` : `IllegalArgumentException` ;\n- deux `Random` de même graine donnent le même résultat.",
+  "hints": [
+    "Travaille sur une copie : `new ArrayList<>(cartes)`.",
+    "Répète `n` fois : retire de la copie l'élément d'indice `rng.nextInt(copie.size())` et ajoute-le au résultat."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un souvenir qui revient : tirer au hasard avec le générateur qu'on nous donne, et ne pas abîmer le jeu."
+    ],
+    "success": [
+      "Tirage sans doublon, jeu intact."
+    ],
+    "done": "Le hasard n'a plus de secret."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaQuest — Les Runes de Javelune</title>
+<link rel="stylesheet" href="vendor/codemirror/codemirror.css">
+<link rel="stylesheet" href="css/game.css">
+<link rel="icon" href="assets/favicon.png">
+<script src="vendor/phaser.min.js"></script>
+<script src="vendor/codemirror/codemirror.js"></script>
+<script src="vendor/codemirror/clike.js"></script>
+<script src="vendor/codemirror/matchbrackets.js"></script>
+<script src="vendor/codemirror/active-line.js"></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<div id="game" aria-label="Monde du jeu"></div>
+
+<!-- Barre de jeu -->
+<div id="hud" hidden>
+  <div class="hud-left">
+    <div id="hud-place" class="hud-chip"></div>
+    <div id="hud-quest" class="hud-chip hud-quest" title="Quête suivie (J pour le journal)"></div>
+  </div>
+  <div class="hud-right">
+    <span id="hud-xp" class="hud-chip" title="Expérience : récompense de jeu, PAS une mesure de maîtrise"></span>
+    <button data-open="journal" title="Journal des quêtes (J)">📜 Journal <kbd>J</kbd></button>
+    <button data-open="grimoire" title="Grimoire des compétences (G)">📘 Grimoire <kbd>G</kbd></button>
+    <button data-open="map" title="Carte (M)">🗺 Carte <kbd>M</kbd></button>
+    <button data-open="menu" title="Menu (Échap)">☰ <kbd>Échap</kbd></button>
+  </div>
+</div>
+<div id="prompt" hidden></div>
+
+<!-- Dialogue -->
+<div id="dialog" hidden role="dialog" aria-live="polite">
+  <div id="dialog-portrait"></div>
+  <div class="dialog-body">
+    <div id="dialog-name"></div>
+    <div id="dialog-text"></div>
+    <div id="dialog-choices"></div>
+  </div>
+  <div id="dialog-next">▼</div>
+</div>
+
+<!-- Atelier de code -->
+<section id="editor" hidden aria-label="Atelier de code">
+  <header class="ed-head">
+    <div>
+      <div id="ed-kind" class="ed-kind"></div>
+      <h2 id="ed-title"></h2>
+    </div>
+    <button id="ed-close" title="Fermer (Échap)">✕</button>
+  </header>
+  <nav class="ed-tabs" id="ed-infotabs">
+    <button data-info="brief" class="on">Mission</button>
+    <button data-info="lesson">Rappel</button>
+    <button data-info="hints">Indices <span id="ed-hintcount"></span></button>
+    <button data-info="api">API de la quête</button>
+  </nav>
+  <div id="ed-info" class="ed-info"></div>
+  <div class="ed-files" id="ed-files"></div>
+  <div id="ed-code" class="ed-code"></div>
+  <div id="ed-parsons" class="ed-parsons" hidden></div>
+  <div id="ed-predict" class="ed-predict" hidden></div>
+  <div class="ed-toolbar">
+    <button id="ed-run" class="btn-run" title="Exécuter (Ctrl+Entrée)">▶ Exécuter <kbd>Ctrl+Entrée</kbd></button>
+    <button id="ed-check" class="btn-check" title="Vérifier (Ctrl+Maj+Entrée)">✔ Vérifier la quête <kbd>Ctrl+Maj+Entrée</kbd></button>
+    <label class="ed-stdin-label" title="Texte fourni au programme (IO.readln)">Entrée : <input id="ed-stdin" placeholder="(clavier simulé)"></label>
+    <label class="ed-args-label" title="Arguments de la ligne de commande (args), séparés par des espaces">args : <input id="ed-args" placeholder="toto 2000"></label>
+    <span class="grow"></span>
+    <button id="ed-reset" title="Revenir au code de départ">↺ Réinitialiser</button>
+  </div>
+  <div class="ed-bottom">
+    <nav class="ed-tabs" id="ed-outtabs">
+      <button data-out="console" class="on">Console</button>
+      <button data-out="problems">Problèmes <span id="ed-probcount"></span></button>
+      <button data-out="trace">Exécution pas à pas</button>
+      <button data-out="tests">Vérification</button>
+    </nav>
+    <div id="ed-out" class="ed-out"></div>
+  </div>
+</section>
+
+<!-- Fenêtres (journal, grimoire, carte, menu, écran titre) -->
+<div id="modal" hidden><div id="modal-box"></div></div>
+<div id="toasts" aria-live="polite"></div>
+<div id="fatal" hidden></div>
+</body>
+</html>

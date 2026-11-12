@@ -1,0 +1,41 @@
+JavaQuest 2.0 — Les Runes de Javelune
+=====================================
+Un jeu de Nevant. © 2026 Nevant.
+
+Un RPG fantastique où l'on apprend Java (programme Java EISC4, Java 25) en écrivant de vrais
+programmes : chaque sort est compilé par un vrai javac et exécuté pour agir sur le monde.
+
+LANCER LE JEU
+1. Extrais TOUT le contenu du ZIP dans un dossier de ton choix (pas besoin d'administrateur).
+2. Double-clique sur JavaQuest.cmd (une fenêtre noire apparaît une seconde, c'est normal).
+3. Le jeu s'ouvre dans ton navigateur.
+4. Pour arrêter : Menu > Quitter le jeu. Si tu fermes simplement l'onglet, le jeu s'arrête de
+   lui-même après 4 minutes sans activité. Relancer JavaQuest.cmd pendant qu'il tourne rouvre
+   simplement le jeu dans le navigateur.
+
+Aucune installation (ni Java, ni Node, ni autre), aucun compte, aucune connexion Internet.
+Windows 10 (1703+) ou Windows 11 64 bits requis.
+
+COMMANDES
+Déplacement : Z Q S D (AZERTY) / W A S D (QWERTY) / flèches — Interagir : E
+Journal : J — Grimoire : G — Carte : M — Menu : Échap
+Atelier de code : Ctrl+Entrée exécuter, Ctrl+Maj+Entrée vérifier, Ctrl+S sauvegarder.
+
+SAUVEGARDES
+Une sauvegarde par profil, sur ce PC : %LOCALAPPDATA%\JavaQuest\profiles\
+(copie précédente en .bak). Menu > Exporter / Importer pour changer de PC.
+
+SÉCURITÉ
+Ton code Java s'exécute dans un conteneur isolé de Windows (AppContainer « LPAC » sans réseau
+ni accès à tes fichiers personnels, avec limites de mémoire, de temps et de processus).
+Le serveur du jeu n'écoute que ton propre PC (127.0.0.1) et exige un jeton de session.
+Détails et limites : voir docs/SECURITY.md dans le dépôt du projet.
+
+PÉDAGOGIE
+L'XP récompense l'aventure ; la MAÎTRISE (Grimoire) n'est accordée qu'avec des preuves sans aide,
+sur plusieurs activités dont un problème nouveau, et à nouveau quelques jours plus tard.
+Les sujets d'examen officiels ne sont pas inclus : tu peux importer ton propre exemplaire dans la
+Citadelle des Épreuves (il reste sur ton PC et s'affiche sans modification).
+
+En cas de problème : journal %LOCALAPPDATA%\JavaQuest\javaquest.log
+Licences des composants : THIRD_PARTY.md et dossier licenses\.

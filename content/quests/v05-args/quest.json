@@ -1,0 +1,58 @@
+{
+  "id": "v05-args",
+  "title": "Le registre du garde",
+  "region": "village",
+  "giver": "garde",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.args"
+  ],
+  "summary": "Lis le nom et la durée de séjour passés en arguments, sans jamais planter.",
+  "hud": "Parle à Aubin, le garde de la porte du village.",
+  "source": "hello : args.length et args[i] (java HelloWorld toto 2000) ; cas sans argument",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "void main(String[] args) {\n    \n}\n"
+  },
+  "brief": "Le garde Aubin inscrit les voyageurs dans son registre. Ton programme reçoit des **arguments** : `args[0]` est le nom du voyageur, `args[1]` (facultatif) son nombre de jours de séjour.\n\n- Aucun argument : affiche `Halte ! Donne ton nom.`\n- Un nom : affiche `Bienvenue, <nom> !`\n- Un nom et une durée : affiche aussi, sur une deuxième ligne, `Séjour : <heures> heures` (la durée en jours × 24).\n\nExemple pour les arguments `Mira 3` :\n```\nBienvenue, Mira !\nSéjour : 72 heures\n```\nGarde la signature `void main(String[] args)`. Le bouton « Exécuter » ne transmet aucun argument (c'est le cas « sans argument ») ; la vérification, elle, essaie plusieurs combinaisons. Un accès à une case qui n'existe pas fait planter le sort !",
+  "hints": [
+    "`args.length` donne le nombre d'arguments reçus : teste-le **avant** de lire `args[0]` ou `args[1]`.",
+    "Les arguments sont des `String` : pour calculer des heures, convertis la durée avec `Integer.parseInt(...)`.",
+    "Trois cas à séparer : `args.length == 0`, un seul argument, au moins deux arguments."
+  ],
+  "dialog": {
+    "intro": [
+      "Halte-là ! Je suis Aubin, garde de Javelune. Chaque voyageur doit se présenter à mon registre.",
+      "Mon registre lit ce qu'on lui passe en arguments. Mais un voyageur muet, qui ne donne rien, ne doit pas faire planter ma porte !",
+      "Écris-moi ça seul·e : trois cas, aucun plantage."
+    ],
+    "success": [
+      "Rien ne plante, même pour le voyageur muet. Ma porte est entre de bonnes mains !"
+    ],
+    "done": "Mon registre est toujours à jour, grâce à toi.",
+    "locked": "Reviens quand la Doyenne t'aura appris à manier les variables."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "s01-premiers-pas",
+  "title": "Les premiers pas de l'automate",
+  "region": "sommet",
+  "giver": "astronome",
+  "main": false,
+  "kind": "code",
+  "assessment": "guided",
+  "requires": [
+    "b07-classement-livres"
+  ],
+  "skills": [
+    "loop.while",
+    "obj.methodes"
+  ],
+  "summary": "Guide l'automate de l'observatoire jusqu'à sa cible avec deux boucles while.",
+  "hud": "L'automate attend tes ordres sur la grille de l'observatoire.",
+  "source": "boucle while sur une condition (capteur), appels de méthodes d'un objet ; aucun codage en dur",
+  "support": [
+    "support/Compagnon.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n    static void guider(Compagnon c) {\n        while (/* ??? */) {\n            c.avancer(\"droite\");\n        }\n        while (/* ??? */) {\n            c.avancer(\"bas\");\n        }\n        c.dire(\"Arrivé !\");\n    }\n\n    public static void main(String[] args) {\n        guider(Compagnon.demarrer());\n    }\n}\n"
+  },
+  "brief": "Voici l'**automate** de l'observatoire, une petite créature de métal qui évolue sur une grille (`#` mur, `X` cible). Ta mission : le guider en **trois temps**.\n\n1. Il avance vers la **droite** tant qu'un mur (ou le bord de la grille) ne bloque pas le chemin ;\n2. puis il descend vers le **bas** jusqu'à se trouver **sur la cible** ;\n3. enfin il dit « Arrivé ! ».\n\nL'automate (classe `Compagnon`, fournie : lis-la dans l'onglet) :\n- `c.avancer(\"droite\")` : un pas vers `\"haut\"`, `\"bas\"`, `\"gauche\"` ou `\"droite\"` ; contre un mur, une `MurException` explique le problème ;\n- `c.devantMur(\"droite\")` : vrai si un mur (ou le bord de la grille) bloque cette direction ;\n- `c.surCible()` : vrai s'il est sur la cible ; `c.x()`, `c.y()` : sa position ; `c.dire(\"…\")` : une phrase.\n\nComplète les deux `/* ??? */` de `guider`. Lance avec « Exécuter » : la grille s'affiche dans le monde et l'automate bouge.\nLa cible est toujours dans la dernière colonne atteignable, mais la grille change d'un test à l'autre (largeur, hauteur, cible déjà atteinte au bout de la première ligne, une seule colonne…) : il faut des conditions, pas un nombre de pas écrit en dur.\n\nExemple : sur la grille `C..#` / `...X`, l'automate fait deux pas vers la droite (le mur de la case suivante l'arrête), puis un pas vers le bas : il est sur `X`.",
+  "lesson": "**Exemple** — un lutin qui marche jusqu'au mur :\n```java\nwhile (!lutin.devantMur(\"gauche\")) {   // tant que rien ne bloque\n    lutin.avancer(\"gauche\");\n}\n```\nLa condition est testée **avant chaque tour** : si le mur est déjà là, le corps ne s'exécute pas du tout.",
+  "hints": [
+    "Une boucle `while (condition)` répète tant que la condition est vraie. Ici : « tant que le mur n'est **pas** devant lui », donc une négation `!`.",
+    "Première boucle : `!c.devantMur(\"droite\")`. Deuxième boucle : on ne descend pas jusqu'au mur mais jusqu'à la cible ; cherche la méthode qui dit si l'automate est dessus.",
+    "Si ton automate heurte un mur ou ne s'arrête pas sur la cible, relis la condition de la deuxième boucle : elle doit devenir fausse **exactement** quand il est arrivé."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue à l'Observatoire du Sommet, voyageur. Je suis Astrion, et voici mon automate : il lit les étoiles, mais il ne sait pas encore marcher seul.",
+      "Il obéit à ton code, un geste à la fois. Apprends-lui d'abord à aller tout droit jusqu'au mur, puis à descendre vers sa cible."
+    ],
+    "resume": "L'automate attend toujours sur la grille : avancer tant que rien ne bloque, puis descendre jusqu'à la cible.",
+    "success": [
+      "Il a marché jusqu'au mur, descendu jusqu'à la cible, et il l'annonce fièrement. Et sur n'importe quelle grille : tu ne lui as pas appris un trajet, mais une règle."
+    ],
+    "done": "L'automate trotte jusqu'à sa cible sans jamais se tromper."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

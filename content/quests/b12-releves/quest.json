@@ -1,0 +1,61 @@
+{
+  "id": "b12-releves",
+  "title": "Le tableau des chasseurs",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b11-inventaire"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "str.split",
+    "col.tri"
+  ],
+  "summary": "Analyse des lignes « nom : prises » puis classe les chasseurs avec un Comparator.",
+  "source": "celebs : fromString + tri par popularité ; address : s.split(\":\")",
+  "support": [
+    "support/Chasseur.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static List<Chasseur> lire(List<String> lignes) {\n        return null;\n    }\n\n    static List<String> classement(List<String> lignes) {\n        return null;\n    }\n}\n"
+  },
+  "brief": "Lyra reçoit les relevés des chasseurs de la forêt, une ligne par chasseur : `nom : prises` (espaces facultatifs autour des morceaux, lignes vides possibles). Le record `Chasseur(String nom, int prises)` est fourni. Dans `Main` :\n- `List<Chasseur> lire(List<String> lignes)` : une entrée par ligne non vide, dans l'ordre ;\n- `List<String> classement(List<String> lignes)` : les chasseurs triés par prises **décroissantes**, à égalité par nom croissant, sous la forme `\"Ada (12)\"`.\n\n```\nclassement([\" Ada : 12 \", \"Zoe:7\", \"\", \"Bob :12\"])   // [Ada (12), Bob (12), Zoe (7)]\n```",
+  "hints": [
+    "`ligne.split(\":\")` donne le nom et le nombre ; `trim()` retire les espaces avant `Integer.parseInt` (qui refuse `\" 12\"`).",
+    "Teste `ligne.isBlank()` pour ignorer les lignes vides.",
+    "`Comparator.comparingInt(Chasseur::prises).reversed().thenComparing(Chasseur::nom)` : le `reversed` ne s'applique qu'au premier critère."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les chasseurs envoient leurs prises sous forme de lignes de texte, brutes et pas toujours propres. Lis-les, puis classe-les."
+    ],
+    "success": [
+      "Texte brut, objets propres, classement net : tu enchaînes découpage et tri sans effort."
+    ],
+    "done": "Le tableau est affiché."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

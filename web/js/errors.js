@@ -1,0 +1,78 @@
+// Explications pédagogiques en complément des VRAIS messages (javac / JVM), jamais à leur place (P9).
+const COMPILE = {
+  'compiler.err.cant.resolve.location': 'Java ne connaît pas ce nom. Vérifie l\'orthographe et les majuscules, et qu\'il est bien déclaré (variable déclarée avant usage, méthode existante, import éventuel).',
+  'compiler.err.cant.resolve.location.args': 'Aucune méthode de ce nom n\'accepte ces arguments ici. Vérifie le nom, le nombre et le type des arguments.',
+  'compiler.err.cant.resolve': 'Symbole inconnu : nom mal écrit, non déclaré, ou hors de portée (déclaré dans un autre bloc { }).',
+  'compiler.err.expected': 'Il manque un symbole attendu à cet endroit — très souvent un point-virgule ; ou une parenthèse. Regarde aussi la fin de la ligne précédente.',
+  'compiler.err.expected3': 'Il manque un symbole attendu (souvent une parenthèse, une accolade ou un ;).',
+  'compiler.err.prob.found.req': 'Types incompatibles : la valeur n\'a pas le type attendu (ex. un texte "…" dans un int, ou un double dans un int sans conversion).',
+  'compiler.err.possible.loss.of.precision': 'Conversion avec perte : un double ne rentre pas dans un int sans cast explicite (int) — et la partie décimale serait perdue.',
+  'compiler.err.missing.ret.stmt': 'Ta méthode annonce un type de retour : chaque chemin d\'exécution doit se terminer par return valeur;',
+  'compiler.err.var.might.not.have.been.initialized': 'Cette variable peut être lue avant d\'avoir reçu une valeur. Donne-lui une valeur initiale ou dans toutes les branches.',
+  'compiler.err.already.defined': 'Ce nom est déjà déclaré dans la même portée. Réutilise la variable (sans répéter son type) ou choisis un autre nom.',
+  'compiler.err.not.stmt': 'Cette ligne n\'est pas une instruction complète (une expression seule comme x + 1; ne fait rien). Il manque souvent une affectation ou un appel.',
+  'compiler.err.illegal.start.of.expr': 'Une expression commence mal ici : accolade ou parenthèse mal placée, ou instruction écrite hors d\'une méthode.',
+  'compiler.err.illegal.start.of.type': 'Java attendait un type ou une déclaration : code probablement placé hors d\'une méthode ou accolade en trop.',
+  'compiler.err.premature.eof': 'Fin du fichier atteinte trop tôt : il manque probablement une accolade fermante }.',
+  'compiler.err.unreported.exception.need.to.catch.or.throw': 'Cette opération peut lever une exception contrôlée : entoure-la d\'un try { } catch (…) { } ou ajoute throws à la méthode.',
+  'compiler.err.cant.apply.symbol': 'La méthode existe mais pas avec ces arguments : compare le nombre et les types avec sa déclaration.',
+  'compiler.err.cant.apply.symbols': 'Aucune version (surcharge) de cette méthode ne correspond aux arguments donnés.',
+  'compiler.err.does.not.override.abstract': 'Ta classe promet d\'implémenter une interface (ou hérite d\'une classe abstraite) mais une méthode obligatoire manque.',
+  'compiler.err.method.does.not.override.superclass': '@Override signale que cette méthode devrait redéfinir une méthode héritée : vérifie le nom exact et les types des paramètres.',
+  'compiler.err.non-static.cant.be.ref': 'Depuis une méthode static, on ne peut pas utiliser directement un membre d\'instance : crée un objet ou rends le membre static.',
+  'compiler.err.class.public.should.be.in.file': 'Une classe public doit être dans un fichier du même nom (classe Point → Point.java).',
+  'compiler.err.cant.assign.val.to.var': 'Cette variable est final : sa valeur ne peut plus changer après son initialisation.',
+  'compiler.err.cant.assign.val.to.final.var': 'Champ ou variable final : une seule affectation est permise.',
+  'compiler.err.unreachable.stmt': 'Cette instruction ne peut jamais s\'exécuter (elle suit un return, un break ou une boucle infinie).',
+  'compiler.err.incomparable.types': 'Ces deux types ne peuvent pas être comparés avec == ou !=.',
+  'compiler.err.operator.cant.be.applied': 'Cet opérateur ne s\'applique pas à ce type de valeur.',
+  'compiler.err.operator.cant.be.applied.1': 'Cet opérateur ne s\'applique pas à ces types (ex. comparer un boolean avec <, ou - sur des String).',
+  'compiler.err.report.access': 'Ce membre est private (ou non visible) : passe par une méthode publique (getter) ou vérifie la visibilité.',
+  'compiler.err.abstract.cant.be.instantiated': 'On ne peut pas faire new sur une interface ou une classe abstraite : instancie une classe concrète qui l\'implémente.',
+  'compiler.err.illegal.char': 'Caractère interdit dans le code (guillemets typographiques « » ou “ ”, espace insécable…). Utilise les guillemets droits ".',
+  'compiler.err.unclosed.str.lit': 'Chaîne de caractères non fermée : il manque le guillemet " de fin.',
+  'compiler.err.unclosed.char.lit': 'Caractère non fermé : un char s\'écrit entre apostrophes, ex. \'a\'.',
+  'compiler.err.else.without.if': 'else sans if correspondant : souvent un ; en trop après if (…) ou une accolade mal placée.',
+  'compiler.err.cant.deref': 'On ne peut pas appeler de méthode sur un type primitif (int, double…) ; utilise une classe (Integer, String) ou un opérateur.',
+  'compiler.err.invalid.meth.decl.ret.type.req': 'Une méthode doit déclarer son type de retour (void si elle ne renvoie rien). Pour un constructeur, le nom doit être exactement celui de la classe.',
+  'compiler.err.missing.meth.body.or.decl.abstract': 'Méthode sans corps : ajoute { … } ou déclare-la abstract (dans une classe abstraite / interface).',
+  'compiler.err.call.must.be.first.stmt.in.ctor': 'super(...) ou this(...) doit être la première instruction du constructeur.',
+  'compiler.err.var.might.already.be.assigned': 'Variable final peut-être déjà affectée : une seule affectation possible.',
+  'compiler.err.cant.inherit.from.final': 'Impossible d\'hériter d\'une classe final (les records sont implicitement final).',
+  'compiler.err.duplicate.class': 'Deux classes portent le même nom.',
+  'compiler.err.break.outside.switch.loop': 'break ne peut s\'utiliser que dans une boucle ou un switch.',
+  'compiler.err.missing.ret.val': 'return doit renvoyer une valeur du type annoncé par la méthode.',
+  'compiler.err.cant.ret.val.from.meth.decl.void': 'Une méthode void ne renvoie pas de valeur : return; seul, ou change le type de retour.',
+  'compiler.err.not.def.public.cant.access': 'Cette classe ou ce membre n\'est pas accessible depuis ce paquetage.',
+  'compiler.err.local.var.accessed.from.icls.needs.final': 'Une variable locale utilisée dans une lambda doit être effectivement final (jamais réaffectée).',
+  'compiler.err.not.within.bounds': 'Le type générique ne respecte pas la contrainte attendue.',
+  'compiler.err.type.found.req': 'Un type primitif ne peut pas servir de paramètre générique : List<Integer> et non List<int>.',
+  'compiler.err.record.cant.declare.field.modifiers': 'Un record ne peut pas déclarer de champ d\'instance supplémentaire : ses composants sont déclarés dans l\'en-tête.',
+};
+
+const RUNTIME = {
+  ArrayIndexOutOfBoundsException: 'Indice hors du tableau : les indices vont de 0 à longueur − 1. Vérifie les bornes de ta boucle (< et non <=).',
+  StringIndexOutOfBoundsException: 'Position hors de la chaîne : charAt(i) exige 0 ≤ i < s.length().',
+  IndexOutOfBoundsException: 'Indice hors de la liste : get(i) exige 0 ≤ i < size().',
+  NullPointerException: 'Une référence vaut null et on l\'utilise comme un objet. Quelle variable n\'a jamais reçu d\'objet (new …) ?',
+  NumberFormatException: 'Le texte ne représente pas un nombre valide pour parseInt/parseDouble (espaces, lettres, texte vide…).',
+  ArithmeticException: 'Opération arithmétique impossible, typiquement une division entière par zéro.',
+  ClassCastException: 'Conversion de type impossible : l\'objet n\'est pas de la classe visée par le cast.',
+  StackOverflowError: 'Pile d\'appels saturée : une méthode s\'appelle sans fin (récursion sans cas d\'arrêt).',
+  OutOfMemoryError: 'Mémoire épuisée : structure de données qui grossit sans fin ?',
+  IllegalArgumentException: 'Une méthode a refusé un argument invalide (souvent levée volontairement avec throw).',
+  IllegalStateException: 'Opération refusée dans l\'état actuel de l\'objet (souvent levée volontairement avec throw).',
+  ConcurrentModificationException: 'Collection modifiée pendant qu\'on la parcourt avec for-each : utilise un Iterator et it.remove(), ou une copie.',
+  NoSuchElementException: 'On demande un élément qui n\'existe pas (liste/itérateur vide, ou entrée clavier épuisée).',
+  InputMismatchException: 'L\'entrée lue ne correspond pas au type attendu.',
+  UnsupportedOperationException: 'Opération non permise : par ex. modifier une liste immuable (List.of).',
+  NoSuchMethodException: 'Aucune méthode main trouvée : écris void main() { … } ou public static void main(String[] args).',
+};
+
+export function explainDiagnostic(d) {
+  if (COMPILE[d.code]) return COMPILE[d.code];
+  if (/lossy conversion/.test(d.message)) return COMPILE['compiler.err.possible.loss.of.precision'];
+  return null;
+}
+
+export function explainException(simpleType) { return RUNTIME[simpleType] || null; }

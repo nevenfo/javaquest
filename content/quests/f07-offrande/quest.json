@@ -1,0 +1,61 @@
+{
+  "id": "f07-offrande",
+  "title": "L'offrande à l'arbre-sage",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "f06-fagots"
+  ],
+  "skills": [
+    "exc.trycatch",
+    "cond.if"
+  ],
+  "summary": "Écris seul·e une saisie qui redemande tant que l'entier est invalide ou hors bornes.",
+  "source": "hello : saisie validée par try/catch dans une boucle (redemander tant que non valide)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "x\\n11\\n4",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "L'arbre-sage accepte une offrande de **1 à 10 glands** (inclus). Écris un programme qui lit le nombre de glands et **redemande** tant que la saisie est mauvaise :\n- si ce n'est pas un entier : affiche `Saisie invalide.`\n- si c'est un entier hors de 1..10 : affiche `Entre 1 et 10 !`\n- sinon, affiche `Merci : N glands` et termine.\n\nExemple avec les lignes `x`, `11`, `4` :\n```\nSaisie invalide.\nEntre 1 et 10 !\nMerci : 4 glands\n```\n(les lignes d'invite et l'écho de ta saisie peuvent aussi apparaître ; seuls les messages ci-dessus comptent).",
+  "hints": [
+    "Une boucle `while` qui tourne tant que la saisie n'est pas acceptée ; un `try / catch (NumberFormatException e)` autour de `Integer.parseInt`.",
+    "Le test de bornes se fait **après** une conversion réussie, dans le `try` : une valeur hors bornes n'est pas une exception, c'est un `if`.",
+    "Garde un booléen (ou une valeur sentinelle) qui ne devient « accepté » que lorsque les deux contrôles sont passés."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "L'arbre-sage ne se laisse pas amadouer par n'importe quelle offrande : un à dix glands, pas un de plus, pas un de moins.",
+      "Écris un sort qui redemande tant que la réponse n'est pas bonne. Seul·e : tu sais déjà attraper une exception et vérifier une borne."
+    ],
+    "success": [
+      "L'arbre-sage frémit de contentement. Ton sort sait refuser calmement les mauvaises offrandes !"
+    ],
+    "done": "L'arbre-sage garde ton nom en mémoire."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

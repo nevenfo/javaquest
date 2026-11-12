@@ -1,0 +1,57 @@
+{
+  "id": "m02-filon",
+  "title": "Le filon qui double",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m01-wagons"
+  ],
+  "skills": [
+    "loop.while"
+  ],
+  "summary": "Compte les jours nécessaires pour qu'un filon qui double atteigne l'objectif.",
+  "source": "median : boucle conditionnée par une valeur ; risque de boucle infinie et décalage d'une itération",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3\\n10",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Un filon de cristal **double** de volume chaque jour. Écris un programme qui lit :\n1. le volume de départ (un entier ≥ 1),\n2. l'objectif à atteindre (un entier ≥ 1),\n\npuis affiche le **nombre de jours** nécessaires pour atteindre ou dépasser l'objectif, et le volume obtenu :\n```\nJours : 2\nVolume : 12\n```\n(exemple pour 3 puis 10 : 3 → 6 → 12). Si le volume de départ atteint déjà l'objectif, il faut 0 jour. Attention à ne pas écrire une boucle qui ne s'arrête jamais !",
+  "hints": [
+    "Tant que le volume n'a pas atteint l'objectif, on double et on compte un jour de plus : c'est un `while`.",
+    "Si la condition ne change jamais, la boucle est infinie : vérifie que le volume est bien modifié **dans** la boucle.",
+    "« Atteindre ou dépasser » signifie qu'on continue tant que `volume < objectif` (et non `<=`)."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Ce filon est étrange : il double de volume chaque jour ! Combien de jours avant qu'on puisse en tirer assez ?",
+      "Écris-moi ça seul·e. Et fais attention : si ta boucle ne s'arrête pas, mes wagons attendront longtemps…"
+    ],
+    "success": [
+      "Pile le bon nombre de jours, même quand l'objectif est déjà atteint ! Les boucles `while` n'ont plus de secret pour toi."
+    ],
+    "done": "Mon filon est bien surveillé."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

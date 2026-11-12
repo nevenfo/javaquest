@@ -1,0 +1,60 @@
+{
+  "id": "a18-tiroir",
+  "title": "Le tiroir de l'atelier",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "a15-sacoche"
+  ],
+  "skills": [
+    "obj.classe",
+    "obj.methodes",
+    "obj.visibilite"
+  ],
+  "summary": "Écris la classe Tiroir (capacité, contenu) avec champs privés et méthodes qui renvoient un booléen.",
+  "source": "point : classe, méthodes avec paramètres et valeur de retour, encapsulation (contexte nouveau)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Tiroir.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Tiroir.java"
+    ],
+    [
+      "wrong2/Tiroir.java"
+    ]
+  ],
+  "starter": {
+    "Tiroir.java": "public class Tiroir {\n}\n"
+  },
+  "brief": "Rosa range des clous dans un tiroir de capacité limitée. Écris la classe `Tiroir` (fichier `Tiroir.java`) :\n\n- champs **`private`** ; constructeur `Tiroir(int capacite)` (tiroir vide au départ) ;\n- `boolean ranger(int n)` : ajoute `n` clous (`n > 0`) **si tout rentre**, et renvoie `true` ; sinon ne change rien et renvoie `false` ;\n- `boolean sortir(int n)` : retire `n` clous (`n > 0`) s'il y en a assez, `true` ; sinon `false` sans rien changer ;\n- `int getContenu()`, `int getCapacite()`, `boolean estVide()`, `boolean estPlein()`.\n\n```java\nTiroir t = new Tiroir(10);\nt.ranger(8);    // true ; t.ranger(5) -> false, le contenu reste 8\n```",
+  "hints": [
+    "Seule la classe modifie ses champs : les autres passent par `ranger` et `sortir`, qui contrôlent les limites.",
+    "Une méthode qui renvoie un `boolean` dit si l'opération a eu lieu : teste la condition avant de modifier le champ.",
+    "Pense aux cas `n <= 0` (refusés) et au tiroir exactement plein."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mon tiroir à clous déborde parce que n'importe qui y fourre n'importe quoi.",
+      "Une classe `Tiroir` fera mieux : elle seule touche à son contenu, et elle me dit si l'opération a réussi."
+    ],
+    "success": [
+      "Un tiroir qui sait dire non : voilà de l'encapsulation."
+    ],
+    "done": "Plus un clou ne déborde."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

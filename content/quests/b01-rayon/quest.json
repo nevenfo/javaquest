@@ -1,0 +1,66 @@
+{
+  "id": "b01-rayon",
+  "title": "Le rayon des emprunts",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": true,
+  "requires": [
+    "t09-contrats"
+  ],
+  "kind": "code",
+  "assessment": "guided",
+  "skills": [
+    "col.arraylist"
+  ],
+  "summary": "Retire des titres d'un rayon (ArrayList) sans ConcurrentModificationException.",
+  "source": "collections : ArrayList, ajout/suppression, parcours",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ],
+    [
+      "solutions/s2/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static boolean emprunter(List<String> rayon, String titre) {\n        return /* ??? */;\n    }\n\n    static void retirerCourts(List<String> rayon, int min) {\n        /* ??? */\n    }\n}\n"
+  },
+  "brief": "Lyra range les livres d'un rayon dans une `List<String>` modifiable. Complète deux méthodes de `Main` :\n- `boolean emprunter(List<String> rayon, String titre)` : retire **la première occurrence** du titre ; renvoie `true` s'il était présent, `false` sinon ;\n- `void retirerCourts(List<String> rayon, int min)` : retire **en place** tous les titres de moins de `min` caractères.\n\n```java\nList<String> r = new ArrayList<>(List.of(\"Ab\", \"Runes\", \"Xy\", \"Cendres\"));\nretirerCourts(r, 3);   // r vaut [Runes, Cendres]\n```\nPiège classique : supprimer dans une liste **pendant** un `for (x : liste)` lève une exception ; et avec un index, on saute des éléments !",
+  "lesson": "Exemple résolu (autre liste) :\n```java\nList<Integer> notes = new ArrayList<>(List.of(4, 12, 7, 15));\nnotes.add(9);            // ajoute à la fin\nnotes.remove(Integer.valueOf(7));   // retire la valeur 7\nnotes.removeIf(n -> n < 10);        // retire tous les n < 10\n```",
+  "hints": [
+    "`List.remove(Object)` retire la première occurrence (via `equals`) et renvoie un booléen.",
+    "Pour supprimer pendant le parcours : un `Iterator` (`it.remove()`), ou plus simplement `liste.removeIf(condition)`.",
+    "Exemple analogue : `nombres.removeIf(n -> n < 0);` retire tous les négatifs de la liste."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue à la Grande Bibliothèque ! Je suis Lyra. Mes rayons se vident au gré des emprunts, et ma liste de titres doit suivre.",
+      "Deux méthodes à compléter : retirer un titre, et retirer tous les titres trop courts. Attention, supprimer pendant un parcours est dangereux !"
+    ],
+    "resume": "Les rayons de Lyra attendent encore ta correction.",
+    "success": [
+      "Les rayons sont à jour, sans exception ! Tu sais modifier une liste en toute sécurité."
+    ],
+    "done": "Mes rayons sont bien tenus."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

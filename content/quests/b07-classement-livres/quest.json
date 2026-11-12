@@ -1,0 +1,70 @@
+{
+  "id": "b07-classement-livres",
+  "title": "Le classement des livres",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": true,
+  "requires": [
+    "b06-sac-de-mots"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "col.tri"
+  ],
+  "summary": "Trie des livres avec Comparator.comparing, reversed et thenComparing.",
+  "source": "collections : Comparator.comparing, reversed, thenComparing",
+  "support": [
+    "support/Livre.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static List<Livre> parAnneeRecente(List<Livre> livres) {\n        return livres;\n    }\n\n    static List<Livre> parAuteurPuisPages(List<Livre> livres) {\n        return livres;\n    }\n}\n"
+  },
+  "brief": "La classe `Livre` (record fourni, lecture seule) : `Livre(String titre, String auteur, int annee, int pages)`.\n\nDans `Main`, écris deux méthodes qui renvoient **une nouvelle liste triée** (la liste reçue ne change pas) :\n- `parAnneeRecente(List<Livre>)` : **année décroissante** (les plus récents d'abord), puis **titre alphabétique** à année égale ;\n- `parAuteurPuisPages(List<Livre>)` : **auteur alphabétique**, puis **nombre de pages décroissant** à auteur égal.\n\nUtilise `Comparator.comparing(...)`, `.reversed()` et `.thenComparing(...)`.\nPiège : `.reversed()` inverse **tout le comparateur construit jusque-là**.",
+  "hints": [
+    "`Comparator.comparingInt(Livre::annee)` trie par année croissante ; `.reversed()` inverse l'ordre.",
+    "`.thenComparing(Livre::titre)` départage les égalités. Où placer `.reversed()` pour qu'il n'inverse que ce que tu veux ?",
+    "Pour ne renverser que le second critère : `comparing(A).thenComparing(comparingInt(B).reversed())`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes livres se rangent de mille façons : par année, par auteur, par taille. À chaque fois, le même cri : « Où est le plus récent ? Le plus gros ? »",
+      "Un `Comparator` bien construit règle tout ça. Attention à l'ordre des critères et au `reversed` !"
+    ],
+    "success": [
+      "Les livres se rangent comme tu l'as décidé. Les comparateurs n'ont plus de secret !"
+    ],
+    "done": "Mes livres sont bien rangés."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-bibliotheque",
+      "unlock:Grande Bibliothèque maîtrisée : le passage du nord vers les Archives Englouties est ouvert"
+    ]
+  },
+  "reward": {
+    "xp": 40
+  }
+}

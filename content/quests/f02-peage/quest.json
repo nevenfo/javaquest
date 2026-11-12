@@ -1,0 +1,60 @@
+{
+  "id": "f02-peage",
+  "title": "Le péage du sentier",
+  "region": "foret",
+  "giver": "sylve",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "f01-carrefour"
+  ],
+  "skills": [
+    "cond.if"
+  ],
+  "summary": "Écris seul·e le sort qui fixe le tarif du péage selon l'âge.",
+  "source": "hello : if / else, comparaisons et opérateurs logiques (année bissextile)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "17",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Les esprits du sentier font payer un péage selon l'**âge** du voyageur (un entier lu au clavier) :\n\n| Âge | Affichage |\n|---|---|\n| moins de 0 ou plus de 120 | `Âge invalide` |\n| 0 à 5 | `Passage gratuit` |\n| 6 à 17 | `Tarif enfant : 2 pièces` |\n| 18 à 64 | `Tarif normal : 5 pièces` |\n| 65 à 120 | `Tarif aîné : 3 pièces` |\n\nÉcris le sort complet. Il sera vérifié avec d'autres âges, notamment aux **frontières** (5 et 6, 17 et 18, 64 et 65, 0, 120 et 121…).",
+  "hints": [
+    "Une chaîne `if / else if / else` : traite d'abord le cas invalide (avec `||`), puis les tranches dans l'ordre croissant.",
+    "Une fois les âges invalides écartés, `age < 6`, puis `age < 18`, puis `age < 65` suffisent : chaque test hérite des précédents.",
+    "Compare les bornes avec attention : « moins de 6 » est `age < 6`, pas `age <= 6`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Plus loin, le sentier traverse le territoire des esprits. Ils réclament un péage… qui dépend de l'âge.",
+      "Je te laisse écrire le sort **sans trous** cette fois. Fais attention aux frontières !"
+    ],
+    "success": [
+      "Aucune erreur aux frontières ! Les esprits t'accordent le passage."
+    ],
+    "done": "Les esprits ne réclament plus que le juste tarif."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "a07-compteur-forge",
+  "title": "Le compteur de la forge",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "a06-lingot"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "obj.static"
+  ],
+  "summary": "Ajoute une constante static final et un compteur partagé à Epee.",
+  "source": "point : membres static, constantes, compteur partagé",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Epee.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Epee.java"
+    ],
+    [
+      "wrong/w2/Epee.java"
+    ]
+  ],
+  "starter": {
+    "Epee.java": "public class Epee {\n    // Constante : longueur maximale d'une lame, en cm (120)\n\n    // Compteur partagé : nombre d'épées forgées depuis l'ouverture de la forge\n\n    private final String nom;\n\n    public Epee(String nom) {\n        this.nom = nom;\n        /* ??? : une épée de plus a été forgée */\n    }\n\n    public String getNom() { return nom; }\n\n    // getForgees() : à écrire\n}\n"
+  },
+  "brief": "Brom veut savoir combien d'épées sortent de sa forge, et ne jamais dépasser une lame de 120 cm.\n\nDans `Epee` :\n- une constante `public static final int LAME_MAX = 120;` ;\n- un compteur **partagé par toutes les épées**, `private static` ;\n- le constructeur l'augmente de 1 à chaque nouvelle épée ;\n- une méthode `public static int getForgees()` renvoie sa valeur.\n\n```java\nnew Epee(\"Aube\"); new Epee(\"Crépuscule\");\nEpee.getForgees();   // 2 de plus qu'avant\n```",
+  "hints": [
+    "Un champ `static` appartient à la classe, pas à chaque objet : tous les objets le partagent. Une constante est `static final`.",
+    "Une méthode `static` s'appelle sur la classe (`Epee.getForgees()`) et ne peut lire que des membres `static`.",
+    "Dans le constructeur, `forgees++;` met à jour le compteur partagé ; ne le remets pas à zéro !"
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mon carnet de forge est un désastre : je ne sais plus combien d'épées j'ai faites. Il faut que la **classe** s'en souvienne, pas chaque épée.",
+      "Un compteur partagé, plus une constante pour la longueur maximale d'une lame. Je t'ai préparé la classe."
+    ],
+    "success": [
+      "Le compteur grimpe à chaque épée : la classe garde la mémoire de la forge !"
+    ],
+    "done": "Mon compteur de forge est tenu à jour."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

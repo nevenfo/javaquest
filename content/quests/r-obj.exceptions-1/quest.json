@@ -1,0 +1,34 @@
+{
+  "id": "r-obj.exceptions-1",
+  "title": "Rappel : l'erreur qui passe, le finally qui reste",
+  "region": "artisans",
+  "main": false,
+  "requires": [
+    "a09-bourse"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "obj.exceptions"
+  ],
+  "summary": "Prédis la sortie d'un try/catch/finally.",
+  "source": "exceptions : lever, capturer, finally (réactivation)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "100/4 = 25\nfin 4\nErreur : zéro\nfin 0\n100/3 = 33\nfin 3\n",
+  "brief": "Lis ce programme **sans l'exécuter** et écris sa sortie exacte. Combien de fois `finally` s'exécute-t-il ?",
+  "hints": [
+    "`finally` s'exécute toujours, exception ou non.",
+    "Quand `diviser` lève l'exception, le reste du `try` est sauté : on saute au `catch`."
+  ],
+  "dialog": {
+    "success": [
+      "Parfait : l'ordre des blocs n'a plus de secret pour toi."
+    ],
+    "done": "Rappel réussi."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

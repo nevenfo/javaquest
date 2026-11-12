@@ -1,0 +1,5 @@
+void main() {
+    int sacs = Integer.parseInt(IO.readln("Combien de sacs ? "));
+    IO.println("Caisses : " + sacs / 10);
+    IO.println("Sacs restants : " + sacs % 10);
+}

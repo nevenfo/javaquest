@@ -1,0 +1,41 @@
+{
+  "id": "b04-file",
+  "title": "La file des lecteurs",
+  "region": "bibliotheque",
+  "giver": "lyra",
+  "main": false,
+  "requires": [
+    "b03-listes-quiz"
+  ],
+  "kind": "predict",
+  "assessment": "practice",
+  "skills": [
+    "col.linkedlist"
+  ],
+  "summary": "Prédis l'état d'une LinkedList manipulée comme une file à double entrée.",
+  "source": "collections : LinkedList comme Deque (addFirst, removeLast, push, pop)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "[A, X, B, C]\nAC\nX\n[Z, X, B] 3\nZ1\n",
+  "brief": "Lyra manipule la file d'attente de ses lecteurs avec une `LinkedList`. Lis le programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne.",
+  "hints": [
+    "`addFirst`/`push` ajoutent en tête, `addLast`/`add` en queue, `add(i, x)` insère à l'indice `i`.",
+    "`removeFirst`/`pop` retirent la tête, `removeLast` la queue ; `peekFirst` regarde sans retirer."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les lecteurs font la queue, certains passent devant, d'autres repartent par la porte de derrière. Dans quel ordre sont-ils à la fin ?"
+    ],
+    "success": [
+      "Tu suis la file au maillon près !"
+    ],
+    "done": "La file de Lyra n'a plus de secret."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

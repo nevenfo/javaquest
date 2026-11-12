@@ -1,0 +1,69 @@
+{
+  "id": "s02-strategies",
+  "title": "Deux façons de se repérer",
+  "region": "sommet",
+  "giver": "astronome",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "s01-premiers-pas"
+  ],
+  "skills": [
+    "inh.interface",
+    "inh.polymorphisme"
+  ],
+  "summary": "Écris deux classes qui implémentent l'interface Strategie : foncer vers la cible, ou longer le mur de droite.",
+  "hud": "L'automate cherche sa cible : à toi de choisir sa stratégie.",
+  "source": "interface comme contrat, plusieurs implémentations, polymorphisme (le pilote ne connaît que l'interface)",
+  "support": [
+    "support/Compagnon.java",
+    "support/Strategie.java",
+    "support/Pilote.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Main.java"
+    ],
+    [
+      "wrong/w3/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n    public static void main(String[] args) {\n        Compagnon c = Compagnon.demarrer();\n        // Pilote.conduire(c, new ???(), 100);\n    }\n}\n"
+  },
+  "brief": "L'astronome veut tester plusieurs **stratégies** sur le même automate. L'interface `Strategie` et le `Pilote` sont fournis (onglets de lecture) :\n```java\ninterface Strategie { String choisir(Compagnon c); }   // direction du prochain pas, ou null pour abandonner\nPilote.conduire(c, strategie, maxPas)                    // répète c.avancer(strategie.choisir(c)) jusqu'à la cible\n```\nÉcris dans `Main.java`, à côté de `Main`, **deux classes** qui implémentent `Strategie` (constructeur sans argument) :\n\n- **`VersCible`** : si la colonne de l'automate diffère de celle de la cible, il se rapproche en **colonne** (`\"gauche\"` / `\"droite\"`) ; sinon il se rapproche en **ligne** (`\"haut\"` / `\"bas\"`). Pour une grille sans obstacle.\n- **`LongeMurDroit`** : la **règle de la main droite**. Il choisit la première direction **libre** parmi, dans l'ordre : un quart de tour à **droite** du cap, **tout droit**, un quart de tour à **gauche**, **demi-tour** ; `null` si tout est muré. Le cap, c'est `c.cap()` (« droite » au départ) ; les directions dans le sens des aiguilles d'une montre : `haut → droite → bas → gauche`.\n\nL'automate (classe `Compagnon`, fournie : lis-la dans l'onglet) :\n- `c.avancer(\"droite\")` : un pas vers `\"haut\"`, `\"bas\"`, `\"gauche\"` ou `\"droite\"` ; contre un mur, une `MurException` explique le problème ;\n- `c.devantMur(\"droite\")` : vrai si un mur (ou le bord de la grille) bloque cette direction ;\n- `c.surCible()` : vrai s'il est sur la cible ; `c.x()`, `c.y()` : sa position ; `c.dire(\"…\")` : une phrase.\n`c.cap()` : la direction où il regarde ; `c.cibleX()`, `c.cibleY()` : la cible. Une stratégie **regarde** l'automate, elle ne le déplace pas.\nLe harnais compte les pas : il attend l'itinéraire exact de chaque règle, sur plusieurs grilles (couloirs, labyrinthes, culs-de-sac).\n\nExemple : sur `C...X`, `new VersCible()` répond `\"droite\"` à chaque pas, 4 pas en tout.",
+  "hints": [
+    "Une interface se met en œuvre avec `class Nom implements Strategie { public String choisir(Compagnon c) { … } }` : la méthode est `public` et porte le même nom.",
+    "`VersCible` n'a besoin que de comparer `c.x()` à `c.cibleX()`, puis `c.y()` à `c.cibleY()`. Pour `LongeMurDroit`, range `\"haut\", \"droite\", \"bas\", \"gauche\"` dans un tableau : tourner à droite, c'est avancer d'un indice (modulo 4).",
+    "Pour `LongeMurDroit` : trouve l'indice de `c.cap()` dans le tableau, puis essaie les indices `cap + 1`, `cap`, `cap + 3`, `cap + 2` (modulo 4) ; la première direction où `!c.devantMur(dir)` est la bonne."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un automate qui obéit, c'est bien. Un automate qui **décide**, c'est mieux. Mais comment décide-t-il ? Il y a plus d'une manière de chercher une cible.",
+      "Je te propose l'**interface** `Strategie` : un contrat avec une seule question, « quelle direction maintenant ? ». À toi d'écrire deux stratégies bien différentes : foncer droit vers la cible, ou longer le mur de la main droite dans un labyrinthe."
+    ],
+    "resume": "Il me faut encore deux stratégies : VersCible et LongeMurDroit, toutes deux des Strategie.",
+    "success": [
+      "Deux classes, un seul contrat : le pilote ne sait même pas laquelle il conduit. C'est ça, le polymorphisme : le même appel, des comportements différents."
+    ],
+    "done": "Mon automate change de stratégie sans changer de pilote."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

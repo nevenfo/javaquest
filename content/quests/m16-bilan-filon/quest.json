@@ -1,0 +1,43 @@
+{
+  "id": "m16-bilan-filon",
+  "title": "Le bilan du filon",
+  "region": "mines",
+  "giver": "mineur",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "m12-mediane"
+  ],
+  "skills": [
+    "arr.algos"
+  ],
+  "summary": "Prédis la sortie d'un programme qui cherche un maximum, une somme et échange deux cases.",
+  "source": "median/annale : parcours d'un tableau, maximum, somme, échange",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "9 en 1\n29\n[2, 9, 4, 9, 5]\n",
+  "brief": "Le mineur applique trois algorithmes classiques à son tableau de minerais. Lis le programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne.",
+  "lesson": "**Exemple** — maximum d'un tableau :\n```java\nint max = t[0];\nfor (int i = 1; i < t.length; i++) {\n    if (t[i] > max) max = t[i];\n}\n```\nUne comparaison **stricte** (`>`) garde la première occurrence en cas d'égalité.",
+  "hints": [
+    "Avec `>` strict, la position du maximum n'est mise à jour que pour une valeur **strictement** plus grande.",
+    "La somme parcourt toutes les cases, y compris l'indice 0.",
+    "L'échange passe par une variable temporaire : `t[0]` et `t[petit]` permutent."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Maximum, somme, échange : les trois gestes du mineur. Voyons si tu les suis dans un tableau."
+    ],
+    "success": [
+      "Tu lis un tableau comme une veine de minerai."
+    ],
+    "done": "Les algorithmes de base n'ont plus de secret."
+  },
+  "reward": {
+    "xp": 25
+  }
+}

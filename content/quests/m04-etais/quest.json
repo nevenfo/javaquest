@@ -1,0 +1,69 @@
+{
+  "id": "m04-etais",
+  "title": "Les étais du golem",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m03-golem"
+  ],
+  "skills": [
+    "loop.for",
+    "cond.if"
+  ],
+  "summary": "Fais creuser le golem et poser une pierre d'étai toutes les trois cases.",
+  "hud": "Le golem doit étayer le couloir.",
+  "source": "collections : for avec compteur ; combiner boucle et condition",
+  "support": [
+    "support/Golem.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "7",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Un couloir de `n` cases (lu au clavier) menace de s'effondrer. Programme le golem pour qu'il :\n- avance d'une case, puis **creuse** cette case, et ainsi de suite jusqu'au bout (`n` cases) ;\n- **pose une pierre d'étai** (`Golem.poserPierre()`) sur chaque case dont le numéro est un multiple de 3 (cases 3, 6, 9…), juste après l'avoir creusée.\n\nLe golem part de la case 0 : après son premier pas, il est sur la case 1. Pour `n = 7`, il pose donc des pierres sur les cases 3 et 6.\nRegarde la classe `Golem` fournie.",
+  "hints": [
+    "Une boucle qui répète `n` fois « avancer, creuser » ; puis un test à l'intérieur de la boucle pour décider de poser une pierre.",
+    "Le reste de la division par 3 (`%`) vaut 0 pour les multiples de 3. Mais sur quelle case est le golem après son premier pas ?",
+    "`Golem.position()` donne la case actuelle. Tu peux aussi te servir de `i` : si `i` démarre à 1, il est égal au numéro de la case."
+  ],
+  "stage": {
+    "speak": true,
+    "actors": {
+      "golem": {
+        "sprite": 109,
+        "x": 2,
+        "y": 0
+      }
+    }
+  },
+  "dialog": {
+    "intro": [
+      "Le plafond de ce couloir est fragile ! Il faut étayer : une pierre toutes les trois cases.",
+      "Écris le programme complet, seul·e : le golem avance, creuse, et pose une pierre quand il le faut."
+    ],
+    "success": [
+      "Les étais sont bien placés : cases 3, 6, 9… Le couloir tiendra !"
+    ],
+    "done": "Le couloir tient bon, grâce à ton golem."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "d3-02-heritages-croises",
+  "title": "Les héritages croisés",
+  "region": "labyrinthe",
+  "giver": "heraut",
+  "main": false,
+  "kind": "predict",
+  "assessment": "practice",
+  "requires": [
+    "d3-01-devises-brouillees"
+  ],
+  "skills": [
+    "inh.polymorphisme",
+    "inh.default",
+    "inh.interface",
+    "inh.heritage"
+  ],
+  "summary": "Prédis la sortie d'un programme mêlant liaison dynamique, méthode default redéfinie, super.methode() et surcharge choisie à la compilation.",
+  "source": "type déclaré vs type réel ; default d'interface, super.cri() et Interface.super.cri() ; résolution de surcharge statique",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "Pour la Maison\nPour la Lignée !\nor et argent\nPOUR LE CLAN\nBlason : Pour la Lignée !\nMaison : or et argent\nBlason : Pour la Lignée !\n",
+  "brief": "Dans la salle des miroirs, les blasons répètent leurs cris. Lis ce programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne.\nAttention : qui choisit la méthode `cri()` exécutée ? Et qui choisit **laquelle des deux `annoncer`** est appelée ?",
+  "hints": [
+    "Une méthode d'instance s'exécute selon la **classe réelle** de l'objet (liaison dynamique), même à travers une variable d'un type plus général. Une méthode `default` s'applique à qui ne la redéfinit pas.",
+    "`super.cri()` dans `Lignee` remonte à la version héritée ; `Blason.super.cri()` dans `Clan` appelle la version `default` de l'interface. Dans les deux, `nom()` est celui de l'**objet réel**.",
+    "Le choix entre `annoncer(Blason)` et `annoncer(Maison)` se fait à la **compilation**, d'après le type **déclaré** de l'argument (le cast compte)."
+  ],
+  "dialog": {
+    "intro": [
+      "Dans cette salle, les miroirs répètent les cris des blasons, mais pas toujours celui qu'on croit.",
+      "Avant d'avancer : devine ce que ce programme va afficher. Qui répond vraiment : le type de la variable ou celui de l'objet ?"
+    ],
+    "success": [
+      "Exact ! Le type réel décide du cri, le type déclaré décide de la surcharge. Les deux ne sont pas la même chose.",
+      "Il reste une épreuve à bâtir au fond du labyrinthe : le Sphinx ne se contente pas de lire du code."
+    ],
+    "done": "Les miroirs se sont tus. Merci de les avoir lus."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

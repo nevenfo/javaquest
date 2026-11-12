@@ -1,0 +1,65 @@
+{
+  "id": "a12-pompe-elixir",
+  "title": "La pompe à élixir de Gaspard",
+  "region": "artisans",
+  "giver": "pompiste",
+  "main": true,
+  "requires": [
+    "a09-bourse"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "obj.exceptions",
+    "obj.encapsulation",
+    "obj.static"
+  ],
+  "summary": "Modélise une pompe : stock, prix, recette, exceptions et comptage des billets.",
+  "source": "pompe à essence : capacité, prix, billets, exception si stock insuffisant",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/PompeElixir.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/PompeElixir.java"
+    ],
+    [
+      "wrong/w2/PompeElixir.java"
+    ],
+    [
+      "wrong/w3/PompeElixir.java"
+    ]
+  ],
+  "starter": {
+    "PompeElixir.java": "public class PompeElixir {\n    // Écris la classe PompeElixir (voir l'énoncé).\n}\n"
+  },
+  "brief": "Gaspard tient la pompe à élixir de la forge. Écris la classe `PompeElixir` :\n- `PompeElixir(int stock, int prixLitre)` : `IllegalArgumentException` si le stock est négatif ou si le prix n'est pas strictement positif ;\n- `int getStock()` et `int getRecette()` (total encaissé, 0 au départ) ;\n- `int servir(int litres)` : renvoie le prix à payer (`litres * prixLitre`), diminue le stock et augmente la recette. `IllegalArgumentException` si `litres <= 0`, **`IllegalStateException`** si le stock est insuffisant (rien ne change alors) ;\n- `static int compterBillets(int somme)` : nombre **minimal** de billets de 50, 20, 10 et 5 pièces pour payer `somme`. `IllegalArgumentException` si la somme est négative ou n'est pas un multiple de 5.\n\n```java\nPompeElixir p = new PompeElixir(100, 3);\np.servir(10);                          // 30\nPompeElixir.compterBillets(85);        // 4  (50 + 20 + 10 + 5)\n```\nTous les champs sont `private`. Les billets sont des constantes : pas de nombres magiques éparpillés !",
+  "hints": [
+    "Même structure que la bourse de Rosa : vérifie les cas interdits d'abord, modifie l'état ensuite.",
+    "Pour compter les billets, parcours les valeurs de la plus grande à la plus petite : `somme / billet` donne combien en prendre, `somme % billet` ce qu'il reste.",
+    "Un tableau constant `private static final int[] BILLETS = {50, 20, 10, 5};` évite de répéter les valeurs."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Hé, apprenti·e ! Ma pompe à élixir a un défaut : elle distribue même quand la cuve est vide. Une fois, j'ai servi 40 litres avec 15 en stock !",
+      "Écris-moi une classe `PompeElixir` propre : stock, prix, recette, et des exceptions quand on lui demande n'importe quoi. Et une méthode pour compter mes billets à la caisse !"
+    ],
+    "resume": "Ma pompe attend toujours sa classe. Stock, prix, billets…",
+    "success": [
+      "Ça coule comme du miel ! Stock vérifié, exceptions bien choisies, billets comptés au plus juste.",
+      "Je crois que Brom aura besoin de toi pour sa dernière commande : l'atelier des armures."
+    ],
+    "done": "Ma pompe ne sert plus jamais plus que son stock. Merci !"
+  },
+  "reward": {
+    "xp": 45
+  }
+}

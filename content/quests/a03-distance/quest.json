@@ -1,0 +1,58 @@
+{
+  "id": "a03-distance",
+  "title": "Mesurer entre deux rivets",
+  "region": "artisans",
+  "giver": "brom",
+  "main": true,
+  "requires": [
+    "a02-coffre-ferme"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "obj.methodes"
+  ],
+  "summary": "Ajoute distanceTo et deplacer à la classe Rivet.",
+  "source": "point : méthodes d'instance, distance euclidienne",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Rivet.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Rivet.java"
+    ],
+    [
+      "wrong/w2/Rivet.java"
+    ]
+  ],
+  "starter": {
+    "Rivet.java": "public class Rivet {\n    private final int x;\n    private final int y;\n\n    public Rivet(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public int getX() { return x; }\n    public int getY() { return y; }\n\n    // Ajoute ici distanceTo et deplacer\n}\n"
+  },
+  "brief": "Brom veut contrôler l'écart entre deux rivets. Ajoute à `Rivet` :\n- `double distanceTo(Rivet autre)` : la distance euclidienne entre les deux positions ;\n- `Rivet deplacer(int dx, int dy)` : renvoie **un nouveau** rivet décalé de `dx` colonnes et `dy` lignes. L'original ne change pas (ses champs sont `final`).\n\n```java\nnew Rivet(0, 0).distanceTo(new Rivet(3, 4));   // 5.0\nnew Rivet(1, 1).deplacer(2, -3);                // un rivet en (3, -2)\n```\nÀ toi de jouer, seul·e : la classe est fournie, il te reste les méthodes. Utilise `Math.sqrt`.",
+  "hints": [
+    "Une méthode d'instance accède directement aux champs de `this`, et à ceux de `autre` via `autre.x` (même classe) ou `autre.getX()`.",
+    "Distance : racine de `dx*dx + dy*dy` ; `Math.sqrt(...)` renvoie un `double`.",
+    "`deplacer` ne modifie rien : elle finit par `return new Rivet(...)` avec les nouvelles coordonnées."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Mes plaques doivent respecter un écart précis entre rivets. Je mesure à l'œil, et je me trompe.",
+      "Apprends à ton `Rivet` à mesurer sa distance à un autre, et à se faire déplacer. Je te laisse faire seul·e."
+    ],
+    "success": [
+      "Cinq pour un triangle 3-4-5, pile ! Tes rivets savent mesurer."
+    ],
+    "done": "Mes écarts sont enfin exacts."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

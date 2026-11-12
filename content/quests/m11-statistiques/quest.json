@@ -1,0 +1,60 @@
+{
+  "id": "m11-statistiques",
+  "title": "Les statistiques du filon",
+  "region": "mines",
+  "giver": "mineur",
+  "main": true,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "m10-couleurs"
+  ],
+  "skills": [
+    "arr.algos"
+  ],
+  "summary": "Calcule min, max et moyenne d'une série de mesures.",
+  "source": "median : parcours d'un tableau de valeurs ; calcul de moyenne",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "3\\n3\\n9\\n1",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le mineur relève la richesse de `n` points du filon (`n ≥ 1`, entiers positifs ou négatifs). Lis `n`, puis les `n` mesures, et affiche trois lignes :\n```\nMin : <plus petite mesure>\nMax : <plus grande mesure>\nMoyenne : <moyenne, avec décimales>\n```\nExemple pour `3` mesures `3 9 1` : `Min : 1`, `Max : 9`, `Moyenne : 4.333333333333333`.\nAttention aux séries qui ne contiennent que des nombres négatifs, et à la division entière pour la moyenne !",
+  "hints": [
+    "Range les mesures dans un tableau, puis parcours-le une fois pour le minimum, une fois pour le maximum, une fois pour la somme.",
+    "Initialise le minimum et le maximum avec la **première** mesure (`t[0]`), pas avec 0 : une série négative aurait un faux maximum de 0.",
+    "La moyenne : somme / `n`, mais avec un `double` dans le calcul (par exemple `(double) somme / n`) pour garder les décimales."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Je relève la richesse du filon en plusieurs points. Je voudrais le minimum, le maximum et la moyenne.",
+      "Les mesures négatives existent (zones appauvries). Fais attention à tes valeurs de départ !"
+    ],
+    "success": [
+      "Min, max, moyenne : exact, même avec des séries négatives. Tu maîtrises les parcours de tableaux."
+    ],
+    "done": "Mes statistiques sont enfin fiables."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "t12-orchestre",
+  "title": "L'orchestre de la Tour",
+  "region": "tour",
+  "giver": "mage",
+  "main": false,
+  "requires": [
+    "t11-bestiaire"
+  ],
+  "kind": "code",
+  "assessment": "transfer",
+  "skills": [
+    "inh.heritage",
+    "inh.polymorphisme"
+  ],
+  "summary": "Même hiérarchie, nouveau décor : des instruments héritent d'une classe abstraite fournie.",
+  "source": "annale : héritage et redéfinition appliqués à un autre domaine",
+  "support": [
+    "support/Instrument.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Tambour.java",
+      "solutions/s1/Flute.java",
+      "solutions/s1/Violon.java",
+      "solutions/s1/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Tambour.java",
+      "wrong/w1/Flute.java",
+      "wrong/w1/Violon.java",
+      "wrong/w1/Main.java"
+    ],
+    [
+      "wrong/w2/Tambour.java",
+      "wrong/w2/Flute.java",
+      "wrong/w2/Violon.java",
+      "wrong/w2/Main.java"
+    ]
+  ],
+  "starter": {
+    "Tambour.java": "public class Tambour {\n}\n",
+    "Flute.java": "public class Flute {\n}\n",
+    "Violon.java": "public class Violon {\n}\n",
+    "Main.java": "import java.util.*;\n\npublic class Main {\n    static String concert(List<Instrument> l) {\n        return null;\n    }\n}\n"
+  },
+  "multiFile": true,
+  "brief": "Le Mage monte un orchestre. La classe abstraite `Instrument` est fournie (lecture seule) : elle a un `nom()`, une méthode abstraite `son()` et `jouer()` qui renvoie `nom + \" : \" + son()`.\n\nÉcris :\n- `Tambour` (constructeur sans argument) : nom `Tambour`, son `boum` ;\n- `Flute(boolean aigue)` : nom `Flûte`, son `tiii` si aiguë, sinon `fouuu` ;\n- `Violon(int cordes)` : nom `Violon`, son = `\"vi\"` répété `cordes` fois ; sa méthode `jouer()` est **redéfinie** : elle appelle celle de la mère puis ajoute `\" (archet)\"` ;\n- `Main.concert(List<Instrument> l)` : les `jouer()` de chaque instrument séparés par `\" | \"` (chaîne vide si la liste est vide).\n\n```\nnew Violon(2).jouer()   // \"Violon : vivi (archet)\"\n```",
+  "hints": [
+    "Chaque sous-classe appelle `super(\"nom\")` dans son constructeur et définit `son()`.",
+    "Pour ajouter quelque chose au comportement hérité sans le recopier : `super.jouer() + \"…\"`.",
+    "`String.join(\" | \", liste)` assemble une `List<String>` ; construis cette liste en appelant `jouer()` sur chaque `Instrument`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Même art, autre scène : après les créatures, voici les instruments. La mère est déjà écrite ; aux filles de jouer leur partition."
+    ],
+    "success": [
+      "Chaque instrument joue sa note, et le concert les appelle tous sans savoir lesquels. Voilà le polymorphisme !"
+    ],
+    "done": "L'orchestre est prêt."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

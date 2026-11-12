@@ -1,0 +1,108 @@
+{
+  "id": "t08-menagerie",
+  "title": "La ménagerie de la Tour",
+  "region": "tour",
+  "giver": "mage",
+  "main": true,
+  "requires": [
+    "t07-reliques"
+  ],
+  "kind": "code",
+  "assessment": "autonomous",
+  "skills": [
+    "inh.modelisation",
+    "inh.interface"
+  ],
+  "summary": "Conçois une petite hiérarchie : Animal + capacités marcher, nager, voler.",
+  "source": "annale : modéliser des animaux aux capacités combinées (interfaces + classe abstraite)",
+  "support": [
+    "support/Marcheur.java",
+    "support/Nageur.java",
+    "support/Volant.java",
+    "support/Scene.java"
+  ],
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Main.java",
+      "solutions/s1/Animal.java",
+      "solutions/s1/Canard.java",
+      "solutions/s1/Grenouille.java",
+      "solutions/s1/Poisson.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Main.java",
+      "wrong/w1/Animal.java",
+      "wrong/w1/Canard.java",
+      "wrong/w1/Grenouille.java",
+      "wrong/w1/Poisson.java"
+    ],
+    [
+      "wrong/w2/Main.java",
+      "wrong/w2/Animal.java",
+      "wrong/w2/Canard.java",
+      "wrong/w2/Grenouille.java",
+      "wrong/w2/Poisson.java"
+    ],
+    [
+      "wrong/w3/Main.java",
+      "wrong/w3/Animal.java",
+      "wrong/w3/Canard.java",
+      "wrong/w3/Grenouille.java",
+      "wrong/w3/Poisson.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "public class Main {\n    public static void main(String[] args) {\n        Animal[] zoo = { new Canard(\"Donald\"), new Grenouille(\"Kermit\"), new Poisson(\"Nemo\") };\n        String[] acteurs = { \"canard\", \"grenouille\", \"poisson\" };\n        for (int i = 0; i < zoo.length; i++) {\n            Scene.presenter(acteurs[i], zoo[i].getNom(), zoo[i]);\n        }\n    }\n}\n",
+    "Animal.java": "public abstract class Animal {\n    // à concevoir\n}\n",
+    "Canard.java": "public class Canard {\n    // à concevoir\n}\n",
+    "Grenouille.java": "public class Grenouille {\n    // à concevoir\n}\n",
+    "Poisson.java": "public class Poisson {\n    // à concevoir\n}\n"
+  },
+  "multiFile": true,
+  "brief": "La ménagerie du mage accueille un **canard** (marche, nage, vole), une **grenouille** (marche, nage) et un **poisson** (nage seulement). Les capacités sont trois interfaces fournies : `Marcheur` (`String marcher()`), `Nageur` (`String nager()`), `Volant` (`String voler()`). La classe `Scene` (fournie) anime chaque créature selon ses capacités ; `Main` aussi.\n\nÀ toi de concevoir :\n- une classe **abstraite** `Animal` : champ `nom` privé, `getNom()`, constructeur protégé `Animal(String nom)` ; elle n'implémente **aucune** capacité ;\n- `Canard`, `Grenouille`, `Poisson` : **sous-classes** d'`Animal`, constructeur `(String nom)`, qui n'implémentent **que** les capacités qu'elles possèdent ;\n- `marcher()` renvoie `<nom> marche`, `nager()` renvoie `<nom> nage`, `voler()` renvoie `<nom> vole`.\n\nLance `Main` : les acteurs bougent selon les capacités ! Une capacité qui manque est signalée (« Nemo ne sait pas marcher »).",
+  "hints": [
+    "Une classe étend **un seul** parent mais peut implémenter **plusieurs** interfaces : `class Canard extends Animal implements Marcheur, Nageur, Volant`.",
+    "Ce que tous partagent (le nom) va dans la classe parente ; ce qui varie (les capacités) va dans les interfaces.",
+    "Si `Animal` implémentait `Nageur`, le canard comme le poisson en hériteraient : ne mets dans `Animal` que ce qui est vrai pour **tous**."
+  ],
+  "stage": {
+    "speak": true,
+    "actors": {
+      "canard": {
+        "sprite": 120,
+        "x": 2,
+        "y": 0
+      },
+      "grenouille": {
+        "sprite": 108,
+        "x": 3,
+        "y": 1
+      },
+      "poisson": {
+        "sprite": 123,
+        "x": 4,
+        "y": 0
+      }
+    }
+  },
+  "dialog": {
+    "intro": [
+      "Bienvenue dans ma ménagerie ! Un canard qui marche, nage et vole ; une grenouille qui marche et nage ; un poisson qui ne fait que nager.",
+      "Comment modéliser ça proprement ? Les interfaces te donnent les capacités. À toi de bâtir `Animal` et ses trois créatures, puis de lancer `Main` pour voir la scène s'animer !"
+    ],
+    "resume": "La ménagerie est vide : il manque encore tes classes.",
+    "success": [
+      "Regarde-les bouger ! Chacun fait ce que son contrat l'autorise, et rien de plus.",
+      "Tu sais composer des capacités : tu es prêt·e pour la salle des contrats."
+    ],
+    "done": "Ma ménagerie est animée grâce à toi."
+  },
+  "reward": {
+    "xp": 45
+  }
+}

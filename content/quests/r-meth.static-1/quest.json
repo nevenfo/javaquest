@@ -1,0 +1,49 @@
+{
+  "id": "r-meth.static-1",
+  "title": "Les grades des mineurs",
+  "region": "mines",
+  "main": false,
+  "kind": "code",
+  "assessment": "review",
+  "requires": [
+    "m14-ateliers"
+  ],
+  "skills": [
+    "meth.static"
+  ],
+  "summary": "Écris deux petites méthodes qui retournent leur résultat (réactivation).",
+  "source": "collections / hello : méthodes static avec retour (réactivation espacée)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "starter": {
+    "Main.java": "// Écris tes deux méthodes ici (en dehors de main).\n\nvoid main() {\n}\n"
+  },
+  "brief": "Écris deux méthodes **static** dans `Main.java` (elles retournent, elles n'affichent rien) :\n- `static String grade(int xp)` : `\"Novice\"` si `xp < 100`, `\"Adepte\"` si `xp < 500`, sinon `\"Maître\"` ;\n- `static int ecart(int a, int b)` : la différence positive entre `a` et `b` (`ecart(3, 10)` et `ecart(10, 3)` valent `7`).",
+  "hints": [
+    "Chaque méthode a un type de retour (`String`, `int`), des paramètres, et un `return`.",
+    "Pour `grade`, une chaîne de `if` / `else if` avec un `return` par branche ; pour `ecart`, teste quel nombre est le plus grand."
+  ],
+  "dialog": {
+    "intro": [
+      "Un souvenir des mines : on réutilise les calculs en les rangeant dans des méthodes. Deux méthodes à écrire, de mémoire."
+    ],
+    "success": [
+      "Deux méthodes propres, réutilisables partout."
+    ],
+    "done": "Les méthodes n'ont plus de secret."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

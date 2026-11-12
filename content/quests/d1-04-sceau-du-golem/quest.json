@@ -1,0 +1,72 @@
+{
+  "id": "d1-04-sceau-du-golem",
+  "title": "Le sceau du golem",
+  "region": "crypte",
+  "giver": "golem",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "d1-03-releves-abimes"
+  ],
+  "skills": [
+    "str.parcours",
+    "arr.base",
+    "meth.static"
+  ],
+  "summary": "Épreuve du golem : trouve la lettre la plus fréquente d'une inscription avec un tableau de compteurs et deux méthodes.",
+  "hud": "Dernière salle de la crypte : le golem garde le sceau.",
+  "source": "parcours de chaîne, tableau de compteurs, méthodes static à retour (transfert : texte et tableau combinés)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "banane",
+  "starter": {
+    "Main.java": "// Méthodes demandées (voir l'énoncé), puis main.\n\nvoid main() {\n    \n}\n"
+  },
+  "brief": "Le golem de la crypte ne lâche son sceau qu'à celui qui lit sa **lettre reine** : la lettre la plus fréquente de son inscription. Écris, dans `Main.java`, deux méthodes **static** :\n- `static int[] compter(String s)` : un tableau de **26** entiers ; la case `0` compte les `a`, la case `1` les `b`… jusqu'à `z`. Seules les lettres **minuscules** `a`–`z` comptent (majuscules, chiffres, espaces… sont ignorés) ;\n- `static int indexMax(int[] t)` : l'indice de la plus grande valeur de `t` ; en cas d'égalité, le **plus petit** indice.\n\nPuis, dans `main`, lis une ligne (l'inscription) et :\n- si aucune lettre minuscule n'est comptée, affiche `Le golem ne lit rien.` ;\n- sinon affiche deux lignes : `Lettre reine : x` et `Occurrences : n`.\n\nExemple pour `banane` (a : 3, n : 2, b : 1, e : 1) :\n```\nLettre reine : a\nOccurrences : 3\n```",
+  "hints": [
+    "Découpe : `compter` (un parcours de la chaîne), `indexMax` (un parcours du tableau), puis `main` qui les assemble.",
+    "Une lettre est aussi un nombre : `c - 'a'` vaut `0` pour `'a'`, `1` pour `'b'`… C'est l'indice de la case à incrémenter. Teste `c >= 'a' && c <= 'z'` avant.",
+    "`indexMax` : garde l'indice du meilleur trouvé, part de `0`, et ne le remplace que si la nouvelle case est **strictement** plus grande. Pour afficher la lettre : `(char) ('a' + indice)`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "GRRRR… Qui ose entrer dans l'antre du golem ? Mon sceau n'est pas pour les curieux.",
+      "Lis mon inscription : dis-moi quelle lettre y revient le plus souvent. Chaînes, tableaux, méthodes : montre-moi que tu sais les assembler !"
+    ],
+    "resume": "GRRR… Je ne vois toujours pas ma lettre reine. Deux méthodes, puis `main`.",
+    "success": [
+      "GRRR… La lettre reine, et le bon nombre. Tu es digne de la crypte. Prends mon sceau.",
+      "Les boucles, les chaînes, les exceptions et les méthodes n'ont plus de secret pour toi : bienvenue parmi les maîtres de Boucle-Profonde."
+    ],
+    "done": "GRRR… Mon sceau est à toi, apprenti·e."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-crypte",
+      "item:sceau-golem:Sceau du golem",
+      "unlock:Crypte de Boucle-Profonde conquise : le sceau du golem est à toi"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "v08-salaire",
+  "title": "Le salaire de la porteuse d'eau",
+  "region": "village",
+  "giver": "lina",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "q04-lanterne"
+  ],
+  "skills": [
+    "base.lecture",
+    "base.expressions"
+  ],
+  "summary": "Convertis des minutes en heures et calcule un salaire avec un tarif décimal.",
+  "hud": "Lina, près du puits, a besoin d'un sort de paie.",
+  "source": "hello : IO.readln + parseInt ; median : Double.parseDouble(IO.readln(...)) ; division entière",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "135\\n12.5",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Lina porte l'eau pour tout le village et on la paie à l'heure. Écris un programme qui lit :\n1. la durée de son travail en **minutes** (un entier),\n2. son **tarif horaire** en pièces (un nombre décimal, ex. `12.5`),\n\npuis affiche trois lignes :\n```\nHeures : H\nMinutes : M\nSalaire : S\n```\n`H` et `M` découpent la durée (par exemple 135 min = 2 h 15 min) ; `S` est le salaire exact, minutes comprises (135 min à 12.5 donne `Salaire : 28.125`).\nLe sort sera vérifié avec d'autres durées et tarifs. Pour essayer avec « Exécuter », écris les deux valeurs sur deux lignes dans le champ **Entrée**.",
+  "hints": [
+    "Deux lectures successives : `Integer.parseInt(IO.readln(...))` puis `Double.parseDouble(IO.readln(...))`.",
+    "`/` et `%` entre deux `int` donnent quotient et reste : parfait pour heures et minutes.",
+    "Pour le salaire, attention à la division entière : `minutes / 60` jette la partie décimale. Un `double` dans le calcul la conserve."
+  ],
+  "dialog": {
+    "intro": [
+      "Ah, tu tombes bien ! Le tavernier me paie à l'heure, mais je n'arrive jamais à compter les minutes qui dépassent.",
+      "Un sort qui sépare heures et minutes, puis calcule ma paie exacte ? Tu connais déjà les ingrédients."
+    ],
+    "success": [
+      "28 pièces et 125 millièmes… c'est exactement ce que me doit le tavernier ! Merci !"
+    ],
+    "done": "Mes comptes sont justes, mes seaux aussi."
+  },
+  "reward": {
+    "xp": 30
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "r-inh.heritage-1",
+  "title": "Rappel : le canard et le chien",
+  "region": "tour",
+  "main": false,
+  "requires": [
+    "t13-amphibie"
+  ],
+  "kind": "predict",
+  "assessment": "review",
+  "skills": [
+    "inh.heritage",
+    "inh.default",
+    "inh.modelisation"
+  ],
+  "summary": "Prédis la sortie d'une hiérarchie : classe abstraite, super, default et capacités combinées (réactivation).",
+  "source": "héritage, interfaces default et capacités combinées (réactivation espacée)",
+  "program": [
+    "program/Main.java"
+  ],
+  "expected": "Canard fait coin et brasse\nChien fait wouf / pas\ndandine\n1\n",
+  "brief": "Un chien marche, un canard marche **et** nage. Lis ce programme **sans l'exécuter** et écris sa sortie exacte, ligne par ligne. Pense à qui fournit quelle méthode (classe mère, interface default, redéfinition).",
+  "hints": [
+    "`super.decrire()` exécute la version de la classe mère ; la suite de l'expression s'ajoute derrière.",
+    "Une méthode `default` non redéfinie est utilisée telle quelle ; si la classe la redéfinit, c'est la sienne qui s'exécute, même via une variable du type de l'interface."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Un petit rappel sur l'héritage et les capacités : qui fait quoi dans ce zoo ?"
+    ],
+    "success": [
+      "Mère, interfaces, redéfinition : tu as suivi chaque appel."
+    ],
+    "done": "Le zoo n'a plus de secret."
+  },
+  "reward": {
+    "xp": 15
+  }
+}

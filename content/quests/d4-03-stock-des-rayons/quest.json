@@ -1,0 +1,70 @@
+{
+  "id": "d4-03-stock-des-rayons",
+  "title": "Le stock des rayons",
+  "region": "archives",
+  "giver": "greffier",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "d4-02-ordres-des-rayons"
+  ],
+  "skills": [
+    "col.map",
+    "str.split",
+    "col.tri"
+  ],
+  "summary": "Lis des lignes « nom;quantité », cumule les quantités par nom dans une Map, puis affiche le stock trié (quantité décroissante, puis nom).",
+  "source": "lecture de lignes, String.split / strip, Map.merge, tri d'entrées de Map avec Comparator",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ],
+    [
+      "wrong2/Main.java"
+    ],
+    [
+      "wrong3/Main.java"
+    ],
+    [
+      "wrong4/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "pomme;3\\npoire;5\\npomme;4\\nfin",
+  "starter": {
+    "Main.java": "void main() {\n    \n}\n"
+  },
+  "brief": "Le greffier reçoit des livraisons, **une par ligne**, au format `nom;quantité` (la quantité est un entier, éventuellement négatif pour une sortie de stock ; des espaces peuvent entourer chaque champ). La saisie s'arrête à la ligne `fin`.\n\nCumule les quantités **par nom**, puis affiche une ligne `nom : total` par nom, du plus gros total au plus petit ; à total égal, par ordre alphabétique du nom. Si aucune livraison n'a été saisie, affiche `Stock vide`.\n\nExemple pour `pomme;3`, `poire;5`, `pomme;4`, `fin` :\n```\npomme : 7\npoire : 5\n```",
+  "hints": [
+    "Une `Map<String, Integer>` associe chaque nom à son total. `split(\";\")` découpe une ligne en champs ; `strip()` retire les espaces autour ; `Integer.parseInt` convertit.",
+    "Pour ajouter à un total existant (ou le créer), `merge(nom, quantite, Integer::sum)` fait tout en un appel. Une `Map` ne se trie pas : copie ses `entrySet()` dans une `List`, puis trie la liste.",
+    "Un `Comparator` peut enchaîner deux critères : `Map.Entry.comparingByValue()` (à renverser avec `reversed()`), puis `thenComparing(Map.Entry.comparingByKey())`. Pense à tester d'abord la saisie vide."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Les livraisons arrivent en vrac : la même fourniture revient plusieurs fois, parfois avec des espaces de trop.",
+      "Écris-moi un programme qui cumule tout par nom et m'affiche le stock du plus fourni au moins fourni. Sans modèle cette fois !"
+    ],
+    "resume": "Mon stock n'est toujours pas à jour. Une Map pour cumuler, une liste triée pour afficher.",
+    "success": [
+      "Les totaux sont justes, l'ordre est impeccable, même pour les égalités. Mon stock est enfin lisible.",
+      "Dans la dernière salle, Dame Pipistrelle veut te confier l'index maître."
+    ],
+    "done": "Mon stock est à jour, merci."
+  },
+  "reward": {
+    "xp": 40
+  }
+}

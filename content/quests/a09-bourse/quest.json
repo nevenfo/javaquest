@@ -1,0 +1,58 @@
+{
+  "id": "a09-bourse",
+  "title": "La bourse de Rosa",
+  "region": "artisans",
+  "giver": "rosa",
+  "main": true,
+  "requires": [
+    "a08-commande"
+  ],
+  "kind": "code",
+  "assessment": "practice",
+  "skills": [
+    "obj.exceptions"
+  ],
+  "summary": "Lève IllegalArgumentException ou IllegalStateException quand la bourse est mal utilisée.",
+  "source": "postier/pompe : valider les entrées, lever des exceptions",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Bourse.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Bourse.java"
+    ],
+    [
+      "wrong/w2/Bourse.java"
+    ]
+  ],
+  "starter": {
+    "Bourse.java": "public class Bourse {\n    // Écris la classe Bourse (voir l'énoncé).\n}\n"
+  },
+  "brief": "Rosa garde ses pièces dans une `Bourse`. Écris-la en **refusant** les usages absurdes par des exceptions :\n- `new Bourse(int solde)` : `IllegalArgumentException` si le solde est négatif ;\n- `int getSolde()` ;\n- `void deposer(int montant)` : `IllegalArgumentException` si `montant <= 0` ;\n- `void retirer(int montant)` : `IllegalArgumentException` si `montant <= 0`, **`IllegalStateException`** si le solde est insuffisant (et le solde ne change pas).\n\n```java\nBourse b = new Bourse(10);\nb.retirer(25);   // IllegalStateException : pas assez de pièces\n```\nChoisis bien le type : argument absurde → `IllegalArgumentException` ; état de l'objet qui ne le permet pas → `IllegalStateException`.",
+  "hints": [
+    "`throw new IllegalArgumentException(\"message\");` interrompt la méthode. Teste les cas interdits **avant** de modifier le solde.",
+    "Deux cas différents dans `retirer` : le montant lui-même est invalide (argument) / le montant est correct mais la bourse est trop vide (état).",
+    "Exemple analogue : `if (age < 0) throw new IllegalArgumentException(\"âge négatif\");`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Écoute, apprenti·e : l'autre jour, un client a retiré 50 pièces d'une bourse qui n'en contenait que 10, et le solde est devenu négatif !",
+      "Écris-moi une `Bourse` qui refuse ces bêtises avec la bonne exception. Choisis bien entre `IllegalArgumentException` et `IllegalStateException`."
+    ],
+    "success": [
+      "Plus de solde négatif, et chaque erreur a le bon nom. Merci !"
+    ],
+    "done": "Ma bourse ne se laisse plus faire."
+  },
+  "reward": {
+    "xp": 35
+  }
+}

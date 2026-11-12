@@ -1,0 +1,67 @@
+{
+  "id": "v09-seaux",
+  "title": "Les seaux en désordre",
+  "region": "village",
+  "giver": "lina",
+  "main": false,
+  "kind": "parsons",
+  "assessment": "guided",
+  "requires": [
+    "q03-mana"
+  ],
+  "skills": [
+    "base.lecture"
+  ],
+  "summary": "Remets dans l'ordre les lignes d'un sort qui lit un nombre de seaux.",
+  "hud": "Lina a renversé les lignes de son sort.",
+  "source": "hello : IO.readln puis Integer.parseInt (lecture d'un entier au clavier)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/Main.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/Main.java"
+    ]
+  ],
+  "usesStdin": true,
+  "sampleStdin": "5",
+  "parsons": {
+    "prefix": "void main() {\n",
+    "lines": [
+      "String saisie = IO.readln(\"Combien de seaux ? \");",
+      "int seaux = Integer.parseInt(saisie);",
+      "int litres = seaux * 12;",
+      "IO.println(\"Litres : \" + litres);"
+    ],
+    "distractors": [
+      "int seaux = saisie;",
+      "int litres = seaux + 12;"
+    ],
+    "suffix": "}"
+  },
+  "brief": "Le sort de Lina lit un nombre de seaux au clavier et affiche combien de litres ils contiennent (**12 litres par seau**). Ses lignes sont tombées par terre : remets-les **dans l'ordre**, sans les lignes qui ne servent à rien (ou qui sont fausses !).\nRappel : `IO.readln` renvoie toujours un `String`.",
+  "lesson": "**Exemple** — lire l'âge d'un arbre et afficher son âge dans dix ans :\n```java\nString texte = IO.readln(\"Âge ? \");\nint age = Integer.parseInt(texte);\nIO.println(\"Dans dix ans : \" + (age + 10));\n```",
+  "hints": [
+    "Une variable doit exister avant d'être utilisée : on lit, on convertit, on calcule, puis on affiche.",
+    "`IO.readln` donne un `String` ; on ne peut pas le ranger directement dans un `int`.",
+    "Le calcul des litres multiplie (`*`) le nombre de seaux par 12."
+  ],
+  "dialog": {
+    "intro": [
+      "Oh non, j'ai renversé mon sort ! Les lignes sont toutes mélangées.",
+      "Aide-moi à les remettre dans le bon ordre. Attention, il y a des lignes en trop qui traînent !"
+    ],
+    "success": [
+      "Voilà : on lit, on convertit, on calcule, on affiche. Merci !"
+    ],
+    "done": "Mon sort est de nouveau en ordre."
+  },
+  "reward": {
+    "xp": 15
+  }
+}
