@@ -2,11 +2,11 @@
 
 Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. Chaque activité est validée automatiquement (`Validate` : solutions de référence acceptées, solutions fautives refusées).
 
-**127 activités**, **41 compétences**.
+**131 activités**, **41 compétences**.
 
 | guidé | entraînement | autonome | transfert | réactivation | examen |
 |---|---|---|---|---|---|
-| 22 | 24 | 28 | 20 | 29 | 4 |
+| 22 | 26 | 29 | 21 | 29 | 4 |
 
 | Compétence | Région | Provenance (cours) | Guidé | Autonome | Transfert | Réactivation | Examen | Parcours complet |
 |---|---|---|---|---|---|---|---|---|
@@ -27,15 +27,15 @@ Généré par `node tools/coverage.mjs` le 2026-11-12 à partir de `content/`. C
 | Tableaux (`arr.base`) | mines | median : double[] values = new double[10] ; hello : args[i] | 1 | 1 | 2 | 1 | 0 | ✔ |
 | Algorithmes sur tableaux (`arr.algos`) | mines | median : Arrays.copyOf, Arrays.sort(values, 0, i), médiane pair/impair | 1 | 2 | 1 | 1 | 0 | ✔ |
 | Écrire des méthodes (`meth.static`) | mines | collections : public static Map<String,Integer> buildBag(List<String> l) ; hello : méthodes age(), isPalindromic() | 1 | 2 | 2 | 1 | 0 | ✔ |
-| Classes, champs, constructeurs (`obj.classe`) | artisans | point : classe Point avec x, y, constructeur | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Encapsulation : private, getters, final (`obj.encapsulation`) | artisans | point : final, private, getters/setters, mutable vs immuable | 1 | 1 | 2 | 1 | 1 | ✔ |
-| Méthodes d'instance (`obj.methodes`) | artisans | point : distanceTo(Point p), distanceToOrigin() | 1 | 1 | 1 | 1 | 0 | ✔ |
-| toString (`obj.tostring`) | artisans | point : String toString() redéfinie (Object affiche nom@adresse) | 1 | 1 | 2 | 1 | 0 | ✔ |
-| equals et hashCode (`obj.equals`) | artisans | point : equals(Object obj), hashCode (Objects.hash) ; annale Q8 | 1 | 1 | 1 | 1 | 1 | ✔ |
-| Membres static et constantes (`obj.static`) | artisans | point : public static final Point ORIGIN | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Records (`obj.record`) | artisans | hello : record Person(String name, int birthYear) + age(), isPalindromic(), bornOnLeapYear() ; point : record Point | 1 | 1 | 1 | 1 | 0 | ✔ |
-| Lever des exceptions (`obj.exceptions`) | artisans | annale : GasPump.takeGas lève une exception si la cuve est insuffisante | 1 | 1 | 2 | 1 | 1 | ✔ |
-| Visibilité et paquetages (`obj.visibilite`) | artisans | annale Q6 ; GasPump : changement de prix réservé au paquetage | 1 | 1 | 1 | 1 | 1 | ✔ |
+| Classes, champs, constructeurs (`obj.classe`) | artisans | point : classe Point avec x, y, constructeur | 3 | 1 | 1 | 1 | 1 | ✔ |
+| Encapsulation : private, getters, final (`obj.encapsulation`) | artisans | point : final, private, getters/setters, mutable vs immuable | 1 | 2 | 2 | 1 | 1 | ✔ |
+| Méthodes d'instance (`obj.methodes`) | artisans | point : distanceTo(Point p), distanceToOrigin() | 1 | 2 | 2 | 1 | 0 | ✔ |
+| toString (`obj.tostring`) | artisans | point : String toString() redéfinie (Object affiche nom@adresse) | 1 | 2 | 2 | 1 | 0 | ✔ |
+| equals et hashCode (`obj.equals`) | artisans | point : equals(Object obj), hashCode (Objects.hash) ; annale Q8 | 2 | 1 | 2 | 1 | 1 | ✔ |
+| Membres static et constantes (`obj.static`) | artisans | point : public static final Point ORIGIN | 2 | 1 | 2 | 1 | 0 | ✔ |
+| Records (`obj.record`) | artisans | hello : record Person(String name, int birthYear) + age(), isPalindromic(), bornOnLeapYear() ; point : record Point | 1 | 1 | 2 | 1 | 0 | ✔ |
+| Lever des exceptions (`obj.exceptions`) | artisans | annale : GasPump.takeGas lève une exception si la cuve est insuffisante | 1 | 2 | 3 | 1 | 1 | ✔ |
+| Visibilité et paquetages (`obj.visibilite`) | artisans | annale Q6 ; GasPump : changement de prix réservé au paquetage | 1 | 2 | 1 | 1 | 1 | ✔ |
 | Aléatoire et fabrique d'objets (`obj.random`) | artisans | point : PointFactory.build() avec Random, estimation de π par fléchettes | 1 | 1 | 1 | 1 | 0 | ✔ |
 | Interfaces (`inh.interface`) | tour | point : interface Shape (area, perimeter) ; address : interface ContactSpecifier | 1 | 1 | 1 | 1 | 1 | ✔ |
 | Méthodes default et static d'interface (`inh.default`) | tour | point : Polygon.vertexNumber() default, perimeter() par les sommets ; address : ContactSpecifier.create(String) | 1 | 1 | 2 | 1 | 0 | ✔ |

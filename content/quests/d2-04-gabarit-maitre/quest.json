@@ -1,0 +1,72 @@
+{
+  "id": "d2-04-gabarit-maitre",
+  "title": "Le gabarit maître",
+  "region": "fonderie",
+  "giver": "gabarit",
+  "main": false,
+  "kind": "code",
+  "assessment": "transfer",
+  "requires": [
+    "d2-03-alliage-scelle"
+  ],
+  "skills": [
+    "obj.record",
+    "obj.equals",
+    "obj.exceptions",
+    "obj.static",
+    "obj.methodes"
+  ],
+  "summary": "Épreuve du Gabarit de Fer : un record avec constructeur compact (validation, nettoyage), méthodes d'instance et fabrique static.",
+  "hud": "Grande fonderie : le Gabarit de Fer juge ton record.",
+  "source": "record, constructeur compact, equals/hashCode dérivés, méthode static (transfert : tout l'objet)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Gabarit.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Gabarit.java"
+    ],
+    [
+      "wrong/w2/Gabarit.java"
+    ]
+  ],
+  "starter": {
+    "Gabarit.java": "public record Gabarit(/* à compléter */) {\n    // Constructeur compact, méthodes…\n}\n"
+  },
+  "brief": "Le Gabarit de Fer ne reconnaît que les pièces taillées dans un **record**. Écris `Gabarit(String modele, int taille)` :\n- **constructeur compact** : `IllegalArgumentException` si `modele` est `null` ou blanc, ou si `taille` n'est pas entre **1 et 20** (bornes incluses) ; sinon le modèle est **nettoyé** (`strip()`) avant d'être rangé, donc `\"  cloche \"` et `\"cloche\"` donnent des gabarits **égaux** ;\n- `int volume()` : `taille` au cube ;\n- `Gabarit agrandir(int delta)` : un **nouveau** gabarit de taille `taille + delta` (mêmes règles de validation : ça peut lever l'exception) ;\n- `static Gabarit unitaire(String modele)` : un gabarit de taille 1.\n\n`equals`, `hashCode` et `toString` sont fournis par le record : `Gabarit[modele=cloche, taille=3]`.\n\nExemple :\n```java\nnew Gabarit(\" cloche\", 3).equals(new Gabarit(\"cloche\", 3));  // true\nnew Gabarit(\"cloche\", 3).agrandir(4);                          // Gabarit[modele=cloche, taille=7]\nnew Gabarit(\"cloche\", 3).agrandir(18);                         // IllegalArgumentException (21 > 20)\n```",
+  "hints": [
+    "Un record se déclare `public record Gabarit(String modele, int taille) { … }`. Le **constructeur compact** s'écrit `public Gabarit { … }` : sans parenthèses ni `this.`, on y teste les paramètres.",
+    "Dans un constructeur compact, tu peux **réaffecter** un paramètre (`modele = modele.strip();`) : c'est la valeur réaffectée qui sera rangée dans le champ. Teste `null` avant d'appeler une méthode sur `modele`.",
+    "`agrandir` n'a pas besoin de re-valider à la main : en construisant `new Gabarit(modele, taille + delta)`, le constructeur compact s'en charge. `unitaire` est `static` : elle s'appelle sur la classe."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "CLANG. Qui entre dans la grande fonderie ? Ici, on ne taille que des pièces **immuables** et **validées** : des records.",
+      "Montre-moi un `Gabarit` irréprochable : constructeur compact, volume, agrandissement et fabrique. Je teste tout, y compris les cas tordus."
+    ],
+    "resume": "CLANG. Mon gabarit n'est toujours pas taillé. Un record, un constructeur compact, des méthodes.",
+    "success": [
+      "CLANG. Validé, nettoyé, immuable, et deux gabarits identiques se reconnaissent. Voilà du travail de maître.",
+      "Classes, encapsulation, `equals`, exceptions, `static`, records : la Fonderie n'a plus rien à t'apprendre. Prends ce moule : il est à toi."
+    ],
+    "done": "CLANG. Le moule maître est à toi, forgeron."
+  },
+  "effects": {
+    "onPass": [
+      "flag:f-fonderie",
+      "item:moule-maitre:Moule maître",
+      "unlock:Fonderie des Gabarits conquise : le moule maître est à toi"
+    ]
+  },
+  "reward": {
+    "xp": 60
+  }
+}

@@ -35,6 +35,8 @@ quests.filter(q => q.main).sort((a, b) => RANK.indexOf(a.region) - RANK.indexOf(
 const nMain = order.length;
 // Donjon optionnel de la crypte (après la chaîne principale) : quêtes non principales de la région `crypte`, prérequis d'abord.
 quests.filter(q => q.region === 'crypte').forEach(q => visit(q));
+// Donjon optionnel de la fonderie (région 2, après f-forge) : quêtes `d2-*`, prérequis d'abord.
+quests.filter(q => q.region === 'fonderie').forEach(q => visit(q));
 const solutionFiles = (q) => {
   const variant = (q.solutions || [])[0]; if (!variant) return null;
   return Object.fromEntries(variant.map(p => [basename(p), readFileSync(join(QDIR, q.dir, p), 'utf8')]));
@@ -95,10 +97,10 @@ try {
   await waitFor(dialogOpen); await closeDialogs();
   const clientIds = await js(`window.JQ.quests.map(q => q.id).join(',')`);
   check('contenu client = contenu disque', order.every(q => clientIds.split(',').includes(q.id)), 'quêtes manquantes côté client');
-  console.log(`Chaîne à traverser : ${order.length} quêtes (${nMain} principales + prérequis, puis ${order.length - nMain} de la crypte)`);
+  console.log(`Chaîne à traverser : ${order.length} quêtes (${nMain} principales + prérequis, puis ${order.length - nMain} des donjons crypte et fonderie)`);
 
   // Portails initialement verrouillés
-  for (const [from, to] of [['village', 'foret'], ['village', 'mines'], ['village', 'artisans'], ['village', 'bibliotheque'], ['artisans', 'tour'], ['mines', 'crypte']]) {
+  for (const [from, to] of [['village', 'foret'], ['village', 'mines'], ['village', 'artisans'], ['village', 'bibliotheque'], ['artisans', 'tour'], ['mines', 'crypte'], ['artisans', 'fonderie']]) {
     await goPortal(from, to); await sleep(500);
     check(`portail verrouillé au départ : ${from} → ${to}`, (await mapOf()) === from, await mapOf());
   }
@@ -114,7 +116,7 @@ try {
 
   // ---------- Traversée ----------
   const entered = new Set(['village']);
-  const travel = { foret: ['village', 'foret'], mines: ['village', 'mines'], artisans: ['village', 'artisans'], tour: ['artisans', 'tour'], crypte: ['mines', 'crypte'], bibliotheque: ['village', 'bibliotheque'] };
+  const travel = { foret: ['village', 'foret'], mines: ['village', 'mines'], artisans: ['village', 'artisans'], tour: ['artisans', 'tour'], crypte: ['mines', 'crypte'], fonderie: ['artisans', 'fonderie'], bibliotheque: ['village', 'bibliotheque'] };
   let doneCount = 0, aborted = false;
   for (const q of order) {
     if (aborted) break;
@@ -163,7 +165,7 @@ try {
 
   // Preuves, portes, citadelle
   const flags = await js(`JSON.stringify(window.JQ.session.state.world.flags)`);
-  for (const f of ['door:sanctuaire', 'f-foret', 'f-mines', 'f-forge', 'f-tour', 'f-crypte']) check(`flag ${f} posé`, !!JSON.parse(flags || '{}')[f], flags);
+  for (const f of ['door:sanctuaire', 'f-foret', 'f-mines', 'f-forge', 'f-tour', 'f-crypte', 'f-fonderie']) check(`flag ${f} posé`, !!JSON.parse(flags || '{}')[f], flags);
   check('preuves pédagogiques enregistrées', await js(`window.JQ.session.state.evidence.length >= ${Math.max(1, doneCount)}`));
   check('XP accordée', (await js(`window.JQ.session.state.xp`)) > 0);
   await js(`window.JQ.scene.loadMap('village'); window.JQ.exam.enter(); true`);

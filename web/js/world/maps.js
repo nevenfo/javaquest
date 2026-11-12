@@ -72,7 +72,7 @@ function crypte() {
   m.room(14, 17, 12, 9);           // salle des runes
   m.room(2, 16, 10, 9);            // ossuaire (à l'ouest)
   m.room(10, 3, 20, 10);           // antre du golem
-  m.carve(19, 26, 2, 4).carve(19, 12, 2, 6).carve(11, 20, 4, 2).carve(19, 37, 2, 3);
+  m.carve(19, 25, 2, 5).carve(19, 12, 2, 6).carve(11, 20, 4, 2).carve(19, 37, 2, 3);
   m.setD(15, 30, TILE.statue).setD(24, 30, TILE.statue).setD(15, 35, TILE.grave).setD(24, 35, TILE.tomb);
   m.setD(16, 18, TILE.banner).setD(23, 18, TILE.banner).setD(17, 23, TILE.pedestal).setD(22, 23, TILE.pedestal);
   m.setD(3, 17, TILE.bookshelf).setD(4, 17, TILE.bookshelf).setD(8, 17, TILE.bookshelf).setD(3, 23, TILE.barrelD).setD(4, 23, TILE.barrelD).setD(9, 23, TILE.tomb);
@@ -82,8 +82,9 @@ function crypte() {
 
 function artisans() {
   const m = new MapBuilder(46, 32, { seed: 31 });
-  m.forestBorder(2, [{ side: 'w', from: 14, to: 16 }, { side: 's', from: 30, to: 33 }], [TILE.tree, TILE.pine]);
+  m.forestBorder(2, [{ side: 'w', from: 14, to: 16 }, { side: 's', from: 30, to: 33 }, { side: 'n', from: 22, to: 23 }, { side: 'e', from: 14, to: 15 }], [TILE.tree, TILE.pine]);
   m.plaza(14, 11, 18, 9);
+  m.path(22, 0, 22, 10, 2);        // sentier nord : porte de la Fonderie des Gabarits
   m.path(0, 15, 14, 15).path(0, 14, 14, 14).path(31, 20, 31, 31).path(32, 20, 32, 31);
   m.house(6, 4, 'redChimney', { door: 'atelier-brom' });
   m.house(16, 4, 'redWoodWide', { door: 'atelier-records' });
@@ -93,6 +94,21 @@ function artisans() {
   m.setD(20, 13, TILE.anvil).setD(21, 13, TILE.barrel).setD(25, 13, TILE.log).setD(28, 17, TILE.barrel);
   m.scatter(36, 14, 8, 14, 0.14, [TILE.tree, TILE.pine, TILE.bush]);
   m.scatter(3, 26, 24, 4, 0.15, [TILE.tree, TILE.bush]);
+  return m.build();
+}
+
+// Donjon optionnel de la région 2 : entrée (fondeur), halle des fours, annexe des moules (à l'est), grande fonderie (gabarit).
+function fonderie() {
+  const m = new MapBuilder(40, 40, { base: 'void', seed: 83 });
+  m.room(14, 29, 12, 9);           // entrée (fondeur)
+  m.room(14, 17, 12, 9);           // halle des fours
+  m.room(28, 16, 10, 9);           // annexe des moules (à l'est)
+  m.room(10, 3, 20, 10);           // grande fonderie (gabarit)
+  m.carve(19, 25, 2, 5).carve(19, 12, 2, 6).carve(25, 20, 4, 2).carve(19, 37, 2, 3);
+  m.setD(15, 30, TILE.anvil).setD(24, 30, TILE.anvil).setD(15, 35, TILE.barrelD).setD(16, 35, TILE.barrelD).setD(24, 35, TILE.table).setD(23, 35, TILE.stool);
+  m.setD(16, 18, TILE.banner).setD(23, 18, TILE.banner).setD(17, 23, TILE.pedestalLit).setD(22, 23, TILE.pedestalLit).setD(15, 22, TILE.anvil);
+  m.setD(29, 17, TILE.bookshelf).setD(30, 17, TILE.bookshelf).setD(35, 17, TILE.bookshelf).setD(36, 17, TILE.bookshelf).setD(30, 22, TILE.table).setD(31, 22, TILE.table).setD(36, 22, TILE.barrelD).setD(36, 23, TILE.barrelD).setD(29, 23, TILE.chest);
+  m.setD(11, 4, TILE.banner).setD(28, 4, TILE.banner).setD(12, 10, TILE.anvil).setD(27, 10, TILE.anvil).setD(16, 4, TILE.fountainLit).setD(23, 4, TILE.fountainLit);
   return m.build();
 }
 
@@ -140,6 +156,8 @@ export const NPCS = {
   lyra: { name: 'Lyra l\'archiviste', sprite: SPRITES.elder, role: 'Bibliothécaire des Collections' },
   gardien: { name: 'Gardien de la crypte', sprite: SPRITES.skeleton, role: "Veille à l'entrée de la crypte" },
   golem: { name: 'Golem des Boucles', sprite: SPRITES.cyclops, role: 'Gardien du sceau de la crypte' },
+  fondeur: { name: 'Maître fondeur Orgel', sprite: SPRITES.viking, role: "Veille à l'entrée de la Fonderie" },
+  gabarit: { name: 'Gabarit de Fer', sprite: SPRITES.soldier, role: 'Contremaître des moules' },
   examinateur: { name: 'Examinatrice Céleste', sprite: SPRITES.knight, role: 'Juge des épreuves' },
 };
 
@@ -187,7 +205,15 @@ export const MAPS = {
     name: 'Quartier des Artisans', build: artisans, spawn: { x: 43, y: 15 }, mapPos: { x: 22, y: 50 },
     npcs: [{ id: 'brom', x: 8, y: 8 }, { id: 'rosa', x: 18, y: 8 }, { id: 'pompiste', x: 37, y: 10 }],
     objects: [],
-    portals: [{ x: 45, y: 14, h: 2, to: 'village', at: { x: 1, y: 15 } }, { x: 30, y: 31, w: 4, to: 'tour', at: { x: 19, y: 34 }, requires: 'f-forge', locked: 'La Tour des Contrats n\'accepte que les forgerons d\'objets confirmés (quêtes de Brom).' }],
+    portals: [{ x: 45, y: 14, h: 2, to: 'village', at: { x: 1, y: 15 } },
+      { x: 22, y: 0, w: 2, to: 'fonderie', at: { x: 19, y: 36 }, requires: 'f-forge', locked: "Le sentier du nord est barré par une herse : la Fonderie des Gabarits n'ouvre qu'aux forgerons d'objets confirmés. Termine d'abord l'atelier des armures de Brom." },
+      { x: 30, y: 31, w: 4, to: 'tour', at: { x: 19, y: 34 }, requires: 'f-forge', locked: 'La Tour des Contrats n\'accepte que les forgerons d\'objets confirmés (quêtes de Brom).' }],
+  },
+  fonderie: {
+    name: 'Fonderie des Gabarits', build: fonderie, spawn: { x: 19, y: 36 }, mapPos: { x: 22, y: 24 },
+    npcs: [{ id: 'fondeur', x: 21, y: 33 }, { id: 'gabarit', x: 20, y: 6 }],
+    objects: [],
+    portals: [{ x: 19, y: 39, w: 2, to: 'artisans', at: { x: 22, y: 3 } }],
   },
   tour: {
     name: 'Tour des Contrats', build: tour, spawn: { x: 19, y: 33 }, mapPos: { x: 24, y: 80 },

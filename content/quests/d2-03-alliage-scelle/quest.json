@@ -1,0 +1,67 @@
+{
+  "id": "d2-03-alliage-scelle",
+  "title": "L'alliage scellé",
+  "region": "fonderie",
+  "giver": "fondeur",
+  "main": false,
+  "kind": "code",
+  "assessment": "autonomous",
+  "requires": [
+    "d2-02-coulees-jumelles"
+  ],
+  "skills": [
+    "obj.encapsulation",
+    "obj.exceptions",
+    "obj.tostring",
+    "obj.methodes",
+    "obj.visibilite"
+  ],
+  "summary": "Écris la classe Alliage : champs private final, validation dans le constructeur (IllegalArgumentException), toString au format annoncé.",
+  "source": "classe encapsulée, invariants vérifiés au constructeur, toString (complément artisans)",
+  "harness": [
+    "harness/Verif.java"
+  ],
+  "solutions": [
+    [
+      "solutions/s1/Alliage.java"
+    ]
+  ],
+  "wrong": [
+    [
+      "wrong/w1/Alliage.java"
+    ],
+    [
+      "wrong/w2/Alliage.java"
+    ],
+    [
+      "wrong/w3/Alliage.java"
+    ]
+  ],
+  "starter": {
+    "Alliage.java": "public class Alliage {\n    // Écris Alliage ici\n}\n"
+  },
+  "brief": "Le fondeur ne scelle un alliage que s'il est **cohérent**. Écris la classe `Alliage(String nom, int cuivre, int etain)` :\n- trois champs `private final` ; les proportions `cuivre` et `etain` sont des **pourcentages** ;\n- `IllegalArgumentException` si le nom est `null` ou blanc, si une proportion est **négative**, ou si `cuivre + etain` ne vaut pas **100** ;\n- accesseurs `getNom()`, `getCuivre()`, `getEtain()` ;\n- `boolean estBronze()` : `true` si le cuivre représente **80 % ou plus** ;\n- `toString()` au format exact ci-dessous (sans accent).\n\nExemple :\n```java\nnew Alliage(\"bronze\", 88, 12).toString();   // \"Alliage bronze (88% cuivre, 12% etain)\"\nnew Alliage(\"faux\", 60, 30);               // lève IllegalArgumentException (total 90)\n```",
+  "hints": [
+    "Les vérifications se font **au début du constructeur**, avant d'affecter les champs : un objet invalide ne doit jamais exister. `throw new IllegalArgumentException(\"…\")`.",
+    "Un champ `private final` ne peut être affecté qu'une fois, dans le constructeur. Pas de setter : l'objet est immuable. Pense au cas où le nom est `null` : teste-le **avant** d'appeler `isBlank()`.",
+    "Pour `toString`, assemble par concaténation : `\"Alliage \" + nom + \" (\" + cuivre + \"% cuivre, \" + …`. Teste les limites : `100/0`, `0/100`, `80/20` et `79/21`."
+  ],
+  "stage": {
+    "speak": true
+  },
+  "dialog": {
+    "intro": [
+      "Le registre est réparé, bravo ! Maintenant, les alliages : cuivre et étain, en pourcentages qui doivent toujours faire 100.",
+      "Je veux une classe `Alliage` bien fermée : champs privés, validation à la naissance, un `toString` lisible. Plus de bricolage !"
+    ],
+    "resume": "Mon alliage attend toujours sa classe : champs privés, validation, toString.",
+    "success": [
+      "Impossible d'en créer un faux : le constructeur veille. Voilà de l'encapsulation sérieuse !",
+      "Il reste le grand gabarit, au bout de la fonderie. Il est sévère, mais juste."
+    ],
+    "done": "L'alliage est scellé, grâce à toi."
+  },
+  "reward": {
+    "xp": 40
+  }
+}
