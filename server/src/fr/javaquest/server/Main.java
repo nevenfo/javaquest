@@ -54,7 +54,7 @@ public final class Main {
         Path web = Path.of(o.getOrDefault("web", app.resolve("web").toString())).toAbsolutePath().normalize();
         Path contentDir = Path.of(o.getOrDefault("content", app.resolve("content").toString())).toAbsolutePath();
         Path runtime = Path.of(o.getOrDefault("runtime", app.resolve("runtime").toString())).toAbsolutePath();
-        Path sandbox = Path.of(o.getOrDefault("sandbox", app.resolve("bin/jq-sandbox.exe").toString())).toAbsolutePath();
+        Path sandbox = Path.of(o.getOrDefault("sandbox", app.resolve("bin/sandbox.jar").toString())).toAbsolutePath();
         Path runnerJar = Path.of(o.getOrDefault("runner", app.resolve("runner/runner.jar").toString())).toAbsolutePath();
         String local = System.getenv("LOCALAPPDATA");
         Path data = Path.of(o.getOrDefault("data", (local != null ? Path.of(local) : Path.of(System.getProperty("user.home"))).resolve("JavaQuest").toString())).toAbsolutePath();

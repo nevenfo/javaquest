@@ -13,29 +13,59 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Exécute le runner Java DANS jq-sandbox (AppContainer LPAC + Job Object) et décode le protocole.
+ * Exécute le runner Java DANS le broker d'isolation (AppContainer LPAC + Job Object) et décode le protocole.
+ * Broker : {@code sandbox.jar} (Java FFM, lancé par le java.exe signé du runtime, compatible Smart App Control) ;
+ * un chemin {@code .exe} (ancien jq-sandbox.exe, même CLI) reste accepté.
  * Aucun repli non isolé : si la sandbox échoue, le résultat est une erreur explicite.
  */
 public final class SandboxRunner {
-    private final Path sandboxExe, javaExe, runnerJar;
+    private final List<String> broker;
+    private final Path javaExe, runnerJar;
     private final Semaphore slots = new Semaphore(2);
     private final SecureRandom random = new SecureRandom();
     private volatile String grantError;
 
     public SandboxRunner(Path sandboxExe, Path runtimeDir, Path runnerJar) {
-        this.sandboxExe = sandboxExe;
         this.javaExe = runtimeDir.resolve("bin").resolve("java.exe");
+        this.broker = brokerCommand(sandboxExe, javaExe);
         this.runnerJar = runnerJar;
+    }
+
+    /** Préfixe de commande du broker : {@code java.exe <options> -jar sandbox.jar}, ou l'exécutable lui-même. */
+    static List<String> brokerCommand(Path sandbox, Path javaExe) {
+        String s = sandbox.toAbsolutePath().toString();
+        if (!s.toLowerCase(java.util.Locale.ROOT).endsWith(".jar")) return List.of(s);
+        return List.of(javaExe.toString(), "-XX:+UseSerialGC", "-Xmx64m", "-Xss512k", "-XX:TieredStopAtLevel=1", "-XX:-UsePerfData",
+                "-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8", "--enable-native-access=ALL-UNNAMED", "-jar", s);
+    }
+
+    private List<String> with(String... args) {
+        List<String> c = new java.util.ArrayList<>(broker);
+        c.addAll(List.of(args));
+        return c;
+    }
+
+    /**
+     * Clé du marqueur d'autorisation : chemins ET identité des fichiers (création/modification). Un dossier remplacé
+     * au même endroit (ZIP réextrait, mise à jour) perd ses ACL : la clé change et l'autorisation est refaite.
+     */
+    private String grantKey(Path runtimeDir) throws IOException {
+        StringBuilder k = new StringBuilder();
+        for (Path f : List.of(javaExe, runnerJar)) {
+            var a = Files.readAttributes(f, java.nio.file.attribute.BasicFileAttributes.class);
+            k.append(f.toAbsolutePath()).append('|').append(a.creationTime().toMillis()).append('|').append(a.lastModifiedTime().toMillis()).append('|');
+        }
+        return k.append(runtimeDir.toAbsolutePath()).toString();
     }
 
     /** Accorde au conteneur la lecture du runtime et du runner (idempotent, sans droits admin). */
     public void prepare(Path runtimeDir, Path stateDir) {
         try {
             Path marker = stateDir.resolve("sandbox-grant.txt");
-            String key = runtimeDir.toAbsolutePath() + "|" + runnerJar.getParent().toAbsolutePath();
+            String key = grantKey(runtimeDir);
             if (Files.exists(marker) && Files.readString(marker).equals(key)) return;
             for (Path p : List.of(runtimeDir, runnerJar.getParent())) {
-                Process pr = new ProcessBuilder(sandboxExe.toString(), "grant", p.toAbsolutePath().toString())
+                Process pr = new ProcessBuilder(with("grant", p.toAbsolutePath().toString()))
                         .redirectErrorStream(true).start();
                 String out = new String(pr.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
                 if (!pr.waitFor(60, TimeUnit.SECONDS) || pr.exitValue() != 0)
@@ -72,7 +102,7 @@ public final class SandboxRunner {
         try {
             acquired = slots.tryAcquire(30, TimeUnit.SECONDS);
             if (!acquired) { result.put("status", "busy"); result.put("error", "Trop d'exécutions simultanées."); return result; }
-            List<String> cmd = List.of(sandboxExe.toString(), "run", "--lpac", "--cap", "registryRead",
+            List<String> cmd = with("run", "--lpac", "--cap", "registryRead",
                     "--timeout-ms", String.valueOf(limits.timeoutMs()), "--cpu-ms", String.valueOf(limits.cpuMs()),
                     "--mem-mb", String.valueOf(limits.memMb()), "--max-out", String.valueOf(2 * 1024 * 1024), "--",
                     javaExe.toString(), "-XX:-UsePerfData", "-Xms8m", "-Xmx256m", "-Xss1m", "-XX:+UseSerialGC",

@@ -24,7 +24,7 @@ New-Item -ItemType Directory -Force $base | Out-Null
 Expand-Archive -Path $zip -DestinationPath $base -Force
 $dist = Join-Path $base "JavaQuest"
 Check "ZIP extrait : JavaQuest.exe à la racine" (Test-Path (Join-Path $dist "JavaQuest.exe"))
-foreach ($f in @("app\runtime\bin\javaw.exe", "app\server.jar", "app\runner\runner.jar", "app\bin\jq-sandbox.exe", "app\web\index.html", "app\content\skills.json", "THIRD_PARTY.md", "LISEZMOI.txt")) {
+foreach ($f in @("app\runtime\bin\javaw.exe", "app\server.jar", "app\runner\runner.jar", "app\bin\sandbox.jar", "app\web\index.html", "app\content\skills.json", "THIRD_PARTY.md", "LISEZMOI.txt")) {
   Check "contenu de la distribution : $f" (Test-Path (Join-Path $dist $f))
 }
 $leaks = @(Get-ChildItem -Recurse -File $dist | Where-Object { $_.FullName -match '\\(originals|\.git)\\|\.(pdf|env)$' })

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Assemble la distribution dans build/dist/JavaQuest (runtime jlink, serveur, runner, sandbox, web, contenu).
+# Assemble la distribution dans build/dist/JavaQuest (runtime jlink, serveur, runner, broker sandbox.jar, web, contenu).
 # Usage : bash tools/assemble.sh [--zip] [--no-build]
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -22,7 +22,7 @@ mkdir -p "$APP/bin" "$APP/runner"
   --generate-cds-archive --output "$APP/runtime"
 cp build/server/server.jar "$APP/server.jar"
 cp build/runner/runner.jar "$APP/runner/runner.jar"
-cp launcher/Sandbox/bin/Release/jq-sandbox.exe launcher/Sandbox/bin/Release/jq-sandbox.exe.config "$APP/bin/"
+cp build/sandbox/sandbox.jar "$APP/bin/sandbox.jar"   # broker d'isolation (Java FFM, lancé par le java.exe signé)
 cp launcher/Launcher/bin/Release/JavaQuest.exe launcher/Launcher/bin/Release/JavaQuest.exe.config "$DIST/"
 cp -r web "$APP/web"
 cp -r content "$APP/content"

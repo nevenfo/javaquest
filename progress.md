@@ -7,11 +7,11 @@ Phases A–G validées. Reste : H1 (H1.1 fait ; H1.2 partiel ; H1.3 en attente d
 H1.3 — rendre le lancement compatible avec Smart App Control.
 
 ## Dernière tâche validée
-H1.3.1 : broker d'isolation porté en Java FFM (`sandbox/src/fr/javaquest/sandbox/{Main,Win}.java` → `build/sandbox/sandbox.jar`, même CLI que `jq-sandbox.exe`) ; `tools/test-sandbox.sh` accepte `SB_CMD`.
+H1.3.2 : le serveur lance le broker Java (`app/bin/sandbox.jar` via `runtime/bin/java.exe`) ; `assemble.sh` le livre à la place de `jq-sandbox.exe` ; marqueur `sandbox-grant.txt` lié à l'identité des fichiers (réextraction au même endroit → nouvelle autorisation).
 Validation :
-- `SB_CMD=".tools/jdk-25/bin/java.exe -XX:+UseSerialGC -Xmx64m -XX:TieredStopAtLevel=1 -XX:-UsePerfData --enable-native-access=ALL-UNNAMED -jar build/sandbox/sandbox.jar" bash tools/test-sandbox.sh` → 26 PASS, 0 FAIL.
-- Windows Sandbox (Smart App Control actif), session utilisateur : broker accepté, enfant LPAC OK, réseau / profil / processus bloqués.
-- Antérieur : `tools/test-dist.ps1` 15/15 ; `npm run -s test:web` 33/33 ; `node tools/e2e.mjs` 33/33.
+- `bash tools/test-server.sh` → 24/24 + 143 quêtes ; `node tools/e2e.mjs` 33/33 ; `node tools/e2e-traversee.mjs` 124/124.
+- `pwsh -NoProfile -File tools/test-dist.ps1` → 15/15, deux fois de suite (réextraction).
+- H1.3.1 : `SB_CMD=… bash tools/test-sandbox.sh` 26/26 ; broker validé sous Smart App Control (WSB, session utilisateur).
 
 ## Décisions actives
 - Windows Sandbox : exécuter les scénarios en session utilisateur (`wsb connect` puis `wsb exec -r ExistingLogin`) ; en contexte `System` (session 0), tout enfant AppContainer échoue en `0xC0000142`. Sous PowerShell 5, quoter les options `-XX:...` passées à un exe.
@@ -36,4 +36,4 @@ Aucun (décision H1.3 prise).
 `web/js/` · `content/{skills.json,quests/}` · `server/src/fr/javaquest/` · `runner/` · `launcher/` · `tools/{build,assemble,test-server,test-sandbox}.sh` · `tools/{e2e.mjs,coverage.mjs,test-launcher.ps1}` · `docs/`
 
 ## NEXT ACTION
-H1.3.2 — Faire lancer le broker Java par `SandboxRunner`/`Main` (option `sandbox` → commande `runtime/bin/java.exe … -jar app/bin/sandbox.jar`, `grant` compris) à la place de `jq-sandbox.exe` ; valider par `bash tools/test-server.sh` (143), `node tools/e2e.mjs` et `node tools/e2e-traversee.mjs`.
+H1.3.3 — Remplacer `JavaQuest.exe` par un point d'entrée sans exe non signé (`JavaQuest.cmd` → `app/runtime/bin/javaw.exe`, classe de lancement Java : instance unique, navigateur, arrêt depuis le jeu, aucun processus résiduel) ; adapter `tools/test-launcher.ps1` ; valider par `pwsh -NoProfile -File tools/test-dist.ps1 -Build`.

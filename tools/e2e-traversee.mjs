@@ -50,7 +50,7 @@ const solutionFiles = (q) => {
 
 // ---------- Serveur ----------
 const server = spawn(join(ROOT, '.tools/jdk-25/bin/java.exe'), ['-jar', 'build/server/server.jar', '--app', '.', '--web', 'web', '--content', 'content',
-  '--runtime', '.tools/jdk-25', '--sandbox', 'launcher/Sandbox/bin/Release/jq-sandbox.exe', '--runner', 'build/runner/runner.jar', '--data', data, '--watch-stdin', '1'], { cwd: ROOT });
+  '--runtime', '.tools/jdk-25', '--sandbox', 'build/sandbox/sandbox.jar', '--runner', 'build/runner/runner.jar', '--data', data, '--watch-stdin', '1'], { cwd: ROOT });
 const url = await new Promise((res, rej) => {
   let buf = '';
   server.stdout.on('data', d => { buf += d; const m = buf.match(/JAVAQUEST_READY (\S+)/); if (m) res(m[1]); });
